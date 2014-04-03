@@ -1,5 +1,9 @@
-Statistik für Sprachwissenschaftler
-===================================
+# Statistik für Sprachwissenschaftler
+
+
+
+
+# License
 This work is licensed under the Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Germany License. To view a copy of this license, visit http://creativecommons.org/licenses/by-nc-sa/3.0/de/.
 
 The programs presented here are mostly so simple as to be trivial, and as such, they should not be able to cause any damage. However, as Murphy once noted, there is always the potential for something to go horribly wrong, and so I hereby explicitly state that
