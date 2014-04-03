@@ -14,7 +14,7 @@ simulate <- function(alpha=0.05,n=10,maxiter=3000,...){
   increment <- 1
   a <- rnorm(n)
   b <- rnorm(n)
-  p <- rep(NULL,n-1)
+  p <- rep(NA,n-1)
   ua <- partialmean(a[1:n-1])
   ub <- partialmean(b[1:n-1])
   ci.min <- rep(NA,n-1)
@@ -73,7 +73,7 @@ simulate <- function(alpha=0.05,n=10,maxiter=3000,...){
                      geom_line(data=du,size=2) +
                      scale_y_continuous(breaks= pretty_breaks())
        ,pvals=pvals
-       ,pvals.plot=ggplot(data=subset(pvals,!is.na(p)),aes(x=idx,y=p)) + 
+       ,pvals.plot=ggplot(data=pvals,aes(x=idx,y=p)) + 
                    geom_line() + 
                    geom_abline(intercept=alpha, slope=0, color="red",alpha=I(1/2)) +
                    scale_y_continuous(breaks= pretty_breaks(),limits=c(0,1))
@@ -95,6 +95,6 @@ ciplot <- test$samples.plot +
             theme(legend.position = "none"
                   ,plot.margin=unit(c(0.5,1,1,1), "lines"))
 
-grid.arrange(pplot, ciplot, ncol=1, nrow=2, widths=c(4), heights=c(1, 4))
+combiplot <- arrangeGrob(pplot, ciplot, ncol=1, nrow=2, widths=c(4), heights=c(1, 4),plot=FALSE)
 
 
