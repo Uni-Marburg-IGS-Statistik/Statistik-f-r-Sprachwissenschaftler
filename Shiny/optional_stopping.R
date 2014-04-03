@@ -1,4 +1,5 @@
 library(ggplot2)
+library(scales)
 library(reshape)
 library(zoo)
 
@@ -16,6 +17,7 @@ partialsum.to.mean <- function(x){
 
 simulate <- function(alpha=0.05,n=10,increment=1,maxiter=3000,...){
   require(ggplot2)
+  require(scales)
   require(reshape)
   
   a <- rnorm(n)
@@ -63,11 +65,13 @@ simulate <- function(alpha=0.05,n=10,increment=1,maxiter=3000,...){
        ,means=du
        ,samples.plot=ggplot(data=df,aes(x=idx,y=value,color=group),size=1.5) + 
                      geom_point(alpha=I(trans)) + 
-                     geom_line(data=du,size=2)
+                     geom_line(data=du,size=2) +
+                     scale_y_continuous(breaks= pretty_breaks())
        ,pvals=pvals
        ,pvals.plot=ggplot(data=subset(pvals,!is.na(p)),aes(x=idx,y=p)) + 
                    geom_line() + 
-                   geom_abline(intercept=alpha, slope=0, color="red",alpha=I(1/2))
+                   geom_abline(intercept=alpha, slope=0, color="red",alpha=I(1/2)) +
+                   scale_y_continuous(breaks= pretty_breaks())
        )
 }
 
