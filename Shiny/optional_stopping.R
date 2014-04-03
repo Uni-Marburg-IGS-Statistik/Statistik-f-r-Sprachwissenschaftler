@@ -4,17 +4,7 @@ library(scales)
 library(reshape)
 library(zoo)
 
-partialsum <- function(x) rollapply(x,width=length(x),partial=TRUE,align="right",FUN=sum)
 partialmean <- function(x) rollapply(x,width=length(x),partial=TRUE,align="right",FUN=mean)
-# be VERY careful with this method -- depending on how the partial sums are
-# calculated, it can show a profound lack of numerical stability
-partialsum.to.mean <- function(x){
-  y <- c()
-  for(i in 1:length(x)){
-    y <- c(y,x[i] / i)
-  }
-  y
-}
 
 simulate <- function(alpha=0.05,n=10,maxiter=3000,...){
   require(ggplot2)
