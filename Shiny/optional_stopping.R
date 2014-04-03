@@ -14,13 +14,13 @@ partialsum.to.mean <- function(x){
   y
 }
 
-simulate <- function(alpha=0.05,n=10,increment=10,maxiter=10000,...){
+simulate <- function(alpha=0.05,n=10,increment=1,maxiter=3000,...){
   require(ggplot2)
   require(reshape)
   
   a <- rnorm(n)
   b <- rnorm(n)
-  p <- rep("NA",n)
+  p <- c()
   
   count <- n
   for(i in 1:maxiter){
@@ -38,6 +38,12 @@ simulate <- function(alpha=0.05,n=10,increment=10,maxiter=10000,...){
     b <- c(b,nextb)
   }
   
+  if(tail(p,n=1) > alpha){
+    # failure to converge
+    stop(paste("Failed to achieve significance in",maxiter,"iterations."))
+    return
+  }
+  
   df <-  data.frame(a,b)
   df$idx <- as.numeric(row.names(df))
   
@@ -47,20 +53,26 @@ simulate <- function(alpha=0.05,n=10,increment=10,maxiter=10000,...){
   pvals <- data.frame(p)
   pvals$idx <- as.numeric(row.names(pvals))
   
-  d <- melt(d,measure.vars=c("a","b"),variable_name="group")
+  df <- melt(df,measure.vars=c("a","b"),variable_name="group")
   du <- melt(du,measure.vars=c("a","b"),variable_name="group")
   
   trans <- ifelse(count <= 10, 1,1/log10(count))
   
-  list(count=count,
+  list(count=count
        ,samples=df
        ,means=du
-       ,samples.plot=ggplot(data=d,aes(x=idx,y=value,color=group)) + geom_point(alpha=I(trans)) + geom_line(data=du,size=2)
-       ,pvals=pvals,
-       ,pvals.plot=ggplot(data=pvals,aes(x=idx,y=p)) + geom_line() +  geom_abline(intercept=alpha, slope=0, color="red",alpha=I(1/2))
+       ,samples.plot=ggplot(data=df,aes(x=idx,y=value,color=group),size=1.5) + 
+                     geom_point(alpha=I(trans)) + 
+                     geom_line(data=du,size=2)
+       ,pvals=pvals
+       ,pvals.plot=ggplot(data=subset(pvals,!is.na(p)),aes(x=idx,y=p)) + 
+                   geom_line() + 
+                   geom_abline(intercept=alpha, slope=0, color="red",alpha=I(1/2))
        )
 }
 
 test <- simulate() 
-
+print(test$count)
+print(test$samples.plot)
+print(test$pvals.plot)
 
