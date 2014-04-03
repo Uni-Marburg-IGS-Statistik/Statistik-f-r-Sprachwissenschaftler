@@ -15,20 +15,28 @@ partialsum.to.mean <- function(x){
   y
 }
 
-simulate <- function(alpha=0.05,n=10,increment=1,maxiter=3000,...){
+simulate <- function(alpha=0.05,n=10,maxiter=3000,...){
   require(ggplot2)
   require(scales)
   require(reshape)
   
+  increment <- 1
   a <- rnorm(n)
   b <- rnorm(n)
-  p <- c()
+  p <- rep(NULL,n-1)
+  ua <- partialmean(a[1:n-1])
+  ub <- partialmean(b[1:n-1])
+  ci.min <- rep(NA,n-1)
+  ci.max <- rep(NA,n-1)
   
   count <- n
   for(i in 1:maxiter){
     t <- t.test(a,b)
     p <- c(p,t$p.value)
-    
+    ua <- c(ua,t$estimate["mean of x"])
+    ub <- c(ub,t$estimate["mean of y"])
+    ci.max <- c(ci.max, t$conf.int[2])
+    ci.min <- c(ci.min, t$conf.int[1])
     if(t$p.value <= alpha){
       break
     }
@@ -42,15 +50,17 @@ simulate <- function(alpha=0.05,n=10,increment=1,maxiter=3000,...){
   
   if(tail(p,n=1) > alpha){
     # failure to converge
-    stop(paste("Failed to achieve significance in",maxiter,"iterations."))
-    return
+    warning(paste("Failed to achieve significance in",maxiter,"iterations."))
   }
   
   df <-  data.frame(a,b)
   df$idx <- as.numeric(row.names(df))
   
-  du <-  data.frame(a=partialmean(a),b=partialmean(b))
+  du <-  data.frame(a=ua,b=ub)
   du$idx <- as.numeric(row.names(du))
+  
+  dc <- data.frame(diff=ua-ub,lower=ci.min,upper=ci.max)
+  dc$idx <- as.numeric(row.names(dc))
   
   pvals <- data.frame(p)
   pvals$idx <- as.numeric(row.names(pvals))
@@ -58,11 +68,15 @@ simulate <- function(alpha=0.05,n=10,increment=1,maxiter=3000,...){
   df <- melt(df,measure.vars=c("a","b"),variable_name="group")
   du <- melt(du,measure.vars=c("a","b"),variable_name="group")
   
-  trans <- ifelse(count <= 10, 1,1/log10(count))
+  if(count <= 100)
+    trans <- 1
+  else
+    trans <- 1 / log10(count)
   
   list(count=count
        ,samples=df
        ,means=du
+       ,conf.int=dc
        ,samples.plot=ggplot(data=df,aes(x=idx,y=value,color=group),size=1.5) + 
                      geom_point(alpha=I(trans)) + 
                      geom_line(data=du,size=2) +
@@ -71,7 +85,7 @@ simulate <- function(alpha=0.05,n=10,increment=1,maxiter=3000,...){
        ,pvals.plot=ggplot(data=subset(pvals,!is.na(p)),aes(x=idx,y=p)) + 
                    geom_line() + 
                    geom_abline(intercept=alpha, slope=0, color="red",alpha=I(1/2)) +
-                   scale_y_continuous(breaks= pretty_breaks())
+                   scale_y_continuous(breaks= pretty_breaks(),limits=c(0,1))
        )
 }
 
