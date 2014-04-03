@@ -1,4 +1,5 @@
 library(ggplot2)
+library(gridExtra)
 library(scales)
 library(reshape)
 library(zoo)
@@ -89,8 +90,21 @@ simulate <- function(alpha=0.05,n=10,maxiter=3000,...){
        )
 }
 
-test <- simulate() 
-print(test$count)
-print(test$samples.plot)
-print(test$pvals.plot)
+test <- simulate(maxiter=1000) 
+
+pplot <- test$pvals.plot +  
+            theme(axis.title.x = element_blank()
+                  ,axis.text.x= element_blank()
+                  ,axis.ticks.x=element_blank()
+                  ,plot.margin=unit(c(1,1,-1,1), "lines")) 
+
+ciplot <- test$samples.plot + 
+            geom_ribbon(aes(x=idx,ymin=lower,ymax=upper,y=diff),color=NA,fill="black",alpha=I(1/10),data=test$conf.int) + 
+            geom_line(aes(x=idx,y=diff),color="black",data=test$conf.int) + 
+            xlab("sample") + 
+            theme(legend.position = "none"
+                  ,plot.margin=unit(c(0.5,1,1,1), "lines"))
+
+grid.arrange(pplot, ciplot, ncol=1, nrow=2, widths=c(4), heights=c(1, 4))
+
 
