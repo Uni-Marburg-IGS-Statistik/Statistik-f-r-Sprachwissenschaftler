@@ -1,3 +1,6 @@
+---
+output: html_document
+---
 # Statistik für Sprachwissenschaftler
 ## Sommersemester 2014
 ## Phillip Alday
@@ -19,34 +22,36 @@ Diese Veranstaltung bietet eine praktische Einführung in statistische Verfahren
 
 # Ablauf
 
-01. **14.04.2014** Formalia, Einführung, (Textdateien &) DVCS, Warm-Up: Mengenlehre
-    **15.04.2014** R, RStudio, Git
-02. **21.04.2014** fällt aus! (Ostermontag)
-    **22.04.2014** Beschreibungsstatistik I 
-03. **28.04.2014**
-    **29.04.2014** Beschreibungsstatistik II 
-04. **05.05.2014** 
-    **06.05.2014** Statistische Inteferenz; Bevolkerung vs. Stichprobe 
-05. **12.05.2014** $t$-Test
-    **13.05.2014** $p$-Werte, Fehler-Arten, $p$-Werte, Frequentism vs Bayes
-06. **19.05.2014**
-    **20.05.2014**
-07. **26.05.2014**
-    **27.05.2014**
-08. **02.06.2014**
-    **03.06.2014**
-09. **09.06.2014** fällt aus! (Pfingstmontag)
-    **10.06.2014**
-10. **16.06.2014**
-    **17.06.2014**
-11. **23.06.2014**
-    **24.06.2014**
-12. **30.06.2014**
-    **01.07.2014**
-13. **07.07.2014**
-    **08.07.2014**
-14. **14.07.2014**
-    **15.07.2014**
+Woche | Datum          | Themen
+----- | -------------- | ----------------------------------------------------------
+01.   | **14.04.2014** |  Formalia, Einführung, (Textdateien &) DVCS, Warm-Up: Mengenlehre
+|     | **15.04.2014** |  R, RStudio, Git
+02.   | **21.04.2014** |  fällt aus! (Ostermontag)
+|     | **22.04.2014** |  Beschreibungsstatistik I 
+03.   | **28.04.2014** | 
+|     | **29.04.2014** |  Beschreibungsstatistik II 
+04.   | **05.05.2014** |  
+|     | **06.05.2014** |  Statistische Inteferenz; Bevolkerung vs. Stichprobe 
+05.   | **12.05.2014** |  $t$-Test
+|     | **13.05.2014** |  $p$-Werte, Fehler-Arten, $p$-Werte, Frequentism vs Bayes
+06.   | **19.05.2014** | 
+|     | **20.05.2014** | 
+07.   | **26.05.2014** | 
+|     | **27.05.2014** | 
+08.   | **02.06.2014** | 
+|     | **03.06.2014** | 
+09.   | **09.06.2014** |  fällt aus! (Pfingstmontag)
+|     | **10.06.2014** | 
+10.   | **16.06.2014** | 
+|     | **17.06.2014** | 
+11.   | **23.06.2014** | 
+|     | **24.06.2014** | 
+12.   | **30.06.2014** | 
+|     | **01.07.2014** | 
+13.   | **07.07.2014** | 
+|     | **08.07.2014** | 
+14.   | **14.07.2014** | 
+|     | **15.07.2014** | 
 
 # Bibliografie
 Eid, Gollwitzer und Schmitt (2010): Statistik und Forschungsmethoden. Beltz Verlag.
