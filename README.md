@@ -1,6 +1,3 @@
----
-output: html_document
----
 # Statistik für Sprachwissenschaftler
 ## Sommersemester 2014
 ## Phillip Alday
