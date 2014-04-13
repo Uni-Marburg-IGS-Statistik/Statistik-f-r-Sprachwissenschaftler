@@ -9,3 +9,7 @@ README.html
 .RData
 Folien/*-figure/
 Folien/*.md
+*.out
+*.aux
+*.synctex.gz
+*.log

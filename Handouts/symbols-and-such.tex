@@ -1,0 +1,175 @@
+\documentclass[a4paper,12pt,oneside,leqno]{scrartcl}%,12pt,oneside,reqno]{scrbook}
+\usepackage{amsmath,amssymb,amsthm}
+%\usepackage{listings}
+%\usepackage{times}
+\usepackage{lmodern}
+\usepackage[T1]{fontenc}			% enable extra punctuation output 
+\usepackage[ngerman,english]{babel}		% the majority of this document is in German
+\usepackage[pdftex]{hyperref}	% nice formatting for URLs 
+\usepackage[top=2.5cm,bottom=2.5cm,left=3cm,right=3cm]{geometry}			% use the whole page
+%\usepackage{setspace}			% allows us to double space 
+\usepackage{color}
+%\usepackage[none]{hyphenat}		% disables hyphenation
+\usepackage[stable]{footmisc}	% allow footnote in section headings
+\usepackage{natbib}				% extra bibliography tools
+\usepackage{bibgerm}				% German APA like bibliography
+%\usepackage{acronym}		
+%\usepackage[parfill]{parskip}    % Activate to begin paragraphs with an empty line rather than an indent
+%\usepackage{synttree}
+\usepackage[pdftex]{graphicx}	% advanced graphics
+%\usepackage{rotating}			% sidewaystable -- landscape'd table
+%\usepackage{multirow}			% row-spanning cells in tables
+%\usepackage{tabularx}			% a nifty expanded table environment
+\usepackage{booktabs}			% professional looking tables
+%\usepackage{longtable}
+%\usepackage{lscape}
+%\usepackage{epigraph}
+\usepackage[utf8x]{inputenc}
+\newcommand{\enquote}[1]{\frqq{}#1\flqq{}}
+%\usepackage[utf8]{inputenc}
+%\usepackage{csquotes}
+%\usepackage{gb4e}  \noautomath	% necessary to make gb4e play nice
+\usepackage{fixltx2e}
+%\usepackage{paralist}
+%\usepackage{tipa}
+\usepackage{float}
+%\usepackage{multicol}
+%\begin{inparaenum}[\itshape a\upshape)] \item formatted within their paragraph; \item usually labelled with letters; and \item usually have the final item prefixed with ‘and’ or ‘or’,\end{inparaenum} like this example.
+%\usepackage{wrapfig}
+
+% mark this is as a draft --- should work with all drivers
+%\usepackage{draftwatermark}
+%\SetWatermarkScale{.5}
+%\SetWatermarkLightness{0.8}
+%\SetWatermarkText{not for further distribution}
+
+% Setup the PDF parts of the document
+\hypersetup{
+	 pdfauthor={Phillip M Alday},
+	 pdftitle={Prerequisites: Symbols and Logic},
+    bookmarks=true,
+    bookmarksopen=true,
+    pdfstartview=FitH
+}
+
+% natbib options
+\bibpunct{[}{]}{;}{n}{~}{,}
+
+%\newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
+\definecolor{darkgreen}{rgb}{0,0.6,0}
+
+\newcommand{\fixme}[1]{\marginpar{\mbox{$<==$}}{\bfseries\color{blue}#1}}
+\newcommand{\terminus}[1]{\textsc{#1}}
+\newcommand{\bedeutung}[1]{`#1'}
+\newcommand{\ortho}[1]{$\langle$#1$\rangle$}
+\newcommand{\notation}[1]{\framebox[\textwidth]{\begin{minipage}[c]{0.99\textwidth}\textbf{Notation:} #1\end{minipage}}}
+\newcommand{\application}[2]{\framebox[\textwidth]{\begin{minipage}[c]{0.9\textwidth}\textbf{Application: #1.} #2\end{minipage}}}
+\newcommand{\mybox}[1]{\framebox[\textwidth]{\begin{minipage}[c]{0.99\textwidth}#1\end{minipage}}}
+
+
+\newcommand{\super}[1]{^{#1}}
+
+% this is basically a hack to fix bad hyphenation decisions from LaTeX :-(
+%\hyphenation{Unter-stütz-ung}
+
+
+\title{Prerequisites: Symbols and Logic}
+\author{Phillip M Alday}
+\date{April 2011}
+
+%\frenchspacing
+
+\begin{document}
+\newtheorem{pos}{Postulate}[section]
+\newtheorem{thm}{Theorem}[section]
+
+\theoremstyle{definition}
+\newtheorem{defn}{Definition}
+\newtheorem*{definition}{Definition}
+
+\maketitle
+
+\section{Math shorthand}
+%\begin{table}[H]
+%\caption{default}
+\begin{center}
+\begin{tabular}{l p{8cm}}
+\toprule
+Symbol & Meaning \\
+\midrule
+$\forall$ & for all, for each, for every, for any, etc.\\ 
+$ \exists$ & there exists (at least one), for some \\ 
+$a \in A$& $a$ is an element of $A$, $a$ is in $A$ \\ 
+$\lnot$, $\sim{}$ & not \\
+%$\sim$ & not \\  
+$P\rightarrow Q $ & if $P$ then $Q$ (as proposition) \\
+$P \Rightarrow Q $ & $P$ implies $Q$ (as conclusion or theorem) \\
+$P \Leftrightarrow Q$  & $P$ is logically equivalent to $Q$:\linebreak ($P$ implies $Q$) and ($Q$ implies $P$) \\
+%$ $ & therefore \\
+iff & if and only if\\
+\bottomrule
+\end{tabular}
+\end{center}
+\label{tab:symbols}
+%\end{table}%
+
+\section{Logical Operations}
+
+There are four basic logical operations: \terminus{and, or, not, xor}.  The meaning of \terminus{and} and \terminus{not} is the same as in everyday language, but \terminus{or} and \terminus{xor} require some explanation.  \terminus{Or} (inclusive OR) is the operation that returns \terminus{true} if at least one side holds (is true).  This means that for $A \text{ or } B$ holds if $A$ holds or if $B$ holds or if \emph{both} $A$ and $B$ hold. For example, when I can say \enquote{people who speak German or English}, I also include people who speak both languages.  On the other hand, if I want to emphasize that I want people who speak \emph{either} German or English, but not both, then I need an \terminus{xor}.  \terminus{Xor} (exclusive OR) is the operation that returns \terminus{true} if exactly one side holds (is true). This means that for $A \text{ xor } B$ holds if $A$ holds or if $B$ holds but \emph{not} if \emph{both} $A$ and $B$ hold.  This is summarized in the following table (\bedeutung{T} for \bedeutung{True}, \bedeutung{F} for \bedeutung{False}). 
+%\begin{table}[htdp]
+%\caption{default}
+\begin{center}
+\begin{tabular}{c c | *{5}{c}}
+\toprule
+$P$ & $Q$ & $\sim{}P$ & $\sim{}Q$ & $P \text{ and } Q$ & $P \text{ or } Q$ & $P \text{ xor } Q$ \\
+\midrule
+F & F & T & T & F & F & F \\
+F & T & T & F & F & T & T \\
+T & F & F & T &F  & T & T \\
+T & T & F & F & T & T & F\\
+\bottomrule
+\end{tabular}
+\end{center}
+\label{tab:truth}
+%\end{table}%
+\mybox{\textbf{Comprehension Check:} Restate $A\text{ xor }B$ in terms of the other logical operations (and, or, not).}
+
+\section{Logical Propositions and their Negation}
+Given a logical proposition $P\rightarrow{}Q$, we can derive the following three propositions:
+\begin{description}
+\item[Inverse] $\sim{}P\rightarrow{}\sim{}Q$
+\item[Converse] $Q\rightarrow{}P$
+\item[Contrapositive] $\sim{}Q\rightarrow{}\sim{}P$.
+\end{description}
+The contrapositive is the \enquote{inverse of the converse} or \enquote{the converse of the inverse}. 
+
+Note that $P\rightarrow{}Q \Leftrightarrow \sim{}Q\rightarrow{}\sim{}P$.  However, the inverse and the converse are not implied by the original proposition (although they may still be true).
+
+Now, we wish to consider the opposite of propositions with quantifiers.  For universal quantification, negation is achieved by at least one counterexample, i.e.\ existential quantification of the inverse. 
+
+%\begin{table}[htdp]
+%\caption{default}
+\begin{center}
+\begin{tabular}{l p{5cm} p{3cm} p{5cm} }
+\toprule
+ Proposition & Meaning & Negation & Negated Meaning  \\
+\midrule
+ $\forall x \in X: R$ & \enquote{for all $x$ in $X$ such that $R$ holds} & $\exists x \in X: ~R$ & \enquote{there exists an $x$ in $X$ such that $R$ does not hold}\\
+ $\exists x \in X: R$ & \enquote{there exists $x$ in $X$ such that $R$ holds} & $\forall x \in X: ~R$ & \enquote{for all $x$ in $X$, $R$ does not hold}\\
+ $A \text{ and } B $ & \enquote{$A$ and $B$ both hold} & $\sim{}A \text{ or } \sim{} B $ & \enquote{At least one of $A,B$ does not hold.}\\
+ $A \text{ or } B $ & \enquote{At least one of $A, B$ holds.} & $\sim{}A \text{ and } \sim{} B $ & \enquote{Both $A$ and $B$ do not hold.} \\
+ $A \text{ xor } B $ & \enquote{Exactly one of $A,B$ holds.} & $(A \text{ and } B)$ \linebreak \centering $\text{ or }$ \linebreak $(\sim{}A \text{ and } \sim{} B) $ & \enquote{Both $A$ and $B$ hold OR both do not hold:  $A$ and $B$ have the same truth value.}\\
+\bottomrule
+\end{tabular}
+\end{center}
+\label{tab:negation}
+%\end{table}%
+
+
+
+\phantomsection	% this fixes some pagination/link issues with the bibliography
+%\cite{*}
+\bibliographystyle{gerapali}
+%\addcontentsline{toc}{chapter}{Literaturverzeichnis}
+\bibliography{$HOME/Dropbox/alday}
+\end{document}
