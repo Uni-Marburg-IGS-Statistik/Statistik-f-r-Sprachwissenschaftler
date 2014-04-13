@@ -1,0 +1,93 @@
+Statistik für Sprachwissenschaftler
+========================================================
+author: Phillip M . Alday
+date: 2014-04-14    
+autosize: true
+
+Formalien
+========================================================
+- Anzahl der ECTS-Punkte und Art der Prüfung (Klausur, "Hausarbeit") nach der jeweilgen Prüfungsordnung.
+- max. 4 unentschuldigten Fehltermine (1 pro SWS)
+- regelmäßige Teilnahme, inkl. Hausaufgaben zu jedem Termin
+- Sprechstunde montags 16-17 Uhr oder nach Absprache
+- Kursmaterial über [Git](https://github.com/Uni-Marburg-IGS-Statistik/Statistik-f-r-Sprachwissenschaftler) verfügbar
+-  **Nur Mails von Uni-Konten werden gelesen und beantwortet!**  
+
+R
+========================================================
+- Implementierung bzw. Neuentwicklung der Sprache **S**
+- funktionalle Sprache mit Wurzeln in LISP
+- eine Interpretersprache (oder interpretative Programmiersprache) im Gegensatz zu Compilersprachen wie C. (s. dazu Wikipedia)
+- Vektor basiert, Skalarwerte als Vektoren mit einem Element (mehr dazu später) 
+- auf Windows, Linux, OS X verfügbar
+- Programm und Quellcode kostenlos verfügbar (GPL)
+
+Bedienung von R
+================
+- REPL
+    - **R**ead
+    - **E**valuate
+    - **P**rint
+    - **L**oop
+- gespeichtere Reihe von Befehlen, *Skripten*, auch durchführbar 
+- Skripte als Plain-Text gespeichert
+
+ggplot2
+========================================================
+```{r, echo=TRUE}
+library(ggplot2)
+data(sleepstudy,package="lme4")
+with(sleepstudy,
+     ggplot(data=sleepstudy,aes(x=Days,y=Reaction)) + geom_smooth(method="loess") + geom_point() + facet_wrap(~Subject)
+)
+```
+
+Wie oft sieht Ihr Schreibtisch so aus?
+==============================================
+<img src=http://hginit.com/i/01-copies.png>
+<br/>Quelle: [HgInit](http://hginit.com/)
+
+
+Versionierung
+==============
+- sämtliche Versionen eines Programms ein bekanntes Problem für Programmierer seit den 70ern
+- problematisch sowohl für Einzelarbeit als auch Team-Arbeit
+- Entwicklung von *Version Control Systems*
+- Frühere Systeme ziemlich schwierig zu benutzen und benötigte einen zentralen Server
+- Moderne Systeme wie Git sind *verteilt*: **distributed version control systems (DVCS)**
+    - Leicht einzurichten, funktionieren gut auf einzelnen Rechner, sogar für kleine Projekte
+    - Beispiele dafür sind Mercurial, Git und Bazaar
+    - Git wurde für die Verwaltung des Linux-Kernels entwickelt!
+
+Zeilenbasierter Umgang mit Plain-Text
+========================================
+- ursprünglich für Quelltext entwickelt 
+- Zeilenbasierter Umgang 
+- Optimiert für Plain-Text: Nur Unterschiede (*Diffs*) müssen gespeichert werden!
+- Bei binären Formaten (Word, Excel, PDF, Grafiken, usw.) sind "Unterschiede" komplizierter 
+- DVCS kann solche Formatte verwalten, aber mit Nachteilen
+    - Diffs nicht wirklich sinnvoll / verständlich
+    - Diffs oft so groß wie die ganze Datei -- DVCS macht in Prinzip eine neue versteckte Kopie für jede Version!
+
+Hausaufgabe
+============
+Bis morgen:
+- R, RStudio und Git installieren
+- Konto bei GitHub machen, ggf. mir um ein Private-Repo per Mail bitten
+- Handout zu **Mengenlehre** lesen
+- die Angst vor Mathematik vergessen
+
+Letzte Anmerkung, bevor es los geht
+====================================
+"Ich bin einfach schlecht in Mathe" ist ebenso so blöd und sollte so pe inlich sein, wie "Ich kann nicht lesen." Wenn Sie sich Mühe geben, mache ich alles, um Ihnen zu helfen. Wenn Sie sich keine Mühe geben bzw. nur Ausreden machen, habe ich kein Mitleid und keine Zeit. 
+
+Also: wenn Sie mitmachen, dann machen Sie wirklich mit! Sonst sparen Sie mir und Ihnen die Zeit und geben Sie Ihren Platz an jemanden, der mitmachen möchte.
+
+
+Warm up: Kombinatorik
+=======================
+incremental: true
+- Zählen nicht so leicht, wie man denkt bzw. den Kindern es vortäuscht.
+- Unterschied zwischen Zählen (etwa Größe bestimmen) und Abzählen (*Enumieren* bzw. Auflisten)
+
+

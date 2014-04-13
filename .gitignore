@@ -7,3 +7,5 @@
 .DS_Store
 README.html
 .RData
+Folien/*-figure/
+Folien/*.md
