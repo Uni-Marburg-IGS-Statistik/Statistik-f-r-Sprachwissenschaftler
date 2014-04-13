@@ -21,16 +21,16 @@ Diese Veranstaltung bietet eine praktische Einführung in statistische Verfahren
 
 Woche | Datum          | Themen
 ----- | -------------- | ----------------------------------------------------------
-01.   | **14.04.2014** |  Formalia, Einführung, (Textdateien &) DVCS, Warm-Up: Mengenlehre
-|     | **15.04.2014** |  R, RStudio, Git
-02.   | **21.04.2014** |  fällt aus! (Ostermontag)
-|     | **22.04.2014** |  Beschreibungsstatistik I 
-03.   | **28.04.2014** | 
-|     | **29.04.2014** |  Beschreibungsstatistik II 
-04.   | **05.05.2014** |  
-|     | **06.05.2014** |  Statistische Inteferenz; Bevolkerung vs. Stichprobe 
-05.   | **12.05.2014** |  $t$-Test
-|     | **13.05.2014** |  $p$-Werte, Fehler-Arten, $p$-Werte, Frequentism vs Bayes
+01.   | **14.04.2014** | Formalia, Einführung, (Textdateien &) DVCS, Warm-Up: Kombinatorik
+|     | **15.04.2014** | Warum Statistik? R, RStudio, Git
+02.   | **21.04.2014** | fällt aus! (Ostermontag) Ersatz-Lektüre: Stevens (1946)
+|     | **22.04.2014** | Beschreibungsstatistik  I
+03.   | **28.04.2014** | Beschreibungsstatistik  II
+|     | **29.04.2014** | 
+04.   | **05.05.2014** | Statistische Inteferenz; Bevolkerung vs. Stichprobe; Intuition von "Messfehler" und "Wahrscheinlichkeit"
+|     | **06.05.2014** |  
+05.   | **12.05.2014** |  $p$-Werte, Fehler-Arten, Frequentism vs Bayes
+|     | **13.05.2014** |  Interferenz in der Praxis: Der Sinn von statischen Tests, neuartige Fehler 
 06.   | **19.05.2014** | 
 |     | **20.05.2014** | 
 07.   | **26.05.2014** | 
@@ -50,10 +50,20 @@ Woche | Datum          | Themen
 14.   | **14.07.2014** | 
 |     | **15.07.2014** | 
 
+# Software
+- R
+- RStudio
+- Git
+
 # Bibliografie
+Baayen
 Eid, Gollwitzer und Schmitt (2010): Statistik und Forschungsmethoden. Beltz Verlag.
 Field, A., Miles, J., & Field, Z. (2012): Discovering Statistics Using R. Sage Publications.
 Luhmann, M. (2010): R für Einsteiger. Einführung in die Statistiksoftware für die Sozialwissenschaften. Beltz Verlag.
+Wickham
+
+Use R! 
+
 
 # License
 This work is licensed under the Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Germany License. To view a copy of this license, visit http://creativecommons.org/licenses/by-nc-sa/3.0/de/.
