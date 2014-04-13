@@ -5,7 +5,7 @@
 .Rproj.user
 *.Rproj
 .DS_Store
-README.html
+*.html
 .RData
 Folien/*-figure/
 Folien/*.md
@@ -13,3 +13,4 @@ Folien/*.md
 *.aux
 *.synctex.gz
 *.log
+hausaufgaben.html

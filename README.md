@@ -1,6 +1,6 @@
-# Statistik für Sprachwissenschaftler
-## Sommersemester 2014
-## Phillip Alday
+% Statistik für Sprachwissenschaftler
+% Phillip Alday
+% Sommersemester 2014
 
 Diese Veranstaltung bietet eine praktische Einführung in statistische Verfahren und deren Anwendung auf sprachliche Beispiele. Sie vermittelt Grundlagenwissen sowohl aus dem Bereich der deskriptiven Statistik als auch über die gängigsten inferenzstatistischen Verfahren, die im Bereich der Sprache angewendet werden. Alle theoretischen Grundkenntnisse werden anhand von praktischen Übungen vertieft, die mit Hilfe des (frei verfügbaren) Statistikprogramms "R" durchgeführt werden. Nachdem die Teilnehmer Grundlagenkenntnisse in R erworben haben, werden darauf aufbauend Beispielfragestellungen aus unterschiedlichen sprachrelevanten Bereichen bearbeitet. Dabei wird neben der Frage nach einem angemessenen experimentellen Design und dem geeigneten statistischen Verfahren auch die praktische Umsetzung der Auswertung in R im Mittelpunkt stehen. Nach Besuch dieser Veranstaltung sollten Teilnehmer in der Lage sein, eigene Daten statistisch zu analysieren.
 
@@ -29,8 +29,8 @@ Woche | Datum          | Themen
 |     | **29.04.2014** | 
 04.   | **05.05.2014** | Statistische Inteferenz; Bevolkerung vs. Stichprobe; Intuition von "Messfehler" und "Wahrscheinlichkeit"
 |     | **06.05.2014** |  
-05.   | **12.05.2014** |  $p$-Werte, Fehler-Arten, Frequentism vs Bayes
-|     | **13.05.2014** |  Interferenz in der Praxis: Der Sinn von statischen Tests, neuartige Fehler 
+05.   | **12.05.2014** | $p$-Werte, Fehler-Arten, Frequentism vs Bayes
+|     | **13.05.2014** | Interferenz in der Praxis: Der Sinn von statischen Tests, neuartige Fehler 
 06.   | **19.05.2014** | 
 |     | **20.05.2014** | 
 07.   | **26.05.2014** | 
@@ -51,20 +51,31 @@ Woche | Datum          | Themen
 |     | **15.07.2014** | 
 
 # Software
-- R
-- RStudio
-- Git
+- [R](http://cran.r-project.org/)
+- [RStudio](http://rstudio.com/) (mit [RMarkdown](http://rmarkdown.rstudio.com/))
+- [Git](http://git-scm.com/) (mit der [Bildungsinitiative](https://education.github.com/) von [GitHub](https://github.com/) )
 
 # Bibliografie
-Baayen
+Baayen, R. Harald (2008): Analyzing Linguistic Data: A Practical Introduction to Statistics Using R. Cambridge University Press.
+
 Eid, Gollwitzer und Schmitt (2010): Statistik und Forschungsmethoden. Beltz Verlag.
+
 Field, A., Miles, J., & Field, Z. (2012): Discovering Statistics Using R. Sage Publications.
+
 Luhmann, M. (2010): R für Einsteiger. Einführung in die Statistiksoftware für die Sozialwissenschaften. Beltz Verlag.
-Wickham
 
-Use R! 
+Wickham, Hadley (2009): ggplot2. Springer.
 
+Die Reihe *Use R!* von Springer ist **kostenlos** über das Uni-Netz elektronisch verfügbar!  
 
+# Linksammlung
+* [RMarkdown](http://rmarkdown.rstudio.com/)
+* [GitHub Git Cheat Sheet](https://education.github.com/git-cheat-sheet-education.pdf)
+* [GitHub Git Resources](https://help.github.com/articles/what-are-other-good-resources-for-learning-git-and-github)
+* [R Bloggers](http://www.r-bloggers.com/)
+* [RSeek](http://rseek.org/)
+* [CrossValidated](http://stats.stackexchange.com/)
+  
 # License
 This work is licensed under the Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Germany License. To view a copy of this license, visit http://creativecommons.org/licenses/by-nc-sa/3.0/de/.
 
