@@ -34,12 +34,28 @@ Bedienung von R
 
 ggplot2
 ========================================================
-```{r, echo=TRUE}
+```{r, echo=FALSE}
+library(ggplot2)
+data(sleepstudy,package="lme4")
+with(sleepstudy,
+     ggplot(data=sleepstudy,aes(x=Days,y=Reaction)) + geom_smooth(method="loess",size=2.5,alpha=I(1/5)) + geom_point(aes(color=Subject)) + geom_smooth(method="loess",aes(color=Subject),linetype="dashed",alpha=I(1/20),weight=1)
+)
+```
+***
+```{r, echo=FALSE}
 library(ggplot2)
 data(sleepstudy,package="lme4")
 with(sleepstudy,
      ggplot(data=sleepstudy,aes(x=Days,y=Reaction)) + geom_smooth(method="loess") + geom_point() + facet_wrap(~Subject)
 )
+```
+
+
+ggplot2
+============
+```{r, echo=FALSE}
+source("ggplot2_distributions.R") 
+print(plot2d)
 ```
 
 Wie oft sieht Ihr Schreibtisch so aus?
@@ -54,10 +70,13 @@ Versionierung
 - problematisch sowohl für Einzelarbeit als auch Team-Arbeit
 - Entwicklung von *Version Control Systems*
 - Frühere Systeme ziemlich schwierig zu benutzen und benötigte einen zentralen Server
-- Moderne Systeme wie Git sind *verteilt*: **distributed version control systems (DVCS)**
-    - Leicht einzurichten, funktionieren gut auf einzelnen Rechner, sogar für kleine Projekte
-    - Beispiele dafür sind Mercurial, Git und Bazaar
-    - Git wurde für die Verwaltung des Linux-Kernels entwickelt!
+
+DVCS
+=====
+- Moderne Systeme wie Git *verteilt*: **distributed version control systems (DVCS)**
+- Leicht einzurichten, funktionieren gut auf einzelnen Rechner, sogar für kleine Projekte
+- Beispiele dafür sind [Mercurial](http://mercurial.selenic.com/), [Git](http://git-scm.com/), [darcs](http://darcs.net/) und [Bazaar](http://bazaar.canonical.com/en/)
+- Git wurde für die Verwaltung des Linux-Kernels entwickelt!
 
 Zeilenbasierter Umgang mit Plain-Text
 ========================================
@@ -89,7 +108,7 @@ type: alert
 
 Letzte Anmerkung, bevor es los geht
 ====================================
-"Ich bin einfach schlecht in Mathe" ist ebenso so blöd und sollte so pe inlich sein, wie "Ich kann nicht lesen." Wenn Sie sich Mühe geben, mache ich alles, um Ihnen zu helfen. Wenn Sie sich keine Mühe geben bzw. nur Ausreden machen, habe ich kein Mitleid und keine Zeit. 
+"Ich bin einfach schlecht in Mathe" ist ebenso so blöd und sollte so peinlich sein wie "Ich kann nicht lesen." Wenn Sie sich Mühe geben, mache ich alles, um Ihnen zu helfen. Wenn Sie sich keine Mühe geben bzw. nur Ausreden machen, habe ich kein Mitleid und keine Zeit. 
 
 Also: wenn Sie mitmachen, dann machen Sie wirklich mit! Sonst sparen Sie mir und Ihnen die Zeit und geben Sie Ihren Platz an jemanden, der mitmachen möchte.
 
