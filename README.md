@@ -75,6 +75,7 @@ Die Reihe *Use R!* von Springer ist **kostenlos** über das Uni-Netz elektronisc
 * [R Bloggers](http://www.r-bloggers.com/)
 * [RSeek](http://rseek.org/)
 * [CrossValidated](http://stats.stackexchange.com/)
+* [How to Search for R Materials](http://stackoverflow.com/questions/102056/how-to-search-for-r-materials)
   
 # License
 This work is licensed under the Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Germany License. To view a copy of this license, visit http://creativecommons.org/licenses/by-nc-sa/3.0/de/.
