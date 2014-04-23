@@ -47,11 +47,11 @@ git remote set-url origin git@github.com:XXX/Statistik-f-r-Sprachwissenschaftler
   ![](img/gitbash-set-origin.png)4
 4. Try pushing -- if everything goes well, you'll either get a notification of pushed branches or a message that everything is up-to-date. You may get the following warning about RSA fingerprint.
 
-![](img/rstudio-hostkey.png)
+  ![](img/rstudio-hostkey.png)
 
   I'll quote the GitHub team:
   
-> Don't worry! This is supposed to happen. Verify that the fingerprint in your ~~terminal~~ window matches the one we've provided up above, and then type "yes."
+  > Don't worry! This is supposed to happen. Verify that the fingerprint in your ~~terminal~~ window matches the one we've provided up above, and then type "yes."
    
    The IP-Address (the numbers in parantheses following `github.com` may be different, but the RSA fingerpint **must** match.)
 
@@ -75,13 +75,9 @@ git subsystem [[subcommand]] [[arguments]]
 
 3. Test that everything worked by pulling in the latest changes:
 ```
-git pull upstream
-```
-   If you get an error message that the branch wasn't specified, then you can specify `master`:
-```
 git pull upstream master
 ```
-   
+
    Git will automatically merge in most changes, assuming we haven't edited the same spot in the same file. The magic and beauty of this will become clearer as the semester progresses.
 
 Unfortunately, there doesn't seem to be a particularly good way to do this via RStudio's graphical interface, so you'll need to open a shell window to pull the changes in the course repository to your own. Pushing and pulling to origin, i.e. your repository, works wonderfully via the pull and push buttons in RStudio. The next time you push to your repository, the changes from upstream will be included! 
