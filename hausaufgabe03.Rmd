@@ -1,6 +1,6 @@
 % Hausaufgabe 01
 % Phillip Alday <phillip.alday@staff.uni-marburg.de>
-% 23 Apr 2014
+% 2014-04-23
 
 Falls die Umlaute in dieser und anderen Dateien nicht korrekt dargestellt werden, sollten Sie File > Reopen with Encoding > UTF-8 sofort machen (und auf jeden Fall ohne davor zu speichern), damit die Enkodierung korrekt erkannt wird! 
 
