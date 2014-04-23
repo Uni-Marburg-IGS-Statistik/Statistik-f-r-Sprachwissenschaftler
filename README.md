@@ -24,7 +24,10 @@ Woche | Datum          | Themen
 01.   | **14.04.2014** | Formalia, Einführung, (Textdateien &) DVCS, Warm-Up: Kombinatorik
 |     | **15.04.2014** | Warum Statistik? R, RStudio, Git
 02.   | **21.04.2014** | fällt aus! (Ostermontag) Ersatz-Lektüre: Stevens (1946)
-|     | **22.04.2014** | Beschreibungsstatistik  I
+|     | **22.04.2014** | Warum Statistik? Ziele der Forschung, Modelle, Beschreibungsstatistik  I
+|     |                | *Hausaufgabe bis 28.04.2014, 12 Uhr:* (in der Reihenfolge machen!)
+|     |                | 1. `hausaufgabe03.Rmd`
+|     |                | 2. `hausaufgabe03.R` 
 03.   | **28.04.2014** | Beschreibungsstatistik  II
 |     | **29.04.2014** | 
 04.   | **05.05.2014** | Statistische Inteferenz; Bevolkerung vs. Stichprobe; Intuition von "Messfehler" und "Wahrscheinlichkeit"
