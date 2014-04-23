@@ -77,6 +77,11 @@ git subsystem [[subcommand]] [[arguments]]
 ```
 git pull upstream
 ```
+   If you get an error message that the branch wasn't specified, then you can specify `master`:
+```
+git pull upstream master
+```
+   
    Git will automatically merge in most changes, assuming we haven't edited the same spot in the same file. The magic and beauty of this will become clearer as the semester progresses.
 
 Unfortunately, there doesn't seem to be a particularly good way to do this via RStudio's graphical interface, so you'll need to open a shell window to pull the changes in the course repository to your own. Pushing and pulling to origin, i.e. your repository, works wonderfully via the pull and push buttons in RStudio. The next time you push to your repository, the changes from upstream will be included! 
