@@ -26,8 +26,8 @@ Woche | Datum          | Themen
 02.   | **21.04.2014** | fällt aus! (Ostermontag) Ersatz-Lektüre: Stevens (1946)
 |     | **22.04.2014** | Warum Statistik? Ziele der Forschung, Modelle, Beschreibungsstatistik  I
 |     |                | *Hausaufgabe bis 28.04.2014, 12 Uhr:* (in der Reihenfolge machen!)
-|     |                | 1. `hausaufgabe03.Rmd`
-|     |                | 2. `hausaufgabe03.R` 
+|     |                | 1. `hausaufgabe03a.Rmd`
+|     |                | 2. `hausaufgabe03b.R` 
 03.   | **28.04.2014** | Beschreibungsstatistik  II
 |     | **29.04.2014** | 
 04.   | **05.05.2014** | Statistische Inteferenz; Bevolkerung vs. Stichprobe; Intuition von "Messfehler" und "Wahrscheinlichkeit"
