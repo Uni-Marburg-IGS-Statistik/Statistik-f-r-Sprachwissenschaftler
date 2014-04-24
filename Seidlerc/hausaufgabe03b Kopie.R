@@ -47,7 +47,7 @@ print(mean(my.data))
 # können wir auch sie indizieren (zwar nur mit [1]), weil es nur ein Element gibt
  print(zahl[1])
 
-# Diese starke Orientierung an Daten statt an Datenpunkte ist eine große Stärke
+# Diese starke Orientierung an Daten statt an Datenpunkten ist eine große Stärke
 # von R, die R von vielen anderen Programmiersprachen unterscheidet.
 # Ganz viele praktische Funktionen sind in R eingebaut und sie funktionieren alle
 # mit Vektoren:
