@@ -1,6 +1,6 @@
 % Hausaufgabe 03
-% Phillip Alday <phillip.alday@staff.uni-marburg.de>
-% 2014-04-23
+% Carmen Seidler <seidlerc@students.uni-marburg.de>
+% 2014-04-24
 
 Falls die Umlaute in dieser und anderen Dateien nicht korrekt dargestellt werden, sollten Sie File > Reopen with Encoding > UTF-8 sofort machen (und auf jeden Fall ohne davor zu speichern), damit die Enkodierung korrekt erkannt wird! 
 
@@ -26,7 +26,11 @@ Der Index bzw. das Staging Area ist ein vorläufiger Commit, an dem Sie gerade a
 # Ein bisschen Markdown
 Es gibt in RStudio und im Internet **viel** zu Markdown. RStudio nutzt einen besonderen Dialekt, damit auch R-Code-Blöcke eingebaut werden können, aber der Großteil der "Syntax" ändert sich nicht. Fügen Sie hier eine ungeordnete Liste hier mit zumindest zwei Erwartungen von diesem Kurs ein. Testen Sie, dass Sie das korrekt formatiert haben, indem Sie auf "Knit HTML" klicken und schauen, dass die Liste mit Punkten erscheint.  
 
-list_hier
+**Erwartungen**
+- Möglichkeit der Erstellung von Satistiken und der gleichzeitigen geordneten Dokumentation für wissenschaftliche Arbeiten, 
+
+- Verknüpfung von Satistik, Grafik und Dokumentation
+
 
 ## R-Code-Blöcke
 
