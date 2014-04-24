@@ -53,10 +53,10 @@ print(mean(my.data))
 # mit Vektoren:
 
 # Quadratwurzel
-print(sqrt(my.data))
+ print(sqrt(my.data))
 
 # Exponenten mit **
-print(my.data**3)
+ print(my.data**3)
 
 # Logarithmen
  print(log(my.data))
@@ -83,7 +83,7 @@ print(my.data**3)
 # die komische Syntax mit Tilde wird später deutlicher ....
  print(xtabs(~more.data))
 
-# auch die Ergebnisse solcher Funktionen können wir einer Variabel zuweisen:
+# auch die Ergebnisse solcher Funktionen können wir einer Variable zuweisen:
  tabelle <- xtabs(~more.data)
  print(tabelle)
 
@@ -97,7 +97,7 @@ print(my.data**3)
 
 # Vervollständigen Sie folgende Zeile, sodass Prozentwerte aus den relativen
 # Häufigkeiten entstehen: 
- tabelle.prozent <- round (tabelle.rel * 100, 2)
+ tabelle.prozent <- round(tabelle.rel * 100, 2) 
  print(tabelle.prozent)
 
 # Aber die Frage bleibt, wie berechnen wir den Modus? Durch sortieren!
@@ -121,12 +121,12 @@ print(my.data**3)
 # Vorausgesetzt sind Merkmalsausprägungen mit der gleichen maximalen Häufigkeit.
 # Der Code ist korrekt, da es nur eine maximale Häufigkeit gibt (w).
 
-# Als Abscheid ein Beispiel mit der Darstellung Frequenzdaten mit Säulendiagramm
+# Als Abschied ein Beispiel mit der Darstellung Frequenzdaten mit Säulendiagramm
 # bzw. Histogramm
 
  library(ggplot2)
  my.histogram <- qplot(more.data,geom="histogram")
- print(my.histogram)
+ print(my.histogram) 
 
 # Sie sind jetzt fertig -- das waren ganz viele Kleinigkeiten, aber
 # Kleinigkeiten, die wir immer wieder nutzen werden. Machen Sie einen Commit und
