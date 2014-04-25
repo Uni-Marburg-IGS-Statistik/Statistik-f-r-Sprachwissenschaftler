@@ -29,7 +29,6 @@ Es gibt in RStudio und im Internet **viel** zu Markdown. RStudio nutzt einen bes
 - grundlegende Funtkionen von R kennen lernen
 - eine Einführung in statistische Berechnungen mit R bekommen
 
-
 ## R-Code-Blöcke
 ```{r}
 # Dieser Block wird als R-Code statt Markdown interpretiert.
