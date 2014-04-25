@@ -120,7 +120,7 @@ print (modus)
 # Es könnte auch sein, dass es gleich viele w und m gibt. Oder dass es noch mehr 
 # Variablen gibt, von denen 2 oder mehr die selbe, höchste Anzahl haben. Dann wären die
 # Verteilungen Bimodal oder Multimodal. Es würde dann nicht reichen, nur das erste Element
-# aus der Liste zu nehmen
+# aus der Liste zu nehmen und der Code müsste verändert werden.
 
 
 # Als Abscheid ein Beispiel mit der Darstellung Frequenzdaten mit Säulendiagramm
