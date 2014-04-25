@@ -42,10 +42,10 @@ print(my.data[3])
 
 # Wenn wir eine Variable mit einer Zahl haben,
 zahl <- 42
-# print(zahl)
+print(zahl)
 
 # können wir auch sie indizieren (zwar nur mit [1]), weil es nur ein Element gibt
-# print(zahl[1])
+print(zahl[1])
 
 # Diese starke Orientierung an Daten statt an Datenpunkte ist eine große Stärke
 # von R, die R von vielen anderen Programmiersprachen unterscheidet.
@@ -97,7 +97,7 @@ print(tabelle.rel)
 
 # Vervollständigen Sie folgende Zeile, sodass Prozentwerte aus den relativen
 # Häufigkeiten entst ehen: tabelle.prozent <- tabelle.rel  
-print(percent_format)(tabelle.rel))
+print(percent_format(0.353,0647))
 
 # Aber die Frage bleibt, wie berechnen wir den Modus? Durch sortieren!
 tabelle.sorted <- sort(tabelle,decreasing=TRUE)
