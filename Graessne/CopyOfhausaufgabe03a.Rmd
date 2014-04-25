@@ -1,6 +1,6 @@
 % Hausaufgabe 03
 % Astrid Graessner <Graessne@students.uni-marburg.de>
-% 2014-04-24.
+% 2014-04-25
 
 Falls die Umlaute in dieser und anderen Dateien nicht korrekt dargestellt werden, sollten Sie File > Reopen with Encoding > UTF-8 sofort machen (und auf jeden Fall ohne davor zu speichern), damit die Enkodierung korrekt erkannt wird! 
 
@@ -26,7 +26,8 @@ Der Index bzw. das Staging Area ist ein vorläufiger Commit, an dem Sie gerade a
 # Ein bisschen Markdown
 Es gibt in RStudio und im Internet **viel** zu Markdown. RStudio nutzt einen besonderen Dialekt, damit auch R-Code-Blöcke eingebaut werden können, aber der Großteil der "Syntax" ändert sich nicht. Fügen Sie hier eine ungeordnete Liste hier mit zumindest zwei Erwartungen von diesem Kurs ein. Testen Sie, dass Sie das korrekt formatiert haben, indem Sie auf "Knit HTML" klicken und schauen, dass die Liste mit Punkten erscheint.  
 
-list_hier
+- Erwartung 1: sichere Anwendung von statistischen Tests
+- Erwartung 2: kritische Auseinandersetzung mit Statistiken
 
 ## R-Code-Blöcke
 ```{r}
@@ -72,7 +73,7 @@ R-Code können Sie auch direkt in den Fließtext bauen: Die Quadratwurzel von 13
 
 Ergänzen Sie folgende Zeile mit Inline R-code, sodass der Satz korrekt und vollständig ist:
 
-Die Summe von 98545455678767 und 567886538546532323 ist: `r 98545455678767+567886538546532323`.
+Die Summe von 98545455678767 und 567886538546532323 ist: `r 98545455678767 + 567886538546532323`.
 
 # Normaler R-Code 
 Es ist natürlich auch möglich R-Code zu schreiben, ohne ihn in (R)Markdown einzubetten. Dazu geht die Aufgabe weiter mit `hausaufgabe03b.R` weiter. Sie sollten die Datei auch in Ihren Ordner kopieren und einen Commit machen, bevor Sie die Kopie weiter anpassen.
