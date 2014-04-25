@@ -1,0 +1,81 @@
+% Hausaufgabe 03
+% Phillip Alday <phillip.alday@staff.uni-marburg.de>
+% 2014-04-23
+
+Falls die Umlaute in dieser und anderen Dateien nicht korrekt dargestellt werden, sollten Sie File > Reopen with Encoding > UTF-8 sofort machen (und auf jeden Fall ohne davor zu speichern), damit die Enkodierung korrekt erkannt wird! 
+
+# Setup und ein bisschen Übung mit Git 
+1. Machen Sie einen neuen Ordner in der Repository, deren Name Ihrem ILIAS-Benutzernamen entspricht.
+2. Kopieren Sie diese Datei in den Ordner (das können Sie innerhalb RStudio machen oder mit Explorer/Finder/usw.) und öffnen Sie die Kopie. Ab diesem Punkt arbeiten Sie mit der Kopie.
+3. Sie sehen jetzt im Git-Tab, dass der neue Ordner als unbekannt (mit gelbem Fragezeichnen) da steht. Geben Sie Git Bescheid, dass Sie die Änderungen im Ordner verfolgen möchten (auf Stage klicken). Die neue Datei steht automatisch da.
+4. Machen Sie ein Commit mit den bisherigen Änderungen (schreiben  Sie eine sinnvolle Message dazu -- sinnvoll bedeutet nicht unbedingt lang) und danach einen Push.
+5. Ersetzen Sie meinen Namen oben mit Ihrem. Klicken auf Stage, um die Änderung zu merken.
+6. Ändern Sie das Datum auf heute. (Seien Sie ehrlich! Ich kann das sowieso am Commit sehen.)
+7. Sie sehen jetzt, dass es zwei Symbol in der Status-Spalte gibt, eins für den Zustand im *Staging Area* (auch als *Index* bekannt), eins für den Zustand im Vergleich zum Staging Area. Sie haben die Datei modifiziert, eine Änderung in das Staging Area aufgenommen, und danach weitere Änderungen gemacht. Nur Änderungen im Staging Area werden in den Commit aufgenommen.
+8. Stellen Sie die letzten Änderungen auch ins Staging Area und machen Sie einen Commit (immer mit sinnvoller Message!).
+9. Vergessen Sie nicht am Ende, die Lizenz ggf. zu ändern!
+
+## Ein möglicher Umgang mit Git
+Wenn Sie die Hausaufgabe machen, können Sie das Staging Area und Commits nutzen, um Ihre(n) Fortschritt(e) zu verfolgen. Ich mache selber z.B. Commits, wenn ich relativ sicher bin bzw. einen gewissen (manchmal auch kleinen) Meilenstein erreicht habe. Ich stelle Änderungen ins Staging Area, wenn ich kleinere Schritte fertig habe. Wenn ich irgendeinen Blödsinn mache, kann ich mit Git alle Änderungen, die nicht im Staging Area sind, rückgängig machen. Auch wenn Sie Fehler schon mit commit-et haben, ist das überhaupt kein Problem, denn mit Git können Sie jederzeit auf jede commit-et Version zurückspringen und ab dem Punkt weiter bzw. neu entwickeln.  Das ist einer der vielen Vorteile von Git (und anderen Versionierungssytemen) -- Sie können sich wagen, ohne Angst dass etwas (was schon commit-ed wurde!) verloren geht. Wenn daraus nichts wird, können Sie zurückspringen. 
+
+Das ist besonders toll bei Abschlussarbeiten: Sie gehen zu Ihrem Betreuer mit Entwurf, er meinte, Sie sollten etwas löschen. In der Woche darauf gehen Sie wieder hin, und jetzt meint er, der gestrickene Teil sollte wieder rein. Mit Git können Sie nicht nur die alte Version abrufen, sondern auch die alte und die neue Versionen zusammenführen und nur die guten Teile von beiden übernehmen!
+
+## Was ist der Unterschied zwischen dem Index und einem Commit?
+Der Index bzw. das Staging Area ist ein vorläufiger Commit, an dem Sie gerade arbeiten. Änderungen im Staging Area haben keine Commit-Message und werden auch nicht an andere gegeben, wenn Sie einen Push machen. Sie können auch einfach durcharbeiten, ohnen etwas in den Index zu tun, bis Sie mit dem gesamten Commit fertig sind, und am Ende stage-n und sofort commit-en, wenn das Ihnen besser passt. 
+
+# Ein bisschen Markdown
+Es gibt in RStudio und im Internet **viel** zu Markdown. RStudio nutzt einen besonderen Dialekt, damit auch R-Code-Blöcke eingebaut werden können, aber der Großteil der "Syntax" ändert sich nicht. Fügen Sie hier eine ungeordnete Liste hier mit zumindest zwei Erwartungen von diesem Kurs ein. Testen Sie, dass Sie das korrekt formatiert haben, indem Sie auf "Knit HTML" klicken und schauen, dass die Liste mit Punkten erscheint.  
+
+list_hier
+
+## R-Code-Blöcke
+```{r}
+# Dieser Block wird als R-Code statt Markdown interpretiert.
+# Zeilen in R, die mit # anfangen, werden von R ignoriert.
+# Solche Zeilen nennt man "Comments" -- "Kommentar"
+
+x <- c(1,2,3)
+print(x)
+```
+
+Per Default wird der R-Code schön dargestellt und durchgeführt, sodass sowohl der Code als auch sein Output in der HTML-Datei erscheint. Wir können das ändern mit Blockoptionen. Das ist zum Beispiel nutzlich, wenn wir Grafiken machen und die Größe der Figuren bestimmen möchten. (Wenn Sie `ggplot2` noch nicht installiert haben, müssen Sie das noch machen!)
+
+
+```{r fig.height=5, fig.width=5}
+library(ggplot2)
+# example from http://www.statmethods.net/advgraphs/ggplot2.html
+
+# create factors with value labels
+mtcars$gear <- factor(mtcars$gear,levels=c(3,4,5),
+   labels=c("3gears","4gears","5gears"))
+mtcars$am <- factor(mtcars$am,levels=c(0,1),
+   labels=c("Automatic","Manual"))
+mtcars$cyl <- factor(mtcars$cyl,levels=c(4,6,8),
+   labels=c("4cyl","6cyl","8cyl"))
+
+# Kernel density plots for mpg
+# grouped by number of gears (indicated by color)
+carplot <- qplot(mpg, data=mtcars, geom="density", fill=gear, alpha=I(.5),
+   main="Distribution of Gas Milage", xlab="Miles Per Gallon",
+   ylab="Density")
+print(carplot)
+```
+
+Das ist übrigens ein sehr gutes Beispiel, wie die Darstellung von Daten bzw. Statistik unseren Eindruck und unsere Wahrnehmung davon beeinflussen kann. Wenn wir die Grafik breiter aber weniger hoch, sieht das Bild anders aus!
+
+```{r fig.height=3, fig.width=10}
+print(carplot)
+```
+
+## Inline R-Code
+R-Code können Sie auch direkt in den Fließtext bauen: Die Quadratwurzel von 13 ist `r sqrt(13)`. Passen Sie dabei auf, dass die verschiedenen Arten von Aposostrophen, Anführungszeichnen und Akzenten in den meisten Programmiersprachen bedeutsam sind!
+
+Ergänzen Sie folgende Zeile mit Inline R-code, sodass der Satz korrekt und vollständig ist:
+
+Die Summe von 98545455678767 und 567886538546532323 ist: code_hier .
+
+# Normaler R-Code 
+Es ist natürlich auch möglich R-Code zu schreiben, ohne ihn in (R)Markdown einzubetten. Dazu geht die Aufgabe weiter mit `hausaufgabe03b.R` weiter. Sie sollten die Datei auch in Ihren Ordner kopieren und einen Commit machen, bevor Sie die Kopie weiter anpassen.
+
+# Lizenz
+Dieses Werk ist lizenziert unter einer CC-BY-NC-SA Lizenz.
