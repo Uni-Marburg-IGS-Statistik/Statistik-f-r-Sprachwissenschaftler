@@ -7,11 +7,11 @@ Falls die Umlaute in dieser und anderen Dateien nicht korrekt dargestellt werden
 # Setup und ein bisschen Übung mit Git 
 1. Machen Sie einen neuen Ordner in der Repository, deren Name Ihrem ILIAS-Benutzernamen entspricht.
 2. Kopieren Sie diese Datei in den Ordner (das können Sie innerhalb RStudio machen oder mit Explorer/Finder/usw.) und öffnen Sie die Kopie. Ab diesem Punkt arbeiten Sie mit der Kopie.
-3. Sie sehen jetzt im Git-Tab, dass der neue Ordner als unbekannt (mit gelbem Fragezeichnen) da steht. Geben Sie Git Bescheid, dass Sie die Änderungen im Ordner verfolgen möchten (auf Stage klicken). Die neue Datei steht automatisch da.
-4. Machen Sie ein Commit mit den bisherigen Änderungen (schreiben  Sie eine sinnvolle Message dazu -- sinnvoll bedeutet nicht unbedingt lang) und danach einen Push.
+3. Sie sehen jetzt im Git-Tab, dass der neue Ordner als unbekannt (mit gelbem Fragezeichenen) da steht. Geben Sie Git Bescheid, dass Sie die Änderungen im Ordner verfolgen möchten (auf Stage klicken). Die neue Datei steht automatisch da.
+4. Machen Sie ein Commit mit den bisherigen Änderungen (schreiben Sie eine sinnvolle Message dazu -- sinnvoll bedeutet nicht unbedingt lang) und danach einen Push.
 5. Ersetzen Sie meinen Namen oben mit Ihrem. Klicken auf Stage, um die Änderung zu merken.
 6. Ändern Sie das Datum auf heute. (Seien Sie ehrlich! Ich kann das sowieso am Commit sehen.)
-7. Sie sehen jetzt, dass es zwei Symbol in der Status-Spalte gibt, eins für den Zustand im *Staging Area* (auch als *Index* bekannt), eins für den Zustand im Vergleich zum Staging Area. Sie haben die Datei modifiziert, eine Änderung in das Staging Area aufgenommen, und danach weitere Änderungen gemacht. Nur Änderungen im Staging Area werden in den Commit aufgenommen.
+7. Sie sehen jetzt, dass es zwei Symbole in der Status-Spalte gibt, eins für den Zustand im *Staging Area* (auch als *Index* bekannt), eins für den Zustand im Vergleich zum Staging Area. Sie haben die Datei modifiziert, eine Änderung in das Staging Area aufgenommen, und danach weitere Änderungen gemacht. Nur Änderungen im Staging Area werden in den Commit aufgenommen.
 8. Stellen Sie die letzten Änderungen auch ins Staging Area und machen Sie einen Commit (immer mit sinnvoller Message!).
 9. Vergessen Sie nicht am Ende, die Lizenz ggf. zu ändern!
 
@@ -26,8 +26,8 @@ Der Index bzw. das Staging Area ist ein vorläufiger Commit, an dem Sie gerade a
 # Ein bisschen Markdown
 Es gibt in RStudio und im Internet **viel** zu Markdown. RStudio nutzt einen besonderen Dialekt, damit auch R-Code-Blöcke eingebaut werden können, aber der Großteil der "Syntax" ändert sich nicht. Fügen Sie hier eine ungeordnete Liste hier mit zumindest zwei Erwartungen von diesem Kurs ein. Testen Sie, dass Sie das korrekt formatiert haben, indem Sie auf "Knit HTML" klicken und schauen, dass die Liste mit Punkten erscheint.  
 
-**Erwartungen**
-- Möglichkeit der Erstellung von Satistiken und der gleichzeitigen geordneten Dokumentation für wissenschaftliche Arbeiten, 
+**Erwartungen von diesem Kurs**
+- Kenntnis der Erstellung von Satistiken und der gleichzeitigen geordneten Dokumentation wissenschaftlicher Analysen, 
 
 - Verknüpfung von Satistik, Grafik und Dokumentation
 
@@ -48,7 +48,7 @@ print(x)
 ```
 
 
-Per Default wird der R-Code schön dargestellt und durchgeführt, sodass sowohl der Code als auch sein Output in der HTML-Datei erscheint. Wir können das ändern mit Blockoptionen. Das ist zum Beispiel nutzlich, wenn wir Grafiken machen und die Größe der Figuren bestimmen möchten. (Wenn Sie `ggplot2` noch nicht installiert haben, müssen Sie das noch machen!)
+Per Default wird der R-Code schön dargestellt und durchgeführt, sodass sowohl der Code als auch sein Output in der HTML-Datei erscheint. Wir können das ändern mit Blockoptionen. Das ist zum Beispiel nützlich, wenn wir Grafiken machen und die Größe der Figuren bestimmen möchten. (Wenn Sie `ggplot2` noch nicht installiert haben, müssen Sie das noch machen!)
 
 
 

@@ -26,8 +26,8 @@ Der Index bzw. das Staging Area ist ein vorläufiger Commit, an dem Sie gerade a
 # Ein bisschen Markdown
 Es gibt in RStudio und im Internet **viel** zu Markdown. RStudio nutzt einen besonderen Dialekt, damit auch R-Code-Blöcke eingebaut werden können, aber der Großteil der "Syntax" ändert sich nicht. Fügen Sie hier eine ungeordnete Liste hier mit zumindest zwei Erwartungen von diesem Kurs ein. Testen Sie, dass Sie das korrekt formatiert haben, indem Sie auf "Knit HTML" klicken und schauen, dass die Liste mit Punkten erscheint.  
 
-**Erwartungen**
-- Kenntnis der Erstellung von Satistiken und der gleichzeitigen geordneten Dokumentation für wissenschaftliche Arbeiten, 
+**Erwartungen von diesem Kurs**
+- Kenntnis der Erstellung von Satistiken und der gleichzeitigen geordneten Dokumentation wissenschaftlicher Analysen, 
 
 - Verknüpfung von Satistik, Grafik und Dokumentation
 
@@ -42,7 +42,7 @@ x <- c(1,2,3)
 print(x)
 ```
 
-Per Default wird der R-Code schön dargestellt und durchgeführt, sodass sowohl der Code als auch sein Output in der HTML-Datei erscheint. Wir können das ändern mit Blockoptionen. Das ist zum Beispiel nutzlich, wenn wir Grafiken machen und die Größe der Figuren bestimmen möchten. (Wenn Sie `ggplot2` noch nicht installiert haben, müssen Sie das noch machen!)
+Per Default wird der R-Code schön dargestellt und durchgeführt, sodass sowohl der Code als auch sein Output in der HTML-Datei erscheint. Wir können das ändern mit Blockoptionen. Das ist zum Beispiel nützlich, wenn wir Grafiken machen und die Größe der Figuren bestimmen möchten. (Wenn Sie `ggplot2` noch nicht installiert haben, müssen Sie das noch machen!)
 
 
 ```{r fig.height=5, fig.width=5}
