@@ -98,7 +98,7 @@ print(mean(my.data))
 # Vervollständigen Sie folgende Zeile, sodass Prozentwerte aus den relativen
 # Häufigkeiten entstehen: 
  tabelle.prozent <- round(tabelle.rel * 100, 2) 
- print(tabelle.prozent)
+ cat(tabelle.prozent,"%",  sep="%")
 
 # Aber die Frage bleibt, wie berechnen wir den Modus? Durch sortieren!
  tabelle.sorted <- sort(tabelle,decreasing=TRUE)
