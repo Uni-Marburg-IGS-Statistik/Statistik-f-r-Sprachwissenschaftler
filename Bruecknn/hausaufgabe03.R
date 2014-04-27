@@ -39,13 +39,17 @@ print(mean(my.data))
 # überschaubar war.)
 
 # print(my.data[3])
+print(my.data[3])
 
 # Wenn wir eine Variable mit einer Zahl haben,
 # zahl <- 42
 # print(zahl)
+zahl <- 42
+print(zahl)
 
 # können wir auch sie indizieren (zwar nur mit [1]), weil es nur ein Element gibt
 # print(zahl[1])
+print(zahl[1])
 
 # Diese starke Orientierung an Daten statt an Datenpunkte ist eine große Stärke
 # von R, die R von vielen anderen Programmiersprachen unterscheidet.
@@ -60,44 +64,60 @@ print(my.data**3)
 
 # Logarithmen
 # print(log(my.data))
+print(log(my.data))
 
 # Summe aller Elemente in einem Vektor
 # print(sum(my.data))
+print(sum(my.data))
+
 
 # Sortieren
 # print(sort(my.data))
+print(sort(my.data))
 
 # und vieles Mehr! 
 
 # Es gibt eine eingebaute Funktion für das Median:
 # print(median(my.data))
+print(median(my.data))
 
 # aber nicht für den Modalwert!
 # Es gibt aber andere Funktionen, die uns da helfen.
 # more.data <- c("m","m","w","w","m","w","w","w","w","w","w","m","m","m","w","w","w")
+more.data <- c("m","m","w","w","m","w","w","w","w","w","w","m","m","m","w","w","w")
 
 # with table()
 # print(table(more.data))
+print(table(more.data))
 
 # with xtabs()
 # die komische Syntax mit Tilde wird später deutlicher ....
 # print(xtabs(~more.data))
+print(xtabs(~more.data))
 
 # auch die Ergebnisse solcher Funktionen können wir einer Variabel zuweisen:
 # tabelle <- xtabs(~more.data)
 # print(tabelle)
+tabelle <- xtabs(~more.data)
+print(tabelle)
 
 # Wir können die Werte auch aus dieser Tabelle bearbeiten
 # total <- sum(tabelle)
 # print(total)
+total <- sum(tabelle)
+print(total)
 
 # und damit relative Häufigkeiten ausdrucken:
 # tabelle.rel <- tabelle / total
 # print(tabelle.rel)
+tabelle.rel <- tabelle / total
+print(tabelle.rel)
 
 # Vervollständigen Sie folgende Zeile, sodass Prozentwerte aus den relativen
 # Häufigkeiten entst ehen: tabelle.prozent <- tabelle.rel code_hier 
 # print(tabelle.prozent)
+Häufigkeiten entst ehen: tabelle.prozent <- round (tabelle.rel * 100, 2)
+print(tabelle.prozent)
 
 # Aber die Frage bleibt, wie berechnen wir den Modus? Durch sortieren!
 # tabelle.sorted <- sort(tabelle,decreasing=TRUE)
