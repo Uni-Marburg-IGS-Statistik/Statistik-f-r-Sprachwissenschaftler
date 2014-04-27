@@ -1,4 +1,4 @@
-% Hausaufgabe 01
+% Hausaufgabe 03
 % Phillip Alday <phillip.alday@staff.uni-marburg.de>
 % 2014-04-23
 
@@ -75,7 +75,7 @@ Ergänzen Sie folgende Zeile mit Inline R-code, sodass der Satz korrekt und voll
 Die Summe von 98545455678767 und 567886538546532323 ist: code_hier .
 
 # Normaler R-Code 
-Es ist natürlich auch möglich R-Code zu schreiben, ohne ihn in (R)Markdown einzubetten. Dazu geht die Aufgabe weiter mit `hausaufgabe03.R` weiter. Sie sollten die Datei auch in Ihren Ordner kopieren und einen Commit machen, bevor Sie die Kopie weiter anpassen.
+Es ist natürlich auch möglich R-Code zu schreiben, ohne ihn in (R)Markdown einzubetten. Dazu geht die Aufgabe weiter mit `hausaufgabe03b.R` weiter. Sie sollten die Datei auch in Ihren Ordner kopieren und einen Commit machen, bevor Sie die Kopie weiter anpassen.
 
 # Lizenz
 Dieses Werk ist lizenziert unter einer CC-BY-NC-SA Lizenz.
