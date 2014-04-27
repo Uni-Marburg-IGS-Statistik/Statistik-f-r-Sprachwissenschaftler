@@ -1,6 +1,6 @@
 # Hausaufgabe 03
-# Phillip Alday <phillip.alday@staff.uni-marburg.de>
-# 2014-04-23
+# Nadine Brückner <Bruecknn@students.uni-marburg.de>
+# 2014-04-27
 # Dieses Werk ist lizenziert unter einer CC-BY-NC-SA Lizenz.
 
 # Sie sollten die Datei auch in Ihren Ordner kopieren und einen Commit machen, 
