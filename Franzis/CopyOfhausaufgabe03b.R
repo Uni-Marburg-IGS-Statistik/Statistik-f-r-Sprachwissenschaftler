@@ -1,7 +1,7 @@
 # Hausaufgabe 03
 # Isabelle Franz <Franzis@students.uni-marburg.de>
 # 2014-04-25
-# Dieses Werk ist lizenziert unter einer CC-BY-NC-SA Lizenz.
+# Darf nur zu Prüfungszwecken verwendet werden
 
 # Sie sollten die Datei auch in Ihren Ordner kopieren und einen Commit machen, 
 # bevor Sie die Kopie weiter anpassen! Vergessen Sie dabei nicht, Namen, Datum
