@@ -1,4 +1,4 @@
-# Hausaufgabe 03
+# Hausaufgabe 03b
 # Nadine Brückner <Bruecknn@students.uni-marburg.de>
 # 2014-04-27
 # Dieses Werk ist lizenziert unter einer CC-BY-NC-SA Lizenz.
@@ -119,6 +119,7 @@ print(tabelle.rel)
 # Häufigkeiten entst ehen: 
 tabelle.prozent <- round (tabelle.rel * 100, 1)
 print(tabelle.prozent)
+cat(tabelle.prozent, sep="% ","\n")
 
 # Aber die Frage bleibt, wie berechnen wir den Modus? Durch sortieren!
 # tabelle.sorted <- sort(tabelle,decreasing=TRUE)
