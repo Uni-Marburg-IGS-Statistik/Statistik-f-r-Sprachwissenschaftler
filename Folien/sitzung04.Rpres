@@ -135,7 +135,7 @@ type: section
 Notation Alert
 ===============
 * Mitterlwert von einer Menge $x$ mit Elementen $x_1, x_2,\ldots,x_{n-1},x_n$ wird mit $\bar{x}$ angeben
-* Ohne explizite Aussage dagegen wird der arithmetische Mittelwert gemeint
+* Ohne explizite Aussage dagegen ist der arithmetische Mittelwert gemeint
 * $\bar{x} = \frac{\sum_{1}^{n} x_n}{n}$
 
 
