@@ -1,0 +1,422 @@
+Statistik für Sprachwissenschaftler
+========================================================
+author: Phillip M . Alday
+date: 2014-04-28    
+autosize: true
+
+```{r setup, include=FALSE}
+opts_chunk$set(cache=TRUE,prompt=TRUE)
+library(knitcitations)
+```
+
+===================
+title: false
+type: alert
+<center>
+<h1>RTFM</h1>
+</center>
+
+Sprechstunde heute
+===================
+<center>
+<h1>fällt aus</h1>
+</center>
+
+Nachholtermin: morgen (2014-04-29), 15-16 Uhr
+
+der Plan
+===================
+- heute: deskriptive Statistik mit kleineren Datenmengen und wenig R
+- morgen: deskriptive Statistik mit größeren Datenmengen und mehr R, evtl. Anfang der Interferenzstatistik
+
+Aufwachen und sich errinnern!
+====================================
+type: section
+
+
+Mean, Median, Modus
+======================
+incremental: true
+- Maße der zentralen Tendenz
+- unterschiedliche Schätzungen für unterschiedle Probleme und Datenarten
+- Einkommen: 400, 300, 700, 500, 10000 € / Monat
+- Mean: `r mean(c(400, 300, 700, 500, 10000))`
+- Median: `r median(c(400, 300, 700, 500, 10000))`
+
+
+nominalskalierte Daten
+=======================
+type: section
+
+Streuung
+=================================
+- Modus durch andere Dispersionmaß ergänzt 
+- Zusammenhang zwischen der Häufigkeit und des *(relativen) Informationgehalts* einer Kategorie  
+- $H = -\frac{1}{\ln K} \cdot \sum_{j=1}^{k} \left( h_j \cdot \ln h_j \right)$
+  - **$\ln$** 41natürlicher Logarithmus
+  - **$h_j$** relative Häufigkeit einer Kategorie 
+  - **$k$** Anzahl der Kategorien
+- a.k.a. *Entropie* 
+- variert zwischen 0 (minimal Streeung, bzw. nur eine Kategorie besetzt) und 1 (maximale Streeung, d.h. Gelichverteilung über alle Kategorien)
+
+Beispiel
+==========
+incremental: true
+```{r}
+library(languageR)
+head(alice)
+```
+```{r}
+counts <- table(alice)
+head(sort(counts))
+```
+```{r}
+rel <- prop.table(counts)
+head(sort(rel))
+```
+
+
+Beispiel (cont'd)
+===================
+```{r}
+innen <- rel * log(rel)
+summe <- sum(innen)
+kehrwert <- -1 / log(length(counts))
+h <- summe * kehrwert
+print(h)
+```
+
+- $H$ nah an 1 heißt, dass jedes Wort relativ viel Information trägt. 
+- Was ist die Entropie von blah blah?
+
+Anwendungen von Entropie
+=========================
+left: 30%
+
+- Komprimierung (Versuch, Platz und Informationsgehalt aneinander anzupassen)
+- Passwörter
+
+****
+<img src= http://imgs.xkcd.com/comics/password_strength.png >
+<br/>Quelle: [xkcd](http://xkcd.com/)
+
+ordinalskalierte Daten
+========================
+type: section
+
+Typen von ordinalskalierten Daten
+===================================
+- singulär
+  * Rangreihung, bei der jedem Objekt sein Rangplatz zugewiesen wird
+  * Beispiel: Marathonlauf
+  * jedes Objekt enthält typischerweise einen anderen Rangplatz
+  * geteile Ränge: "Rangbindungen"
+- kategoriale Dten mit geordneten Kategorien
+  * "gruppierte Daten"
+  * Beispiel: Schulnoten
+
+*Sind Dispersionmaße und Modalwerte bedeutsam für beide Typen?*
+
+ordinalskalierte Daten
+========================
+* Median
+* Quartile: Median der zwei Hälfte, die durch das Median des Ganzen entstanden
+* Manchmal ein bisschen unklar ... (es gibt allerdings exakte Definitionen), schlagen Sie nach, falls Sie das brauchen!
+* in R mit `quantile()` (auch Dezile, Perzentile, usw.) zu berechnen
+* ACHTUNG: unterschiedliche Definitionen -> unterschiedle Möglichkeiten, s. Dokumentation!
+
+metrische (interval- und verhältnisskalierte) Daten
+====================================================
+type: section
+
+
+Notation Alert
+===============
+* Mitterlwert von einer Menge $x$ mit Elementen $x_1, x_2,\ldots,x_{n-1},x_n$ wird mit $\bar{x}$ angeben
+* Ohne explizite Aussage dagegen wird der arithmetische Mittelwert gemeint
+* $\bar{x} = \frac{\sum_{1}^{n} x_n}{n}$
+
+
+Streuung
+===========
+incremental: true
+Sind die beiden Listen vergleichbar?
+- 1, 3, 3, 5, 5, 5, 6, 8, 10
+- 1, 1, 1, 1, 5, 10, 10, 10, 10
+
+***
+```{r}
+x <- c(1, 3, 3, 5, 5, 5, 6, 8, 10)
+print(paste(mean(x), median(x)))
+```
+```{r}
+y <- c(1, 1, 1, 1, 5, 10, 10, 10, 10)
+print(paste(mean(y), median(y)))
+```
+
+
+Histogramm
+===========
+```{r}
+hist(x)
+```
+***
+```{r}
+hist(y)
+```
+
+
+Mit ggplot2
+===========
+```{r}
+library(ggplot2)
+qplot(x, geom="bar")
+```
+***
+```{r}
+qplot(y, geom="bar")
+```
+
+Streuungsbreite
+==================
+- Abweichung zwischen dem größten und dem kleinsten Messwert: $x_{\text{max}} - x_{\text{min}}$
+- einfach zu berechnen
+- sagt wennig darüber aus, wie die Werte innerhalb der Verteilung beschaffen sind
+
+***
+```{r}
+range(x)
+diff(range(x))
+range(y)
+diff(range(y))
+```
+
+Mittlere Abweichung (average deviation)
+==========================================
+left: 38%
+- Durchschnitt der in absoluten Beträgen gemessenen Abweichung aller Messwerte vom Mitterlwert
+- $\text{AD}_x = \frac{\sum_i^n \left| x_i - \bar{x}\right|}{n}$
+
+***
+```{r}
+abweichung <- x - mean(x)
+abs.abweichung <- abs(abweichung)
+mittlere.abweichung <- mean(abs.abweichung)
+mittlere.abweichung
+```
+
+```{r}
+mittlere.abweichung <- mean(abs(y - mean(y)))
+mittlere.abweichung
+``` 
+
+
+
+Varianz und Standardabweichung
+===============================
+type: section
+wichtigste Maße zur Kennzeichnug der Variabilität
+
+Varianz
+========
+- wie sehr ein Sachverhalt "streut"
+- Durschnitt der quadrierten Abweichung aller Messwerte vom Mittelwert
+in absoluten Beträgen gemessenen Abweichung
+- $s_x^2 = \frac{\sum_i^n \left( x_i - \bar{x}\right)^2}{n}$
+
+Varianz berechnen
+===========================================
+- manuell
+```{r}
+abweichung <- x - mean(x)
+quadr.abweichung <- abweichung^2
+varianz.x <- mean(quadr.abweichung)
+varianz.x
+```
+
+```{r}
+varianz.y <- mean((y - mean(y))^2)
+varianz.y
+``` 
+
+***
+- mit `var()`
+```{r}
+#
+#
+#
+var(x)
+```
+```{r}
+#
+var(y)
+```
+****
+**OBACHT**: Die Funktion `var()` verwendet folgende Formel für die Berechnung der Varianz:
+$s_x^2 = \frac{\sum_i^n \left( x_i - \bar{x}\right)^2}{n-1}$
+
+Varianz und ein Motiv der Quadrierung
+========================================
+- kleinere Abweichung vom aritmetischen Mittel eher zufällig entstehen
+- größere Abweeichungen bedeutsamer
+- Gewichtung durch Quadriere 
+- Beispiel: Gewichtschwankungen
+
+
+Standardabweichung ("standard deviation")
+=============================================
+- Problem: keine Entsprechung der ursprünglischen Maßeinheit wegen Quadrieren 
+- Lösung: Quadratwurzel!
+- Quadratwurzel der Varianz
+- $s_x = \sqrt{s_x^2} = \sqrt{\frac{\sum_i^n \left( x_i - \bar{x}\right)^2}{n}}$
+
+
+Berechnung der Standardabweichung
+======================================
+- manuell
+```{r}
+sqrt(varianz.x)
+```
+```{r}
+sqrt(varianz.y)
+```
+***
+- mit `sd()`
+```{r}
+sd(x)
+```
+```{r}
+sd(y)
+```
+****
+**OBACHT**: Auch hier wird eine Variente der Formel mit $n-1$ im Nenner verwendet. (Mehr später zum Hintergrund dazu)
+
+Visualsierung
+=================
+type:section
+
+Anscombes Quartet
+=====================
+```{r }
+anscombe
+```
+
+Anscombes Quartet: Mittelwert
+=============================
+```{r }
+mean(anscombe$x1)
+mean(anscombe$x2)
+mean(anscombe$x3)
+mean(anscombe$x4)
+```
+***
+```{r}
+mean(anscombe$y1)
+mean(anscombe$y2)
+mean(anscombe$y3)
+mean(anscombe$y4)
+```
+
+Anscombes Quartet: Varianz
+=============================
+```{r }
+var(anscombe$x1)
+var(anscombe$x2)
+var(anscombe$x3)
+var(anscombe$x4)
+```
+***
+```{r}
+var(anscombe$y1)
+var(anscombe$y2)
+var(anscombe$y3)
+var(anscombe$y4)
+```
+
+Anscombes Quartet: Summary
+=============================
+```{r}
+summary(anscombe)
+```
+
+Anscombes Quartet: Plot
+========================
+```{r,echo=FALSE}
+anscombe.long <- data.frame(set=c(rep(1,11),rep(2,11),rep(3,11),rep(4,11)),xvar=c(anscombe$x1,anscombe$x2,anscombe$x3,anscombe$x4),yvar=c(anscombe$y1,anscombe$y2,anscombe$y3,anscombe$y4))
+
+ ggplot(anscombe.long,aes(x=xvar,y=yvar)) + geom_point() + geom_smooth(method="lm",se=F) + facet_wrap(~set)
+```
+
+Schnelle Grafik: Box-Whisker-Diagramme
+========================================
+- von Tukey entwickelt
+- "Box" aus den drei Quartilen
+- Whiskers ("Schnurrhaare") aus 1,5 der Interquartilabweichung (IQA)
+  - IQA = Länge der Box
+  - Ende der oberen bzw. rechten Linie: $Q_3 + 1.5\cdot\text{IQA}$
+  - Ende der unteren bzw. linken Linie: $Q_1 - 1.5\cdot\text{IQA}$
+- **Ausreißer:**Werte, die nicht zwischen $Q_1 - 1.5\cdot\text{IQA}$ und $Q_3 + 1.5\cdot\text{IQA}$ liegen, d.h. jenseits der Whiskers sind
+
+*** 
+```{r, echo=FALSE}
+qplot("x",y=x,geom="boxplot") 
+```
+
+Base Graphics
+=============
+```{r}
+boxplot(x)
+```
+***
+```{r}
+boxplot(y)
+```
+
+ggplot2
+=========
+```{r}
+qplot(x="x",y=x,geom="boxplot")
+```
+***
+```{r}
+qplot(x="y",y=y,geom="boxplot")
+```
+
+
+long format
+==========
+```{r}
+df <- data.frame(var=c(rep("x",length(x)), rep("y",length(y))),
+                 val=c(x,y)
+                 )
+df
+```
+
+ggplot2 und data.frame
+==============================
+```{r}
+qplot(x=var,y=val,data=df,geom="boxplot")
+```
+
+Geigen
+========
+```{r}
+qplot(x=var,y=val,data=df,geom="violin")
+```
+
+Hausaufgabe
+============
+Bis morgen:
+- Fragebogen bei ILIAS ausführen (bis 8 Uhr!)
+- Handout zu Logarithmen anschauen (bei ILIAS)
+
+Bibliography
+=============
+```{r, echo=FALSE,results='hide'}
+cite("10.1080/00031305.1973.10478966")
+```
+
+```{r,results='asis',echo=FALSE}
+bibliography()
+```
+
