@@ -2,7 +2,7 @@ Statistik für Sprachwissenschaftler
 ========================================================
 author: Phillip M . Alday
 date: 2014-04-28    
-autosize: true
+#autosize: true
 
 ```{r setup, include=FALSE}
 opts_chunk$set(cache=TRUE,prompt=TRUE)
@@ -70,11 +70,13 @@ head(alice)
 counts <- table(alice)
 head(sort(counts))
 ```
+
+Beispiel (cont'd)
+===================
 ```{r}
 rel <- prop.table(counts)
 head(sort(rel))
 ```
-
 
 Beispiel (cont'd)
 ===================
@@ -91,12 +93,10 @@ print(h)
 
 Anwendungen von Entropie
 =========================
-left: 30%
-
 - Komprimierung (Versuch, Platz und Informationsgehalt aneinander anzupassen)
 - Passwörter
 
-****
+============
 <img src= http://imgs.xkcd.com/comics/password_strength.png >
 <br/>Quelle: [xkcd](http://xkcd.com/)
 
@@ -115,6 +115,8 @@ Typen von ordinalskalierten Daten
   * "gruppierte Daten"
   * Beispiel: Schulnoten
 
+
+============
 *Sind Dispersionmaße und Modalwerte bedeutsam für beide Typen?*
 
 ordinalskalierte Daten
@@ -133,7 +135,7 @@ type: section
 Notation Alert
 ===============
 * Mitterlwert von einer Menge $x$ mit Elementen $x_1, x_2,\ldots,x_{n-1},x_n$ wird mit $\bar{x}$ angeben
-* Ohne explizite Aussage dagegen wird der arithmetische Mittelwert gemeint
+* Ohne explizite Aussage dagegen ist der arithmetische Mittelwert gemeint
 * $\bar{x} = \frac{\sum_{1}^{n} x_n}{n}$
 
 
@@ -144,14 +146,17 @@ Sind die beiden Listen vergleichbar?
 - 1, 3, 3, 5, 5, 5, 6, 8, 10
 - 1, 1, 1, 1, 5, 10, 10, 10, 10
 
-***
+Streuung
+===========
 ```{r}
 x <- c(1, 3, 3, 5, 5, 5, 6, 8, 10)
-print(paste(mean(x), median(x)))
+mean(x)
+median(x)
 ```
 ```{r}
 y <- c(1, 1, 1, 1, 5, 10, 10, 10, 10)
-print(paste(mean(y), median(y)))
+mean(y)
+median(y)
 ```
 
 
@@ -183,10 +188,14 @@ Streuungsbreite
 - einfach zu berechnen
 - sagt wennig darüber aus, wie die Werte innerhalb der Verteilung beschaffen sind
 
-***
+Streuungsbreite
+==================
 ```{r}
 range(x)
 diff(range(x))
+```
+***
+```{r}
 range(y)
 diff(range(y))
 ```
@@ -197,7 +206,8 @@ left: 38%
 - Durchschnitt der in absoluten Beträgen gemessenen Abweichung aller Messwerte vom Mitterlwert
 - $\text{AD}_x = \frac{\sum_i^n \left| x_i - \bar{x}\right|}{n}$
 
-***
+Mittlere Abweichung (average deviation)
+==========================================
 ```{r}
 abweichung <- x - mean(x)
 abs.abweichung <- abs(abweichung)
@@ -226,29 +236,23 @@ in absoluten Beträgen gemessenen Abweichung
 
 Varianz berechnen
 ===========================================
-- manuell
 ```{r}
 abweichung <- x - mean(x)
 quadr.abweichung <- abweichung^2
 varianz.x <- mean(quadr.abweichung)
 varianz.x
 ```
-
 ```{r}
 varianz.y <- mean((y - mean(y))^2)
 varianz.y
 ``` 
 
-***
-- mit `var()`
+Varianz berechnen
+===========================================
 ```{r}
-#
-#
-#
 var(x)
 ```
 ```{r}
-#
 var(y)
 ```
 ****
@@ -271,17 +275,17 @@ Standardabweichung ("standard deviation")
 - $s_x = \sqrt{s_x^2} = \sqrt{\frac{\sum_i^n \left( x_i - \bar{x}\right)^2}{n}}$
 
 
-Berechnung der Standardabweichung
+Berechnung der Std.Dev.
 ======================================
-- manuell
 ```{r}
 sqrt(varianz.x)
 ```
 ```{r}
 sqrt(varianz.y)
 ```
-***
-- mit `sd()`
+
+Berechnung der Std.Dev.
+======================================
 ```{r}
 sd(x)
 ```
@@ -335,9 +339,11 @@ var(anscombe$y4)
 
 Anscombes Quartet: Summary
 =============================
-```{r}
+```{r, eval=FALSE}
 summary(anscombe)
 ```
+(*Output nicht lesbar auf der Folie*)
+
 
 Anscombes Quartet: Plot
 ========================
@@ -347,15 +353,16 @@ anscombe.long <- data.frame(set=c(rep(1,11),rep(2,11),rep(3,11),rep(4,11)),xvar=
  ggplot(anscombe.long,aes(x=xvar,y=yvar)) + geom_point() + geom_smooth(method="lm",se=F) + facet_wrap(~set)
 ```
 
-Schnelle Grafik: Box-Whisker-Diagramme
+Box-Whisker-Diagramme
 ========================================
+left: 70
 - von Tukey entwickelt
 - "Box" aus den drei Quartilen
-- Whiskers ("Schnurrhaare") aus 1,5 der Interquartilabweichung (IQA)
+- Whiskers ("Schnurrhaare"): 1,5 $\times$ Interquartilabweichung (IQA)
   - IQA = Länge der Box
   - Ende der oberen bzw. rechten Linie: $Q_3 + 1.5\cdot\text{IQA}$
   - Ende der unteren bzw. linken Linie: $Q_1 - 1.5\cdot\text{IQA}$
-- **Ausreißer:**Werte, die nicht zwischen $Q_1 - 1.5\cdot\text{IQA}$ und $Q_3 + 1.5\cdot\text{IQA}$ liegen, d.h. jenseits der Whiskers sind
+- **Ausreißer** jenseits der Whiskers
 
 *** 
 ```{r, echo=FALSE}
@@ -375,20 +382,29 @@ boxplot(y)
 ggplot2
 =========
 ```{r}
-qplot(x="x",y=x,geom="boxplot")
+qplot(x="x",y=x,geom="boxplot") 
 ```
-***
+
+ggplot2
+=========
 ```{r}
 qplot(x="y",y=y,geom="boxplot")
 ```
 
 
 long format
-==========
+=============
 ```{r}
-df <- data.frame(var=c(rep("x",length(x)), rep("y",length(y))),
+df <- data.frame(var=c(rep("x",length(x)), 
+                       rep("y",length(y))
+                       ),
                  val=c(x,y)
                  )
+```
+
+long format
+=============
+```{r}
 df
 ```
 
