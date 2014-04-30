@@ -34,7 +34,7 @@ Woche | Datum          | Themen
 |     |                | 2. Handout zu Logarithmen anschauen 
 |     | **29.04.2014** | Visualisierung der Daten: `ggplot2`-Basics
 |     |                | *Hausaufgabe bis 05.05.2014 12 Uhr:*
-|     |                | 1. `hausaufgabe04.R`
+|     |                | 1. `hausaufgabe05.R`
 04.   | **05.05.2014** | Statistische Inteferenz; Bevolkerung vs. Stichprobe; Intuition von "Messfehler" und "Wahrscheinlichkeit"
 |     | **06.05.2014** |  
 05.   | **12.05.2014** | $p$-Werte, Fehler-Arten, Frequentism vs Bayes
