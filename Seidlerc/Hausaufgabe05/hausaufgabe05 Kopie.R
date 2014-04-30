@@ -1,6 +1,6 @@
 # Hausaufgabe 04
-# Phillip Alday <phillip.alday@staff.uni-marburg.de>
-# 2014-04-30
+# Carmen Seidler <seidlerc@students.uni-marburg.de>
+# 2014-05-01
 # Dieses Werk ist lizenziert unter einer CC-BY-NC-SA Lizenz.
 
 # Sie sollten die Datei auch in Ihren Ordner kopieren und einen Commit machen, 
