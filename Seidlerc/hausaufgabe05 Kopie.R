@@ -48,7 +48,7 @@ print(weight.grafik.alt)
 weight.grafik.alt2 <- weight.grafik.alt + geom_histogram(aes(y=..density..),fill="white",color="black")
 print(weight.grafik.alt2)
 
-# Sie sehen an dieser Grafik auch, dass ggplot gestappelte Layers nutzt -- das 
+# Sie sehen an dieser Grafik auch, dass ggplot gestapelte Layers nutzt -- das 
 # Histogramm wird auf das Layer mit Dichte gestapelt und daher wird die 
 # Dichtekurve zum Teil versteckt. Wir können auch das Histogramm mit alpha
 # transparenter machen.
@@ -87,24 +87,28 @@ print(frauen)
 #sollten Sie die Plots so machen, damit man einen Vergleich zwischen den Gruppen
 #ziehen kann. Dafür gibt es verschiedene Möglichkeiten; die Wahl bleibt Ihnen
 #überlassen. 
-frauen.studiengang.bw <- height.grafik.basis + geom_boxplot(aes(x="height", y=height)) 
+frauen.studiengang.bw <- ggplot(data=frauen,aes(x=height)) + geom_boxplot(aes(x=major,y=height))
 print(frauen.studiengang.bw)
 
 # Sehen die Studiengänge anders aus? Wir müssen hier noch relativ vorrsichtig
 # sein, weil die Gruppen *unbalanziert* sind, d.h. die Gruppen sind
 # unterschiedlich groß. Aber wie sieht der Vergleich auf den ersten Blick aus?
-# (Keine explizite Antwort nötig, nur eine Überlegung.)
+
+# Seidlerc: Der Median aller Gruppen liegt bei ca. 1.66m
+# Die Studentinnen des M.A. Linguistik: Kog. und Komm. sind durchschnittlich größer als die Studentinnen der anderen Studiengänge 
 
 # Wir können natürlich auch die Dichte anschauen:
-#frauen.studiengang.dichte <- CODE_HIER
-#print(frauen.studiengang.dichte)
+frauen.studiengang.dichte <- ggplot(data=frauen) + geom_density(aes(x=height, color=major))
+print(frauen.studiengang.dichte)
 
 # Haben Sie den gleichen Eindruck wie bei Box-Whisker bekommen? Unterscheiden
 # sich die Gruppen?
 # (Keine explizite Antwort nötig, nur eine Überlegung.)
+# Problematisch hierbei ist, dass die Gruppen: "Other" und "Germanistische Linguistik" nicht dargestellt werden
 
 # Welche Gruppe hat gefehlt? Wie viele Datenpunkte gab es für die Gruppe?
 # (Keine explizite Antwort nötig, nur eine Überlegung.)
+# Gefehlt haben die Studentinnen der Major "Other" und "Germanistische Linguistik"
 
 # Wir können auch die verschiedenen Maße der Streuung berechnen.
 # In R gibt es oft verschiedene Möglichkeiten, etwas zu machen. Wir haben bisher
