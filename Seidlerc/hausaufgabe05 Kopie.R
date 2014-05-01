@@ -19,7 +19,7 @@
 library(ggplot2)
 
 # und danach die Daten:
-dat <- read.table("Data//body_dim_long.tab",header=TRUE)) 
+dat <- read.table("Data//body_dim_long.tab",header=TRUE)
 
 # Wir haben im Kurs die Verteilung der Variabel weight angeschaut. In Skripten
 # werden Ergebnisse nicht automatich dargestellt, sondern nur dann, wenn ein
@@ -28,32 +28,32 @@ dat <- read.table("Data//body_dim_long.tab",header=TRUE))
 # ist. Wie bei anderen Berechnungen können wir den Output von ggplot einer
 # Variabel zuweisen. Danach müssen wir nur den Variabelnamen in die Klammer von
 # print() einpacken.
-#weight.grafik <- ggplot(data=dat,aes(x=weight)) + geom_histogram(aes(y=..density..),fill="white",color="black") + geom_density()
-#print(weight.grafik)
+weight.grafik <- ggplot(data=dat,aes(x=weight)) + geom_histogram(aes(y=..density..),fill="white",color="black") + geom_density()
+print(weight.grafik)
 
 # Wenn wir verschiedene Grafiken mit einem Datenzsatz machen möchten, ist es
 # nervig, wenn wir den gemeinsamen Teil immer wieder eingeben müssen. Auch Teile
 # von ggplot-Grafiken können einer Variabel zugewiesen werden:
-#weight.grafik.basis <- ggplot(data=dat,aes(x=weight))
-#print(weight.grafik.basis + geom_histogram())
-#print(weight.grafik.basis + geom_density())
+weight.grafik.basis <- ggplot(data=dat,aes(x=weight))
+print(weight.grafik.basis + geom_histogram())
+print(weight.grafik.basis + geom_density())
 
 # Wir haben auch mal die qplot()-Funktion gesehen. Sie ergibt eigentlich das
 # Gleiche wie die "ggplot() + ..."-Befehle, hat nun eine andere Schnittstelle. 
-#weight.grafik.alt <- qplot(x=weight,data=dat,geom="density")
-#print(weight.grafik.alt)
+weight.grafik.alt <- qplot(x=weight,data=dat,geom="density")
+print(weight.grafik.alt)
 
 # Weil das Gleiche ergeben wird, können wir auch den Ouput von qplot() mit
 # weiteren geom_XXXX() Funktionen erweitern. 
-#weight.grafik.alt2 <- weight.grafik.alt + geom_histogram(aes(y=..density..),fill="white",color="black")
-#print(weight.grafik.alt2)
+weight.grafik.alt2 <- weight.grafik.alt + geom_histogram(aes(y=..density..),fill="white",color="black")
+print(weight.grafik.alt2)
 
 # Sie sehen an dieser Grafik auch, dass ggplot gestappelte Layers nutzt -- das 
-# Histogramm wird auf das Layer mit Dichte gestappelt und daher wird die 
+# Histogramm wird auf das Layer mit Dichte gestapelt und daher wird die 
 # Dichtekurve zum Teil versteckt. Wir können auch das Histogramm mit alpha
 # transparenter machen.
-#weight.grafik.alt3 <- weight.grafik.alt + geom_histogram(aes(y=..density..),fill="white",color="black",alpha=0.65)
-#print(weight.grafik.alt3)
+weight.grafik.alt3 <- weight.grafik.alt + geom_histogram(aes(y=..density..),fill="white",color="black",alpha=0.65)
+print(weight.grafik.alt3)
 
 # ggplot hat auch eingebaute Untestützung für Box-Whisker-Plots, allerdings sind x und y jetzt anders:
 #weight.bw <- weight.grafik.basis + geom_boxplot(aes(x="weight",y=weight))
