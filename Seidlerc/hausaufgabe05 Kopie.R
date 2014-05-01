@@ -140,37 +140,32 @@ print(speech)
 # Gruppen. Sie können auch weitere Zeilen hinzufügen, wenn es Ihnen so leichter
 # ist. 
 # HINT: Formel und Beispiel für die Berechnung auf den Folien!
+
 #klinisch.sd <- CODE_HIER
 y <- c(klinisch$height)
 abweichung <- y -mean(y)
 quadr.abweichung <- abweichung^2
 varianz.y <- mean(quadr.abweichung)
 varianz.y
-sqrt(varianz.y)
+klinisch.sd <- sqrt(varianz.y)
+
 #linkk.sd <- CODE_HIER
 x <- c(linkk$height)
 abweichung <- x -mean(x)
 quadr.abweichung <- abweichung^2
 varianz.x <- mean(quadr.abweichung)
 varianz.x
-sqrt(varianz.x)
+linkk.sd <- sqrt(varianz.x)
+
 #speech.sd <- CODE_HIER
 z <- c(speech$height)
 abweichung <- z -mean(z)
 quadr.abweichung <- abweichung^2
 varianz.z <- mean(quadr.abweichung)
 varianz.z
-sqrt(varianz.z)
-
-## Standardabweichung der Größe der drei Guppen (zusammen)
-v <- c(linkk$height, speech$height, klinisch$height)
-abweichung <- v -mean(v)
-quadr.abweichung <- abweichung^2
-varianz.v <- mean(quadr.abweichung)
-varianz.v
-sqrt(varianz.v)
+speech.sd <- sqrt(varianz.z)
 
 # Berichten Sie jetzt die Mittelwerte und Standardabweichungen für die drei Gruppen. Die erste Gruppe steht hier als Muster:
 print( paste("Studiengang: Klinische Linguistik","Mean:",mean(klinisch$height),"SD:",klinisch.sd) )
-#CODE_HIER
-
+print( paste("Studiengang: Speech Science", "Mean:" ,mean(speech$height),"SD:", speech.sd))
+print( paste("Studiengang: Linguistik: Kognition und Kommunikation", "Mean:",mean(linkk$height),"SD:",linkk.sd))
