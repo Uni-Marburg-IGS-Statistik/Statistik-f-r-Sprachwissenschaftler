@@ -89,7 +89,10 @@ print( weight.grafik.basis + geom_density(aes(color=sex,fill=sex),alpha=0.5) )
 # Weil wir deutlich weniger Männer haben und es einen bekannten Unterschied in der Größe 
 # zwischen Männern und Frauen gibt, schließen wir erstmal die Männer aus:
 #frauen <- subset(dat, CODE_HIER)
-frauen <- subset(dat, CODE_HIER)
+frauen <- subset(dat, sex=="f") 
+summary(frauen)
+
+    
 
 # (Sie sollten sich wirklich überlegen, ob der Schritt "gut" ist. Haben wir 
 # dadurch unsre Ergebnisse verstellt? Sie müssen hier nichts schreiben, aber 
@@ -103,6 +106,12 @@ frauen <- subset(dat, CODE_HIER)
 #sollten Sie die Plots so machen, damit man einen Vergleich zwischen den Gruppen
 #ziehen kann. Dafür gibt es verschiedene Möglichkeiten; die Wahl bleibt Ihnen
 #überlassen. frauen.studiengang.bw <- CODE_HIER print(frauen.studiengang.bw)
+
+#height.grafik.alt <- boxplot(dat$height)
+#print(height.grafik.alt)
+frauen.studiengang.bw <- boxplot(dat$height~dat$major)
+print(frauen.studiengang.bw)
+
 
 # Sehen die Studiengänge anders aus? Wir müssen hier noch relativ vorrsichtig
 # sein, weil die Gruppen *unbalanziert* sind, d.h. die Gruppen sind
