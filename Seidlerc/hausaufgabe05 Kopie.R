@@ -114,8 +114,8 @@ print(frauen.studiengang.dichte)
 # In R gibt es oft verschiedene Möglichkeiten, etwas zu machen. Wir haben bisher
 # Teile einer Datenmenge mit subset() rausgezogen, aber wir können das auch mit 
 # einer weiteren Syntax machen:
-#klinisch <- frauen[frauen$major == "M.A..Klinische.Linguistik",]
-#print(klinisch)
+klinisch <- frauen[frauen$major == "M.A..Klinische.Linguistik",]
+print(klinisch)
 
 # Das sieht erstmal sehr vervwirrend aus, ist es aber nicht. Die eckigen
 # Klammern bestimmen die Auswahl an Elementen. Wir haben das ja bei Indizen in
@@ -131,18 +131,46 @@ print(frauen.studiengang.dichte)
 # Jetzt brauchen wir die Teilmenge für die anderen beiden Studiengänge, 
 # Linguistik Kognition und Kommunikation und Speech Science
 # HINT: wie sehen die Namen aus bzw. wie werden sie im data frame buchstabiert?
-#linkk <- frauen[CODE_HIER]
-#speech <- frauen[CODE_HIER] 
+linkk <- frauen[frauen$major == "M.A..Linguistik.Kognition.und.Kommunikation",]
+print(linkk)
+speech <- frauen[frauen$major == "M.A..Speech.Science",] 
+print(speech)
 
 # Berechnen Sie -- ohne Hilfe von sd() -- die Standardabweichung für die Größe der drei 
 # Gruppen. Sie können auch weitere Zeilen hinzufügen, wenn es Ihnen so leichter
 # ist. 
 # HINT: Formel und Beispiel für die Berechnung auf den Folien!
 #klinisch.sd <- CODE_HIER
+y <- c(klinisch$height)
+abweichung <- y -mean(y)
+quadr.abweichung <- abweichung^2
+varianz.y <- mean(quadr.abweichung)
+varianz.y
+sqrt(varianz.y)
 #linkk.sd <- CODE_HIER
+x <- c(linkk$height)
+abweichung <- x -mean(x)
+quadr.abweichung <- abweichung^2
+varianz.x <- mean(quadr.abweichung)
+varianz.x
+sqrt(varianz.x)
 #speech.sd <- CODE_HIER
+z <- c(speech$height)
+abweichung <- z -mean(z)
+quadr.abweichung <- abweichung^2
+varianz.z <- mean(quadr.abweichung)
+varianz.z
+sqrt(varianz.z)
+
+## Standardabweichung der Größe der drei Guppen (zusammen)
+v <- c(linkk$height, speech$height, klinisch$height)
+abweichung <- v -mean(v)
+quadr.abweichung <- abweichung^2
+varianz.v <- mean(quadr.abweichung)
+varianz.v
+sqrt(varianz.v)
 
 # Berichten Sie jetzt die Mittelwerte und Standardabweichungen für die drei Gruppen. Die erste Gruppe steht hier als Muster:
-#print( paste("Studiengang: Klinische Linguistik","Mean:",mean(klinisch$height),"SD:",klinisch.sd) )
+print( paste("Studiengang: Klinische Linguistik","Mean:",mean(klinisch$height),"SD:",klinisch.sd) )
 #CODE_HIER
 
