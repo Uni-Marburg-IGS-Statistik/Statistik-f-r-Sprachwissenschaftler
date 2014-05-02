@@ -1,7 +1,7 @@
 # Hausaufgabe 04
-# Phillip Alday <phillip.alday@staff.uni-marburg.de>
-# 2014-04-30
-# Dieses Werk ist lizenziert unter einer CC-BY-NC-SA Lizenz.
+# Isabelle Franz <Franzis@students.uni-marburg.de>
+# 2014-05-01
+# Diese Datei darf nur Prüfungszwecken dienen.
 
 # Sie sollten die Datei auch in Ihren Ordner kopieren und einen Commit machen, 
 # bevor Sie die Kopie weiter anpassen! Vergessen Sie dabei nicht, Namen, Datum 
@@ -28,50 +28,54 @@ dat <- read.table("body_dim_long.tab",header=TRUE)
 # ist. Wie bei anderen Berechnungen können wir den Output von ggplot einer
 # Variabel zuweisen. Danach müssen wir nur den Variabelnamen in die Klammer von
 # print() einpacken.
-#weight.grafik <- ggplot(data=dat,aes(x=weight)) + geom_histogram(aes(y=..density..),fill="white",color="black") + geom_density()
-#print(weight.grafik)
+binwidth = 60
+weight.grafik <- ggplot(data=dat,aes(x=weight)) + geom_histogram(aes(y=..density..),fill="white",color="black") + geom_density()
+print(weight.grafik)
 
 # Wenn wir verschiedene Grafiken mit einem Datenzsatz machen möchten, ist es
 # nervig, wenn wir den gemeinsamen Teil immer wieder eingeben müssen. Auch Teile
 # von ggplot-Grafiken können einer Variabel zugewiesen werden:
-#weight.grafik.basis <- ggplot(data=dat,aes(x=weight))
-#print(weight.grafik.basis + geom_histogram())
-#print(weight.grafik.basis + geom_density())
+weight.grafik.basis <- ggplot(data=dat,aes(x=weight))
+print(weight.grafik.basis + geom_histogram())
+print(weight.grafik.basis + geom_density())
 
 # Wir haben auch mal die qplot()-Funktion gesehen. Sie ergibt eigentlich das
 # Gleiche wie die "ggplot() + ..."-Befehle, hat nun eine andere Schnittstelle. 
-#weight.grafik.alt <- qplot(x=weight,data=dat,geom="density")
-#print(weight.grafik.alt)
+weight.grafik.alt <- qplot(x=weight,data=dat,geom="density")
+print(weight.grafik.alt)
 
 # Weil das Gleiche ergeben wird, können wir auch den Ouput von qplot() mit
 # weiteren geom_XXXX() Funktionen erweitern. 
-#weight.grafik.alt2 <- weight.grafik.alt + geom_histogram(aes(y=..density..),fill="white",color="black")
-#print(weight.grafik.alt2)
+weight.grafik.alt2 <- weight.grafik.alt + geom_histogram(aes(y=..density..),fill="white",color="black")
+print(weight.grafik.alt2)
 
 # Sie sehen an dieser Grafik auch, dass ggplot gestappelte Layers nutzt -- das 
 # Histogramm wird auf das Layer mit Dichte gestappelt und daher wird die 
 # Dichtekurve zum Teil versteckt. Wir können auch das Histogramm mit alpha
 # transparenter machen.
-#weight.grafik.alt3 <- weight.grafik.alt + geom_histogram(aes(y=..density..),fill="white",color="black",alpha=0.65)
-#print(weight.grafik.alt3)
+weight.grafik.alt3 <- weight.grafik.alt + geom_histogram(aes(y=..density..),fill="white",color="black",alpha=0.65)
+print(weight.grafik.alt3)
 
 # ggplot hat auch eingebaute Untestützung für Box-Whisker-Plots, allerdings sind x und y jetzt anders:
-#weight.bw <- weight.grafik.basis + geom_boxplot(aes(x="weight",y=weight))
-#print(weight.bw)
+weight.bw <- weight.grafik.basis + geom_boxplot(aes(x="weight",y=weight))
+print(weight.bw)
 # Sie sehen auch dabei, dass Layer-Asthetics Basis-Athetics brechen. 
 
 # Aber viel interessanter ist eben, wenn wir Gruppen unterscheiden. Dann können etwas machen wie BW-Plot nach Geschlecht:
-#weight.bw.sex <- weight.grafik.basis + geom_boxplot(aes(x=sex,y=weight))
-#print(weight.bw.sex)
+weight.bw.sex <- weight.grafik.basis + geom_boxplot(aes(x=sex,y=weight))
+print(weight.bw.sex)
 
 # Und als Erinnerung können wir auch ähnliches mit der Dichte machen:
-#print( weight.grafik.basis + geom_density(aes(color=sex,fill=sex),alpha=0.5) )
+print( weight.grafik.basis + geom_density(aes(color=sex,fill=sex),alpha=0.5) )
 
 # Aber jetzt haben wir uns Gewicht mehrmals angeschaut. Es wird Zeit, dass uns
 # auch Größe anschauen. Sind die Studenten mancher Studiengänge größer als die anderen?
 # Weil wir deutlich weniger Männer haben und es einen bekannten Unterschied in der Größe 
 # zwischen Männern und Frauen gibt, schließen wir erstmal die Männer aus:
-#frauen <- subset(dat, CODE_HIER)
+
+frauen <- subset(dat, sex=="f")
+summary(Frauen)
+
 
 # (Sie sollten sich wirklich überlegen, ob der Schritt "gut" ist. Haben wir 
 # dadurch unsre Ergebnisse verstellt? Sie müssen hier nichts schreiben, aber 
@@ -84,30 +88,48 @@ dat <- read.table("body_dim_long.tab",header=TRUE)
 #falls Sie unsicher sind, ob das Bild korrekt aussieht.) Hier und im Folgenden
 #sollten Sie die Plots so machen, damit man einen Vergleich zwischen den Gruppen
 #ziehen kann. Dafür gibt es verschiedene Möglichkeiten; die Wahl bleibt Ihnen
-#überlassen. frauen.studiengang.bw <- CODE_HIER print(frauen.studiengang.bw)
+#überlassen. 
+
+#height.grafik.basis.frauen <- ggplot(data=frauen,aes(x=height))(Frauen.studiengang.bw)
+#frauen.studiengang.bw <- height.grafik.basis.frauen + geom_boxplot(aes(x=sex,y=weight))
+#print(weight.bw.sex) 
+frauen.studiengang.bw <- ggplot(data=frauen,aes(x=major)) + geom_boxplot(aes(x=major,y=height))
+print(frauen.studiengang.bw)
 
 # Sehen die Studiengänge anders aus? Wir müssen hier noch relativ vorrsichtig
 # sein, weil die Gruppen *unbalanziert* sind, d.h. die Gruppen sind
 # unterschiedlich groß. Aber wie sieht der Vergleich auf den ersten Blick aus?
 # (Keine explizite Antwort nötig, nur eine Überlegung.)
+# die Mediane sind etwa zwischen 165 und 170cm, also über die Studiengänge hinaus relativ ähnlich
 
 # Wir können natürlich auch die Dichte anschauen:
-#frauen.studiengang.dichte <- CODE_HIER
-#print(frauen.studiengang.dichte)
+frauen.studiengang.dichte <- ggplot(data=frauen,aes(x=major)) + geom_density(aes(x=height,color=major,fill=major),alpha=0.5)
+print(frauen.studiengang.dichte)
+
+
 
 # Haben Sie den gleichen Eindruck wie bei Box-Whisker bekommen? Unterscheiden
-# sich die Gruppen?
+# sich die Gruppen? 
+# Es zeigt sich vorallem bei Speech Science einen starken 
+# Dichteanstieg bei etwa 1,68m. Dies ist in der boxplot Darstellung nicht so deutlich sichtbar.
+# Im Studiengang Klinische Linguitstik scheint die Verteilung ausgewogener, 
+# was sicherlich an der höheren Anzahl der Studierenden in der Gruppe liegt.
+# Bei Kognition und Kommunikation gibt es kleinere Anstiege bei etwa 1,66m und 1,74.
+# 
 # (Keine explizite Antwort nötig, nur eine Überlegung.)
 
 # Welche Gruppe hat gefehlt? Wie viele Datenpunkte gab es für die Gruppe?
-# (Keine explizite Antwort nötig, nur eine Überlegung.)
+# die anderen Stüdiengänge fehlen, also "others" mit 2 Datenpunkten, 
+# und die Germanistische Linguistik. Für letztere gab es auch nur einen Datenpunkt.
+# Bei so wenigen Daten ist das Anzeigen der Dichte nicht aussagekräftig, da sie bei 50 oder 100% liegen würde.
+# Dies erklärt aber nicht warum sie nicht trotzdem angezeigt wird? (Keine explizite Antwort nötig, nur eine Überlegung.)
 
 # Wir können auch die verschiedenen Maße der Streuung berechnen.
 # In R gibt es oft verschiedene Möglichkeiten, etwas zu machen. Wir haben bisher
 # Teile einer Datenmenge mit subset() rausgezogen, aber wir können das auch mit 
 # einer weiteren Syntax machen:
-#klinisch <- frauen[frauen$major == "M.A..Klinische.Linguistik",]
-#print(klinisch)
+klinisch <- frauen[frauen$major == "M.A..Klinische.Linguistik",]
+print(klinisch)
 
 # Das sieht erstmal sehr vervwirrend aus, ist es aber nicht. Die eckigen
 # Klammern bestimmen die Auswahl an Elementen. Wir haben das ja bei Indizen in
@@ -123,18 +145,47 @@ dat <- read.table("body_dim_long.tab",header=TRUE)
 # Jetzt brauchen wir die Teilmenge für die anderen beiden Studiengänge, 
 # Linguistik Kognition und Kommunikation und Speech Science
 # HINT: wie sehen die Namen aus bzw. wie werden sie im data frame buchstabiert?
-#linkk <- frauen[CODE_HIER]
-#speech <- frauen[CODE_HIER] 
+
+linkk <- frauen[frauen$major == "M.A..Linguistik.Kognition.und.Kommunikation",]
+print(linkk)
+speech <- frauen[frauen$major == "M.A..Speech.Science",] 
+print(speech)
+
 
 # Berechnen Sie -- ohne Hilfe von sd() -- die Standardabweichung für die Größe der drei 
 # Gruppen. Sie können auch weitere Zeilen hinzufügen, wenn es Ihnen so leichter
 # ist. 
 # HINT: Formel und Beispiel für die Berechnung auf den Folien!
-#klinisch.sd <- CODE_HIER
-#linkk.sd <- CODE_HIER
-#speech.sd <- CODE_HIER
+
+# Klinische Linguistik:
+x <- klinisch$height
+abweichung.klinisch <- x - mean(x)
+quadr.abweichung.klinisch <- abweichung.klinisch^2
+varianz.x <- mean(quadr.abweichung.klinisch)
+print(varianz.x)
+klinisch.sd <- sqrt(varianz.x)
+
+# Linguistik Kognition und Kommunikation
+y <- linkk$height
+abweichung.linkk <- y - mean(y)
+quadr.abweichung.linkk <- abweichung.linkk^2
+varianz.y <- mean(quadr.abweichung.linkk)
+print(varianz.y)
+linkk.sd <- sqrt(varianz.y)
+
+# Speech Science
+z <- speech$height
+abweichung.speech <- z - mean(z)
+quadr.abweichung.speech <- abweichung.speech^2
+varianz.z <- mean(quadr.abweichung.speech)
+print(varianz.z)
+speech.sd <- sqrt(varianz.z)
+
+
+
 
 # Berichten Sie jetzt die Mittelwerte und Standardabweichungen für die drei Gruppen. Die erste Gruppe steht hier als Muster:
-#print( paste("Studiengang: Klinische Linguistik","Mean:",mean(klinisch$height),"SD:",klinisch.sd) )
+print( paste("Studiengang: Klinische Linguistik","Mean:",mean(klinisch$height),"SD:",klinisch.sd) )
 #CODE_HIER
-
+print( paste("Studiengang: Linguistik.Kognition.und.KOmmunikation","Mean:",mean(linkk$height),"SD:",linkk.sd) )
+print( paste("Studiengang: Speech science","Mean:",mean(speech$height),"SD:",speech.sd) )
