@@ -24,12 +24,17 @@ Woche | Datum          | Themen
 01.   | **14.04.2014** | Formalia, Einführung, (Textdateien &) DVCS, Warm-Up: Kombinatorik
 |     | **15.04.2014** | Warum Statistik? R, RStudio, Git
 02.   | **21.04.2014** | fällt aus! (Ostermontag) Ersatz-Lektüre: Stevens (1946)
-|     | **22.04.2014** | Warum Statistik? Ziele der Forschung, Modelle, Beschreibungsstatistik  I
+|     | **22.04.2014** | Warum Statistik? Ziele der Forschung, Modelle, Beschreibungsstatistik  I (Maße der zentralen Tendenz)
 |     |                | *Hausaufgabe bis 28.04.2014, 12 Uhr:* (in der Reihenfolge machen!)
 |     |                | 1. `hausaufgabe03a.Rmd`
 |     |                | 2. `hausaufgabe03b.R` 
-03.   | **28.04.2014** | Beschreibungsstatistik  II
-|     | **29.04.2014** | 
+03.   | **28.04.2014** | Beschreibungsstatistik  II: Dispersions- und Streuungsmaße
+|     |                | *Hausaufgabe bis 29.04.2014 8 Uhr:*
+|     |                | 1. An Fragenbogen "Verteilungen" (bei ILIAS) teilnehmen
+|     |                | 2. Handout zu Logarithmen anschauen 
+|     | **29.04.2014** | Visualisierung der Daten: `ggplot2`-Basics
+|     |                | *Hausaufgabe bis 05.05.2014 12 Uhr:*
+|     |                | 1. `hausaufgabe05.R`
 04.   | **05.05.2014** | Statistische Inteferenz; Bevolkerung vs. Stichprobe; Intuition von "Messfehler" und "Wahrscheinlichkeit"
 |     | **06.05.2014** |  
 05.   | **12.05.2014** | $p$-Werte, Fehler-Arten, Frequentism vs Bayes
