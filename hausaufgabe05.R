@@ -1,5 +1,5 @@
 # Hausaufgabe 05
-# Phillip Alday <phillip.alday@staff.uni-marburg.de>
+# Miriam Burk <Burkm@students.uni-marburg.de>
 # 2014-05-02
 # Dieses Werk ist lizenziert unter einer CC-BY-NC-SA Lizenz.
 
