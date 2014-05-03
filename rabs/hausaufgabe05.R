@@ -1,7 +1,7 @@
 # Hausaufgabe 05
-# Phillip Alday <phillip.alday@staff.uni-marburg.de>
+# Elisabeth Rabs <rabs@students.uni-marburg.de>
 # 2014-05-02
-# Dieses Werk ist lizenziert unter einer CC-BY-NC-SA Lizenz.
+# Diese Datei darf weiter als Beispiel verwendet werden.
 
 # Sie sollten die Datei auch in Ihren Ordner kopieren und einen Commit machen, 
 # bevor Sie die Kopie weiter anpassen! Vergessen Sie dabei nicht, Namen, Datum 
