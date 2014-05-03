@@ -135,16 +135,14 @@ speech <- frauen[frauen$major == "M.A..Speech.Science",]
 # Gruppen. Sie können auch weitere Zeilen hinzufügen, wenn es Ihnen so leichter
 # ist. 
 # HINT: Formel und Beispiel für die Berechnung auf den Folien!
-kli.hei <- klinisch$height
-x <- c(kli.hei)
-klinisch.sd <- sqrt(mean((x-mean(x))^2))
 
-lin.hei <- linkk$height
-y <- c(lin.hei)
+x <- c(klinisch$height)
+klinisch.sd <- sqrt(mean((x-mean(x))^2))
+ 
+y <- c(linkk$height)
 linkk.sd <-  sqrt(mean((y-mean(y))^2))
 
-spe.hei <- speech$height
-z <- c(spe.hei)
+z <- c(speech$height)
 speech.sd <- sqrt(mean((z-mean(z))^2))
 
 # Berichten Sie jetzt die Mittelwerte und Standardabweichungen für die drei Gruppen. Die erste Gruppe steht hier als Muster:
