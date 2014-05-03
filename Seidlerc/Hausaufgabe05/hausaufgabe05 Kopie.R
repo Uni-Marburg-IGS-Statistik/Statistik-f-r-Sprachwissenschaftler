@@ -1,6 +1,6 @@
-# Hausaufgabe 04
+# Hausaufgabe 05
 # Carmen Seidler <seidlerc@students.uni-marburg.de>
-# 2014-05-01
+# 2014-05-03
 # Dieses Werk ist lizenziert unter einer CC-BY-NC-SA Lizenz.
 
 # Sie sollten die Datei auch in Ihren Ordner kopieren und einen Commit machen, 
@@ -19,7 +19,7 @@
 library(ggplot2)
 
 # und danach die Daten:
-dat <- read.table("Data//body_dim_long.tab",header=TRUE)
+dat <- read.table("body_dim_long.tab",header=TRUE)
 
 # Wir haben im Kurs die Verteilung der Variabel weight angeschaut. In Skripten
 # werden Ergebnisse nicht automatich dargestellt, sondern nur dann, wenn ein
