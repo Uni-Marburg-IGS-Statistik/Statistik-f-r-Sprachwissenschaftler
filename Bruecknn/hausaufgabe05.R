@@ -109,7 +109,7 @@ summary(frauen)
 
 #height.grafik.alt <- boxplot(dat$height)
 #print(height.grafik.alt)
-frauen.studiengang.bw <- boxplot(dat$height~dat$major)
+frauen.studiengang.bw <- ggplot(data=frauen,aes(x=major)) + geom_boxplot(aes(x=major,y=height))
 print(frauen.studiengang.bw)
 
 
@@ -117,19 +117,26 @@ print(frauen.studiengang.bw)
 # sein, weil die Gruppen *unbalanziert* sind, d.h. die Gruppen sind
 # unterschiedlich groß. Aber wie sieht der Vergleich auf den ersten Blick aus?
 # (Keine explizite Antwort nötig, nur eine Überlegung.)
+# Auf den ersten Blick sieht es so aus, als seien die Frauen des M.A..Linguistik.Kognition.und.Kommunikation im Schnitt am größten.
+# Die Mediane der Studiengänge liegen alle zwischen 165cm und 170cm.
 
 # Wir können natürlich auch die Dichte anschauen:
 #frauen.studiengang.dichte <- CODE_HIER
 #print(frauen.studiengang.dichte)
-frauen.studiengang.dichte <- CODE_HIER
+frauen.studiengang.dichte <- ggplot(data=frauen) + geom_density(aes(x=height, color=major))
 print(frauen.studiengang.dichte)
+ 
+
 
 # Haben Sie den gleichen Eindruck wie bei Box-Whisker bekommen? Unterscheiden
 # sich die Gruppen?
 # (Keine explizite Antwort nötig, nur eine Überlegung.)
+#Bei Speech Science ist die Dichte zw. 165 und 170cm am höchsten. In der Box-Whisker Darstellung ist dies nicht sichtbar, dort sieht man nur, dass der Mean ungefähr denselben Wert hat.  
 
 # Welche Gruppe hat gefehlt? Wie viele Datenpunkte gab es für die Gruppe?
 # (Keine explizite Antwort nötig, nur eine Überlegung.)
+# M.A. Germanistische Linguistik hat gefehlt sowie "others"
+# Für Germanistische Linguistik gab es nur einen Datenpunkt und für "others" 2 Datenpunkte, evtl. zu gering, um Dichte darzustellen?
 
 # Wir können auch die verschiedenen Maße der Streuung berechnen.
 # In R gibt es oft verschiedene Möglichkeiten, etwas zu machen. Wir haben bisher
@@ -157,8 +164,10 @@ print(klinisch)
 # HINT: wie sehen die Namen aus bzw. wie werden sie im data frame buchstabiert?
 #linkk <- frauen[CODE_HIER]
 #speech <- frauen[CODE_HIER] 
-linkk <- frauen[CODE_HIER]
-speech <- frauen[CODE_HIER]
+linkk <- frauen[frauen$major == "M.A..Linguistik.Kognition.und.Kommunikation",]
+print(linkk)
+speech <- frauen[frauen$major == "M.A..Speech.Science",] 
+print(speech)
 
 # Berechnen Sie -- ohne Hilfe von sd() -- die Standardabweichung für die Größe der drei 
 # Gruppen. Sie können auch weitere Zeilen hinzufügen, wenn es Ihnen so leichter
@@ -167,11 +176,35 @@ speech <- frauen[CODE_HIER]
 #klinisch.sd <- CODE_HIER
 #linkk.sd <- CODE_HIER
 #speech.sd <- CODE_HIER
-klinisch.sd <- CODE_HIER
-linkk.sd <- CODE_HIER
-speech.sd <- CODE_HIER
+
+# Klinische Linguistik
+x <- klinisch$height
+abweichung.klinisch <- x - mean(x)
+quadr.abweichung.klinisch <- abweichung.klinisch^2
+varianz.x <- mean(quadr.abweichung.klinisch)
+print(varianz.x)
+klinisch.sd <- sqrt(varianz.x)
+
+# Linguistik Kognition und Kommunikation
+y <- linkk$height
+abweichung.linkk <- y - mean(y)
+quadr.abweichung.linkk <- abweichung.linkk^2
+varianz.y <- mean(quadr.abweichung.linkk)
+print(varianz.y)
+linkk.sd <- sqrt(varianz.y)
+  
+# Speech Science
+z <- speech$height
+abweichung.speech <- z - mean(z)
+quadr.abweichung.speech <- abweichung.speech^2
+varianz.z <- mean(quadr.abweichung.speech)
+print(varianz.z)
+speech.sd <- sqrt(varianz.z)
 
 # Berichten Sie jetzt die Mittelwerte und Standardabweichungen für die drei Gruppen. Die erste Gruppe steht hier als Muster:
 #print( paste("Studiengang: Klinische Linguistik","Mean:",mean(klinisch$height),"SD:",klinisch.sd) )
-#CODE_HIER
+print( paste("Studiengang: Klinische Linguistik","Mean:",mean(klinisch$height),"SD:",klinisch.sd) )
+print( paste("Studiengang: Linguistik: Kognition und Kommunikation","Mean:",mean(linkk$height),"SD:",linkk.sd) )
+print( paste("Studiengang: Speech Science","Mean:",mean(speech$height),"SD:",speech.sd) )
+
 
