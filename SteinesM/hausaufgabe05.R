@@ -146,7 +146,7 @@ z <- c(speech$height)
 speech.sd <- sqrt(mean((z-mean(z))^2))
 
 # Berichten Sie jetzt die Mittelwerte und Standardabweichungen für die drei Gruppen. Die erste Gruppe steht hier als Muster:
-print( paste("Studiengang: Klinische Linguistik","Mean:",mean(klinisch$height),"SD:",klinisch.sd) )
-print( paste("Studiengang: Linguistik: Kognition und Kommunikation","Mean:",mean(linkk$height),"SD:",linkk.sd) )
-print( paste("Studiengang: Speech Science","Mean:",mean(speech$height),"SD:",speech.sd) )
+print( paste("Studiengang: Klinische Linguistik","Mean:",mean(x),"SD:",klinisch.sd) )
+print( paste("Studiengang: Linguistik: Kognition und Kommunikation","Mean:",mean(y),"SD:",linkk.sd) )
+print( paste("Studiengang: Speech Science","Mean:",mean(z),"SD:",speech.sd) )
 
