@@ -1,0 +1,139 @@
+Statistik für Sprachwissenschaftler
+========================================================
+author: Phillip M . Alday
+date: 2014-05-05   
+autosize: false
+
+```{r setup, include=FALSE}
+opts_chunk$set(cache=TRUE,prompt=TRUE)
+library(knitcitations)
+library(ggplot2)
+library(reshape2)
+```
+
+
+Aufwachen und sich errinnern!
+====================================
+type: section
+
+
+Gestern
+=========
+- Von Häufigkeitsverteilung zu Wahrscheinlichkeitsverteilungen
+- Standardisierung von Verteilungen
+- Einige wichtige Verteilungen
+- (Population vs. Stichprobe)
+
+Heute
+======
+- Anwendung der Verteilungen: Inferenzstatistik
+- Fehlerarten
+- $p$-Werte
+- evtl. Frequentism vs. Bayesianism
+
+Daten für heute I 
+============================
+```{r, eval=FALSE}
+rtdata <- read.table("Data/priming_rt.tab",header = T)
+```
+```{r, echo=FALSE}
+# the path in the previous block isn't correct, so run this one
+rtdata <- read.table(normalizePath("../Data/priming_rt.tab"),header = T)
+```
+
+```{r}
+rtdata$subj <- as.factor(rtdata$subj)
+summary(rtdata)
+```
+*Daten (c) Lisa Schaufler -- danke!* 
+
+Daten für heute I 
+============================
+```{r, eval=FALSE}
+rtdata <- read.table("Data/priming_rt.tab",header = T)
+```
+```{r, echo=FALSE}
+# the path in the previous block isn't correct, so run this one
+rtdata <- read.table(normalizePath("../Data/priming_rt.tab"),header = T)
+```
+
+```{r}
+rtdata$subj <- as.factor(rtdata$subj)
+summary(rtdata)
+```
+
+Wahrscheinlichkeitsverteilungen
+=================================
+type:section
+
+Von der Häufigkeitsverteilung zur Gesetzmäßigkeit
+==================================================
+- Bis jetzt: Beschreibung von Merkmalen und ihrer Ausprägung innerhalb einer Sammlung von Beobachtungen (*Stichprobe*)
+- Noch nicht: ob sich dahinter allgemeinere Gesetzmäßigkeit verbergen
+
+Beispiel: Effektivität von Gedächtnistraining
+===============================================
+- Ein Gedächtnisforscher preist eine Methode an, mit der man
+angeblich die Gedächtnisleistung steigern kann.
+- Ein Kollege bezweifelt die Effektivität der Methode.
+- Sie einigen sich auf einen empirische Test ...
+- Gedächtnistest (fiktiv!), der die Gedächtnisleistung mit
+unendlicher Genauigkeit ermitteln kann
+  - Testwerte ($X$): stetige (*continuous*) Variable
+  - Populationsverteilung der Testwerte:$\mu = 50, \sigma^2 = 100$ 
+  
+*aus Eid et al. (2010, Kapitel 8)*
+
+Beispiel: Effektivität von Gedächtnistraining
+===============================================
+incremental:true
+- Eine studentische Hilfskraft wählt aus der Population zufällig eine
+Gruppe (Stichprobe) aus und unterzieht sie dem Training.
+- Befund: Mittelwert in der Gruppe der trainierten Personen
+  - $\bar{x} = 58$
+  - d.h. der Wert ist größer als der Populationsmittelwert $\mu = 50$
+- Zeigt dies, dass der Test effektiv ist und die Gedächtnisleistung
+steigert?
+
+*aus Eid et al. (2010, Kapitel 8)*
+
+Beispiel: Effektivität von Gedächtnistraining
+===============================================
+- Zeigt der höhere Stichprobenmittelwert bei trainierten Personen im
+Vergleich zum Populationsmittelwert bei untrainierten Personen,
+dass der Test effektiv ist und die Gedächtnisleistung steigert?
+- Das Problem dabei:
+  - Die Populationsvarianz $\sigma^2 = 100$ zeigt, dass sich Personen in
+ihrer Gedächtnisleistung unterscheiden
+  - Zieht man zufällig eine Person, wird sich deren Testwert
+wahrscheinlich vom Populationsmittelwert unterscheiden,
+ebenso der Mittelwert einer Stichprobe ...
+
+
+*aus Eid et al. (2010, Kapitel 8)*
+
+
+Beispiel: Effektivität von Gedächtnistraining
+===============================================
+- Wie kann man nun feststellen, ob der Unterschied zufällig zustande
+gekommen ist oder nicht?
+
+
+*aus Eid et al. (2010, Kapitel 8)*
+
+
+Zufall
+===============
+type:alert
+Wie wahrscheinlich ist das beobachtete Ergebnis?
+
+
+Bibliography
+=============
+```{r, echo=FALSE,results='hide'}
+```
+
+```{r,results='asis',echo=FALSE}
+bibliography()
+```
+
