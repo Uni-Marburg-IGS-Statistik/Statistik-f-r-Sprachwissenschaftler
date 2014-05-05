@@ -33,9 +33,15 @@ Heute
 - Einige wichtige Verteilungen
 - (Population vs. Stichprobe)
 
+Morgen
+======
+- Anwendung der Verteilungen: Inferenzstatistik
+- Fehlerarten
+- $p$-Werte
+- evtl. Frequentism vs. Bayesianism
 
-Daten für heute
-=================
+Daten für heute und morgen
+============================
 ```{r, eval=FALSE}
 rtdata <- read.table("Data/priming_rt.tab",header = T)
 ```
@@ -401,7 +407,7 @@ Die Normalverteilung
 - Normalverteilungen sind charakterisiert durch:
   - den Erwartungswert ($\mu$)
   - die Streuung ($\sigma$)
-- ist x normalverteilt: $x ~ N(\mu,\sigma^2)$
+- ist x normalverteilt: $X \sim{} N(\mu,\sigma^2)$
 - Dichtefunktion: $$F(x) = \frac{1}{\sqrt{2\pi\sigma^2}}e^{-\frac{1}{2}\left(\frac{x-\mu}{\sigma}\right)^2}$$
 
 
@@ -474,24 +480,20 @@ Anhang: ein paar weitere wichtige Verteilungen
 ===============================================
 type:section
 
-Beispiel
-==========
-incremental: true
-```{r}
-library(languageR)
-head(alice)
-```
-```{r}
-counts <- table(alice)
-head(sort(counts))
+
+Binomialverteilung
+=====================
+- diskrete Entsprechung der Normalverteilung
+- Wahrschlichkeit für das interessierende Ereinis $\pi$ und die Anzahl der Durchgänge $n$: $X \sim{} B(n,\pi)$
+- Bei $\pi = 0.5$: Wurf einer fairen Münze 
+- R-Funktionen: `pbinom()`,`dbinom()`,`rbinom()`, s. auch `choose()`, `combn()`
+```{r, echo=F}
+qplot(x=0:20,y=dbinom(0:20,20,prob=0.5),geom="point",xlab="x",ylab="P(x)")
 ```
 
-Beispiel (cont'd)
-===================
-```{r}
-rel <- prop.table(counts)
-head(sort(rel))
-```
+Pareto und Zipf
+================
+- mehr dazu später (mit Handout)
 
 
 Bibliography
