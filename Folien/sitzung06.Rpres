@@ -2,7 +2,7 @@ Statistik für Sprachwissenschaftler
 ========================================================
 author: Phillip M . Alday
 date: 2014-05-05   
-autosize: true
+autosize: false
 
 ```{r setup, include=FALSE}
 opts_chunk$set(cache=TRUE,prompt=TRUE)
@@ -312,7 +312,7 @@ Wahrscheinlichkeitsverteilungen bei stetigen Zufallsvariablen
 
 ... bei stetigen Zufallsvariablen
 ===============================================================
-```{r}
+```{r, echo=FALSE}
 set.seed(42)
 x <- seq(-3,3,length.out=1000)
 y <- dnorm(x)
@@ -323,7 +323,7 @@ nplot <- qplot(x=x,y=y,data=ndata,
 nplot
 ```
 ***
-```{r}
+```{r,echo=FALSE}
 nplot + 
 geom_ribbon(aes(x=x,ymin=0,ymax=y),
 data=subset(ndata, x > -1 & x < 0),
