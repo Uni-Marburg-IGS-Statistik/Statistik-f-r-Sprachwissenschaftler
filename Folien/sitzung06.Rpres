@@ -464,6 +464,15 @@ iqplot.2sd <- iqplot.1sd + geom_ribbon(aes(x=x,ymax=y,ymin=0),data=subset(iqdist
 iqplot.2sd
 ``` 
 
+Hausaufgabe
+============
+Bis morgen, lesen Sie: 
+- [wie Statistik oft misbraucht wird](http://www.cracked.com/article_20318_the-5-most-popular-ways-statistics-are-used-to-lie-to-you.html).
+- [warum es in den letzten Jahren eine Krise in der Wissenschaft gibt](http://www.economist.com/news/briefing/21588057-scientists-think-science-self-correcting-alarming-degree-it-not-trouble) (und warum ich so fanatisch geworden bin)
+
+Anhang: ein paar weitere wichtige Verteilungen
+===============================================
+type:section
 
 Beispiel
 ==========
@@ -483,13 +492,6 @@ Beispiel (cont'd)
 rel <- prop.table(counts)
 head(sort(rel))
 ```
-
-
-Hausaufgabe
-============
-Bis morgen:
-
-* Lesen Sie, [wie Statistik oft misbraucht wird](http://www.cracked.com/article_20318_the-5-most-popular-ways-statistics-are-used-to-lie-to-you.html).
 
 
 Bibliography
