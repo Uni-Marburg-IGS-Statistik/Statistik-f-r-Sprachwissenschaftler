@@ -8,6 +8,7 @@ autosize: true
 opts_chunk$set(cache=TRUE,prompt=TRUE)
 library(knitcitations)
 library(ggplot2)
+library(reshape2)
 ```
 
 
@@ -325,10 +326,46 @@ fill="red",alpha=0.5)
 
 CDF bei stetigen Zufallsvariablen
 =====================================
+- Die Verteilungsfunktion gibt für einen Wert an, wie viel Prozent der
+Verteilung unter diesem Wert liegt.
+- **Verteilungsperzentil:** Das Perzentil $x_p$ einer Verteilung ist der Wert, unter dem $p$-Prozent der Verteilung liegen. Mit anderen Worten, $x_p$ wird durch die Gleichung $P(x \leq x_p) = p$ definiert. (Bortz & Schuster, 2011: 69)
+- Verteilungsfunktion: $F(x_p) = P(x \leq x_p ) = \int_{-\infty}^{x_p}P(t) dt $
+- Damit kann auch die Wahrscheinlichkeit für einen Wert größer als $x_p$ berechnet werden (*Komplementärwahrscheinlichkeit*): $P(x > x_p ) = 1 − P(x \leq x_p )$
+
+
+CDF bei stetigen Zufallsvariablen
+=====================================
+```{r,echo=FALSE}
+nplot
+``` 
+
+CDF bei stetigen Zufallsvariablen
+=====================================
 ```{r,echo=FALSE}
 nplot + 
 geom_ribbon(aes(x=x,ymin=0,ymax=y),
-data=subset(ndata, pnorm(x) < 0.05),
+data=subset(ndata, pnorm(x) <= 0.05),
+fill="red",alpha=0.5)
+``` 
+
+CDF bei stetigen Zufallsvariablen
+=====================================
+```{r,echo=FALSE}
+nplot + 
+geom_ribbon(aes(x=x,ymin=0,ymax=y),
+data=subset(ndata, pnorm(x) <= 0.05),
+fill="red",alpha=0.5) + 
+geom_ribbon(aes(x=x,ymin=0,ymax=y),
+data=subset(ndata, pnorm(x) > 0.05),
+fill="blue",alpha=0.5)
+```
+
+CDF bei stetigen Zufallsvariablen
+=====================================
+```{r,echo=FALSE}
+nplot + 
+geom_ribbon(aes(x=x,ymin=0,ymax=y),
+data=subset(ndata, pnorm(x) <= 0.05),
 fill="red",alpha=0.5)
 ```
 
@@ -337,12 +374,96 @@ CDF bei stetigen Zufallsvariablen
 ```{r, echo=FALSE}
 nplot + 
 geom_ribbon(aes(x=x,ymin=0,ymax=y),
-  data=subset(ndata, pnorm(x,lower.tail=TRUE) < 0.025),
+  data=subset(ndata, pnorm(x,lower.tail=TRUE) <= 0.025),
   fill="red",alpha=0.5) + 
 geom_ribbon(aes(x=x,ymin=0,ymax=y),
-  data=subset(ndata, pnorm(x,lower.tail=FALSE) < 0.025),
+  data=subset(ndata, pnorm(x,lower.tail=FALSE) <= 0.025),
   fill="red",alpha=0.5)
 ```
+
+Beispiel: Dichtefunktion bei Reaktionszeiten
+=============================================
+```{r}
+plot(density(rtdata$RT))
+``` 
+
+Die Normalverteilung
+=====================
+- Wichtigste Verteilungsform (auch Gauß-Verteilung genannt, da sie von
+dem Mathematikerr Carl Friedrich Gauß (1777-1855) beschrieben wurde)
+- Glockenförmiger Verlauf, symmetrisch und unimodal
+- Nähert sich asymptotisch der Abzisse an, berührt sie jedoch an keiner Stelle (Werte nicht nach unten oder oben beschränkt)
+- ca. 2/3 der Gesamtfläche zwischen den Wendepunkten (*inflection points*)
+
+
+Die Normalverteilung
+=====================
+- Normalverteilungen sind charakterisiert durch:
+  - den Erwartungswert ($\mu$)
+  - die Streuung ($\sigma$)
+- ist x normalverteilt: $x ~ N(\mu,\sigma^2)$
+- Dichtefunktion: $$F(x) = \frac{1}{\sqrt{2\pi\sigma^2}}e^{-\frac{1}{2}\left(\frac{x-\mu}{\sigma}\right)^2}$$
+
+
+Normalverteilungen in R
+=======================
+* `plot(dnorm(...),type="l")` bzw. `qplot(dnorm(...))`
+* `curve(dnorm(...))`
+* `geom_density()` 
+
+Normalverteilungen in R
+=======================
+* `pnorm()` 
+* `qnorm()` 
+
+Beispiel: Intelligenztests (IQ)
+================================
+incremental: true
+* $\mu = 100$, $\sigma=15$
+* Wie ist die Wahrscheinlichkeit, dass jemand einen IQ von *genau* 140 hat?
+```{r}
+dnorm(140,sd=15,mean=100)
+```
+* Wie ist die Wahrscheinlichkeit, dass jemand einen IQ von 140 oder niedriger hat?
+```{r}
+pnorm(140,sd=15,mean=100)
+```
+
+Beispiel: Intelligenztests (IQ)
+================================
+* Wie ist die Wahrscheinlichkeit, dass jemand einen IQ über 140  hat?
+```{r}
+pnorm(140,sd=15,mean=100,lower.tail=FALSE)
+1 - pnorm(140,sd=15,mean=100)
+```
+* Welcher IQ entspricht dem 99,99-Perzentil?
+```{r}
+qnorm(.9999,sd=15,mean=100)
+```
+Beispiel: Intelligenztests (IQ)
+================================
+* Welcher Anteil der Bevölkerung hat einen IQ zwischen 85 und 115?
+```{r}
+pnorm(115,sd=15,mean=100) - pnorm(85,sd=15,mean=100)
+``` 
+```{r,echo=FALSE}
+iqdist <- data.frame(x=40:160, y=dnorm(40:160,sd=15,mean=100))
+iqplot <- qplot(x=x, y=y, data=iqdist ,geom="density",stat="identity",xlab="IQ",ylab="Dichte")
+iqplot.1sd <- iqplot + geom_ribbon(aes(x=x,ymax=y,ymin=0),data=subset(iqdist,x >= 85 & x < 115),alpha=0.5,fill="blue")
+iqplot.1sd
+``` 
+
+Beispiel: Intelligenztests (IQ)
+================================
+* Zwischen 70 und 130? 
+```{r, echo=TRUE}
+pnorm(130,sd=15,mean=100) - pnorm(70,sd=15,mean=100)
+``` 
+```{r,echo=FALSE}
+iqplot.2sd <- iqplot.1sd + geom_ribbon(aes(x=x,ymax=y,ymin=0),data=subset(iqdist,x >= 70 & x < 130),alpha=0.5,fill="red")
+iqplot.2sd
+``` 
+
 
 Beispiel
 ==========
