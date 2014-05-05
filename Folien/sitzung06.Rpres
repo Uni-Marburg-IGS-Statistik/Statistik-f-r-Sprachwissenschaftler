@@ -68,7 +68,7 @@ Standardwerte (z-Werte)
 ==========================
 - Zentrierung
   - Relativierung am Mittelwert der Verteilung
-  - $x_i / s$
+  - $x_i - \bar{x}$
   - Zentrierung von allen Werten $\rightarrow$ zentrierte Verteilung mit $\bar{x} = 0$
 - Standardisierung
   - Relativierung an der Standardabweichung der Verteilung
@@ -252,7 +252,10 @@ Wahrscheinlichsfunktion für die Augensumme beim einmaligen Werfen zweier Würfe
   - $P(5 \cap 3) = 1 / 6 \cdot 1 / 6 = 1 / 36$
   - $P(6 \cap 2) = 1 / 6 \cdot 1 / 6 = 1 / 36$
   - $P(8) = 5 / 36$ = `r 5 / 36`
-  
+
+Wahrscheinlichkeitsverteilungen bei diskreten Zufallsvariablen
+====================================================================
+Wahrscheinlichsfunktion für die Augensumme beim einmaligen Werfen zweier Würfel
 2. Wahrscheinlichkeit für den Bereich 6--8?
   - $5/36 + 6 / 36 + 5 / 36 = 16 / 36)$
   
@@ -304,6 +307,9 @@ Wahrscheinlichkeitsverteilungen bei stetigen Zufallsvariablen
 - Beispiel: Körpergewicht gemessen mit einer unendlich genauen Waage
 - Zwischen zwei Werten liegen unendlich viele Zwischenwerte; daher ist die Wahrscheinlichkeit für einen bestimmten Wert $\rightarrow$ 0
 - Daher: Wahrscheinlichkeiten für Werteintervalle (z.B. $P(60\leq X \leq 70)$)
+
+... bei stetigen Zufallsvariablen
+===============================================================
 - Dichtefunktion:
   - Annahme: Kategoriebreite $d$ (manchmal $\Delta{}x$) wird immer kleiner und geht gegen
 0 ($d \rightarrow 0$), d.h. es gibt unendlich viele Kategorien ($k \rightarrow \infty$)
