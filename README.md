@@ -35,9 +35,15 @@ Woche | Datum          | Themen
 |     | **29.04.2014** | Visualisierung der Daten: `ggplot2`-Basics
 |     |                | *Hausaufgabe bis 05.05.2014 12 Uhr:*
 |     |                | 1. `hausaufgabe05.R`
-04.   | **05.05.2014** | Statistische Inteferenz; Bevolkerung vs. Stichprobe; Intuition von "Messfehler" und "Wahrscheinlichkeit"
-|     | **06.05.2014** |  
-05.   | **12.05.2014** | $p$-Werte, Fehler-Arten, Frequentism vs Bayes
+04.   | **05.05.2014** | Auf dem Weg zu Interferenzstatistik: $z$-Tranformation, Wahrscheinlichkeitsverteilungen, Population vs. Stichprobe
+|     |                | *Hausaufgabe bis 06.05.2014 10 Uhr:*
+|     |                | Lesen Sie:
+|     |                | 1. [wie Statistik oft misbraucht wird](http://www.cracked.com/article_20318_the-5-most-popular-ways-statistics-are-used-to-lie-to-you.html).
+|     |                | 2. [warum es in den letzten Jahren eine Krise in der Wissenschaft gibt](http://www.economist.com/news/briefing/21588057-scientists-think-science-self-correcting-alarming-degree-it-not-trouble).
+|     | **06.05.2014** | Statistische Inteferenz, $p$-Werte, Intuition von "Messfehler" und "Wahrscheinlichkeit", Fehler-Arten
+|     |                | *Hausaufgabe bis 12.05.2014 12 Uhr:*
+|     |                | 1. 
+05.   | **12.05.2014** |  Frequentism vs Bayes
 |     | **13.05.2014** | Interferenz in der Praxis: Der Sinn von statischen Tests, neuartige Fehler 
 06.   | **19.05.2014** | 
 |     | **20.05.2014** | 

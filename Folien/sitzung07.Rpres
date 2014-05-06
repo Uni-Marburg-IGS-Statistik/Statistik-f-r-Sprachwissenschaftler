@@ -1,0 +1,442 @@
+Statistik für Sprachwissenschaftler
+========================================================
+author: Phillip M . Alday
+date: 2014-05-06   
+autosize: false
+
+```{r setup, include=FALSE}
+opts_chunk$set(cache=TRUE,prompt=TRUE)
+library(knitcitations)
+library(ggplot2)
+library(reshape2)
+cite_options(tooltip = TRUE
+             , linked = TRUE
+             , numerical = TRUE
+             , bibtex_data = FALSE)
+```
+
+
+Aufwachen und sich errinnern!
+====================================
+type: section
+
+
+Gestern
+=========
+- Von Häufigkeitsverteilung zu Wahrscheinlichkeitsverteilungen
+- Standardisierung von Verteilungen
+- Einige wichtige Verteilungen
+- (Population vs. Stichprobe)
+
+Heute
+======
+- Anwendung der Verteilungen: Inferenzstatistik
+- Fehlerarten
+- $p$-Werte
+- evtl. Frequentism vs. Bayesianism
+
+Beispiel: Effektivität von Gedächtnistraining
+===============================================
+- Ein Gedächtnisforscher preist eine Methode an, mit der man
+angeblich die Gedächtnisleistung steigern kann.
+- Ein Kollege bezweifelt die Effektivität der Methode.
+- Sie einigen sich auf einen empirische Test ...
+- Gedächtnistest (fiktiv!), der die Gedächtnisleistung mit
+unendlicher Genauigkeit ermitteln kann
+  - Testwerte ($X$): stetige (*continuous*) Variable
+  - Populationsverteilung der Testwerte:$\mu = 50, \sigma^2 = 100$ 
+  
+*aus Eid et al. (2010, Kapitel 8)*
+
+Beispiel: Effektivität von Gedächtnistraining
+===============================================
+incremental:true
+- Eine studentische Hilfskraft wählt aus der Population zufällig eine
+Gruppe (Stichprobe) aus und unterzieht sie dem Training.
+- Befund: Mittelwert in der Gruppe der trainierten Personen
+  - $\bar{x} = 58$
+  - d.h. der Wert ist größer als der Populationsmittelwert $\mu = 50$
+- Zeigt dies, dass der Test effektiv ist und die Gedächtnisleistung
+steigert?
+
+*aus Eid et al. (2010, Kapitel 8)*
+
+Beispiel: Effektivität von Gedächtnistraining
+===============================================
+- Zeigt der höhere Stichprobenmittelwert bei trainierten Personen im
+Vergleich zum Populationsmittelwert bei untrainierten Personen,
+dass der Test effektiv ist und die Gedächtnisleistung steigert?
+- Das Problem dabei:
+  - Die Populationsvarianz $\sigma^2 = 100$ zeigt, dass sich Personen in
+ihrer Gedächtnisleistung unterscheiden
+  - Zieht man zufällig eine Person, wird sich deren Testwert
+wahrscheinlich vom Populationsmittelwert unterscheiden,
+ebenso der Mittelwert einer Stichprobe ...
+
+
+*aus Eid et al. (2010, Kapitel 8)*
+
+
+Beispiel: Effektivität von Gedächtnistraining
+===============================================
+incremental:true
+- Wie kann man nun feststellen, ob der Unterschied zufällig zustande
+gekommen ist oder nicht?
+- Wie wahrscheinlich ist das beobachtete Ergebnis?
+
+*aus Eid et al. (2010, Kapitel 8)*
+
+The Signal and The Noise 
+================================
+type:section
+
+
+Hypothesen
+============
+- **Nullhypothese**: Stichprobenmitterlwert unterscheidet sich nicht vom Populationsmittelwert: $$ H_0: \bar{x} = \mu$$
+- **Alternativehypothese (gerichtet)**: $$ H_1: \bar{x} > \mu$$ $$ H_1: \bar{x} < \mu$$
+- **Alternativehypothese (ungerichtet)**: $$ H_1: \bar{x} \neq \mu$$
+
+Lehrbuchmäßige Vereinfachung
+===============================
+**Obacht** Es gibt verschiedene mögliche Hypothesen, aber "nichts Interessantes" lässt sich meiestens als Variationen von "kein Unterschied" ausdrucken.
+
+Sinn von statistischen Tests
+=============================
+incremental:true
+- Statistische Tests werden angewendet, um festzustellen, wie zuverlässig Zusammenhänge und Korrelationen zwischen den Parametern in den Daten auf systematische Unterschiede zurückgeführt werden können.
+- Es kann z.B. bei Systemen mit großen zufälligen Schwankungen (Rauschen, *noise*) zu Unterschieden zwischen zwei Bedingungen kommen, die auf das Rauschen zurückzuführen sind und nicht auf tatsächliche Unterschiede.
+- **Beispiel** Die durch Sprachverarbeitung erzeugte elektrische Aktivität im Gehirn bildet nur einen kleinen Teil der Gesamtaktivität, es ist also wichtig zu bestimmen, ob ein Ereignis durch Hintergrundrauschen oder durch systematische Underschiede entstand.
+
+Statistische Testverfahren
+==============================
+- Berechnung einer Prüfgröße aufgrund der empirischen Daten
+- Dabei: 
+  - Annahmen über die Rohdaten (z.B. Stichprobe zufällig ausgewählt, Rohwerte sind normalverteilt etc.)
+  - Annahmen unterscheiden sich je nach Testverfahren
+- Basisfrage: Welche Hypothese ist wahrscheinlicher?
+
+Frequentism vs Bayes
+=====================
+- unterschiedliche Vorstellungen von *Wahrscheinlichkeit* möglich
+- typischer, alltäglicher Sinn: **Glaubwürdigkeit**
+  - "Ich finde es nicht wahrscheinlich, dass..." $\Rightarrow$ "Ich glaube nicht wirklich daran, dass..."
+- alternativer Sinn, v.a. bei Versicherungen und Spielen: **Häufigkeit**
+  - "Es ist wahrscheinlich, dass..."  $\Rightarrow$  "Wenn das mehrmals wiederholt würde, würde es in den meisten Versuchen vorkommen, dass..."
+
+Bayes'scher Ansatz
+==================
+- ist der ältere Ansatz der Statistik.
+- wird trotzdem immer noch heute in vielen Bereichen vernachlässigt.
+- beschäftigt sich mit bedingter Wahrscheinlichkeit.
+- wird auch in forensischen Verfahren (z.B. DNA-Beweise, Sprecher-Erkennung) gebraucht, aber ziemlich oft missverstanden.
+- versteht "Wahrscheinlichkeit" als Grad der Glaubwürdigkeit.
+
+Satz von Bayes
+===================
+incremental:true
+$$P(A|B) = \frac{P(B | A)\, P(A)}{P(B)}$$
+
+Die Wahrscheinlichkeit von $A$ gegeben $B$ ist gleich die Wahrscheinlichkeit von $B$ gegeben $A$ mal die unbedingte (absolute) Wahrscheinlichkeit von $A$ dividiert durch die unbedingte Wahrscheinlichkeit von $B$.
+
+Bayes: Überprüfung der Null-Hypothese
+=========================================
+incremental:true
+$P(H_{0}|E) = \frac{P(E | H_{0})\, P(H_{0})}{P(E)}$
+
+Die Wahrscheinlichkeit der Null-Hypothese $H_{0}$ gegeben das beobachte Ereignis $E$ ist gleich die Wahrscheinlichkeit von $E$ gegeben $H_{0}$ mal die unbedingte Wahrscheinlichkeit von $H_{0}$ dividiert durch die unbedingte Wahrscheinlichkeit von $E$.
+
+Festlegung der Priors
+=========================
+incremental: true
+Wie bestimmt man die unbedingte (*a-priori*) Wahrscheinlichkeit (von $H_{0}$)?
+
+Gute Frage! Früher ziemlich schwierig in der Praxis, Rechner ermöglichen heutzutage manche guten Methoden
+
+Frequentistischer Ansatz
+===========================
+- wird in der empirischen Linguistik und den Neurowissenschaften öfter angewendet als der Bayessche.
+- basiert auf der Häufigkeit bestimmter Ereignisse in einer Stichprobe bzw. über mehrere wiederholte Stichproben hinweg.
+- zieht Schlüsse durch den Vergleich zu Standardverteilungen bzw. zu von Permutationen abgeleiteten Verteilungen.
+- versteht "Wahrscheinlichkeit" als die Häufigkeit von Zufallsereignissen als Teil der ganzen Ergebnismenge.
+
+Übrigens
+=========
+Subjektivität vs. Objektivität vs. Formulierungsweise des *a-priori* Glaubens
+
+Null-Hypothesis Significance Testing
+====================================
+- Basisfrage: Ist die Nullhypothese mit der Empirie zu vereinbaren?
+- ist dies nicht der Fall, wird die Nullhypothese zugunsten der Alternativhypothese verworfen
+- **Obacht** modernes NHST:
+  - komische Mischung aus zwei Urformulierungen `r citep(c(gigerenzer2004="10.1016/j.socec.2004.09.033"))`
+  - nicht besonders intuitiv`r citep(c(cohen1994="10.1037/0003-066X.49.12.997",cohen1990="10.1037/0003-066X.45.12.1304"))`
+  - extrem kontrovers (zu viele um aufzulisten)
+  
+NHST: Vorgehen
+==================
+incremental: true
+1. Berechnung der Verteilung der Prüfgröße unter Annahme der Nullhypothese
+2. Wert der Prüfgröße wird mit der Verteilung verglichen
+3. ungewöhnlich groß oder klein? $\Rightarrow$ Evidenz gegen die Nullhypothese
+
+NHST: Vorgehen
+==================
+incremental: true
+type:prompt
+*Ab welchem Punkt ist ein Wert nicht mehr mit der Nullhypothese vereinbar?*
+
+Festellung des Signifikanzniveaus
+
+Es geht also um die Frage
+======================================
+
+wo sich die Prüfgröße im Vergelich zur Verteilung unter der Annahme der Nullhypothese befindet.
+***
+```{r, echo=FALSE}
+set.seed(42)
+x <- seq(-3,3,length.out=1000)
+y <- dnorm(x)
+ndata <- data.frame(x,y)
+nplot <- qplot(x=x,y=y,data=ndata,
+      geom="line",
+      xlab="x",ylab="P(x)")
+pplot <- nplot + 
+        geom_ribbon(aes(x=x,ymin=0,ymax=y),
+          data=subset(ndata, pnorm(x,lower.tail=TRUE) <= 0.025),
+          fill="red",alpha=0.5) + 
+        geom_ribbon(aes(x=x,ymin=0,ymax=y),
+          data=subset(ndata, pnorm(x,lower.tail=FALSE) <= 0.025),
+          fill="red",alpha=0.5) 
+pplot.symbol <- pplot + 
+        theme(axis.ticks = element_blank(), axis.text = element_blank()) + 
+        annotate(geom="text",x=-2.5,y=0.07,size=10,label="alpha / 2",parse=TRUE) + 
+        annotate(geom="text",x=2.5,y=0.07,size=10,label="alpha / 2",parse=TRUE) +
+        annotate(geom="text",x=0,y=0.05,size=15,label="1 - alpha",parse=TRUE) 
+pplot.symbol
+```
+
+Fehlerarten
+===========
+- **$\alpha$-Fehler (Type I Error)**: Ablehnung einer richtigen Nullhypothese zugunsten der Alternative Hypothese 
+  - etwa falsches Positiv
+- **$\beta$-Fehler (Type II Error)**: Fälschliche Beibehaltung der Nullhypothese
+  - etwa falsches Negativ
+
+<small>Vgl. Type M und Type S Error `r citep("http://andrewgelman.com/2004/12/29/type_1_type_2_t/")` mehr dazu später!</small>
+
+Signifikanzniveau
+====================
+incremental: true
+- Die Nullhypothese wird verworfen, wenn das Testergebnis nur schlecht mit ihr vereinbart werden kann (also untypisch ist)
+- Wie untypisch ist untypisch genug?
+- Kontrolle des $\alpha$-Fehlers aufgrund der Festlegung des Signifikanzniveaus (auch $\alpha$-Niveau genannt)
+- Konventionelle Werte: $\alpha$ = 0.05 oder $\alpha$ = 0.01
+
+Signifikanzniveau
+====================
+incremental: true
+- Konsequenzen hängen stark von der Fragestellung ab:
+  - Bei 5-prozentiger Regenwahrscheinlichkeit kann man praktisch sicher auf einen Regenschirm verzichten
+  - Eine 5-prozentige Wahrscheinlichkeit, dass eine Brücke unter Belastung einstürzt wäre hingegen nicht sehr beruhigend.
+  
+Hypothesen testen
+====================
+- Vergleich der Prüfgröße mit der Verteilung unter der Annahme der Nullhypothese
+- Beispiel: z-Wert
+  - unter der Nullhypothese standardnormalverteilt
+- Ablehnungsbereich der Nullhypothese
+  - Bereich an Werten der Prüfgröße, der diejenigen Werte umfasst, die aufgrund des Signifikanzniveaus $\alpha$ zur Ablehnung der Nullhypothese führen
+  - hängt von der Gerichtetheit der Hypothese ab
+
+
+Beispiel: Gerichtet, größer
+=============================
+- $H_1$: $\bar{x} > \mu$
+- Ablehnungsbereich der Nullhypothese umfasst Werte der Prüfgröße, die einen bestimmten Wert übersteigen.
+- Entscheidung:
+  - Prüfgröße $\geq$ krit. Wert $\Rightarrow$ $H_0$ ablehnen, etc.
+  - Prüfgröße $<$ krit. Wert $\Rightarrow$ $H_0$ beibehalten, etc.
+<small>
+- Bei der umgekehrten Richtung der Hypothese entsprechende Umkehrung bei der Entscheidung, d.h.
+  - Prüfgröße $\leq$ krit. Wert $\Rightarrow$ $H_0$ ablehnen, etc.
+</small>
+
+Bsp: einseitiger Test
+==============================================
+incremental:true
+```{r echo=FALSE}
+nplot + 
+        geom_ribbon(aes(x=x,ymin=0,ymax=y),
+          data=subset(ndata, pnorm(x,lower.tail=TRUE) > 0.95),
+          fill="red",alpha=0.5)
+```
+***
+Kritischer Wert bei einem Signifikanzniveau von $\alpha$=0.05 ist $$z_{1-\alpha} = z_{0.95} = 1.65$$
+
+```{r}
+qnorm(0.95)
+```
+
+Gedächtnistraining
+======================================
+<small>
+- Populationsverteilung der Testwerte: $\mu$ = 50,$\sigma^2$= 100
+- Mittelwert in der Gruppe der trainierten Personen: $\bar{x}$ = 58
+- Annahme: $n$ = 12 (Stichprobe)
+</small>
+- Prüfgröße für einen $z$-Test:
+  $$ z = \sqrt{n} \left(\frac{\bar{x}-\mu_0}{\sigma}\right)$$
+  $$ = \sqrt{12} \left(\frac{58 - 50 }{10}\right) = 2.77 \geq 1.65$$
+  
+<small>*aus Eid et al. (2010, Kapitel 8)*</small>
+
+Ist 58 im Vergleich zu 50 nicht eine sehr geringe Abweichung?
+===================================================================
+- Die Differenz zwischen dem beobachteten Mittelwert 58 und dem Populationsmittel von 50 erscheint mit Bezug auf die Populationsstandardabweichung (10) zunächst recht gering. 
+- Was würde passieren, wenn wir uns die Abweichung des Stichprobenmittelwerts (58) mit Bezug auf die empirische Populationsverteilung anschauen würden?
+
+Ist 58 im Vergleich zu 50 nicht eine sehr geringe Abweichung?
+===================================================================
+left:40%
+incremental: true
+```{r echo=FALSE}
+x <- 0:100
+y <- dnorm(x,mean=50,sd=10)
+memory <- data.frame(x,y)
+memplot <- qplot(x=x,y=y,data=memory,
+      geom="line",
+      xlab="x",ylab="P(x)")
+memplot + annotate("point",x=58,y=dnorm(58,mean=50,sd=10),size=5,color="red")
+```
+***
+```{r}
+pnorm(58,mean=50,sd=10)
+qnorm(0.95,mean=50,sd=10)
+```
+??????????????????????????
+
+Ist 58 im Vergleich zu 50 nicht eine sehr geringe Abweichung?
+===================================================================
+- Die Differenz zwischen dem beobachteten Mittelwert 58 und dem Populationsmittel von 50 erscheint mit Bezug auf die Pop-SD (10) zunächst recht gering.
+- Allerdings: Mittelwerte besitzen eine geringere Variabilität als Rohwerte, so dass sie nicht direkt mit der Standardabweichung in Verbindung gesetzt werden dürfen.
+- Lösung: Berechnung einer Prüfgröße ($z$-Wert), die die geringere Variabilität des Mittelwerts berücksichtigt
+- $\sqrt(n)$ als Korrektur 
+
+
+Bsp: Ungerichtet (2-seitiger Test)
+====================================
+```{r echo=FALSE}
+pplot.05 <- pplot + 
+        theme(axis.ticks = element_blank(), axis.text = element_blank()) + 
+        annotate(geom="text",x=-2.5,y=0.07,size=10,label="2,5%") + 
+        annotate(geom="text",x=2.5,y=0.07,size=10,label="2,5%") +
+        annotate(geom="text",x=0,y=0.05,size=15,label="95%") 
+pplot.05
+```
+***
+<small>
+Kritische Werte bei einem Signifikanzniveau von $\alpha$=0.05 sind $$\pm{}z_{1-\alpha/2} = \pm{}1.96$$
+</small>
+```{r}
+qnorm(0.975)
+```
+<small>$H_0$ wird abgelehnt, falls $|z| \geq 1.96$ bzw.  $|z| \geq z_{1-\alpha/2}$</small>
+
+Das eigentliche Problem mit NHST und p-Werten
+===============================================
+incremental: true
+Welche Frage haben wir gestellt und welche Frage beantworten wir?
+- $P(H_0|E) != P(E|H_0)$
+  - Keine Aussage, wie wahrscheinlich $H_1$ ist
+  - Keine Aussage, wie wahrscheinlich $H_0$ ist
+- Vergleichsbasis ("The Null is never true")
+
+Vergleich: 1- vs. 2-seiter Test
+==============================================
+- Effektivität einer neuen Lernmethode
+- Verbessert (bzw. verändert) die neue Methode die Leistungen der Schüler?
+- $H_0$ $\bar{x} = \mu$
+- $H_1$ $\bar{x} \geq \mu$ (gerichtet)
+- $H_0$ $\bar{x} \neq \mu$ (ungerichet)
+
+Vergleich: 1- vs. 2-seiter Test
+==============================================
+- Mit der alten Methode erzielte Testwerte:
+  - $\mu$ = 40, $\sigma$ = 4
+- Mittelwert in der Gruppe der trainierten Personen (n=12): 
+  - $\bar{x} = 42$
+
+$$z = \sqrt{12} \left( \frac{42-40}{4} \right) = 1.73$$
+
+Vergleich: 1- vs. 2-seiter Test
+==============================================
+$$z = \sqrt{12} \left( \frac{42-40}{4} \right) = 1.73$$
+
+- Einseitiger Test:
+  - kristischer Wert = 1.65
+  - Nullhypothese wird abgelehnt
+- Zweiseitiger Test:
+  - kritische Werte = -1.96, 1.96
+  - Nullhypothese kann nicht abgelehnt werden
+
+Bindungsangst?
+======================
+Präzisere Hypothesen können mehr Rauschen aushalten!
+
+Fehlschlusswarnung!
+================================
+type: alert
+Daraus, dass die Nullhypothese nicht abgelehnt werden kann, folgt nicht, dass sie stimmt!
+
+p-Werte
+===========
+- In Publikationen werden meist sogenannte p-Werte berichtet
+- $p$-Wert = das beobachtete Signifikanzniveau
+- Ermittlung wieder über die Prüfgröße
+- bei einem einseitigen Test entspricht der p-Wert der Fläche, die unter der Standardnormalverteilung durch die Prüfgröße abgeschnitten wird im Beispiel (Lernmethode): p-Wert = $P(z > 1,73) = 0.042$
+- dazu: Tabellen
+- oder: R `pnorm()`
+- ganz oft falsch verstanden
+
+Das eigentliche Problem mit NHST und p-Werten
+===============================================
+incremental: true
+Welche Frage haben wir gestellt und welche Frage beantworten wir?
+- $P(H_0|E) != P(E|H_0)$
+  - Keine Aussage, wie wahrscheinlich $H_1$ ist
+  - Keine Aussage, wie wahrscheinlich $H_0$ ist
+- Vergleichsbasis ("The Null is never true")
+
+Das eigentliche Problem mit NHST und p-Werten
+===============================================
+incremental: true
+Welche Frage haben wir gestellt und welche Frage beantworten wir?
+- Existenz vs. Form 
+  - Parameterschätzung
+  - Effektgröße
+  - ...
+- Messen "Effort" (*Aufwand*) `r citep("http://www.johnmyleswhite.com/notebook/2012/07/17/criticism-5-of-nhst-p-values-measure-effort-not-truth/")`
+
+Andere Schwierigkeiten (mehr später)
+======================================
+- multiples Testen (v.a. bei frequentistischen Tests)
+- optional Stopping
+- ....
+
+
+Bibliography
+=============
+```{r, echo=FALSE,results='hide'}
+cite("10.1016/j.socec.2004.09.033") # Gigerenzer 2004 -- Mindless statistics 
+cite("10.1037/0033-2909.112.1.155") # Cohen 1992 -- Power Primer
+cite("10.1037/0003-066X.49.12.997") # Cohen 1994 -- The Eart is Round (p<0.05)
+cite("10.1037/0003-066X.50.12.1103")# Cohen 1994 -- The Eart is Round (p<0.05) Rejoinder
+cite("10.1007/978-0-387-09612-4_9") # Hoijtink et al 2008 -- Bayesian Versus Frequentist Inference
+cite("10.1037/0003-066X.45.12.1304")# Cohen 1990 -- Things I have learned (so far)
+```
+<span style="font-size: 10%;">
+```{r,results='asis',echo=FALSE}
+bibliography(style="markdown",bulleted=FALSE)
+```
+</span>
