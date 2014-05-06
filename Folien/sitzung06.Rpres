@@ -2,7 +2,7 @@ Statistik für Sprachwissenschaftler
 ========================================================
 author: Phillip M . Alday
 date: 2014-05-05   
-autosize: true
+autosize: false
 
 ```{r setup, include=FALSE}
 opts_chunk$set(cache=TRUE,prompt=TRUE)
@@ -54,6 +54,7 @@ rtdata <- read.table(normalizePath("../Data/priming_rt.tab"),header = T)
 rtdata$subj <- as.factor(rtdata$subj)
 summary(rtdata)
 ```
+*Daten (c) Lisa Schaufler -- danke!* 
 
 Vergleichbarkeit
 ==================
@@ -68,7 +69,7 @@ Standardwerte (z-Werte)
 ==========================
 - Zentrierung
   - Relativierung am Mittelwert der Verteilung
-  - $x_i / s$
+  - $x_i - \bar{x}$
   - Zentrierung von allen Werten $\rightarrow$ zentrierte Verteilung mit $\bar{x} = 0$
 - Standardisierung
   - Relativierung an der Standardabweichung der Verteilung
@@ -76,7 +77,7 @@ Standardwerte (z-Werte)
 
 Standardwerte (z-Werte)
 ==========================
-- $z$-Standardisierung ($z$-Ttransformation)
+- $z$-Standardisierung ($z$-Transformation)
   - Zentrierung + Standardisierung
   - $z = (x_i - \bar{x}) / s$
   - $z$-Transformierung von allen Werten $\rightarrow$ standardisierte Verteilung mit $\bar{z} = 0, s_z = 1$
@@ -173,10 +174,19 @@ ihrer Gedächtnisleistung unterscheiden
   - Zieht man zufällig eine Person, wird sich deren Testwert
 wahrscheinlich vom Populationsmittelwert unterscheiden,
 ebenso der Mittelwert einer Stichprobe ...
+
+
+*aus Eid et al. (2010, Kapitel 8)*
+
+
+Beispiel: Effektivität von Gedächtnistraining
+===============================================
 - Wie kann man nun feststellen, ob der Unterschied zufällig zustande
 gekommen ist oder nicht?
 
+
 *aus Eid et al. (2010, Kapitel 8)*
+
 
 Zufall
 ===============
@@ -188,7 +198,7 @@ Zufallsvariablen
 - **Variablen:** veränderliche Größen, die Objekte beschreiben und hinsichtlich
 derer sich Objekte unterscheiden
 - **Zufallsvariablen:** Eine Zufallsvariable ist eine Funktion, die den Ergebnissen eines Zufallsexperimentes (d. h. Elementarereignissen oder Ereignissen) reelle Zahlen zuordnet. (Bortz & Schuster, 2011: 61)
-18Was ist ein Zufallsexperiment?
+- Was ist ein Zufallsexperiment?
 
 Zufallsvariablen
 ====================
@@ -201,17 +211,31 @@ vom Zufall abhängt
 
 Beispiel: Münzwurf
 ===================
-1. Wie wahrscheinlich ist es, beim fünfmaligen Münzwurf das Ereignis $A =
+incremental:true
+Wie wahrscheinlich ist es, beim fünfmaligen Münzwurf das Ereignis $A =
 {(K,Z,K,K,Z)}$ zu erhalten?
-  - dieses Ereignis kommt im Ereignisraum nur einmal vor, daher: P(A) =
-1/32 = `r 1/32` = `r 1/32 * 100`%
 
-2. Wie wahrscheinlich ist es, beim fünfmaligen Münzwurf genau dreimal Kopf zu erhalten?
-  - alle Ereignisse mit dreimal Kopf $\binom{5}{3} = 10$: 
-     P(A) = 10/32 = `r 10/32` = `r 10/32 * 100`%
+dieses Ereignis kommt im Ereignisraum nur einmal vor, daher: 
 
-3. Wie wahrscheinlich ist es, beim fünfmaligen Münzwurf mindestens viermal Zahl zu erhalten?
-  - alle Ereignisse mit vier- oder fünfmal Zahl $\binom{5}{4} + \binom{5}{5}= 6$: P(A) = 6/32 = `r 6 / 32`
+P(A) = 1/32 = `r 1/32` = `r 1/32 * 100`%
+
+Beispiel: Münzwurf
+===================
+incremental:true
+Wie wahrscheinlich ist es, beim fünfmaligen Münzwurf genau dreimal Kopf zu erhalten?
+
+alle Ereignisse mit dreimal Kopf $\binom{5}{3} = 10$: 
+
+P(A) = 10/32 = `r 10/32` = `r 10/32 * 100`%
+
+Beispiel: Münzwurf
+===================
+incremental:true
+Wie wahrscheinlich ist es, beim fünfmaligen Münzwurf mindestens viermal Zahl zu erhalten?
+  
+alle Ereignisse mit vier- oder fünfmal Zahl $\binom{5}{4} + \binom{5}{5}= 6$: 
+
+P(A) = 6/32 = `r 6 / 32`
 
 Warum ist das für uns relevant?
 ======================================
@@ -225,12 +249,11 @@ Dazu: **Wahrscheinlichkeitsverteilungen.**
 Wahrscheinlichkeitsverteilungen
 ==================================
 Wir müssen unterscheiden zwischen
-  - diskreten Zufallsvariablen: endliche Anzahl der Ergebnisse (oder
-abzählbar unendlich), z.B. Münzwurf, Würfeln ...
+  - diskreten Zufallsvariablen: endliche Anzahl der Ergebnisse (oder abzählbar unendlich), z.B. Münzwurf, Würfeln ...
   - stetigen Zufallsvariablen: unendliche Anzahl der Ergebnisse, z.B. Reaktionszeit
 
 
-Wahrscheinlichkeitsverteilungen bei diskreten Zufallsvariablen
+... bei diskreten Zufallsvariablen
 ====================================================================
 Wahrscheinlichsfunktion für die Augensumme beim einmaligen Werfen zweier Würfel:
 ```{r, echo=FALSE}
@@ -241,47 +264,64 @@ dist$Freq <- dist$Freq / sum(dist$Freq)
 qplot(x=df.sum,y=Freq,data=dist,geom="bar",xlab="x",ylab="P(x)",stat="identity")
 ```
 
-Wahrscheinlichkeitsverteilungen bei diskreten Zufallsvariablen
+... bei diskreten Zufallsvariablen
 ====================================================================
 Wahrscheinlichsfunktion für die Augensumme beim einmaligen Werfen zweier Würfel
 
-1. Wahrscheinlichkeit für 8:
+- Wahrscheinlichkeit für 8:
   - $P(2 \cap 6) = 1 / 6 \cdot 1 / 6 = 1 / 36$
   - $P(3 \cap 5) = 1 / 6 \cdot 1 / 6 = 1 / 36$
   - $P(4 \cap 4) = 1 / 6 \cdot 1 / 6 = 1 / 36$
   - $P(5 \cap 3) = 1 / 6 \cdot 1 / 6 = 1 / 36$
   - $P(6 \cap 2) = 1 / 6 \cdot 1 / 6 = 1 / 36$
   - $P(8) = 5 / 36$ = `r 5 / 36`
-  
-2. Wahrscheinlichkeit für den Bereich 6--8?
+
+... bei diskreten Zufallsvariablen
+====================================================================
+Wahrscheinlichsfunktion für die Augensumme beim einmaligen Werfen zweier Würfel
+
+- Wahrscheinlichkeit für den Bereich 6--8?
   - $5/36 + 6 / 36 + 5 / 36 = 16 / 36)$
   
-Wahrscheinlichkeitsverteilungen bei diskreten Zufallsvariablen
+... bei diskreten Zufallsvariablen
 ====================================================================
 Erwartungswert ($E(x)$ oder $\mu$) und Varianz ($\sigma^2$ oder $\text{Var}(X)$) einer diskreten Zufallsverteilung kennzeichnen die theoretische Verteilung der Zufallsvariable 
 
 - $\mu = \sum_{i=1}^n x_i \cdot P(x_i)$
 - $\sigma^2 = \sum_{i=1}^n \left(x_i - \mu\right)^2 \cdot P(x_i)$
 
-Wahrscheinlichkeitsverteilungen bei diskreten Zufallsvariablen
+... bei diskreten Zufallsvariablen
 ====================================================================
 ```{r, echo=TRUE}
 df <-expand.grid(left=1:6,right=1:6)
 df$sum <- df$left + df$right
+head(df,n=3)
+tail(df,n=3)
+```
+
+... bei diskreten Zufallsvariablen
+====================================================================
+```{r, echo=TRUE}
 counts <- data.frame(xtabs(~df$sum))
-counts$p <- counts$Freq / sum(counts$Freq)
-wuerfel <- counts$p * 2:12
+names(counts) <- c("x","freq")
+counts$x <- as.numeric(counts$x)
+counts$p <- counts$freq / sum(counts$freq)
+wuerfel <- counts$p * counts$x
 wuerfel
+```
+
+... bei diskreten Zufallsvariablen
+====================================================================
+```{r, echo=TRUE}
 erwartungswert <- sum(wuerfel)
 erwartungswert
 ```
 
-Wahrscheinlichkeitsverteilungen bei diskreten Zufallsvariablen
+... bei diskreten Zufallsvariablen
 ====================================================================
 ```{r}
-wuerfel.varianz <- sum( (2:12 - erwartungswert)^2 *  counts$p )
+wuerfel.varianz <- sum( (counts$x - erwartungswert)^2 *counts$p )
 wuerfel.varianz
-
 ```
 
 Verteilungsfunktion bei diskreten Zufallsvariablen
@@ -289,13 +329,27 @@ Verteilungsfunktion bei diskreten Zufallsvariablen
 - **(kumlative) Verteilungsfunktion:** gibt die kumulierte Wahrscheinlichkeit für einen Wert an
 - $F(x_i) = P(x \leq x_i)$
 - engl. *cumulative distribution function*, CDF
-- Berechnung: $F(x_i) = \sum_{j\leq i} P(x_j)$
+- Berechnung: $$F(x_i) = \sum_{j\leq i} P(x_j)$$
 
-Verteilungsfunktion bei diskreten Zufallsvariablen
+Verteilungsfunktion ...
 ====================================================================
-```{r}
-qplot(x=df.sum,y=cumsum(p),
-      data=counts,geom="bar",
+left:60%
+```{r eval=FALSE}
+qplot(x=x,
+      y=cumsum(p),
+      data=counts,
+      geom="bar",
+      stat="identity",
+      xlab="x",
+      ylab="P(x' < x)")
+```
+***
+```{r echo=FALSE}
+qplot(x=x,
+      y=cumsum(p),
+      data=counts,
+      geom="bar",
+      stat="identity",
       xlab="x",ylab="P(x' < x)")
 ```
 
@@ -304,15 +358,18 @@ Wahrscheinlichkeitsverteilungen bei stetigen Zufallsvariablen
 - Beispiel: Körpergewicht gemessen mit einer unendlich genauen Waage
 - Zwischen zwei Werten liegen unendlich viele Zwischenwerte; daher ist die Wahrscheinlichkeit für einen bestimmten Wert $\rightarrow$ 0
 - Daher: Wahrscheinlichkeiten für Werteintervalle (z.B. $P(60\leq X \leq 70)$)
+
+... bei stetigen Zufallsvariablen
+===============================================================
 - Dichtefunktion:
   - Annahme: Kategoriebreite $d$ (manchmal $\Delta{}x$) wird immer kleiner und geht gegen
 0 ($d \rightarrow 0$), d.h. es gibt unendlich viele Kategorien ($k \rightarrow \infty$)
 - Fläche unter der Dichte = Wahrscheinlichkeit
-- Fläche unter der Verteilung = 1: $\int_{-\infty}^{\infty}P(x) dx = 1$
+- Fläche unter der Verteilung = 1: $$\int_{-\infty}^{\infty}P(x) dx = 1$$
 
 ... bei stetigen Zufallsvariablen
 ===============================================================
-```{r}
+```{r, echo=FALSE}
 set.seed(42)
 x <- seq(-3,3,length.out=1000)
 y <- dnorm(x)
@@ -323,7 +380,7 @@ nplot <- qplot(x=x,y=y,data=ndata,
 nplot
 ```
 ***
-```{r}
+```{r,echo=FALSE}
 nplot + 
 geom_ribbon(aes(x=x,ymin=0,ymax=y),
 data=subset(ndata, x > -1 & x < 0),
@@ -335,16 +392,19 @@ CDF bei stetigen Zufallsvariablen
 - Die Verteilungsfunktion gibt für einen Wert an, wie viel Prozent der
 Verteilung unter diesem Wert liegt.
 - **Verteilungsperzentil:** Das Perzentil $x_p$ einer Verteilung ist der Wert, unter dem $p$-Prozent der Verteilung liegen. Mit anderen Worten, $x_p$ wird durch die Gleichung $P(x \leq x_p) = p$ definiert. (Bortz & Schuster, 2011: 69)
-- Verteilungsfunktion: $F(x_p) = P(x \leq x_p ) = \int_{-\infty}^{x_p}P(t) dt $
-- Damit kann auch die Wahrscheinlichkeit für einen Wert größer als $x_p$ berechnet werden (*Komplementärwahrscheinlichkeit*): $P(x > x_p ) = 1 − P(x \leq x_p )$
+- Verteilungsfunktion: $$F(x_p) = P(x \leq x_p ) = \int_{-\infty}^{x_p}P(t) dt$$
 
+CDF bei stetigen Zufallsvariablen
+=====================================
+- Verteilungsfunktion: $$F(x_p) = P(x \leq x_p ) = \int_{-\infty}^{x_p}P(t) dt$$
+- Damit kann auch die Wahrscheinlichkeit für einen Wert größer als $x_p$ berechnet werden (*Komplementärwahrscheinlichkeit*): $P(x > x_p ) = 1 − P(x \leq x_p )$
 
 CDF bei stetigen Zufallsvariablen
 =====================================
 ```{r,echo=FALSE}
 nplot
 ``` 
-
+*** 
 CDF bei stetigen Zufallsvariablen
 =====================================
 ```{r,echo=FALSE}
@@ -353,6 +413,9 @@ geom_ribbon(aes(x=x,ymin=0,ymax=y),
 data=subset(ndata, pnorm(x) <= 0.05),
 fill="red",alpha=0.5)
 ``` 
+***
+- $P(x \leq x_p )$
+
 
 CDF bei stetigen Zufallsvariablen
 =====================================
@@ -365,6 +428,10 @@ geom_ribbon(aes(x=x,ymin=0,ymax=y),
 data=subset(ndata, pnorm(x) > 0.05),
 fill="blue",alpha=0.5)
 ```
+***
+- $P(x \leq x_p )$
+- $P(x > x_p )$ =  $1 - P(x \leq x_p )$
+
 
 CDF bei stetigen Zufallsvariablen
 =====================================
@@ -374,6 +441,9 @@ geom_ribbon(aes(x=x,ymin=0,ymax=y),
 data=subset(ndata, pnorm(x) <= 0.05),
 fill="red",alpha=0.5)
 ```
+***
+5% (lower tail)
+
 
 CDF bei stetigen Zufallsvariablen
 =====================================
@@ -386,6 +456,8 @@ geom_ribbon(aes(x=x,ymin=0,ymax=y),
   data=subset(ndata, pnorm(x,lower.tail=FALSE) <= 0.025),
   fill="red",alpha=0.5)
 ```
+***
+5% (two-tailed) is 2.5% at each tail
 
 Beispiel: Dichtefunktion bei Reaktionszeiten
 =============================================
@@ -396,7 +468,7 @@ plot(density(rtdata$RT))
 Die Normalverteilung
 =====================
 - Wichtigste Verteilungsform (auch Gauß-Verteilung genannt, da sie von
-dem Mathematikerr Carl Friedrich Gauß (1777-1855) beschrieben wurde)
+dem Mathematiker Carl Friedrich Gauß (1777-1855) beschrieben wurde)
 - Glockenförmiger Verlauf, symmetrisch und unimodal
 - Nähert sich asymptotisch der Abzisse an, berührt sie jedoch an keiner Stelle (Werte nicht nach unten oder oben beschränkt)
 - ca. 2/3 der Gesamtfläche zwischen den Wendepunkten (*inflection points*)
@@ -419,8 +491,10 @@ Normalverteilungen in R
 
 Normalverteilungen in R
 =======================
-* `pnorm()` 
-* `qnorm()` 
+* `pnorm()`: Verteilungsfunktion (*p* für *probability*)
+* `qnorm()`: Quantilfunktion (Kehrfunktion von `pnorm()`)
+* `dnorm()`: Dichtefunktion
+* `rnorm()`: Zufallsvariabel (*r* für *random*, für Simulationen nützlich)
 
 Beispiel: Intelligenztests (IQ)
 ================================
@@ -430,6 +504,10 @@ incremental: true
 ```{r}
 dnorm(140,sd=15,mean=100)
 ```
+
+Beispiel: Intelligenztests (IQ)
+================================
+incremental: true
 * Wie ist die Wahrscheinlichkeit, dass jemand einen IQ von 140 oder niedriger hat?
 ```{r}
 pnorm(140,sd=15,mean=100)
@@ -437,21 +515,32 @@ pnorm(140,sd=15,mean=100)
 
 Beispiel: Intelligenztests (IQ)
 ================================
+incremental: true
 * Wie ist die Wahrscheinlichkeit, dass jemand einen IQ über 140  hat?
 ```{r}
 pnorm(140,sd=15,mean=100,lower.tail=FALSE)
 1 - pnorm(140,sd=15,mean=100)
 ```
+
+Beispiel: Intelligenztests (IQ)
+================================
+incremental: true
 * Welcher IQ entspricht dem 99,99-Perzentil?
 ```{r}
 qnorm(.9999,sd=15,mean=100)
 ```
+
 Beispiel: Intelligenztests (IQ)
 ================================
 * Welcher Anteil der Bevölkerung hat einen IQ zwischen 85 und 115?
 ```{r}
 pnorm(115,sd=15,mean=100) - pnorm(85,sd=15,mean=100)
 ``` 
+
+Beispiel: Intelligenztests (IQ)
+================================
+* Welcher Anteil der Bevölkerung hat einen IQ zwischen 85 und 115?
+
 ```{r,echo=FALSE}
 iqdist <- data.frame(x=40:160, y=dnorm(40:160,sd=15,mean=100))
 iqplot <- qplot(x=x, y=y, data=iqdist ,geom="density",stat="identity",xlab="IQ",ylab="Dichte")
@@ -465,6 +554,11 @@ Beispiel: Intelligenztests (IQ)
 ```{r, echo=TRUE}
 pnorm(130,sd=15,mean=100) - pnorm(70,sd=15,mean=100)
 ``` 
+
+Beispiel: Intelligenztests (IQ)
+================================
+* Zwischen 70 und 130? 
+
 ```{r,echo=FALSE}
 iqplot.2sd <- iqplot.1sd + geom_ribbon(aes(x=x,ymax=y,ymin=0),data=subset(iqdist,x >= 70 & x < 130),alpha=0.5,fill="red")
 iqplot.2sd
@@ -474,7 +568,7 @@ Hausaufgabe
 ============
 Bis morgen, lesen Sie: 
 - [wie Statistik oft misbraucht wird](http://www.cracked.com/article_20318_the-5-most-popular-ways-statistics-are-used-to-lie-to-you.html).
-- [warum es in den letzten Jahren eine Krise in der Wissenschaft gibt](http://www.economist.com/news/briefing/21588057-scientists-think-science-self-correcting-alarming-degree-it-not-trouble) (und warum ich so fanatisch geworden bin)
+- [warum es in den letzten Jahren eine Krise in der Wissenschaft gibt](http://www.economist.com/news/briefing/21588057-scientists-think-science-self-correcting-alarming-degree-it-not-trouble) (und warum ich so fanatisch geworden bin).
 
 Anhang: ein paar weitere wichtige Verteilungen
 ===============================================
@@ -497,8 +591,7 @@ Pareto und Zipf
 
 Poisson
 ========
-
-
+- mehr dazu später (mit Handout)
 
 Bibliography
 =============
