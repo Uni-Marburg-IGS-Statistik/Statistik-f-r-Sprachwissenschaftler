@@ -347,7 +347,7 @@ Das eigentliche Problem mit NHST und p-Werten
 ===============================================
 incremental: true
 Welche Frage haben wir gestellt und welche Frage beantworten wir?
-- $P(H_0|E) != P(E|H_0)$
+- $P(H_0|E) \neq P(E|H_0)$
   - Keine Aussage, wie wahrscheinlich $H_1$ ist
   - Keine Aussage, wie wahrscheinlich $H_0$ ist
 - Vergleichsbasis ("The Null is never true")
@@ -358,7 +358,7 @@ Vergleich: 1- vs. 2-seiter Test
 - Verbessert (bzw. verändert) die neue Methode die Leistungen der Schüler?
 - $H_0$ $\bar{x} = \mu$
 - $H_1$ $\bar{x} \geq \mu$ (gerichtet)
-- $H_0$ $\bar{x} \neq \mu$ (ungerichet)
+- $H_1$ $\bar{x} \neq \mu$ (ungerichet)
 
 Vergleich: 1- vs. 2-seiter Test
 ==============================================
