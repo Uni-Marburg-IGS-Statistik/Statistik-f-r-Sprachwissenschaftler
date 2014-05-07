@@ -94,7 +94,7 @@ for(s in c(13,14,15)){
 
 Wie steht die Anzahl guter Noten in Beziehung zur Anzahl schlechter Noten? 
 
-antwort_hier
+Der Anteil derjeniger, die bestehen ist deutlich höher, als derer, die durchfallen. Prozentual steigt jedoch nicht die Wahrscheinlichkeit mit 15 Punkten zu bestehen, sondern - in den ausgewerteten Fällen - ist es am wahrscheinlichsten (64,97%), dass mit 13 Punkten bestanden wird. Es gibt mehr gute Noten, der Großteil wird die Prüfung bestehen.
 
 Warum?
 
@@ -107,7 +107,7 @@ Schiefe (*skewness*) beschriebt die (A)Symmetrie einer Verteilung. Eine Verteilu
 
 Die Verteilung von Noten ist oft schief mit mehr guten Noten. Ist die Verteilung rechts- oder linksschief?
 
-antwort_hier
+Die Verteilung ist rechtsschief. Der Gipfel ist auf der linken Seite.
 
 Vielleicht hilft folgende Grafik mit der Visualisierung:
 
@@ -138,15 +138,15 @@ Beantworten Sie ein paar Fragen über die Verteilung, indem Sie den passenden R-
 
 2. Wie viele Studenten bekommen zumindest 10 NP?
 
-    `code_hier` Studenten bekommen zumindest 10 Notenpunkte.
+    `r pnorm(10,mean=mu,sd=3) * n` Studenten bekommen zumindest 10 Notenpunkte.
 
 3. Wie viele Studenten bekommen weniger als 10 NP?
 
-    `code_hier` Studenten bekommen weniger als 10 Notenpunkte.
+    `r pnorm(9,sd=3,mean=mu) * n` Studenten bekommen weniger als 10 Notenpunkte.
 
 4. Wie viele Studenten bekommen weniger als 8 NP?
 
-    `code_hier` Studenten bekommen weniger als 8 Notenpunkte.
+    `r pnorm(7,sd=3,mean=mu) * n` Studenten bekommen weniger als 8 Notenpunkte.
 
 
 (Die Einrückung mit 4 Leerschlägen ist die Syntax für mehrere Absätze pro Punkt auf der Liste.)
