@@ -4,6 +4,11 @@
 
 Falls die Umlaute in dieser und anderen Dateien nicht korrekt dargestellt werden, sollten Sie File > Reopen with Encoding > UTF-8 sofort machen (und auf jeden Fall ohne davor zu speichern), damit die Enkodierung korrekt erkannt wird! 
 
+```{r, echo=FALSE}
+# citations with R -- kinda like BibTeX!
+suppressPackageStartupMessages(library(knitcitations))
+```
+
 # Das sollte langsam automatisch sein...
 1. Kopieren Sie diese Datei in Ihren Ordner (das können Sie innerhalb RStudio machen oder mit Explorer/Finder/usw.) und öffnen Sie die Kopie. Ab diesem Punkt arbeiten Sie mit der Kopie. Die Kopie bitte `hausaufgabe07.Rmd` nennen und nicht `Kopie...`
 3. Sie sehen jetzt im Git-Tab, dass der neue Ordner als unbekannt (mit gelbem Fragezeichnen) da steht. Geben Sie Git Bescheid, dass Sie die Änderungen im Ordner verfolgen möchten (auf Stage klicken). Die neue Datei steht automatisch da.
@@ -140,6 +145,52 @@ Jetzt können Sie ein paar Fragen über die Verteilung konkret beantworten:
 (Die Einrückung mit 4 Leerschlägen ist die Syntax für mehrere Absatz pro Punkt auf der Liste.)
 
 ## Von Noten zu Perzentilen -- ich möchte mich den anderen überlegen fühlen!
+Manchmal will man in die andere Richtung gehen -- z.B. um die Frage beantworten zu können, welche Note man erreichen muss, um überdurschnittlich zu sein. Dafür haben wir `qnorm()`. Überdurchschnittlich heißt "besser als die Hälfte abscheiden" (duh!) und wir nehmen wieder an, dass die Standardabweichung gleich 3 ist. Dann haben wir die Aussage:
+
+Um überdurchscnittlich zu sein, muss man mehr als `r qnorm(0.5,mean=mu,sd=3)` Notenpunkte bekommen. 
+
+Nicht so überraschend, dass "überdurschnittlich" auch "besser als den Durchschnitt" bekommen! Wie sieht es aus, wenn besser als 99% der anderen abschließen möchten?
+
+Um in dem besten 1% abzuschließen, muss man zumindest `code_hier` Notenpunkte bekommen.
+
+## z-Transformation
+Bei der Überprüfung der Lehrqualität scheint es der Verwaltung, dass ein gewisser Dozent andere Noten als andere Dozenten vergibt. Es wird entschieden, dass der Notenspiegel bei den Teilnehmern in einem von seinen Kursen getestet werden, um zu schauen, ob er von signifikant von der idealisierten Notenverteilung ($\mu=8,\sigma=3$) unterscheidet. Um zu zeigen, dass Gott $\alpha=0.06$ so viel liebt wie $\alpha=0.05$ `r citep("10.1037/0003-066X.44.10.1276")`, setzt die Verwaltung das Signikanzniveau auf 0.06. 
+
+Der kritische Wert für einen einseitigen $z$-Test is `code_hier`.
+
+Die kritischen Werte für einen einseitigen $z$-Test sind $\pm$`code_hier`.
+
+### Gibt es einen Unterschied?
+Bei diesem Dozenten ist die Verwaltung wirklich unsicher, ob und was für einen Unterschied es geben könnte. (Welche Testart sollte man hier nutzen?)
+
+In einem kleinen Seminar mit 7 Studenten beträgt der Durchnittswert 10. Unterscheidet sich der Notenspiegel von dem ideallen? Berechnen Sie den $z$-Test:
+code_hier
+
+Das ist ein _wähle_signifikanter_insignifikanter_ Unterschied. 
+
+In einer Vorlesung vom selben Dozenten mit 50 Teilnehmern beträgt der Durchschnittswert wieder 10. (Es scheint, dass der Dozent 10 besonders toll findet.) Berechnen Sie den $z$-Test:
+code_hier
+
+Das ist ein _wähle_signifikanter_insignifikanter_ Unterschied. 
+
+Ist die Benotung vom Dozenten weniger als ideal? 
+
+### Ein anderer, böserer? Dozent
+Die Verwaltung ist auch auf einen anderen Dozenten aufmerksam geworden, weil manche Studenten behaupten, er würde zu streng benoten. (Welche Testart sollte man hier nutzen?)
+
+In einem mittelgroßen Seminar mit 20 Studenten beträgt der Durchschnittswert 7. Der Dozent sagt, dass das wunderbar nah am Erwartungswert (8) ist, und dass man ihn in Ruhe lassen sollte. Ist er zu streng?
+
+Berechnen Sie den $z$-Test:
+code_hier
+
+Das ist ein _wähle_signifikanter_insignifikanter_ Unterschied. 
+
+Später ergibt sich, dass es eigentlich 25 Studenten im Kurs gab. (Der Dozent hat "einen Tippfehler" gemacht, als er seine Teilnehmerzahl per Mail an die Verwaltung geschickt hat.) Der Durschnittwert bleibt -- behauptet der Dozent -- immer noch bei 7. Er behauptet weiterhin, dass das wunderbar nah am Erwartungswert (8) ist, und dass man ihn in Ruhe lassen sollte. Ist er zu streng?
+
+Berechnen Sie den $z$-Test:
+code_hier
+
+Das ist ein _wähle_signifikanter_insignifikanter_ Unterschied. 
 
 ## Zum Überlegen
 Gibt es einen Grund, weshalb die Noten normalverteilt sein sollten? Warum ist das die übliche Annahme?
@@ -147,12 +198,16 @@ Gibt es einen Grund, weshalb die Noten normalverteilt sein sollten? Warum ist da
 # Andere Verteilungen
 Die Normalverteilung ist nicht die einzige wichtige Verteilung. Manche Verteilungen entstehen ganz natürlich aus dem Vergleich anderer Verteilungen und werden zur Berechnung von Teststatistiken genutzt ($F$,$\chi^2$, $t$). Diese Verteilungen werden wir besprechen, wenn wir den entsprechenden Test lernen. 
 
-
 ## Binomialverteilung 
 
 ## Pareto Verteilung
 
 ## Poisson Verteilung
+
+# Bibliografie
+```{r}
+bibliography()
+```
 
 
 # Lizenz
