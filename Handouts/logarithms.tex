@@ -1,0 +1,288 @@
+\documentclass[a4paper,12pt,oneside,leqno]{scrartcl}%,12pt,oneside,reqno]{scrbook}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{lmodern}
+\usepackage[T1]{fontenc}			% enable extra punctuation output 
+\usepackage[english,ngerman]{babel}		% the majority of this document is in German
+\usepackage[pdftex]{hyperref}	% nice formatting for URLs 
+\usepackage[top=2.5cm,bottom=2.5cm,left=3cm,right=3cm]{geometry}			% use the whole page
+\usepackage{color}
+\usepackage[stable]{footmisc}	% allow footnote in section headings
+\usepackage{natbib}				% extra bibliography tools
+\usepackage{bibgerm}				% German APA like bibliography
+\usepackage[pdftex]{graphicx}	% advanced graphics
+%\usepackage{multirow}			% row-spanning cells in tables
+%\usepackage{tabularx}			% a nifty expanded table environment
+\usepackage{booktabs}			% professional looking tables
+\usepackage[utf8x]{inputenc}
+\newcommand{\enquote}[1]{\frqq{}#1\flqq{}}
+%\usepackage{gb4e}  \noautomath	% necessary to make gb4e play nice
+\usepackage{fixltx2e}
+%\usepackage{tipa}
+\usepackage{float,subfig,pdflscape}
+
+% mark this is as a draft --- should work with all drivers
+%\usepackage{draftwatermark}
+%\SetWatermarkScale{.5}
+%\SetWatermarkLightness{0.8}
+%\SetWatermarkText{not for further distribution}
+
+% Setup the PDF parts of the document
+\hypersetup{
+	 pdfauthor={Phillip M Alday},
+	 pdftitle={Logarithmen},
+    bookmarks=true,
+    bookmarksopen=true,
+    pdfstartview=FitH
+}
+
+% natbib options
+\bibpunct{[}{]}{;}{n}{~}{,}
+
+%\newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
+\definecolor{funky}{rgb}{0.7,0.3,0.3}
+
+\newcommand{\fixme}[1]{\marginpar{\mbox{$<==$}}{\bfseries\color{blue}#1}}
+\newcommand{\terminus}[1]{\textsc{#1}}
+\newcommand{\bedeutung}[1]{`#1'}
+\newcommand{\ortho}[1]{$\langle$#1$\rangle$}
+\newcommand{\notation}[1]{\framebox[\textwidth]{\begin{minipage}[c]{0.99\textwidth}\textbf{Notation:} #1\end{minipage}}}
+\newcommand{\application}[2]{\framebox[\textwidth]{\begin{minipage}[c]{0.9\textwidth}\textbf{Application: #1.} #2\end{minipage}}}
+\newcommand{\mybox}[1]{\framebox[\textwidth]{\begin{minipage}[c]{0.99\textwidth}#1\end{minipage}}}
+\newcommand{\solution}[1]{\\ {\ttfamily\color{red} #1 }}
+
+\newcommand{\super}[1]{^{#1}}
+\newcommand{\sep}{,\!}
+
+% this is basically a hack to fix bad hyphenation decisions from LaTeX :-(
+%\hyphenation{Unter-stütz-ung}
+
+
+\title{Angewandte Exponenten und Logarithmen}
+%\author{Phillip M Alday}
+\date{}
+
+\frenchspacing
+
+\begin{document}
+\newtheorem{pos}{Postulate}[section]
+\newtheorem{thm}{Theorem}[section]
+\theoremstyle{lemma}
+\newtheorem{lem}{Lemma}[section]
+
+\theoremstyle{definition}
+\newtheorem{defn}{Definition}
+\newtheorem*{definition}{Definition}
+
+\floatstyle{plain}
+\newfloat{plot}{thp}{lop}
+\floatname{plot}{\ttfamily\color{red}Grafik}
+
+\maketitle
+
+\section{Einführung}
+
+In der Linguistik kommen  ziemlich oft Phänomene vor, bei denen sich ein Wert in jedem Schritt um einen bestimmten, festgelegten Faktor ändert.  Die Ausbreitung neuer Wörter, der Verlust bestimmter Flexionformen, usw. sind alle Beispiele für dieses Verhältnis.   Es ist aber schon viel Handarbeit, ein solches Verhalten immer Schritt für Schritt berechnen zu müssen.  Exponentielle Funktionen und Logarithmen  sind die mathematischen Werkzeuge, die wir benutzen, um solches Verhalten schneller und leichter zu betrachten und zu untersuchen.
+
+\section{Exponentielles Verhalten}
+\subsection{Einfaches Exponentielles Wachstum}\label{sec:expwachs}
+Wir betrachten zuerst die Verbreitung eines neuen Wortes durch eine Sprache.  Das Wort wird von einem Sprecher erfunden und am Tag nach der Erfindung benutzen insgesamt zwei Sprecher (inkl. der Erfinder) das Wort, am Tag danach vier.   Jeden Tag verdoppelt sich die Anzahl an Sprechern, die das Wort benutzen. Wir haben am Tag $t$, wobei Tag 0 der Tag der Erfindung war, $\underbrace{2\times{}2\times{}2\times{}\cdots{}\times{}2}_{t} = 2^{t}$ Benutzer des Wortes.  
+
+Funktionen dieser Form nennen wir \terminus{exponentielle Funktion}.  
+Andere Beispiele sind $3^{t}$, $10^{t}$, $\pi^{t}$ und $e^{t}$.\footnote{$e$ ist die eulersche Zahl $2\sep{}7\,1828\,1828\,45\,90\,45\ldots$ und aus verschiedenen Gründen ist sie die Standardbasis in der Mathematik für Logarithmen und Exponenten.}  
+Solange die \terminus{Basis} (der nicht \enquote{hoch} Part) konstant ist und der Exponent (der \enquote{hoch} Part) die Variable ist, haben wir eine exponentielle Funktion.  Exponentielle Funktionen wachsen extrem, fast unglaublich, schnell. Zum Beispiel erreicht $2^{t}$ den Wert $65\,536$ bei $t=16$.  Bei $t=32$ erreicht es schon 4\,294\,967\,296. In Abbildung~\ref{fig:expwachstum-varbase} wird dieses Verhalten grafisch dargestellt. 
+\begin{figure}[htb]
+\begin{center}
+\includegraphics{exponentielleswachstum-varbase.pdf}
+\end{center}
+\caption{Exponentielles Wachstum. $f(x)=2^{x}, g(x)=3^{x}, h(x)=4^{x}$.}\label{fig:expwachstum-varbase}
+\end{figure}
+
+Wenn wir unser Beispiel mit der Verbreitung eines Wortes erneut anschauen, können wir uns auch überlegen, was passiert, wenn sich die Anzahl an Benutzern erst nach 5 Tagen oder 10 Tagen verdoppelt.  Im ersten Fall gibt es $\frac{t}{5}$ Verdoppelungen nach $t$ Tagen, im zweiten Fall dann  $\frac{t}{10}$ Verdoppelungen nach $t$ Tagen.  Dieses Verhältnis wird in Abbildung~\ref{fig:expwachstum-varexp} aufgetragen.  Wir sehen, wie wir ja hätten erwarten können, dass das Wachstum immer noch sehr schnell ist, allerdings ein bisschen verzögert, weil die Verdopplung nur alle fünf bzw. zehn Tage anstatt jeden Tag stattfindet.
+\begin{figure}[htb]
+\begin{center}
+\includegraphics{exponentielleswachstum-varexponent.pdf}
+\end{center}
+\caption{Exponentielles Wachstum. $f(x)=2^{x}, g(x)=2^{\frac{x}{5}}, h(x)=2^{\frac{x}{10}}$.}\label{fig:expwachstum-varexp}
+\end{figure}
+
+In Allgemeinem sieht die Beschreibungsfunktion eines exponentiellen Wachstums so aus:
+\begin{equation}
+k\cdot{}b^{\frac{t}{i}}\label{eq:expwachs}
+\end{equation}
+wobei $k$ der Anfangswert ist, $b$ der Faktor ist, um den die Funktion pro Intervall wächst, $t$ die Zeit, Entfernung von null, usw. ist, und $i$ die Größe des Intervalls  (wie viele Schritte zwischen Wachstum einmal um den Faktor).
+ 
+\subsection{Einfacher Exponentieller Zerfall}\label{sec:expzerfall}
+Wir können uns auch fragen, wie exponentieller Zerfall aussieht.  Hier handelt es sich z.B. um eine Halbierung oder eine Reduktion um einen bestimmten Faktor pro Schritt. Zum Beispiel betrachten wir den Verlust eines Wortes in einer Sprache.  Am Anfang nutzt jeder von 1000 Sprechern an einer bestimmten Uni das Wort \enquote{Magister} aber jedes Jahr halbiert sich die Anzahl von Benutzern dieses Wortes.  Nach $t$ Jahren bleiben  
+$\displaystyle 1000\times\underbrace{\frac{1}{2}\times{}\frac{1}{2}\times{}\frac{1}{2}\times{}\cdots{}\times{}\frac{1}{2}}_{t} =  1000\left(\frac{1}{2}\right)^{t} = 1000\cdot{}2^{-t}$ Sprecher an der Uni, die \enquote{Magister} benutzen.\footnote{Obacht! Die Notation $k^{-1}=\frac{1}{k}$ ist ganz gebräuchlich und Sie sollten sie anwenden können! Die Notation $x^{\frac{1}{n}}$ für die Wurzel $\sqrt[n]{x}$ ist vielleicht ebenfalls gut zu merken.} Wenn wir eine exponentielle Funktion haben, wo die Basis $b$, $0< b < 1$ ist, oder gleichbeutend, der Exponent negativ ist,\footnote{Streng genommen ist das ein exklusives Oder: wenn beide Möglichkeiten zutreffen, heben sie sich gegenseitig auf.} haben wir kein exponentielles Wachstum, sondern exponentiellen Zerfall. Abbildung~\ref{fig:expzerfall-varbase} stellt einige Beispiele grafisch dar.
+\begin{figure}[htb]
+\begin{center}
+\includegraphics{exponentiellerzerfall-varbase.pdf}
+\end{center}
+\caption{Exponentieller Zerfall. $f(x)=1000\cdot{}2^{-x}$, $g(x)=1000\cdot{}3^{-x}$, $h(x)=1000\cdot{}4^{-x}$.}\label{fig:expzerfall-varbase}
+\end{figure}
+
+Wie bei exponentiellem Wachstum können wir auch andere \enquote{Rhythmen} als eine Reduktion pro Schritt betrachten.  Wir könnten z.B. den Verlust eines Wortes, dessen Gebrauch sich einmal pro fünf Jahre oder zehn Jahre halbiert, beobachten.  Im ersten Fall haben wir $t$ Halbierungen nach $\frac{t}{5}$ Jahren, im zweiten $t$ Halbierungen nach $\frac{t}{10}$ Jahren.  Dieses Verhältnis wird in Abbildung~\ref{fig:expzerfall-varexp} aufgetragen. 
+\begin{figure}[htb]
+\begin{center}
+\includegraphics{exponentiellerzerfall-varexponent.pdf}
+\end{center}
+\caption{Exponentieller Zerfall. $f(x)=1000\cdot{}2^{-x}$, $g(x)=1000\cdot{}2^{-\frac{x}{5}}$, $h(x)=1000\cdot{}2^{-\frac{x}{10}}$.}\label{fig:expzerfall-varexp}
+\end{figure}
+
+In Allgemeinem sieht die Beschreibungsfunktion eines exponentiellen Zerfalls so aus:
+\begin{equation}
+k\cdot{}b^{\frac{t}{i}}\label{eq:expzerfall}
+\end{equation}
+wobei $k$ der Anfangswert ist, $b$ der Faktor, um den die Funktion pro Interval reduziert wird,\footnote{also $0<b<1$. Gleichbedeutend können wir die Formal mit $b>1$ umschreiben: $k\cdot{}^{\frac{-t}{i}}$.} $t$ die Zeit, Entfernung von null, usw., und $i$ die Größe des Intervals ist (wie viele Schritte zwischen Zerfall einmal um den Faktor).
+
+Es ist hier extrem wichtig anzumerken, dass sich exponentieller Zerfall gegen null asymptotisch verhält.  
+Der Wert nähert sich immer weiter an null an, aber erreicht es nie. 
+
+\subsection{Asymptotisches Wachstum}\label{sec:expasymptot}
+Ein etwas komplizierteres Verhalten betrachten wir bei manchen Phänomenen in der Linguistik, nämlich, dass sich der Unterschied zwischen Schritten exponentiell verhält.  
+Es gibt zum Beispiel eine Verhaltensmethode in der empirischen Psycholinguistik, in der die Versuchsperson eine Aufgabe (wie Grammatikalitätsurteil) innerhalb eines bestimmten Zeitrahmen fertigbringen muss.  
+Diese Methode heißt \terminus{Speed-Accuracy-Tradeoff (SAT)}, weil die Versuchspersonen umso ungenauer sind bzw. umso öfter falsche Antworten geben, je schneller sie antworten müssen \citep{reed1973a,wickelgren1977a}.  
+Wenn sie mehr Zeit bekommen, steigt die Akkuratheit erst extrem schnell an, aber jede weitere Zeiteinheit bring immer weniger Verbesserung in der Akkuratheit.  Diese Reduktion in Verbesserung weist oft ein exponentielles Verhalten auf. 
+
+Als einfaches Beispiel davon nehmen wir an, dass sich die Fehlerrate jede weitere Sekunde halbiert und dass wir mit einer Fehlerrate von 50\%  (Zufallsniveau) anfangen, wenn die Versuchsperson sofort antworten muss.  Bei einer Sekunde Antwortszeit gibt es eine Fehlerrate von 25\% (Akkuratheit von 75\%) und bei zwei Sekunden Antwortszeit eine Fehlerrate von 12\sep{}\,5\% (Akkuratheit von 87\sep{}\,5\%).  Die Fehlerrate sieht so wie in Abbildung~\ref{fig:satfehlerrate} aus und hat die Beschreibungsfunktion:
+\begin{equation}
+f(t) = 50\cdot{}2^{-\frac{t}{1}} = 50\cdot{}2^{-t}\label{eq:satfehlerrate}
+\end{equation} (vgl.~\eqref{eq:expzerfall}, Werte in Prozent, Zeit $t$ in Sekunden). 
+\begin{figure}[htb]
+\begin{center}
+\includegraphics[trim=0 12pt 0 12pt]{satfehlerrate.pdf}
+\end{center}
+\caption{Fehlerrate als Funktion der Zeit bei SAT}\label{fig:satfehlerrate}
+\end{figure}
+Uns interessiert aber die Akkuratheit.  Die echte Akkuratheit ist einfach die höchste mögliche Akkuratheit (100\%) minus die Fehlerrate: 
+\begin{equation}
+a(t) = 100 - 50\cdot{}2^{-t}\label{eq:satakkuratheit}
+\end{equation} (Werte in Prozent, Zeit $t$ in Sekunden).  Diese Funktion wird in Abbildung~\ref{fig:satakkuratheit} grafisch wiedergegeben.
+\begin{figure}[htb]
+\begin{center}
+\includegraphics[trim=0 12pt 0 0]{satakkuratheit.pdf}
+\end{center}
+\caption{Akkuratheit als Funktion der Zeit bei SAT }\label{fig:satakkuratheit}
+\end{figure}
+Wichtig anzumerken ist das asymptotische Verhalten um 100\%. Weil sich die Fehlerrate \eqref{eq:satfehlerrate} eben asymptotisch gegen null verhält, muss auch die Akkuratheit gegen 100\% asymptotisch sein.
+
+Die allgemeine Form für die Beschreibungsfunktion solches Verhaltens ist:
+\begin{equation}
+m-k\cdot{}b^{\frac{t}{i}}\label{eq:expasymptot}
+\end{equation} 
+wobei $m$ der maximale Wert ist, $k$ der Anfangswert, $b$ der Faktor, um den der Unterschied zum Maximum pro Interval reduziert wird, $t$ die Zeit, Entfernung von null, usw., und $i$ die Größe des Intervals ist (wie viele Schritte zwischen Zerfall einmal um den Faktor).
+
+%\subsection{Nützliche Eigenschaften der exponentiellen Funktion}
+ \pagebreak
+\section{Logarithmische Plots}
+
+Manchmal wollen wir exponentielles Verhalten einfacher beschreiben können. 
+In diesem Fall können wir den Logarithmus, die Umkehrfunktion der exponentiellen Funktion, anwenden.  
+Der Logarithmus zur Basis $b$ von $x$ wird als $y$, sodass $b^{y}=x$, definiert. 
+Es gibt hier auch noch gewisse Beschränkungen, die direkt aus der Definition und dem Definitionsbereich der exponentiellen Funktion folgen.  
+Mit einer Ausnahme werden sie hier nicht weiter behandelt; der Logarithmus (zu allen Basen) ist für null und negative Zahlen nicht definiert!  
+Es gibt keine Zahl $y$ so dass $b^{y}=0$ ist!\footnote{Wir lassen nie die Basis 0 zu, weil es eben aus einem anderen Grund wenig Sinn macht. Überlegen Sie sich die Definition von Logarithmus und von Exponent.  Logarithmen, die auch auf negative Zahlen angewendet werden können, gibt es schon, aber sie funktionieren nur mit komplexen Zahlen und sind für unsere Zwecke nicht geeignet.}
+
+\subsection{Logarithmen bei exponentiellem Wachstum}
+Wenn wir das Wachstums-Beispiel aus \S\ref{sec:expwachs} nehmen, könnten wir uns auch fragen, nach wie vielen Tagen 256 Sprecher das neue Wort benutzen.  
+Wir möchten also wissen, für welches $y$ ist $2^{y}=256$.  
+Wir wenden den Logarithmus an: $\log_{2}256=8$, und $2^{8}$ ist tatsächlich gleich $256$. 
+Dies gilt auch für nicht Ganzzahlen --  wir können fragen, nach wie vielen Tagen 100 Sprecher das neue Wort benutzen. 
+Wir wenden wieder den Logarithmus an: $\log_{2}100\approx{}6\sep{}643856189774724$.  
+
+\subsection{Eigenschaften des Logarithmus}
+Für die ganzzahligen Werte des Logarithmus ist diese Berechnung nicht allzu schwierig, aber $log_{2}100$ ist nicht praktisch per Hand zu berechnen.  Leider haben die meisten Taschenrechner nur ein oder zwei von den folgenden Sonder-Logarithmen (wenn überhaupt einen), aber es gibt auch eine Formel zum Wechsel der Basis. 
+Wenn die Basis gleich 10 ist, wird der Logarithmus auch ohne explizite Basis geschrieben: $\log x$.  Desweiteren wird der Logarithmus zur Basis $e$  \terminus{natürlicher Logarithmus} genannt und als $\ln x$ geschrieben.   Die Basiswechselformel sieht so aus: 
+
+\bigskip\mybox{\begin{lem}[Wechsel der logarithmischen Basis]
+\begin{equation}
+\log_{b}x = \frac{\log_{a}x}{\log_{a}b}
+\end{equation}  In Besonderem haben wir
+\begin{gather}
+\log_{b}x = \frac{\log x}{\log b} \\
+\log_{b}x = \frac{\ln x}{\ln b}
+\end{gather}
+\end{lem}}
+
+\bigskip
+Wir rechnen somit:
+\begin{equation}
+\log_{2}100=\frac{\log 100}{\log 2} \approx{} \frac{2}{0\sep{}301029995663981} \approx{} 6\sep{}643856189774724
+\end{equation}
+
+Andere Eigenschaften des Logarithmus sind hier auch zu erwähnen.  Ohne Beschränkung der Allgemeinheit wird der Logarithmus zur Basis 10 genutzt, um sie aufzulisten; die Eigenschaften gelten für den Logarithmus zu einer beliebigen Basis.
+\begin{gather}
+\log\left(ab\right)=\log\left(a\right)+\log\left(b\right) \\
+\log\left(\frac{a}{b}\right)=\log\left(a\right)-\log\left(b\right) \\
+\log\left(b^{a}\right) = a \log b \\
+\log(1) = 0 \\
+\log_{b}b=1 \\
+b^{\log_{b}x} = \log_{b}b^{x} = x
+\end{gather} 
+Der Beweis der Eigenschaften folgt direkt aus der Definition und den Eigenschaften der exponentiellen Funktionen.
+
+\subsection{Logarithmen bei exponentiellem Zerfall}
+Bei der Halbierungsfunktion aus dem Beispiel in \S\ref{sec:expzerfall} müssen wir ein bisschen aufpassen. Nehmen wir an, dass wir wissen wollen, wann nur noch 100 Sprecher das Wort benutzen.  
+Wir wollen also $t$ sodass $1000\cdot{}2^{-t} = 100$ Wir wenden den Logarithmus (zur Basis 10) an:
+\begin{eqnarray}
+1000\cdot{}2^{-t} &=& 100 \\
+\log \left(1000\cdot{}2^{-t}\right) &=& \log 100 \\
+\log 1000+\log\left(2^{-t}\right)  &=& \log 100 \\
+\log 1000+-t\log2 &=& \log 100 \\
+3 - t\log 2  &=& 2 \\
+- t\log 2  &=& -1 \\
+t  &=& \frac{1}{\log{2}} \\
+&\approx{}& \frac{1}{0\sep{}301029995663981} \\
+&\approx{}&  3\sep{}32193
+\end{eqnarray}
+Es dauert also etwa 3,3 Jahre oder drei Jahre und vier Monate bis nur noch 100 Sprecher das Wort benutzen. 
+\subsection{Logarithmische Skala auf Abbildungen}
+Wir können Logarithmen weiter bei der Visualisierung von Daten, die ein exponentielles Verhalten aufweisen, benutzen.  
+Wir können die eine oder die andere (oder sogar beide!) logarithmisch skalieren.  
+Bei einer linearen Skala (auf der $y$-Achse) ist die Entfernung zwischen $y-1$ und $y$ die gleiche wie zwischen $y$ und $y+1$.  
+Bei einer logarithmischen Skala (zur Basis $b$) ist die Entfernung zwischen $b^{y-1}$ und $b^{y}$ die gleiche wie zwischen $b^{y}$ und $b^{y+1}$.  
+Die Zahlen wachsen also exponentiell auf der Achse; es heißt aber \enquote{logarithmisch} skaliert, weil die Logarithmen der exponentiellen Werte eine lineare Skala bilden.  
+Zum Beispiel seien $2,4,8$ die exponentiellen Werte ($2^{x}$), folgt, die Logarithmen derselben sind $1,2,3$ -- eine lineare Folge.  
+Es gibt also eine konstante Entfernung zwischen den Logarithmen der Werte anstatt einer konstanten Entfernung zwischen den Werten selbst.  
+Auf ähnliche Weise erscheint exponentielles Verhalten \enquote{linear} auf einer Abbildung mit einer logarithmisch skalierten Achse. Abbildungen~\ref{fig:expwachstum-varbase-log}, \ref{fig:expwachstum-varexp-log}, \ref{fig:expzerfall-varbase-log}, \ref{fig:expzerfall-varexp-log} geben die Abbildungen~\ref{fig:expwachstum-varbase}, \ref{fig:expwachstum-varexp}, \ref{fig:expzerfall-varbase}, \ref{fig:expzerfall-varexp} mit einer logarithmisch skalierten $y$-Achse wieder.
+
+\begin{figure}[H]
+\begin{center}
+\subfloat[$f(x)=2^{x}, g(x)=2^{x}, h(x)=4^{x}$.]{\label{fig:expwachstum-varbase-log}\includegraphics[width=0.45\textwidth]{exponentielleswachstum-varbase-log.pdf}} \qquad
+\subfloat[$f(x)=2^{x}, g(x)=2^{\frac{x}{5}}, h(x)=2^{\frac{x}{10}}$.]{\label{fig:expwachstum-varexp-log}\includegraphics[width=0.45\textwidth]{exponentielleswachstum-varexponent-log.pdf}}
+\end{center}
+\caption{Exponentielles Wachstum mit $y$-Achse logarithmisch skaliert.}
+\label{fig:expwachstum-log}
+\end{figure}
+\begin{figure}[H]
+\begin{center}
+\subfloat[$f(x)=1000\cdot{}2^{-x}$, $g(x)=1000\cdot{}2^{-x}$, $h(x)=1000\cdot{}4^{-x}$.]{\label{fig:expzerfall-varbase-log}\includegraphics[width=0.45\textwidth]{exponentiellerzerfall-varbase-log.pdf}} \qquad
+\subfloat[$f(x)=1000\cdot{}2^{-x}$, $g(x)=1000\cdot{}2^{-\frac{x}{5}}$, $h(x)=1000\cdot{}2^{-\frac{x}{10}}$.]{\label{fig:expzerfall-varexp-log}\includegraphics[width=0.45\textwidth]{exponentiellerzerfall-varexponent-log.pdf}}
+\end{center}
+\caption{Exponentieller Zerfall mit $y$-Achse logarithmisch skaliert.}\label{fig:expzerfall-log}
+\end{figure}
+
+Allerdings lohnt sich eine logarithmische Skala nicht immer.  Bei der SAT-Fehlerrate (Abbildung~\ref{fig:satfehlerrate} aus \ref{sec:expasymptot}), die einen ganz normalen exponentiellen Zerfall aufweist, sehen wir die erwartete Linie auf einer logaritmischen Abbildung (Abb.~\ref{fig:satfehlerrate-log}).   
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics{satfehlerrate-log.pdf}
+\end{center}
+\caption{Fehlerrate als Funktion der Zeit bei SAT mit $y$-Achse logarithmisch skaliert.}\label{fig:satfehlerrate-log}
+\end{figure}
+Dagegen sehen wir keine \enquote{Verbesserung} bei der Darstellung der SAT-Akkuratheit (Abb.~\ref{fig:satakkuratheit-log}, vgl.~Abb.~\ref{fig:satakkuratheit} aus \ref{sec:expasymptot}).  
+Warum ist das der Fall?  Weil die Akkuratheit eine exponentielle Funktion innerhalb einer linearen Funktion einbettet.  
+Die affine Verschiebung, die dadurch eingeführt wird, zerstört die Umkehrfähigkeit des einfachen Logarithmus.  
+(Dieses Problem ist wohl ein schwieriges Problem in der Mathematik, dass affine Räume viel Umrechnen brauchen, während lineare Räume das nicht brauchen.)  
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics{satakkuratheit-log.pdf}
+\end{center}
+\caption{Akkuratheit als Funktion der Zeit bei SAT mit $y$-Achse logarithmisch skaliert.}\label{fig:satakkuratheit-log}
+\end{figure}
+
+Es ist auch möglich, beide Achse gleichzeitig logarithmisch zu skalieren.  Es gibt sogar ein Sprichwort unter den Ingenieuren: \emph{Everything is linear log-log} (\bedeutung{Alles sieht linear aus auf einer Abbildung mit beiden Achsen logarithmisch skaliert}). 
+
+\phantomsection	% this fixes some pagination/link issues with the bibliography
+\bibliographystyle{gerapali}
+\bibliography{$HOME/Dropbox/alday}
+\end{document}

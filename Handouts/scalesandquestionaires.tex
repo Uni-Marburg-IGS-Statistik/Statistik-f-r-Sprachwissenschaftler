@@ -1,0 +1,243 @@
+\documentclass[a4paper,12pt,oneside,leqno]{scrartcl}%,12pt,oneside,reqno]{scrbook}
+\usepackage{amsmath,amssymb,amsthm}
+%\usepackage{listings}
+%\usepackage{times}
+\usepackage{lmodern}
+\usepackage[T1]{fontenc}			% enable extra punctuation output 
+\usepackage[ngerman,english]{babel}		% the majority of this document is in German
+\usepackage[pdftex]{hyperref}	% nice formatting for URLs 
+\usepackage[top=2.5cm,bottom=2.5cm,left=3cm,right=3cm]{geometry}			% use the whole page
+\usepackage{color}
+\usepackage[stable]{footmisc}	% allow footnote in section headings
+\usepackage{natbib}				% extra bibliography tools
+\usepackage{bibgerm}				% German APA like bibliography
+\usepackage[pdftex]{graphicx}	% advanced graphics
+%\usepackage{rotating}			% sidewaystable -- landscape'd table
+%\usepackage{multirow}			% row-spanning cells in tables
+%\usepackage{tabularx}			% a nifty expanded table environment
+\usepackage{booktabs}			% professional looking tables
+\usepackage[utf8x]{inputenc}
+\newcommand{\enquote}[1]{\frqq{}#1\flqq{}}
+\usepackage{fixltx2e}
+\usepackage{float}
+%\usepackage{multicol}
+%\usepackage{wrapfig}
+
+% Setup the PDF parts of the document
+\hypersetup{
+	 pdfauthor={Phillip M Alday},
+	 pdftitle={Scales and Questionaires},
+    bookmarks=true,
+    bookmarksopen=true,
+    pdfstartview=FitH
+}
+
+% natbib options
+\bibpunct{[}{]}{;}{n}{~}{,}
+
+%\newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
+\definecolor{darkgreen}{rgb}{0,0.6,0}
+
+\newcommand{\fixme}[1]{\marginpar{\mbox{$<==$}}{\bfseries\color{blue}#1}}
+\newcommand{\terminus}[1]{\textsc{#1}}
+\newcommand{\bedeutung}[1]{`#1'}
+\newcommand{\ortho}[1]{$\langle$#1$\rangle$}
+\newcommand{\notation}[1]{\framebox[\textwidth]{\begin{minipage}[c]{0.99\textwidth}\textbf{Notation:} #1\end{minipage}}}
+\newcommand{\application}[2]{\framebox[\textwidth]{\begin{minipage}[c]{0.9\textwidth}\textbf{Application: #1.} #2\end{minipage}}}
+\newcommand{\mybox}[1]{\framebox[\textwidth]{\begin{minipage}[c]{0.99\textwidth}#1\end{minipage}}}
+
+
+\newcommand{\super}[1]{^{#1}}
+
+% this is basically a hack to fix bad hyphenation decisions from LaTeX :-(
+%\hyphenation{Unter-stütz-ung}
+
+
+\title{Scales and Questionaires}
+\author{Phillip M Alday}
+\date{May 2012}
+
+%\frenchspacing
+
+\begin{document}
+\newtheorem{pos}{Postulate}[section]
+\newtheorem{thm}{Theorem}[section]
+\newtheorem{lem}{Lemma}[section]
+
+\theoremstyle{definition}
+\newtheorem{defn}{Definition}
+\newtheorem*{definition}{Definition}
+
+\maketitle
+
+\section{Basic Idea}
+There are many types of empirical data that we use in quantitative linguistics.  
+Outside of linguistic corpora, perhaps the easiest data to acquire are behavioral data.  
+Behavioral data take many forms, including reaction time, eye tracking and visual world measurements, as well as speed-accuracy trade off (SAT).
+Questionnaires can also be qualified as a form of behavioral data, while also bridging the gap between traditional generative approaches (quantifying the idea of ``grammaticality''), corpus linguistics (serving to generate a ``real-time'' corpus of sorts) and psycholinguistics.
+
+Strongly tied to questionnaire-based methodology are (rating) scales.  
+Before we go any further with questionnaires, we need to make a small diversion to discuss scales.
+
+ \section{Scales}
+ \citet{stevens1946a} introduced a classification system for scales. 
+ He considered what operations could be performed on a scaled data based on certain properties of that scale.
+ With his introductory remark, ``the real issue is meaning of measurement'', Stevens makes a nudge at an important issue in empirical science, especially those dealing with human perception.\footnote{Stevens aimed his remarks at sensory perception at a rather low level like ``loudness'', but they also hold for other forms of perception like ``acceptability of linguistic stimuli''.}
+ 
+ Statistics provides us with tools to make inferences about future data based on current data but tells us nothing about the correspondence between data and reality, i.e. their reliability and validity. 
+ The branch of mathematics (as well as of philosophy and physics) which gives us the tools to judge the quality of data in comparison to reality is called ``measurement theory'' and encompasses many things beyond what we'll discuss here.
+For now, we're just interested in scales and what we can do with them.  
+
+\subsection{Correspondence with reality}
+Scales of measurement have certain properties arising both from the method of measuring and the formal, mathematical properties of the values . 
+Although this isn't a part of ``pure'' statistics, it is important because it places restrictions on what types of statistical tests and procedures we can use, and thus what types of inference we can make based on given data.
+
+We can define \terminus{measurement} as ``the assignment of numerals to objects or events according to rules.''\citep[p. 677]{stevens1946a}.  
+The rules are, in some sense, what we call ``scales'' --- they determine the values that objects or event receive as well as the relationship between them.  
+The major issue here is that although (indeed because!) we use numerical values for real-world entities, we cannot treat the numerical values as if they were exercises in high school math class.  
+We must treat them in context, i.e., we have to remember that we expect and need a certain correspondence between what we can do with the numbers and what we can do with the aspects of the real-world objects which they represent.
+
+The key mathematical operations and their real-world correspondences which we are concerned with are equality (classification), rank-ordering, and determining when differences and ratios are equal.\citep[p. 677]{stevens1946a}.  
+The full classification presented by Stevens, including some mathematical formalities, can be found in Table~\ref{tab:scales}.  
+We can however begin by noting that there are four key operations and the classification into four categories follows how well these operations on numbers correspond to empirical operations. Furthermore, it should be clear that each stricter correspondence has all of the properties of the weaker ones.
+
+\subsection{Types of Scales}
+ \begin{table}[tbh]
+\caption{Types of Scales.  The column ``Mathematical Group Structure'' is for advanced users and lonely Saturday nights. Table~1 from \citet{stevens1946a}}
+\label{tab:scales}
+\begin{tabular}{l *{3}{p{4cm}} }
+\toprule
+Scale & \centering Basic Empirical Operations & \centering Mathematical Group Structure & {\centering Permissible Statistics (invariantive)} \\
+\midrule
+Nominal & \raggedright Determination of equality & \emph{Permutation group} \[ x'=f(x)\] $f(x)$ means any one-to-one substitution & {\raggedright Number of cases \linebreak Mode \linebreak \raggedright Contingency correlation} \\
+Ordinal & \raggedright Determination of  greater or less &  \emph{Isotonic group} \[ x'=f(x)\] $f(x)$ means any monotonic increasing function  & Median \linebreak Percentiles \\
+Interval & \raggedright Determination of equality of intervals of differences & General linear group \[x'=ax+b\] & {\raggedright Mean \linebreak Standard deviation \linebreak Rank-order correlation \linebreak Product-moment correlation} \\
+Ratio & \raggedright Determination of equality of ratios & Similarity group \[x'=ax\] & {\raggedright Coefficient of variation} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+
+A \terminus{nominal} scale is one for which the only valid operation is equality.  
+In other words, a nominal scale can be used for classification and not much more. 
+A naive perspective on color is nominal --- either something is a certain color or isn't. 
+A nominal scale does not have to have a finite number of values, although that is usually preferred.  
+(Think about the number of color words you know, yet how many do you use on a daily basis?)
+When a nominal scale has only two values, say ``black-white''  or ``true-false'' or ``pass-fail'', we call it a binary scale.  
+A nominal scale is \textbf{discrete} and has no sense of ordering and thus we are limited to statistics like a simple count or mode.  
+
+An \terminus{ordinal} scale is one with an ordering in addition to equality.  
+In other words, an ordinal scale can be used for ranking.  
+It is important to note here that although entries on an ordinal scale can be ranked, ordinal scales provide no information about the distance between two items, i.e., we know which item is greater, but we don't know by how much.
+Many opinion surveys use ordinal scales, when they have only ``very good, good, okay, bad, very bad'' or ``always, often, sometimes, rarely, never'' --- there is a clear ordering to the items, but it is not clear what the distance between items is.  
+As ordinal scales have a notion of ordering, but not of distance, we are limited to tests which rely strictly on ordering, such as median and percentiles. \citet{stevens1946a} did not view mean as a valid operation here; however, this remains controversial, at least \emph{de facto}, and many behavioral scientists continue to use the mean on ordinally scaled data.  
+Indeed  \citeauthor{stevens1946a}  concedes that there may be some validity to this approach, but at the same time warns that we should nonetheless proceed with caution:
+\begin{quote}
+In the strictest propriety, the ordinary statistics involving means and standard deviations oughts not to be used with these scales, for these statistics imply a knowledge of something more than the relative rank-order of the data.  On the other hand, for this `illegal' statisticizing, there can be invoked a kind of pragmatic sanction: In numerous instances it leads to fruitful results.  While the outlying of this procedure would probably serve no good purpose, it is proper to point out that the means and standard deviations compute on an ordinal scale are in error to the extent that successive intervals on the scale are unequal in size.  When only the rank-order of the data is known, we should proceed cautiously with our statistics, especially with the conclusions we draw from them. (p.679)
+\end{quote}
+Stevens also warns against the usual practice of linear interpolation for determining the median and percentiles when they fall between two items.
+  
+An \terminus{interval} scale is one where the distance between points can be measured. 
+In other words, an interval scale can be used to measure degree of difference.
+An example of an interval scale is temperature in degrees Celsius --- we know not just that one place is colder than another, but by how much. 
+Some texts also mention an additional scale type, namely \terminus{log-interval}.  
+This is simply a special case of the interval scale, where the values behave logarithmically instead of linearly. 
+\citet[p. 680]{stevens1946a} states that logarithmic transformations may only applied to ratio scales, and in a certain sense, he is correct that the lack of a true zero (an affine transformation) present in interval scales does destroy many of the convenient properties we hope to achieve with logarithms; however, this is a difference between a post-hoc logarithmic transformation and values which are logarithmic distributed by themselves. 
+As ordinal scales have a notion of distance, they can support many more statistical tests: mean, standard deviation and rank-order correlation.  
+
+A \terminus{ratio} scale is one where not only distance can be measured, but also relative size.  
+This implies that the scale is in some sense ``absolute''  (or at least its zero value is). 
+For example, 22°C is not 11x as hot as 2° Celsius, because 0° on the Celsius scale is not equal to ``completely without heat'' -- absolute zero on the Celsius scale is -273.14°. 
+The Kelvin scale is however a ratio scale, because absolute zero is 0K. 
+Many measurements of distance are ratio scales.  
+This additional restriction that ratios are also well behaved allows for the calculation of an additional statistic, namely the coefficient of variation.
+
+Stevens' classification, although discussed frequently, is often ignored in practice and has been meet with criticism.  
+\citet{vellemanwilkinson1993a} point out problems with his rigid, yet at times ill defined, classification when dealing with measurement in practice.
+Many scales seem to lie somewhere between the ordinal and interval  types.
+ 
+\section{Questionnaires}
+
+ \subsection{Types and Design Concerns}
+ Questionnaires can take many forms, depending on how they will be evaluated.  
+ Both the number of questions and the length of the survey make a difference in how well test subjects will complete it --- a few open ended questions may take as long as many multiple choice questions.  
+ 
+ Other concern also arise from issues related to suggestion and priming.  
+ The order and phrasing of the questions can have an effect on the way the test subject answers.  
+ Furthermore, for psycholinguistics research, issues related to the test subject developing a strategy have to be considered.  
+ For this reason, many questionnaires in psycholinguistics consist mostly of filler questions so that the test subjects cannot recognize what the actual object of investigation is. 
+ The extra length created by the filler questions must also be considered when examing study length.
+
+ 
+ \subsection{Acceptability and Grammaticality}
+ A common issue in psycholinguistics are questions of acceptability or grammaticality.
+ Although these terms are often used largely synonymously in psycholinguistics, they have a very different meaning for the average speaker.  
+``Grammaticality`` is often tied to notions of prescriptive grammar learned in school, while ``acceptability'' may better reflect how good or bad the test subjects finds the sentence. 
+ 
+ 
+ \subsection{Diachrony}
+ Questionnaires are also useful in studies of language variation and change.  
+ When they are used to examine language change over time, we need some way of ``varying'' or elapsing time. 
+ \citet{labov1994a} presents a few of ways of acquiring\slash{}modelling diachronic data, classifying them broadly as ``apparent time'' and ``real time''.  
+ The relevant text portions are reproduced below.
+  
+\subsubsection{``Apparent time''}
+The ``apparent time'' methodology takes advantage of differences between younger and older speakers, especially those that are a direct result of the state of the language during early childhood.  
+This allows for a measurement of the change in the language between the points in time given by the early childhood years of different age groups.
+
+\begin{quote}
+The first and most straightforward approach to studying linguistic change in progress is to trace change in apparent time: that is, the distribution of linguistic variables across age levels. If we discover a monotonic relationship between age and the linguistic variable, or a significant correlation between the two, then the issue is to decide whether we are dealing with a true change in progress or with age-grading [\ldots{}], a regular change of linguistic behavior with age that repeats in each generation. This issue has been the major focus of almost all earlier studies of change in progress [\ldots{}]” \citep[pp. 45--46]{labov1994a}
+\end{quote}
+
+\begin{quote}
+Many well-established sociolinguistic variables exhibit such age-grading, where adolescents and young adults use stigmatized variants more freely than middle-aged speakers, especially when they are being observed.'' 
+ \citep[p. 73]{labov1994a}
+\end{quote}
+
+\subsubsection{``Real time''}
+In ``real time'' studies, language use is actually tracked over a period of time.  
+Time truly elapses during the course of the study and isn't merely simulated by age differences.  
+This is especially important when there are extralinguistic factors why younger and older speakers would use different varieties and when examining the spread and usage of new words. 
+
+\begin{quotation}
+Given a clear age distribution in apparent time, we have the problem of interpreting this result: Does it represent change in progress or not? 
+
+The obvious answer to the problems involved in the interpretation of apparent time would be to rely upon observations in real time, that is, to observe a speech community at two discrete points in time. Any differences between the two observations might be taken as a definitive answer to the question. What kinds of changes have taken place? Indeed, such real-time differences are what we mean by linguistic change, in the simplest and most straightforward definition of the term. Yet it turns out that there are serious and unexpected difficulties in carrying out real-time studies and in making valid inferences from them. [\ldots{}] There are two radically different types of longitudinal studies, which evolve radically different problems of interpretation. In the terms used in sociology, they are trend and panel studies. \citep[72--75]{labov1994a}
+\end{quotation}
+
+
+\citeauthor{labov1994a} further subdivides ``real time'' studies into two categories, based on whether or not a single, particular population is longitudinally examined or whether successive (random) samples are taken at different points in time. 
+
+\bigskip{}\par{Trend studies}
+\begin{quote}
+The simplest type of replication is a trend study. We enumerate the general population in the same way, draw the sample population in the same way, obtain the data and analyze them in the same way --- but x number of years later. If we are dealing with a large urban population, it is highly unlikely that the new sample will include any of the same individuals. But if we follow the same controlled procedures, the sample will be representative, and it will produce the most reliable type of replication.
+\citep[76]{labov1994a}
+\end{quote}
+
+\par{Panel studies}
+\begin{quote}
+The second approach to observations in real time sidesteps the problem of replicating the sampling method of the previous study by using the original sample. A panel study attempts to locate the same individuals that were the subjects of the first study, and monitors any changes in their behavior by submitting them to the same questionnaire, interview, or experiment. This is an expensive and time-consuming procedure, if it is planned as a panel study from the beginning, for the initial sample must be large enough to take the inevitable losses into account. An unplanned panel study will be left with a reduced sample, perhaps too small for statistical significance, but nonetheless extremely valuable for the interpretation of the original observations.
+\citep[76]{labov1994a}
+\end{quote}
+
+
+%\\ \mybox{A \terminus{permutation} is:
+%\begin{itemize}
+%\item an ordering
+%\item a way of arranging a certain (sub)set of elements
+%\item way of putting together elements from different collections in a particular order
+%\end{itemize}
+%}
+
+\section{Further reading}
+ \url{ftp://ftp.sas.com/pub/neural/measurement.html} \\
+ \url{http://davidmlane.com/hyperstat/A30028.html} \\
+\citet{stevens1951a}
+
+
+\phantomsection	% this fixes some pagination/link issues with the bibliography
+%\cite{*}
+\bibliographystyle{gerapali}
+%\addcontentsline{toc}{chapter}{Literaturverzeichnis}
+\bibliography{$HOME/Dropbox/alday}
+\end{document}
