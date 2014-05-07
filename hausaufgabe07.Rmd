@@ -205,7 +205,7 @@ Die Normalverteilung ist nicht die einzige wichtige Verteilung. Manche Verteilun
 ## Poisson Verteilung
 
 # Bibliografie
-```{r}
+```{r, echo=FALSE,results='asis'}
 bibliography()
 ```
 
