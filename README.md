@@ -42,7 +42,11 @@ Woche | Datum          | Themen
 |     |                | 2. [warum es in den letzten Jahren eine Krise in der Wissenschaft gibt](http://www.economist.com/news/briefing/21588057-scientists-think-science-self-correcting-alarming-degree-it-not-trouble).
 |     | **06.05.2014** | Statistische Inteferenz, $p$-Werte, Intuition von "Messfehler" und "Wahrscheinlichkeit", Fehler-Arten
 |     |                | *Hausaufgabe bis 12.05.2014 12 Uhr:*
+<<<<<<< HEAD
 |     |                | 1. 
+=======
+|     |                | 1. `hausaufgabe07.Rmd`
+>>>>>>> 14eddcd829fd99180683def70ccd1c188bc78981
 05.   | **12.05.2014** |  Frequentism vs Bayes
 |     | **13.05.2014** | Interferenz in der Praxis: Der Sinn von statischen Tests, neuartige Fehler 
 06.   | **19.05.2014** | 
