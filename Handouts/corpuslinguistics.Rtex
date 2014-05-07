@@ -1,0 +1,342 @@
+\documentclass[a4paper,12pt,oneside,leqno]{scrartcl}%,12pt,oneside,reqno]{scrbook}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{lmodern}
+\usepackage[T1]{fontenc}			% enable extra punctuation output 
+\usepackage[english]{babel}		% the majority of this document is in German
+\usepackage[pdftex]{hyperref}	% nice formatting for URLs 
+\usepackage[top=2.5cm,bottom=2.5cm,left=3cm,right=3cm]{geometry}			% use the whole page
+\usepackage{color}
+\usepackage[stable]{footmisc}	% allow footnote in section headings
+\usepackage{natbib}				% extra bibliography tools
+\usepackage{bibgerm}				% German APA like bibliography
+\usepackage[pdftex]{graphicx}	% advanced graphics
+%\usepackage{multirow}			% row-spanning cells in tables
+%\usepackage{tabularx}			% a nifty expanded table environment
+\usepackage{booktabs}			% professional looking tables
+\usepackage[utf8x]{inputenc}
+\newcommand{\enquote}[1]{\frqq{}#1\flqq{}}
+\usepackage{gb4e}  \noautomath	% necessary to make gb4e play nice
+\usepackage{fixltx2e}
+%\usepackage{tipa}
+\usepackage{float,subfig,pdflscape}
+\usepackage{epigraph}
+
+% mark this is as a draft --- should work with all drivers
+%\usepackage{draftwatermark}
+%\SetWatermarkScale{.5}
+%\SetWatermarkLightness{0.8}
+%\SetWatermarkText{not for further distribution}
+
+% Setup the PDF parts of the document
+\hypersetup{
+	 pdfauthor={Phillip M Alday},
+	 pdftitle={Aspects of Corpus Linguistics and Word Frequency Distributions},
+    bookmarks=true,
+    bookmarksopen=true,
+    pdfstartview=FitH
+}
+
+% natbib options
+\bibpunct{[}{]}{;}{n}{~}{,}
+
+%\newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
+\definecolor{funky}{rgb}{0.7,0.3,0.3}
+
+\newcommand{\fixme}[1]{\marginpar{\mbox{$<==$}}{\bfseries\color{blue}#1}}
+\newcommand{\terminus}[1]{\textsc{#1}}
+\newcommand{\bedeutung}[1]{`#1'}
+\newcommand{\ortho}[1]{$\langle$#1$\rangle$}
+\newcommand{\notation}[1]{\framebox[\textwidth]{\begin{minipage}[c]{0.99\textwidth}\textbf{Notation:} #1\end{minipage}}}
+\newcommand{\application}[2]{\framebox[\textwidth]{\begin{minipage}[c]{0.9\textwidth}\textbf{Application: #1.} #2\end{minipage}}}
+\newcommand{\mybox}[1]{\framebox[\textwidth]{\begin{minipage}[c]{0.99\textwidth}#1\end{minipage}}}
+\newcommand{\solution}[1]{\\ {\ttfamily\color{red} #1 }}
+
+\newcommand{\super}[1]{^{#1}}
+\newcommand{\sep}{,\!}
+
+\title{Aspects of Corpus Linguistics and Word Frequency Distributions}
+\author{Phillip M Alday}
+\date{June 2012}
+
+\frenchspacing
+
+\begin{document}
+\newtheorem{pos}{Postulate}[section]
+\newtheorem{thm}{Theorem}[section]
+\theoremstyle{lemma}
+\newtheorem{lem}{Lemma}[section]
+
+\theoremstyle{definition}
+\newtheorem{defn}{Definition}
+\newtheorem*{definition}{Definition}
+
+\SweaveOpts{prefix.string=sweave}
+
+\maketitle
+
+\section{Basic Idea}
+In many areas of empirical linguistics, the most natural linguistic data can be acquired from sources originally not intended for linguistic analysis, i.e., from the language of everyday life and activities.  
+This is the area of corpus linguistics: the study of collections of text (or speech) produced in a natural context.  
+Corpus-based studies are often the only possibility for historical linguists, but are also often used for studies where it would otherwise be impractical to gather the necessary amount of samples. 
+
+A number of special problems present themselves with corpora.
+Here, we present a quick overview of some of the more common issues for the young linguist; however, a full exploration of the issues at hand is beyond the scope of this handout.\footnote{For an easy, yet comprehensive introduction, check out \citet{lemnitzerzinsmeister2006a}.}  
+The accessibility and manipulation of text corpora has become much easier with modern computing and network technology --- the Internet and electronic archives of a newspaper are both examples of large corpora which are easy to ``produce''.  
+Nonetheless, non trivial issues are already present, such as the all important question of whether such corpora are representative.  
+Non native speakers may be producing texts of a particular language, which may bias the sample, as well as other issues related to education and anonymity on the Internet. 
+
+A quick Google search may still seem tempting for an easy one-off comparison, but issues related to personalization of results, both at a national level (cf. the results from \url{google.at}, \url{google.de} and \url{google.ch} for certain forms like \textit{Auf Wiederschauen}) and a personal one: Google adapts its results based on your usage. 
+Furthmore, the estimated number of results shown is often so inaccurate on the first page as to almost be a lie.\footnote{\url{http://blog.xkcd.com/2011/02/04/trochee-chart/}}
+
+For corpora of spoken language, search becomes difficult, even with the assistance of modern computers.  
+A good corpus will often be transcribed, making it easier to perform a search (with the transcription linked to an audio file).  
+Auditory corpora are often smaller for this reason, as transcription is a non trivial undertaking.  
+Similarly, historical corpora are also often ``transcribed'' in that there original, non electronic form is converted to text.  
+Optical character recognition (OCR) is far from perfect, especially with older forms of writing and typography, and a large human involvement is also necessary.  
+Historical texts have the further difficulty of large orthographic variation; a clear example of this can be found in the editions of the Luther Bible without modern editing.
+Finally, even modern corpora, available in electronic form from the very beginning, are often not as searchable as one would like.
+Corpora often need to be tagged for part of speech and other morphosyntactic and semantic features.  
+Automatic, computer-based methodologies are an area of heavy research (and one of the largest branches of computer linguistics and natural language processing), but are still not perfectly reliable.  Classic sentence pairs like (\ref{sen:fly:time}) and (\ref{sen:fly:fruit})  show the deep ambiguity of human language, especially outside of a larger context.
+
+\begin{exe}\label{sen:fly}
+\ex\label{sen:fly:time} Time flies like an arrow.
+\ex\label{sen:fly:fruit} Fruit flies like a banana.
+\end{exe}
+
+\section{Counting Words}
+\epigraph{Weil die Welt nicht so einfach ist\ldots{}}{Ina Bornkessel-Schlesewsky}
+\begin{Scode}{fig=FALSE,echo=FALSE}
+k <- sample(100:1000,1)
+n <- sample(1000:1000000,1)
+\end{Scode}
+In examining a corpus, we often want to know how \terminus{frequent} a word is: how many times does it occur in the given text (and how many words there are total in said text), or equivalently, what the probability is that a randomly chosen word will be that word.
+Assuming for a moment that we know how to count words, then we can present our frequency counts in a number of ways.  
+The most obvious is probably ``$k$ occurrences per $n$ words'', often written as a fraction $\frac{k}{n}$.
+Well, we know that fractions are the same as decimal numbers if we just divide through, and so we can also write this as a decimal.  
+For example, let's say we have $k=\Sexpr{k}$ occurrences of particular word in a text with $n=\Sexpr{n}$ words.
+Then, we have a frequency of $\frac{\Sexpr{k}}{\Sexpr{n}} \approx{} \Sexpr{signif(k/n,4)}$, or roughly $\Sexpr{round(k/n*1000000)}$ occurrences per million words.  
+The decimal form reminds of how we wrote probabilities, and indeed, the frequency of a word is more or less the probability of selecting that word randomly from the text.
+
+\subsection{What is a word?}
+Now, as it turns out, counting words is not all that easy.  
+A deep question in linguistics is how to properly define the concept of \terminus{word}.
+Orthographic traditions in a particular language may or many not reflect morphosyntactic reality in a language --- both German and English have rather extensive compounding systems, yet only German writes its compounds as a single orthographic words (\textit{closed compounds}).  
+English compounds, despite orthographic spaces (\textit{open compounds}), are morphologically (and often phonologically) one word.  
+Another example is the status of \textit{to} vs. \textit{zu} in English and German infintival constructions.  English \textit{to} is morphosyntactically a word (cf. split infinitive constructions such as \textit{to boldly go}), while German \textit{zu} is morphosyntactically an affix.\footnote{This becomes apparent in verbs with separable prefixes: \textit{zu gehen}, but \textit{auszugehen}.} 
+For many purposes though, a naive definition of an orthographic word as ``a string of letters separated by spaces'' will suffice.
+
+A more important consideration is the grouping of orthographic words into useful categories. 
+Unless we are interested in the inflectional paradigm of a word, we often consider all of its inflected forms as belonging to a single dictionary entry or \terminus{lemma}.  
+
+\subsection{Types and Tokens}
+A rather fundamental idea in corpus linguistics is the \textit{type-token distinction}. 
+This is the extension of the form-word \slash{} form-lemma distinction presented above.  
+\citet[p.~22]{manningschutze2000a} give the following concise definitions: \terminus{tokens} are ``the individual occurrences of something'' and \terminus{types} are ``the different things present''.
+(This is a form of the \textit{class-instance} distinction.)
+
+Type and token often have context specific meanings.  
+For example, our word forms could be the tokens and our lemmas the types. 
+Then we can discuss the frequency of tokens or of types. 
+This quickly becomes complicated and subject to debate.  
+If we want to discuss how frequent a particular lemma is, we can count the frequency of each of its forms (tokens) and add them up to get the total number of occurrences (token).
+However, we now have to decide if we want to mention the token frequency as the total number of tokens of a particular lemma over the total number of tokens in a particular text (summed token frequency), or whether we want to express it as the number of types (i.e., one for a single lemma) divided by the total number of types in the text.  
+
+This becomes even more complicated when dealing with grey areas.  
+Frequency is often mentioned a driving factor in studies on morphology (ir)regularity \citep[cf.~][]{nubling2000a,pinker1999a,rumelhartmcclelland1986a,mcclellandpatterson2002a,pinkerullman2002a,pinkerullman2002b}, yet the lack of consensus on how to measure frequency makes it non trivial to say how big an effect is to be expected \citep[cf.~][]{bybee1995a}. 
+Categories like ``regular'' and `ìrregular'' have fuzzy edges, and so often one form is chosen as the test form; for verbs in German and English, this is often the past participle.
+Should only the participle be considered when counting tokens or all forms of the verb?  
+Should the frequency of irregular verbs be a simple comparison of the number of irregulars vs. the total number of verb lemmas (simple type frequency) or the total number of irregular verb tokens vs the total number of tokens (summed token frequency)?  
+What about subregularities (e.g., trinken, singen, etc. follow the same pattern) --- how should they be counted when determining the frequency of a particular morphological pattern? 
+The different ways of counting do appear to explain some variation in the differences between expected and observed behaviour \citep{alday2010a,bybee1995a}, but there is still no universally agreed upon methodology. 
+
+\section{Zipf's Law(s)}
+Perhaps the most famous quantitative formulation of the effect of frequency on linguistic data is Zipf's Law(s).
+Zipf basically argued for an economy\footnote{in the sense of ``economical'' or ``efficient''} based on laziness, which he called the Principle of Least Effort\citep{zipf1949a}.  
+While Zipf's claims that his theory could be used to describe all manner of human behaviour are somewhat controversial, the general idea of linguistic economy is relatively easy to accept --- many languages have some fomr of contraction or reduced forms for the most commonly used combinations (English ``don't'', German ``am'', etc.). 
+
+\subsection{Frequency vs Rank}\label{sec:freqrank}
+Zipf's hypothesis on language was that language optimizes itself in such a way the effort for both the speaker and the hearer should be minimized over the long term.  
+For the speaker, this means means that a small vocabulary of common words is optimal (less strain on memory), while for the hearer, this means that there should a large vocabulary of individually less frequent words \citep[cf.~][]{zipf1949a,manningschutze2000a}.  
+Fortunately, these two goals are compatible and serve to make for a vocabulary consisting of a few extremely frequent words and many rather infrequent words.  
+
+More concretely, Zipf noticed that the frequency of a word $f$ is proportional to its \terminus{rank} (position in the sorted list of frequencies)
+\begin{equation}\label{zipf:freq:rank}
+f \propto \frac{1}{r}
+\end{equation}
+or, equivalently, there is a constant $k$, such that$f\cdot{}r=k$. On a logarithmic scale, this will look linear:
+\begin{equation}
+\label{zipf:rank} \log fr = \log c \Leftrightarrow \log f = \log c - \log r 
+\end{equation}
+The intercept is given by $\log c$, and the slope is -1 on a plot of $\log f$ vs $\log r$.  
+This line is given by the blue, dotted line in the plot of word frequencies from Lewis Carrol's \textit{Alice in Wonderland} in Figure~\ref{zipf:freq:alice}.\footnote{\textbf{NB:} The ``frequency'' here is the number of occurences. If you instead take the decimal frequency (occurences divided by total words), the plot will look the same, but the values on the $y$-axis will different, and more obviously, negative.}
+\begin{figure}[tb]
+\begin{center}
+\begin{Scode}{fig=TRUE,echo=FALSE,label=alice-freq,include=FALSE}#,results=tex}
+require(xtable)
+require(languageR)
+data(alice) 
+alice.zipf = zipf.fnc(alice, plot = T)
+abline(b=-1,a=log(max(alice.zipf$frequency)),col="blue",lty="dotted",lwd=2)
+alice.zipf.line = line(log(alice.zipf$rank), log(alice.zipf$frequency))
+abline(alice.zipf.line,col="red",lty="longdash",lwd=2)
+\end{Scode}
+\includegraphics[width=0.58\textwidth, clip=true,trim=0cm 0.5cm 1cm 1.5cm]{sweave-alice-freq}
+\end{center}
+\caption{Distribution of word frequencies in Lewis Carroll's \textit{Alice in Wonderland}. The blue, dotted line has a slope of $-1$ and an empirically determined intercept of \Sexpr{round(log(max(alice.zipf$frequency)),4)}. The red, dashed line has a slope (=$-\alpha$) of $\approx{}\Sexpr{round(alice.zipf.line$coefficients[2],4)}$ and an intercept (=$c$) of $\approx{}\Sexpr{round(alice.zipf.line$coefficients[1],4)}$. }
+\label{zipf:freq:alice}
+\end{figure}
+
+Figure~\ref{zipf:freq:alice} also shows that Zipf's Law works relatively well for the values in the middle, but that the fit becomes worse at the ends.  
+We get a slightly better fit by introducing a power $\alpha$ for $r$ \citep[cf~][p.~14]{baayen2001a}.  We get the following formula:
+\begin{equation}
+\label{zipf:rank:power} \log fr^{\alpha} = \log c \Leftrightarrow \log f = \log c - {\alpha}\log r 
+\end{equation}
+The intercept is given by $\log c$, and the slope is $-\alpha$ on a plot of $\log f$ vs $\log r$. 
+This approximation is used to generate the red, dashed line in Figure~\ref{zipf:freq:alice}. 
+
+Benoit Mandelbrot, of fractal and Mandelbrot set fame\footnote{The Mandelbrot set is often known as the \emph{Apfelmännchen} in German.}, also took a look at Zipf's law and noted that it gives the general shape of the curve, but is quite bad in the details.\citep{mandelbrot1954a}.
+He improved on the approximation \eqref{zipf:rank:power} even further with a more complicated formula:
+\begin{equation}\label{zipf:rank:mandelbrot}
+f=c(r+\rho)^{-\alpha} \Leftrightarrow \log f = \log c - \alpha \log(r+\rho)
+\end{equation}
+The terms $\rho$, $\alpha$, and $c$ are constant for a given text and ``collectively measure the richness of the text's use of words'' \citep{manningschutze2000a}.  
+More concretely for the graph, $c$ determines the intercept ($\approx$ vertical shift), $\alpha$ the slope and $p$ a horizontal shift.   
+
+Another memory-ambiguity tradeoff is Zipf's observation that the number of meanings $m$ of a word is proportional to the square root of its frequency: 
+\begin{equation}\label{zipf:mean:freq}
+m \propto \sqrt{f}
+\end{equation}
+When we consider the relation in \eqref{zipf:freq:rank}, we get the alternate formulation:
+\begin{equation}\label{zipf:mean:rank}
+m \propto \frac{1}{\sqrt{r}}
+\end{equation}
+
+\newpage
+\subsection{Frequency vs Length}\label{sec:freqlength}
+There are several other ways to optimize language beyond the memory-ambiguity tradeoff of Section~\ref{sec:freqrank}.
+We can also talk about a tradeoff between effort (in terms of length of the utterance) and ambiguity.   
+For the speaker, the shortest possible utterance is optimal, while for the hearer, the least ambiguous utterance is optimal. 
+Fortunately, these two goals are compatible and serve to make for a vocabulary where the frequency of a word correlates inversely with its length. 
+In plain English, the more frequent a word is, the shorter it should be since it will be used often.  Parallel to \eqref{zipf:freq:rank} and \eqref{zipf:rank:power}, we get the following formulation ($l$ = length):
+\begin{equation}\label{zipf:freq:length}
+f \propto \frac{1}{l} 
+\end{equation}
+which implies 
+\begin{equation}\label{zipf:length}
+f = \frac{c}{l} \Leftrightarrow fl = c
+\end{equation}
+Again, we can get a better approximation by including an extra constant, $\alpha$:
+\begin{equation}\label{zipf:length:alpha}
+f = \frac{c}{l^{\alpha}} \Leftrightarrow fl^{\alpha} = c
+\end{equation}
+Now, taking the logarithm of both sides, we get:
+\begin{equation}
+\label{zipf:length:power} \log fl^{\alpha} = \log c \Leftrightarrow \log f = \log c - \alpha\log l 
+\end{equation}
+This is displayed for the text of \textit{Alce in Wonderland} in Figure~\ref{zipf:length:alice}.
+
+\begin{figure}[tbp]
+	\begin{center}
+	\begin{Scode}{fig=TRUE,echo=FALSE,label=alice-length,include=FALSE}#,results=tex}
+	require(xtable)
+	require(languageR)
+	data(alice) 
+	spectrum.length.fnc <- function (text) 
+	{
+	  tab = table(sapply(text,nchar,simplify="array"))
+	  spectrum = data.frame(length = as.numeric(rownames(tab)), 
+	                        freqOfLength = as.numeric(tab))
+	  return(spectrum)
+	}
+	
+	
+	zipf.length.fnc <- function (text, plot = FALSE) 
+	{
+	  spectrum = spectrum.length.fnc(text)
+	  spectrum = spectrum[nrow(spectrum):1, ]
+	  if (plot) 
+	    plot(log(spectrum$length), log(spectrum$freqOfLength), xlab = "log length", 
+	         ylab = "log (frequency of length)", type = "S")
+	  return(spectrum)
+	}
+	
+	alice.zipf.length <- zipf.length.fnc(alice,plot=T)
+	abline(b=-1,a=log(max(alice.zipf.length$freqOfLength)),col="blue",lty="dotted",lwd=2)
+	alice.zipf.length.line = line(log(alice.zipf.length$length), log(alice.zipf.length$freqOfLength))
+	abline(alice.zipf.length.line,col="red",lty="longdash",lwd=2)
+	\end{Scode}
+	\includegraphics[width=0.55\textwidth, clip=true,trim=0cm 0.5cm 1cm 1.5cm]{sweave-alice-length}
+	\end{center}
+	\caption{Distribution of word lengths in Lewis Carroll's \textit{Alice in Wonderland}. The blue, dotted line has a slope ($-\alpha$) of $-1$ and an empirically determined intercept of \Sexpr{round(log(max(alice.zipf.length$freqOfLength)),4)}. The red, dashed line has a slope (=$-\alpha$) of $\approx{}\Sexpr{round(alice.zipf.length.line$coefficients[2],4)}$ and an intercept (=$c$) of $\approx{}\Sexpr{round(alice.zipf.length.line$coefficients[1],4)}$.}
+	\label{zipf:length:alice}
+\end{figure}
+\begin{figure}[tbp]
+	\begin{center}
+	\begin{Scode}{fig=TRUE,echo=FALSE,label=alice-length-loglin,include=FALSE}#,results=tex}
+	require(xtable)
+	require(languageR)
+	data(alice) 
+	
+	alice.zipf.length.loglin <- zipf.length.fnc(alice,plot=F)
+	plot(alice.zipf.length.loglin$length, log(alice.zipf.length.loglin$freqOfLength), xlab = "length", ylab = "log (frequency of length)", type = "S")
+	abline(b=-1,a=log(max(alice.zipf.length.loglin$freqOfLength)),col="blue",lty="dotted",lwd=2)
+	alice.zipf.length.loglin.line = line((alice.zipf.length.loglin$length), log(alice.zipf.length.loglin$freqOfLength))
+	abline(alice.zipf.length.loglin.line,col="red",lty="longdash",lwd=2)
+	\end{Scode}
+	\includegraphics[width=0.55\textwidth, clip=true,trim=0cm 0.5cm 1cm 1.5cm]{sweave-alice-length-loglin}
+	\end{center}
+	\caption{Distribution of word lengths in Lewis Carroll's \textit{Alice in Wonderland}. The blue, dotted line has a slope ($-\alpha$) of $-1$ and an empirically determined intercept of \Sexpr{round(log(max(alice.zipf.length.loglin$freqOfLength)),4)}. The red, dashed line has a slope (=$-\alpha$) of $\approx{}\Sexpr{round(alice.zipf.length.loglin.line$coefficients[2],4)}$ and an intercept (=$c$) of $\approx{}\Sexpr{round(alice.zipf.length.loglin.line$coefficients[1],4)}$.}
+	\label{zipf:length:loglin}
+\end{figure}
+
+The log-log plot (and accompanying linear approximation) in Figure~\ref{zipf:length:alice} does a very poor job modelling the left edge. 
+This is in part related to the fact that the length of a word doesn't vary that much and so the logarithm is overkill.  
+When we plot the length linearly (i.e. not as a logarithm), but keep the $y$-axis logarithmically scaled, we get a better match, as seen in Figure~\ref{zipf:length:loglin}.
+
+
+\subsection{Surprising? The significance of power laws}
+So, we have to ask ourselves just how surprising Zipf's laws really are.  
+Do they really provide a deeper insight into human nature?  
+\citet{li1992a} argues that even a randomly produced text would exhibit a zipfian distribution. 
+Consider a text randomly produced from the 26 letters of the Latin alphabet (in English) and spaces (blanks).  
+Then there are 27 possible characters, and assuming that a word is a string of non-blank characters terminated by a blank, the probability of a word of length $n$ being generated is $\left(\frac{26}{27}\right)^{n}\frac{1}{27}$.\footnote{Remembering our combinatorics and basic probability, the chance of picking a non-space letter is $\frac{26}{27}$, and so the chance of drawing $n$ is $\left(\frac{26}{27}\right)^{n}$. The chance of drawing a space is $\frac{1}{27}$, and multiplying it together with the chance of getting $n$ non blanks, we have $\left(\frac{26}{27}\right)^{n}\frac{1}{27}$}.
+Plotting this for $1 < n \leq 100$ (which is long, even by German standards), we get the distribution in Figure~\ref{zipf:random:loglog}, which looks a lot like \ref{zipf:length}.  
+So, just as we did with Figure~\ref{zipf:length}, we try looking at things on a log-linear plot as in Figure~\ref{zipf:length:loglin}, and we see in Figure~\ref{zipf:random:loglin}, that we get nearly exactly the same distribution!
+\begin{figure}[tbp]
+	\begin{center}
+	\begin{Scode}{fig=TRUE,echo=FALSE,label=randomlen-loglog,include=FALSE}#,results=tex}
+	plength <- function(n){(1/27)*(26/27)**n}
+	n <- 1:100
+	plot(log(plength(n)) ~ log(n),type = "S",xlab="log length", ylab="log frequency")
+	\end{Scode}
+	\includegraphics[width=0.58\textwidth, clip=true,trim=0cm 0.5cm 1cm 1.5cm]{sweave-randomlen-loglog}
+	\end{center}
+	\caption{Distribution of random word lengths for $1 < n \leq $ 100 on a log-log scale. \textbf{NB:} The $y$-axis has negative values because the frequencies here are decimal frequencies (occurrences divided by total words). This does not affect the qualitative appearance of the plot.}
+	\label{zipf:random:loglog}
+\end{figure}
+
+\begin{figure}[tbp]
+	\begin{center}
+	\begin{Scode}{fig=TRUE,echo=FALSE,label=randomlen-loglin,include=FALSE}#,results=tex}
+	plength <- function(n,size=1){size*(1/27)*(26/27)**n}
+	n <- 1:100
+	plot(log(plength(n)) ~ n,type = "S", xlab="length", ylab="log frequency")
+	\end{Scode}
+	\includegraphics[width=0.58\textwidth, clip=true,trim=0cm 0.5cm 1cm 1.5cm]{sweave-randomlen-loglin}
+	\end{center}
+	\caption{Distribution of random word lengths for $1 < n \leq $ 100 on a log-linear scale.}
+	\label{zipf:random:loglin}
+\end{figure}
+
+Zipf's law(s) provide a clear demonstration that there are important phenomena that are poorly modelled by normal distributions (`bell curves'). 
+This had actually been discoevred by Vilfredo Pareto a number of years earlier for economic phenomena.  
+We encounter similar distributions in everyday life with the 80-20 rule (also known as the Pareto principle): 80 percent of the work can be done in 20 percent of the time, or alternatively, the last 20 percent of a project takes 80 percent of the time.  
+
+The most important insight here is perhaps that almost all words are rare.
+\nocite{baayen2008a,baayenpiepenbrockrijn1995a,haybaayen2005a,baayen2001a}
+%\clearpage
+\phantomsection	% this fixes some pagination/link issues with the bibliography
+
+\bibliographystyle{apalike}
+\bibliography{$HOME/Dropbox/alday}
+\end{document}

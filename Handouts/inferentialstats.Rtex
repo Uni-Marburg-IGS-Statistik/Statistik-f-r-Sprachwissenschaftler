@@ -1,0 +1,489 @@
+\documentclass[a4paper,12pt,oneside,leqno]{scrartcl}%,12pt,oneside,reqno]{scrbook}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{lmodern}
+\usepackage[T1]{fontenc}			% enable extra punctuation output 
+\usepackage[ngerman,english]{babel}		% the majority of this document is in German
+\usepackage[pdftex]{hyperref}	% nice formatting for URLs 
+\usepackage[top=2.5cm,bottom=2.5cm,left=3cm,right=3cm]{geometry}			% use the whole page
+%\usepackage{setspace}			% allows us to double space 
+\usepackage{color}
+\usepackage[stable]{footmisc}	% allow footnote in section headings
+\usepackage{natbib}				% extra bibliography tools
+\usepackage{bibgerm}				% German APA like bibliography
+\usepackage[pdftex]{graphicx}	% advanced graphics
+\usepackage{booktabs}			% professional looking tables
+\usepackage[utf8x]{inputenc}
+\newcommand{\enquote}[1]{``#1''}
+\usepackage{fixltx2e}
+\usepackage{float}
+\usepackage{wrapfig}
+\usepackage{multicol}
+\usepackage{subfig}
+\usepackage{listings}
+
+% Setup the PDF parts of the document
+\hypersetup{
+	 pdfauthor={Phillip M Alday},
+	 pdftitle={Inferential Statistics},
+    bookmarks=true,
+    bookmarksopen=true,
+    pdfstartview=FitH
+}
+
+% natbib options
+\bibpunct{[}{]}{;}{n}{~}{,}
+
+%\newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
+\definecolor{darkgreen}{rgb}{0,0.6,0}
+
+\newcommand{\fixme}[1]{\marginpar{\mbox{$<==$}}{\bfseries\color{blue}#1}}
+\newcommand{\terminus}[1]{\textsc{#1}}
+\newcommand{\bedeutung}[1]{`#1'}
+\newcommand{\ortho}[1]{$\langle$#1$\rangle$}
+\newcommand{\notation}[1]{\framebox[\textwidth]{\begin{minipage}[c]{0.99\textwidth}\textbf{Notation:} #1\end{minipage}}}
+\newcommand{\application}[2]{\framebox[\textwidth]{\begin{minipage}[c]{0.9\textwidth}\textbf{Application: #1.} #2\end{minipage}}}
+\newcommand{\mybox}[1]{\framebox[\textwidth]{\begin{minipage}[c]{0.99\textwidth}#1\end{minipage}}}
+
+
+\newcommand{\super}[1]{^{#1}}
+
+\title{Inferential Statistics}
+\author{Phillip M Alday}
+\date{May 2012}
+
+%\frenchspacing
+
+\begin{document}
+\newtheorem{pos}{Postulate}[section]
+\newtheorem{thm}{Theorem}[section]
+\newtheorem{lem}{Lemma}[section]
+
+\theoremstyle{definition}
+\newtheorem{defn}{Definition}
+\newtheorem*{definition}{Definition}
+
+\SweaveOpts{prefix.string=sweave}
+
+
+\maketitle
+
+\section{Basic idea}
+Descriptive statistics provided us the tools to analyse and summarize data we already have. 
+Sometimes that's enough, but often we want to make generalizations about what we can expect with additional data. 
+For example, we want to know if two sets are truly different, but can only measure a sample of each.  
+This is how experiments work: we want to know if something is true, but we can't possibly test each individual, and so we only test a sample. 
+Or we have data about how something has performed thus far and want to make predictions about how it will perform in the future. 
+A classic example of this would be fuel efficiency -- we know how far we've travelled before needing to get more gas in the past and want to know when we'll next have to get more gas.
+
+There are two main branches of statistics which seek to generalize about the future; together they are called \terminus{inferential statistics}. 
+Both depend heavily on the idea of \textit{the null hypothesis} (see Section~\ref{sec:nullhypothesis}), but differ in their perspective on it.  
+To understand how these perspectives differ, we first need to pick up a bit of probability theory.  
+
+\section{A short digression into probability theory}
+We all have some intuitive notions of probability, but it is nonetheless useful to have some formalization and notation handy.  
+
+Probabilities are expressed as a real number between 0 and 1, inclusive.
+For example, event that has a one in ten chance of occurring has a probability of $1 / 10 = 0.1$.
+An event that will definitely happen (certainty) has probability 1, while an event that cannot happen (impossibility) has probability 0. 
+
+We denote the probability of an event, $E$, as $P(E)$. Events or \terminus{outcomes} are per convention denoted with a capital letter, like sets. 
+This convention is more than just coincidence; formally, probability theory depends heavily on set theory.
+Indeed, we can think of outcomes as sets and probabilities as cardinalities of sets.\footnote{Now might be a good time to take a look back at the set theory handout.}  
+With that in mind, here are some formulae for manipulating probabilities.\footnote{Can you see the parallel to set theory? Try drawing some diagrams!} 
+
+For outcomes $A$ and $B$, we have:
+\begin{gather}
+P(\text{not }A)=P(\neg{}A)=1-P(A)\label{prob:not} \\ 
+P(A \text{ or } B) = P(A \cup B) = P(A)+P(A) - P(A)P(B) \label{prob:or}
+\end{gather}
+If $A$ and $B$ are \textbf{independent} (see below), then
+\begin{equation}
+P(A \text{ and } B) = P(A \cap B) = P(A)P(B) \label{prob:and}\\
+\end{equation}
+If $A$ and $B$ are furthermore mutually exclusive, $P(A)P(B)=P(A \cap B)=0$ and \eqref{prob:or} simplifies to:
+\begin{equation}
+P(A \text{ or } B) = P(A \cup B) = P(A)+P(AB
+\end{equation}
+Now, the probability of $A$ occurring twice is simply the probability of $P(A \cap A) = P(A)P(A)$  We can generalize this to the probability of $A$ occurring $k$ times to:
+\begin{equation}
+P(A^{n}) = (P(A))^{k} \label{prob:repeat}
+\end{equation}
+
+
+\bigskip{}\noindent{}All of the above formulas have analogues in the basic set operations, and indeed, probabilities are also often represented as Venn diagrams.
+Formulae \eqref{prob:and} and \eqref{prob:repeat} also show a certain parallel to the Fundamental Counting Principle.\footnote{Can see you why this is so?}
+
+It is useful at this point to consider the idea of \terminus{conditional probability}. 
+The probability of $A$ given $B$ is denoted $P(A | B)$, which we can calculate thusly:\footnote{If $P(B)=0$, then $P(A|B)$ is undefined.  But this isn't a real issue, because $A$ and $B$ would be independent!}   
+\begin{equation}
+P(A|B) = \frac{P(A \cap B)}{P(B)} \label{prob:cond}
+\end{equation}
+For example, there is a certain probability of a young adult doing something stupid, $P(S)$.  
+There is also a certain probability of a young adult drinking too much, P$(D)$.  
+So, the probability of doing something stupid given that you drinking too much is $P(S | D)$ and is given by the probability of you getting drunk and doing something stupid divided by the probability of you getting drunk.  The formulae for conditional probabilities are a bit different than those for independent events, so it's important to know whether you're dealing with conditional probabilities! 
+For \textbf{non independent} events $A$ and $B$, we have:
+\begin{equation}
+P(A \text{ or } B) = P(A \cup B) = P(A|B)P(A) = P(B|A)P(A) \label{prob:cond:and}
+\end{equation}
+
+If you're interested in where even professional mathematicians sometimes get confused on the difference between conditional and unconditional probability, then check out the Monty Hall Problem\footnote{See \url{http://en.wikipedia.org/wiki/Monty_Hall_problem}}. 
+It plays on the difference between conditional and unconditional probability.
+
+\section{The null hypothesis}\label{sec:nullhypothesis}
+The basic question in scientific applications of statistics is the question, "Could the results of my experiment have occurred per chance?"
+Equivalently, we can ask, "Are my results the product of an unlikely coincidence?" or "Is it likely that such results would occur again?"
+The \terminus{null hypothesis} ($H_{0}$) is the hypothesis that nothing special happened, i.e.\ that the outcome occurred by chance, and the outcome is thus neither repeatable nor particularly reliable\slash{}indicative or future behavior.
+
+Other \terminus{alternative hypotheses} to the null hypothesis should be formulated before carrying out an experiment: a clear definition of expectations is important both for good experimental design and for useful statistics, which can be generalized from.
+It is possible to formulate new hypotheses based on new data (i.e. to work exploratively); however, these new hypotheses must be checked with additional and different data.
+
+It is important to be clear about what your null and alternative hypotheses are!  
+Sometimes the null hypothesis will be that two groups differ, even though most of the time the null hypothesis will be that two groups are the same.
+
+The null hypothesis can \textbf{never} be confirmed, rather other hypotheses have to be refuted. 
+There is always the chance that the observed effect arose via other factors, including even chance. 
+This means that there could be even more potential hypotheses. 
+The more complicated the data or the method is, the more likely it is that the observed outcome arose via the null hypothesis.  
+
+There are two main approaches to dealing with the null hypothesis and comparing the alternatives: the Bayesian approach and the frequentist approach.
+
+\subsection{Bayesian approach}
+\terminus{Bayesian statistics} are based on the ideas of conditional probability.  
+The Bayesian approach is actually the older approach, but by far the less popular approach in most experimental sciences.  
+It is primarily used in forsensic methodologies like DNA evidence and speaker recognition, but remains misunderstood \citep{rose2002a}.
+``Probability'' is viewed as the degree of plausibility\slash{}reliability \citep{rose2002a}.
+The core of the Bayesian approach is Bayes' Theorem, proven by Thomas Bayes in the first half of the 18th century. 
+
+\begin{thm}[Bayes]
+	$P(A|B) = \frac{P(B | A)\, P(A)}{P(B)}$
+	\end{thm}
+	\begin{quote}
+The probability of $A$ given $B$ is equal to the probability of  $B$ given $A$ times the unconditional (absolute) probability of $A$ divided by the unconditional probability of $B$.
+	\end{quote}
+
+	\begin{lem}[Testing the null hypothesis]
+	$P(H_{0}|E) = \frac{P(E | H_{0})\, P(H_{0})}{P(E)}$
+	\end{lem}
+	\begin{quote}
+	The probability of the null hypothesis $H_{0}$ given the observed outcome $E$ is equal to the probability of $E$ given $H_{0}$ times the unconditional (absolute) probability of $H_{0}$ divided by the unconditional probability of $E$.
+	\end{quote}
+
+The determination of the unconditional (\textit{a-priori}) probability (of $H_{0}$) is pretty difficult in practice.  
+
+\subsection{Frequentist approach}
+\terminus{Frequentist} statistics are used more often in empirical linguistics, cognitive science and neuroscience than Bayesian.  
+The frequentist approach is based on the frequency of particular outcomes in a sample.
+Conclusions are drawn about the probability that a particular outcome depends on one (or more) experimentally manipulated parameter. 
+``Probability'' is viewed as the frequency of chance\slash{}coincidental outcomes as part of the entire result set.
+
+The tests we present in Section~\ref{sec:tests} are all based on the frequentist approach. 
+
+\section{Some distributions}
+Many statistical tests make assumptions about the distribution of data being tested and\slash{}or actively test to see if data fit a certain distribution.  
+As such, it is useful to be familiar with some of the most common distributions.
+
+\subsection{The normal distribution}
+\begin{wrapfigure}{r}{0.5\textwidth}
+\begin{center}
+\begin{Scode}{fig=TRUE,echo=FALSE,label=stdnormal,include=FALSE}
+x=seq(-4,4,length=200)
+y=dnorm(x,mean=0,sd=1)
+plot(x,y,type="l",lwd=2,col="red",xlab="Value",ylab="Probability")
+\end{Scode}
+\includegraphics[width=0.48\textwidth, clip=true,trim=0cm 0.5cm 1cm 1.5cm]{sweave-stdnormal}
+\end{center}
+\caption{The standard normal distribution.}
+\label{fig:stdnormal}
+\end{wrapfigure} 
+The \terminus{normal distribution} or \terminus{Gaussian distribution} is the distribution commonly known as the bell curve and given by the function:
+\[
+f(x;\mu,\sigma^2) = \frac{1}{\sigma\sqrt{2\pi}} e^{ -\frac{1}{2}\left(\frac{x-\mu}{\sigma}\right)^2 },
+\]
+where $\mu$ is the mean  and $\sigma$ the standard deviation (and hence $\sigma^{2}$ the variance).  We call the distribution with $\mu = 0$ and $\sigma^{2} = 1$ the \terminus{standard normal distribution} (see Fig.~\ref{fig:stdnormal}).  
+
+The normal distribution is often assumed to model a random variable with a particular mean, for example height of a given population.
+
+There is a lot of literature on this distribution and a lot of statistical work assumes a normal distribution, but for now, it's enough to know that it's the bell curve.
+
+\subsection{The log-normal distribution}
+The \terminus{log-normal distribution} or \terminus{Galton distribution} is a continuous probability distribution whose logarithm is normally distributed. 
+The formaula follows directly from applying a change of variables to the normal distribution:
+\[
+f(x;\mu,\sigma) = \frac{1}{x \sigma \sqrt{2 \pi}}\, e^{-\frac{(\ln x - \mu)^2}{2\sigma^2}},\ \ x>0,
+\]
+whereby the logarithm imposes the additional restriction $x>0$. 
+The log-normal distribution ($\mu=0$ and $\sigma=1$) is shown in Fig.~\ref{fig:lognormal}.  
+When we use a logarithmic scale for the $x$-axis, we see a bell-curve and thus that the logarithm of the distribution does indeed follow a normal distribution (Fig.~\ref{fig:lognormal-logscale}).
+
+\begin{multicols}{2}
+\begin{figure}[H]
+\begin{center}
+\begin{Scode}{fig=TRUE,echo=FALSE,label=lognormal,include=FALSE}
+x=seq(0,4,length=200)
+y=dlnorm(x,mean=0,sd=1)
+plot(x,y,type="l",lwd=2,col="red",xlab="Value",ylab="Probability")
+\end{Scode}
+\includegraphics[width=0.48\textwidth, clip=true,trim=0cm 0.5cm 1cm 1.5cm]{sweave-lognormal}
+\end{center}
+\caption{The log-normal distribution with $\mu=0$ and $\sigma=1$.}
+\label{fig:lognormal}
+\end{figure} 
+
+\begin{figure}[H]
+\begin{center}
+\begin{Scode}{fig=TRUE,echo=FALSE,label=lognormal-logscale,include=FALSE}
+x=seq(0,4,length=200)
+y=dlnorm(x,mean=0,sd=1)
+plot(log(x),y,type="l",lwd=2,col="red",xlab="Value",ylab="Probability")
+\end{Scode}
+\includegraphics[width=0.48\textwidth, clip=true,trim=0cm 0.5cm 1cm 1.5cm]{sweave-lognormal-logscale}
+\end{center}
+\caption{The log-normal distribution with $\mu=0$ and $\sigma=1$, plotted on a logarithmic scale.}
+\label{fig:lognormal-logscale}
+\end{figure} 
+\end{multicols}
+
+The log-normal distribution comes up quite naturally in many areas, especially in those areas where logarithmic scales are most used.  
+Signal strength and volume are both measured in decibels (dB), a logarithmic scale.  
+Other logarithmic scales include acidity (pH) and earthquake strength (Richter scale or the newer Moment magnitude scale).
+
+\subsection{The binomial distribution}
+The \terminus{binomial distribution} represents the number of successes in a sequence of independent yes-no  (or pass-fail, win-lose, etc.) experiments.
+Unlike the normal and log-normal distributions, the binomial distribution is a discrete (i.e. not continuous) distribution: there are no "half-successes".\footnote{``Almost'' only counts with hand grenades and horse shoes.} 
+
+So, we are interested in the likelihood of having $k$ succeses in $n$ independent experiments, where the chance of success in each experiment is $p$.  
+There are $\binom{n}{k}$ ways of getting $k$ successes in $n$ trials.
+The probability of winning at each step is $p$ and so the probability of $k$ successes is $p^{k}$.  
+However, we must also consider the probability that of non success for the remaining $n-k$ trials, $(1-p)^{n-k}$.  
+Because these two probabilities are independent and are both required (``and''), we multiply, and get the following function to describe the distribution:
+ \[
+f(k;n,p) = \binom{n}{k}p^{k}(1-p)^{n-k}, n,k \in \mathbb{Z}
+\]
+\begin{wrapfigure}{r}{0.5\textwidth}  
+\begin{center}
+\begin{Scode}{fig=TRUE,echo=FALSE,label=binom,include=FALSE}
+x=seq(0,20)
+y=dbinom(x,size=length(x),prob=0.5)
+plot(x,y,type="p",lwd=2,col="red",xlab="Successes",ylab="Probability")
+\end{Scode}
+\includegraphics[width=0.48\textwidth, clip=true,trim=0cm 0.5cm 1cm 1.5cm]{sweave-binom}
+\end{center}
+\caption{The binomial distribution with $n=20$ and $p=0.5$}
+\label{fig:binom}
+\end{wrapfigure}
+The binomial distribution is shown in Fig.\ref{fig:binom}. 
+For large $n$, the binomial distribution approximates the normal distribution.\footnote{This is a special case of the Central Limit Theorem.}
+
+A good example of a binomial distribution is coin tosses. 
+For a fair coin, we have $p=0.5$ and get a binomial distribution like that in Fig.\ref{fig:binom}. 
+Another example are Galton boards (see Fig.~\ref{fig:galton}), seen in such games as Plinko, where an object is sent down a slide with a number of pegs.
+At each peg, the object can bounce left or right (``succeed'' or ``fail'').
+If a large number of objects (often beans or balls) are sent down the slide, then we can count the objects that took each path and divide that number by the total number of objects to obtain an estimate of the probability of that path. 
+
+\begin{figure}[htb]
+\begin{center}
+\includegraphics[width=0.4\textwidth]{200px-Galton-Brett.png}
+\caption{A Galton board, a.k.a. Plinko machine, has behavior similar to a binomial distribution. \url{http://upload.wikimedia.org/wikipedia/commons/thumb/b/bf/Galton-Brett.svg/200px-Galton-Brett.svg.png} An interactive simulator can be found at \url{http://www.math.psu.edu/dlittle/java/probability/plinko/index.html}.}
+\label{fig:galton}
+\end{center}
+\end{figure} 
+
+\section{Statistical tests}\label{sec:tests}
+So, after a lot of prelude, we turn now to statistical tests.  
+In most statistical tests, we want to find out when differences are meaningful.  
+Our null hypothesis is thus that ``there are no differences''.
+
+So let's consider a simple example: a coin toss. 
+We want to know whether our coin is fair (i.e., whether there is an equal probability of heads vs. tails).
+Successive tosses of a fair coin will follow the binomial distribution with $p=0.5$.
+Our null hypothesis is that our coin is fair. 
+
+\begin{Scode}{fig=FALSE,echo=FALSE}
+n<-10
+\end{Scode}
+
+So, we toss a coin \Sexpr{n} times to see:\footnote{This example is generated dynamically with the PDF.}
+\begin{Scode}{fig=FALSE,echo=FALSE}
+tosses <- sample(c("H","T"),n,replace=T)
+print(tosses, quote=F)
+df.tosses = data.frame(table(tosses))
+k <- df.tosses[df.tosses$tosses=="H",]$Freq
+p <- choose(n,k)*(0.5**k)*(0.5**(n-k))
+\end{Scode}.
+%which we summarize in Table~\ref{tab:tosses}.
+%\begin{Scode}{fig=FALSE,echo=FALSE,results=tex}
+%require(xtable)
+%print(xtable(table(tosses), caption=paste("Summary of results of",n,"coin tosses."), label="tab:tosses", digit=0, latex.environments="center"), caption.placement = "top", table.placement = "thbp", include.colnames=T,booktabs=T,size="small")
+%\end{Scode}
+We see that \Sexpr{df.tosses[df.tosses$tosses=="H",]$Freq} tosses came out to be heads. 
+Because a coin toss follows the binomial distribution, we can calculate the likelihood of this result:
+\begin{equation}
+P(\text{outcome}) = f(\Sexpr{k}; \Sexpr{n}; 0.5) = \binom{\Sexpr{n}}{\Sexpr{k}}0.5^{\Sexpr{k}}(1-0.5)^{\Sexpr{n}-\Sexpr{k}} = \Sexpr{p}
+\end{equation}
+
+Is this coin fair?  
+It's still hard to tell, and we can never be certain, but $P(\text{outcome}) < 0.05$ is often considered a \terminus{significant} result, i.e., one not likely due to chance. 
+Our result here was \Sexpr{ifelse(p<0.05,"significant, even though our simulated coin was fair!","not significant, which is a good thing, since our simulated coin was fair.")} This brings us to our first test, the $p$-value.
+
+\subsection{$p$-value}
+The $p$-value corresponds to the probability that the observed outcome would occur if the null hypothese were true.  
+This is however not the same thing as the the likelihood of the null hypothesis.  
+A small $p$-value only implies that the observed outcome is unlikely under the null hypothesis, and not whether or not the null hypothesis is in and of itself likely or unlikely. 
+Because the observed outcome is unlikely under the null hypothesis, it is assumed that the outcome is more likely under another hypothesis and thus that the alternative hypothesis is the more likely or better explanation of the observation.
+There is however no way to tell if a small $p$-value arose through unlikely coincidence!  
+
+Results are called ``significant'' (``meaningful'') when $p<0.05$.  
+We sometimes call $p <0.001$ or even $p<0.005$ ``very significant.''
+However, these terms are simply convention and are should be taken as being meaningful per se.
+The more the data are processed or the more experimentel paramaters there are, the more likely it is that the $p$-value will become significant -- it is thus not a particularly good indicator for data that require lots of preprocessing (e.g. fMRI). (See also Fig.~\ref{fig:pval}.)
+\begin{figure}[p]
+\begin{center}
+\includegraphics[width=0.55\textwidth]{significant.png}
+\caption{The pitfalls of the $p$-value, where there is a 1 in 20 chance of a false  positive. Source:\url{http://xkcd.com/882/}}\label{fig:pval}
+\end{center}
+\end{figure}
+
+Because of these shortcomings --- and the fact that $p<0.05$ is a 1 in 20 chance --- the $p$-value is viewed increasingly critically \citep{ioannidis2005a}.  
+Some epidemiology journals advise against using $p$-values, some even go so far to reject all papers which use $p$-values as a statistical measure.
+In 2004, the Editor-in-Chief of \textit{Epidemiology} rejected all submissions using $p$-values \citep{fitts1954a}.
+
+\subsection{$t$-tests}
+A $t$-test measures the deviation of an observed value from its expected value in the light of the sample's mean and standard deviation as well as the exact value according to the null hypothesis. 
+This means that the $t$-test is an indicator for the ``strength'' of the deviation from the value, which would be expected under the null hypothesis.
+There are several different $t$-tests based on different distributions (e.g., Student's $t$-test is based on Student's distribution, which is similar to the normal distribution with a slightly larger number of outliers).  
+$t$-tests are used to compare two averages as well as to compare an average to the expected average under a particular distribution.
+
+%\subsubsection{One-sample tests}
+A one-sample $t$-test can test whether the mean of a normally distributed population has a value specified in the null hypothesis.\footnote{The formula for the one-sample $t$-test is given by: 
+$$t = \frac{\overline{x} - \mu_0}{s/\sqrt{n}}$$
+where $\overline{x}$ is the sample mean, $\mu_{0}$ is the mean specified in the null hypothesis $s$ is the sample standard deviation of the sample and $n$ is the sample size. The degrees of freedom used in this test is $n-1$.}
+\begin{Scode}{fig=FALSE,echo=FALSE}
+n <- 10
+k <- 10
+x <- sample(0:n,k,replace=T)
+y <- sample(0:n,k,replace=T)
+mux <- n/2
+muy <- n/2
+\end{Scode}
+For example, say we want to know whether the following values have the ``true'' mean of \Sexpr{mux} as we would expect if they were normally distributed:
+\begin{Scode}{fig=FALSE,echo=F}
+x
+\end{Scode}
+Our null hypothesis is that the mean is equal to \Sexpr{mux}. 
+We can use the one sample $t$-test provided by R:\small
+\begin{Scode}{fig=FALSE,echo=F}
+t.test(x, mu=mux)
+\end{Scode}
+\normalsize
+The 95 percent confidence interval is the area in which the true mean lies with a probability of 0.95. We see that $p = \Sexpr{t.test(x,mu=5)$p.value}$, which \Sexpr{ifelse(t.test(x,mu=5)$p.value<0.05, "is", "isn't")} significant.
+A $p$-value is typically used as an intermediary step towards calculating a $p$-value based on Student's $t$ distribution.  
+\begin{figure}[H]
+ 	 \centering
+	 \subfloat[blue=indefinite aticle, red=definite article]{\label{fig:gull}\includegraphics[width=0.3\textwidth]{ttest-bigdiff-littlet.png}}                
+  	\qquad\subfloat[Scale for the EEG plots; the black curve is a the $p$-value from a running $t$-test.]{\label{fig:tiger}\includegraphics[width=0.25\textwidth]{labels.png}}
+  	\qquad\subfloat[blue=inanimate NP, red=animate NP]{\label{fig:mouse}\includegraphics[width=0.3\textwidth]{ttest-bigt-littlediff.png}}
+	\caption{Examples for a large difference with little significance and a small difference with large significance from a current Marburger experiment; measured from NP onset.}
+\end{figure}
+
+%\subsubsection{Two-sample tests}
+%to come!
+%\subsection{$F$-test}
+%to come!
+%\subsection{$\chi^2$-test}
+%to come!
+%\subsection{Correlation tests}
+%to come!
+%\pagebreak
+\subsection{ANOVA}
+ANOVA is an abbreviation for \textit{Analysis Of VAriance} and is perhaps the most important statistical method in psycho- and neurolinguistics.
+Like the $t$-tests, there are several different variants of ANOVA for different types of data; however, they all measure variation in more complicated data sets.
+Amongst other things, ANOVA calculates whether a given paramater either had an effect on the observed variable either by itself or by an interaction with another variable. 
+To that end, the signal-noise ratio (amongst other things) is taken into account.  
+
+\begin{figure}[hbt]
+	\begin{lstlisting}[basicstyle=\tiny, title={\textbf{ANOVA example} -- time window 600-800ms from a current Marburger Experiment},frame=single]
+	     Effect DFn DFd        SSn       SSd          F            p p<.05        pes
+1   (Intercept)   1  23 299.377701  340.3064 20.2337860 0.0001625995     * 0.46800865
+2           pos   1  23   6.501335  241.3901  0.6194568 0.4392846455       0.02622655
+3         morph   2  46 132.493945 1326.6706  2.2969987 0.1119832997       0.09080123
+4           roi   3  69   4.677177  118.7677  0.9057605 0.4429060308       0.03788880
+5     pos:morph   2  46  29.469126  710.7112  0.9536784 0.3928070689       0.03981344
+6       pos:roi   3  69   9.434770  153.4748  1.4139109 0.2461278462       0.05791415
+7     morph:roi   6 138  12.236282  395.7609  0.7111226 0.6411921893       0.02999110
+8 pos:morph:roi   6 138  38.489602  297.9686  2.9709869 0.0092670970     * 0.11439638
+
+$`Mauchly's Test for Sphericity`
+         Effect           W            p p<.05
+3         morph 0.944780852 5.353551e-01
+4           roi 0.263719709 2.463344e-05     *
+5     pos:morph 0.966209311 6.851464e-01
+6       pos:roi 0.200672369 1.674795e-06     *
+7     morph:roi 0.005932813 1.400491e-13     *
+8 pos:morph:roi 0.001357426 3.665006e-19     *
+
+$`Sphericity Corrections`
+         Effect       GGe      p[GG] p[GG]<.05       HFe      p[HF] p[HF]<.05
+3         morph 0.9476704 0.11517237           1.0302981 0.11198330
+4           roi 0.6789741 0.41279975           0.7455351 0.42027435
+5     pos:morph 0.9673138 0.39045832           1.0545995 0.39280707
+6       pos:roi 0.6792976 0.25340879           0.7459401 0.25237573
+7     morph:roi 0.4912236 0.54635310           0.5712975 0.56604373
+8 pos:morph:roi 0.4485057 0.04375193         * 0.5136058 0.03625438         *
+	\end{lstlisting}
+	\end{figure}
+
+\section{Errors}
+
+\subsection{Types of statistical error}
+\subsubsection{Type-I errors}
+A \terminus{Type-I error} (also called \terminus{$\alpha$ error}, especially in the German literature) is the false confirmation of a hypothesis that isn't actually true, i.e.\ a false positive.
+For example, the metal detector at the airport alarms when you go through it at the airport, even though you don't have any metal objects on your person.
+Repeating the test with the handheld metal detector reveals the previous Type-I error.
+
+Repeated statistical tests, i.e non independence of statistical data, often leads to Type-I errors.  
+This is a non trivial issue with fMRI data and has become the subject of major criticism in recent years, with some going as far as claiming that the majority of published fMRI results would not be reproducible \citep{vulharriswinkielman2009a}! 
+
+\terminus{Specificity} is a measure of how many actual negatives are correctly identified as such and is inversely proportional to the type-I error rate.
+
+\subsubsection{Type-II errors}
+A \terminus{Type-II error} (also called \terminus{$\beta$} error, especially in the German literature) is the incorrect rejection of a hypothesis that is actually true, i.e.\ a false negative.
+For example, you don't recognize your mother on the phone when she calls you because she has a cold and her voice is deeper than usual.
+So, you ask her who is calling you from her number. 
+She's insulted (and you're compelled to call her next time) because you made a type-II error.
+
+\terminus{Sensitivity} is a measure of how many actual positives are correctly identified as such is inversely proportional to the type-II error rate.
+
+\subsubsection{Equal Error Rate}
+In many areas of life, both the likelihood of false positives and false negatives is important.  
+Is it better to tell your brother, "Hi, Mom," when he calls from your mother's phone (type-I error) or to not recognize your mother when she's the one calling? 
+
+HIV tests are extremely accurate, but are more likely to yield false positive than false negative: 15 out of 1000 positive tests are incorrect (0.015 chance of a positive being incorrect), and 3 out of 1000 negative tests would be incorrect (0.003 chance of positive being incorrect).\citep{chouhuffmanfu2005a}  False negative could be disastrous, but a false positive is quickly made unlikely by second test (the chance of two consecutive false positives is astronomically low -- about 0.000225).
+Common practice is thus to immediately retest all positive results before reporting them to the patient.   
+The negative predictive value of HIV testing (how reliable the test is at determining whether a patient is HIV-negative) is even higher in practice in Western countries because of other factors (HIV rate amongst the general population, taking into account lifestyle factors in testing.) 
+
+If HIV-tests were more sensitive, there would be more false positives, but fewer false negatives.  
+Contrarily, if the tests were more specific, there were would be more false positives, but fewer false negatives.  
+The same holds true for many other diagnostic tests. 
+An important consideration by such tests is the \terminus{equal error rate} (often abbreviated EER), or the point at which the incidence of type-I and type-II errors is the same.  
+In other words, the EER is the point where an error has an equal chance of being a false positive or a false negative. 
+
+\subsection{Limits of Statistics}
+	\subsubsection{Correlation vs. Causation}
+	\begin{center}
+	\includegraphics{correlation.png}
+	\end{center}
+	\hfill {\tiny Source: \url{http://xkcd.com/605/}}
+
+	\subsubsection{Extrapolation from a (too) small data set}
+	\begin{center}
+	\includegraphics{extrapolating.png}
+	\end{center}
+	\hfill {\tiny Source: \url{http://xkcd.com/605/}}
+
+
+\phantomsection	% this fixes some pagination/link issues with the bibliography
+\tiny
+\bibliographystyle{gerapali}
+%\addcontentsline{toc}{chapter}{Literaturverzeichnis}
+\bibliography{$HOME/Dropbox/alday}
+\end{document}
