@@ -1,0 +1,210 @@
+% Hausaufgabe 07
+% Phillip Alday <phillip.alday@staff.uni-marburg.de>
+% 2014-05-07
+
+Falls die Umlaute in dieser und anderen Dateien nicht korrekt dargestellt werden, sollten Sie File > Reopen with Encoding > UTF-8 sofort machen (und auf jeden Fall ohne davor zu speichern), damit die Enkodierung korrekt erkannt wird! 
+
+```{r, echo=FALSE}
+# citations with R -- kinda like BibTeX!
+suppressPackageStartupMessages(library(knitcitations))
+```
+
+# Die nächsten Punkte sollten langsam automatisch sein...
+1. Kopieren Sie diese Datei in Ihren Ordner (das können Sie innerhalb RStudio machen oder mit Explorer/Finder/usw.) und öffnen Sie die Kopie. Ab diesem Punkt arbeiten Sie mit der Kopie. Die Kopie bitte `hausaufgabe07.Rmd` nennen und nicht `Kopie...`
+2. Sie sehen jetzt im Git-Tab, dass der neue Ordner als unbekannt (mit gelbem Fragezeichen) da steht. Geben Sie Git Bescheid, dass Sie die Änderungen im Ordner verfolgen möchten (auf Stage klicken). Die neue Datei steht automatisch da.
+3. Machen Sie ein Commit mit den bisherigen Änderungen (schreiben Sie eine sinnvolle Message dazu -- sinnvoll bedeutet nicht unbedingt lang) und danach einen Push.
+4. Ersetzen Sie meinen Namen oben mit Ihrem. Klicken auf Stage, um die Änderung zu merken.
+5. Ändern Sie das Datum auf heute. (Seien Sie ehrlich! Ich kann das sowieso am Commit sehen.)
+6. Sie sehen jetzt, dass es zwei Symbole in der Status-Spalte gibt, eins für den Zustand im *Staging Area* (auch als *Index* bekannt), eins für den Zustand im Vergleich zum Staging Area. Sie haben die Datei modifiziert, eine Änderung in das Staging Area aufgenommen, und danach weitere Änderungen gemacht. Nur Änderungen im Staging Area werden in den Commit aufgenommen.
+7. Stellen Sie die letzten Änderungen auch ins Staging Area und machen Sie einen Commit (immer mit sinnvoller Message!).
+8. Vergessen Sie nicht am Ende, die Lizenz ggf. zu ändern!
+
+
+# Verteilung von Noten
+An der Uni Marburg nutzen wir 15 Punkte als Benotungskala (*Notenpunkte*). Wir nehmen an, dass der Mittelwert 8 NP (=3 im üblichen 1-5 System, was eigentlich einem durchschnittlichen Verständnis des Stoffes entsprechen soll) ist. Wie sieht dann die Verteilung der Noten aus? Wir müssen uns noch überlegen, was eine sinnvolle Standardabweichung für die Noten wäre. Vielleicht ist am leichtesten, wenn wir einfach ein paar ausprobieren und plotten. Wir fangen mit $\sigma = 3,4,5$ an. Das entspricht 1, 1.5, 2 Noten auf der 1-5 Skala.
+
+```{r}
+noten <- 1:15
+mu <- 8
+drei <- dnorm(noten,mean=mu,sd=3)
+vier <- dnorm(noten,mean=mu,sd=4)
+fuenf <- dnorm(noten,mean=mu,sd=5)
+
+noten.dist <- data.frame(Notenpunkte=noten,drei,vier,fuenf)
+noten.dist
+```
+
+Die Daten sind im sog. **wide format** (*breiten Format*), weil die verschiedenen Stufen einer Variable (hier: simulierte Standardabweichung) "breit", d.h. über mehrere Spalten hinweg, dargestellt werden. Obwohl viele es als "natürlich" betrachten, ist dieses Format in R nicht bevorzugt. Unter anderem haben wir hier mehrere Beobachtungen pro Zeile, was aus der Perspektive der Statistik ein bisschen durcheinander ist. R (und die Mathematik, die R Ihnen abnimmt) bevorzugt sog. **long format** (*langes Format*), wo es eine Beobachtung pro Zeile gibt. In diesem Format gibt es dann bei unserem Beispiel eine weitere Spalte "Standardabweichung" und die drei verschiedenen beobachteten Messwerte werden zusammen in eine Spalte gepackt. Das Paket `reshape2` bietet ein paar Hilfsfunktionen an, die das Umformatieren viel leichter machen. (Es gibt auch das Paket `reshape` vom selben Autor, das auch ähnliches macht. `reshape2` hat ein paar Verbesserungen eingeführt, die nicht ganz rückwärts kompatibel sind.)
+
+Die Funktion heißt `melt()` (*schmelzen*) aus der Analogie zu Schmieden, wo die Daten (der Rohstoff) in eine schmiedbare bzw. flüssige Form gebracht werden. Aus dem Long-Format kann man ggf. die Daten in andere Formate mit `cast()` (*gießen*) konvertieren. 
+
+```{r}
+library(reshape2)
+# value.name is the name of the new column with the values that were previously spread out over several columns
+# variable.name is the name of the new column with the old column names 
+melt(noten.dist,id.vars="Notenpunkte",value.name="P",variable.name="Standardabweichung")
+```
+
+Wir müssen den Output von `melt()` natürlich einer Variable zuweisen. Wir können die Ausgangsvariable "überschreiben":
+
+```{r}
+noten.dist <- melt(noten.dist,id.vars="Notenpunkte",value.name="P",variable.name="Standardabweichung")
+```
+
+Das funktioniert, weil alles rechts von `<-` zuerst gemacht wird. *Die Zuweisung findet erst nach der Evaluation der rechten Seite statt!* Jetzt können wir alle drei Verteilungen mit einem `ggplot`-Befehl grafisch darstellen. 
+
+```{r}
+library(ggplot2)
+# we use geom_line() because dnorm() already gave us the densities! 
+# we onle use geom_density() when ggplot should calculate the density for us
+ggplot(data=noten.dist,aes(x=Notenpunkte,y=P,color=Standardabweichung)) + geom_line() + scale_x_continuous(limits=c(0,16))
+```
+Ich habe die Grenzen der Grafik ein bisschen breiter gestellt, sodass man die Endpunkte klar sieht und Sie auch einen weiteren `ggplot`-Befehl kennen lernen. 
+
+Welche Verteilung sieht am fairsten aus? Warum?
+
+Wir können das konkreter machen: welcher Anteil der Studenten bekommt bei den jeweiligen Verteilungen eine 1 (zumindest 13 NP)? Für die Verteilung mit $\sigma = 3$ sieht die Berechnung mit R so aus:
+```{r}
+pnorm(13,mean=mu,sd=3,lower.tail=FALSE)
+```
+Oder vielleicht interessiert uns der Anteil der Durchgefallenen (< 5NP):
+```{r}
+pnorm(5,mean=mu,sd=3)
+```
+
+Wenn wir das für alle drei Gruppen wiederholen möchten, ist es ziemlich ärgerlich, wenn wir jede Gruppe einzeln eingeben müssen. Dafür können wir eine **`for`-Schleife** nutzen:
+
+```{r}
+for(s in c(3,4,5) ){
+  durchfall <- pnorm(5,mean=mu,sd=s)
+  output <- paste("Bei einer Standabweichung von",s, "fallen",durchfall*100,"% durch.")
+  print(output)
+}
+```
+
+Aber wir hoffen alle, dass wir doch eine gute Note bekommen. Fügen Sie einen Code-Block hier ein, der das gleiche aber mit "ausgezeichneten" Noten (=1 bzw. >= 13) macht. (Bei evtl. Copy-Paste nicht vergessen, "fallen...durch" durch etwas Passendes zu ersetzen!)  
+
+code_block_hier
+
+Wie steht die Anzahl guter Noten in Beziehung zur Anzahl schlechter Noten? 
+
+antwort_hier
+
+Warum?
+
+antwort_hier
+
+## Kurtosis und Schiefe
+Kurtosis (im Deutschen auch *Wölbung*) ist ein Maß dafür, wie spitz eine Verteilung ist. Die Normalverteilung wird nie zu extrem spitz -- der Gipfel bleibt immer schön rund, obwohl er manchmal eng wird. Andere Verteilungen (z.B. die Laplace-Verteilung ) haben Gipfel, die nicht rund sind.   
+
+Schiefe (*skewness*) beschriebt die (A)Symmetrie einer Verteilung. Eine Verteilung ist *linksschief*, wenn die linke Seite "breiter" ist, d.h., wenn sich der "Gipfel" auf der rechten Seite befindet.  Eine Verteilung ist *rechtsschief*, wenn die rechte Seite "breiter" ist, d.h., wenn sich der "Gipfel" auf der linken Seite befindet 
+
+Die Verteilung von Noten ist oft schief mit mehr guten Noten. Ist die Verteilung rechts- oder linksschief?
+
+antwort_hier
+
+Vielleicht hilft folgende Grafik mit der Visualisierung:
+
+```{r echo=FALSE}
+suppressPackageStartupMessages(library(sn))
+qplot(x=1:15,y=dsn(1:15, xi=c(12), omega=1, alpha=-3, log=FALSE),geom="line",xlab="Notenpunkte",ylab="P")
+```
+
+## Von Perzentilen auf Häufikgeiten
+Wir können die Perzentile in (absolute) Häufigkeiten übersetzen. Nehmen wir an, dass es 50 Studenten in einem Kurs gibt und dass die Noten wie oben normal verteilt sind. Dann können wir unserem Data.Frame eine weitere Spalte hinzufügen:
+```{r}
+n <- 50
+noten.dist$Anzahl <- noten.dist$P * n
+noten.dist
+```
+
+Jetzt können wir die absoluten Häufigkeiten auch plotten:
+
+code_block_hier
+
+Beantworten Sie ein paar Fragen über die Verteilung, indem Sie den passenden R-Code einsetzen:
+
+1. Wie viele Studenten bekommen zwischen 7 und 9 NP bei einer Standardabweichung von 3?
+
+    `r (pnorm(9,mean=mu,sd=3) - pnorm(7,mean=mu,sd=3) ) * n` Studenten bekommen zwischen 7 und 9 Notenpunkten. 
+    
+    Wichtig: bei Wahrscheinlichkeits- und Häufigkeitsverteilung ist der linke Rand inklusiv aber der rechte Rand exklusiv! Das heißt, wir zählen hiermit die Leute, die bis zu 9 NP bekommen haben aber nicht die, die tatsächlich 9 NP bekommen haben!
+
+2. Wie viele Studenten bekommen zumindest 10 NP?
+
+    `code_hier` Studenten bekommen zumindest 10 Notenpunkte.
+
+3. Wie viele Studenten bekommen weniger als 10 NP?
+
+    `code_hier` Studenten bekommen weniger als 10 Notenpunkte.
+
+4. Wie viele Studenten bekommen weniger als 8 NP?
+
+    `code_hier` Studenten bekommen weniger als 8 Notenpunkte.
+
+
+(Die Einrückung mit 4 Leerschlägen ist die Syntax für mehrere Absätze pro Punkt auf der Liste.)
+
+## Von Noten zu Perzentilen -- ich möchte mich den anderen überlegen fühlen!
+Manchmal will man in die andere Richtung gehen -- z.B. um die Frage beantworten zu können, welche Note man erreichen muss, um überdurchschnittlich zu sein. Dafür haben wir `qnorm()`. Überdurchschnittlich heißt "besser als die Hälfte abscheiden" (duh!) und wir nehmen wieder an, dass die Standardabweichung gleich 3 ist. Dann haben wir die Aussage:
+
+Um überdurchschnittlich zu sein, muss man mehr als `r qnorm(0.5,mean=mu,sd=3)` Notenpunkte bekommen. 
+
+Nicht so überraschend, dass "überdurchschnittlich" auch "mehr Punkte als den Durchschnitt bekommen" heißt! Wie sieht es aus, wenn wir besser als 99% der anderen abschließen möchten?
+
+Um in dem besten 1% abzuschließen, muss man zumindest `code_hier` Notenpunkte bekommen.
+
+## z-Transformation
+Bei der Überprüfung der Lehrqualität scheint es der Verwaltung, dass ein gewisser Dozent andere Noten als andere Dozenten vergibt. Es wird entschieden, dass der Notenspiegel bei den Teilnehmern in einem von seinen Kursen getestet wird, um zu schauen, ob er sich von signifikant von der idealisierten Notenverteilung ($\mu=8,\sigma=3$) unterscheidet. Um zu zeigen, dass Gott $\alpha=0.06$ so viel liebt wie $\alpha=0.05$ `r citep("10.1037/0003-066X.44.10.1276")`, setzt die Verwaltung das Signikanzniveau auf 0.06. 
+
+Der kritische Wert für einen einseitigen $z$-Test ist `code_hier`.
+
+Die kritischen Werte für einen zweiseitigen $z$-Test sind $\pm$`code_hier`.
+
+### Gibt es einen Unterschied?
+Bei diesem Dozenten ist die Verwaltung wirklich unsicher, ob und was für einen Unterschied es geben könnte. (Welche Testart sollte man hier nutzen?)
+
+In einem kleinen Seminar mit 7 Studenten beträgt der Durchschnittswert 10. Unterscheidet sich der Notenspiegel von dem idealen? Berechnen Sie den $z$-Test:
+
+code_hier
+
+Das ist ein **_eins_von_signifikanter_insignifikanter_** Unterschied. 
+
+In einer Vorlesung vom selben Dozenten mit 50 Teilnehmern beträgt der Durchschnittswert wieder 10. (Es scheint, dass der Dozent 10 besonders toll findet.) Berechnen Sie den $z$-Test:
+
+code_hier
+
+Das ist ein **_eins_von_signifikanter_insignifikanter_** Unterschied. 
+
+Ist die Benotung vom Dozenten weniger als ideal? 
+
+### Ein anderer, böserer? Dozent
+Die Verwaltung ist auch auf einen anderen Dozenten aufmerksam geworden, weil manche Studenten behaupten, er würde zu streng benoten. (Welche Testart sollte man hier nutzen?)
+
+In einem mittelgroßen Seminar mit 20 Studenten beträgt der Durchschnittswert 7. Der Dozent sagt, dass das wunderbar nah am Erwartungswert (8) ist, und dass man ihn in Ruhe lassen sollte. Ist er zu streng?
+
+Berechnen Sie den $z$-Test:
+
+code_hier
+
+Das ist ein **_eins_von_signifikanter_insignifikanter_** Unterschied. 
+
+Später ergibt sich, dass es eigentlich 25 Studenten im Kurs gab. (Der Dozent hat "einen Tippfehler" gemacht, als er seine Teilnehmerzahl per Mail an die Verwaltung geschickt hat.) Der Durchschnittswert bleibt -- behauptet der Dozent -- immer noch bei 7. Er behauptet weiterhin, dass das wunderbar nah am Erwartungswert (8) ist, und dass man ihn in Ruhe lassen sollte. Ist er zu streng?
+
+Berechnen Sie den $z$-Test:
+
+code_hier
+
+Das ist ein **_eins_von_signifikanter_insignifikanter_** Unterschied. 
+
+## Zum Überlegen
+Gibt es einen Grund, weshalb die Noten normal verteilt sein sollten? Warum ist das die übliche Annahme?
+
+# Bibliografie
+```{r, echo=FALSE,results='asis'}
+bibliography()
+```
+
+
+# Lizenz
+Dieses Werk ist lizenziert unter einer CC-BY-NC-SA Lizenz.
