@@ -88,18 +88,18 @@ Aber wir hoffen alle, dass wir doch eine gute Note bekommen. Fügen Sie einen Co
 ```{r}
 for(s in c(3,4,5)){
   bestehen <- pnorm(13,mean=mu, sd=s, lower.tail=FALSE)
-  output <- paste("Bei einer Standardabweichung von",s, "werden", bestehen*100, "% mit 'sehr gut' bestehen.")
+  output <- paste("Bei einer Standardabweichung von",s, "werden", bestehen*100, "% mit der Note 'sehr gut' bestehen.")
   print(output)
 }
 ```  
 
 Wie steht die Anzahl guter Noten in Beziehung zur Anzahl schlechter Noten? 
 
-*Es gibt mehr schlechte Noten als gute Noten.*
+*Die Anzah der guten Noten ist geringer als die Anzahl der schlechten Noten. Es gibt mehr schlechte Noten als gute Noten.*
 
 Warum?
 
-*Der untersuchte Bereich ist größer für schlechte Noten(≤5), gute Noten sind hingegen nur  ≥13, deshalb fallen auch mehr Prozent in den Bereich der schlechten Noten.*
+*Der untersuchte Bereich ist größer für schlechte Noten (≤5), gute Noten sind hingegen nur  ≥13, deshalb fallen auch mehr Prozent in den Bereich der schlechten Noten.*
 
 ## Kurtosis und Schiefe
 Kurtosis (im Deutschen auch *Wölbung*) ist ein Maß dafür, wie spitz eine Verteilung ist. Die Normalverteilung wird nie zu extrem spitz -- der Gipfel bleibt immer schön rund, obwohl er manchmal eng wird. Andere Verteilungen (z.B. die Laplace-Verteilung ) haben Gipfel, die nicht rund sind.   
@@ -108,7 +108,7 @@ Schiefe (*skewness*) beschriebt die (A)Symmetrie einer Verteilung. Eine Verteilu
 
 Die Verteilung von Noten ist oft schief mit mehr guten Noten. Ist die Verteilung rechts- oder linksschief?
 
-*Die Verteilung ist linksschief. Der Gipfel ist auf der rechten Seite.*
+*Die Verteilung ist linksschief.*
 
 Vielleicht hilft folgende Grafik mit der Visualisierung:
 
@@ -127,7 +127,6 @@ noten.dist
 
 Jetzt können wir die absoluten Häufigkeiten auch plotten:
 ```{r}
-library(ggplot2)
 ggplot(data=noten.dist,aes(x=Notenpunkte,y=P,color=Standardabweichung)) + geom_line() + scale_x_continuous(limits=c(0,16))
 ```
 
@@ -135,13 +134,13 @@ Beantworten Sie ein paar Fragen über die Verteilung, indem Sie den passenden R-
 
 1. Wie viele Studenten bekommen zwischen 7 und 9 NP bei einer Standardabweichung von 3?
 
-    *`r (pnorm(9,mean=mu,sd=3) - pnorm(7,mean=mu,sd=3) ) * n` Studenten bekommen zwischen 7 und 9 Notenpunkten.* 
+    *`r (pnorm(9,mean=mu,sd=3) - pnorm(7,mean=mu,sd=3) )*n` Studenten bekommen zwischen 7 und 9 Notenpunkten.* 
     
     Wichtig: bei Wahrscheinlichkeits- und Häufigkeitsverteilung ist der linke Rand inklusiv aber der rechte Rand exklusiv! Das heißt, wir zählen hiermit die Leute, die bis zu 9 NP bekommen haben aber nicht die, die tatsächlich 9 NP bekommen haben!
 
 2. Wie viele Studenten bekommen zumindest 10 NP?
 
-    *`r pnorm(10,mean=mu,sd=3, lower.tail=FALSE) * n` Studenten bekommen zumindest 10 Notenpunkte.* 
+    *`r pnorm(10,mean=mu,sd=3, lower.tail=FALSE)*n` Studenten bekommen zumindest 10 Notenpunkte.* 
 
 3. Wie viele Studenten bekommen weniger als 10 NP?
 
