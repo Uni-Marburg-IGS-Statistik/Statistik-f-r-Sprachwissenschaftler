@@ -602,3 +602,7 @@ Bibliography
 bibliography()
 ```
 
+```{r}
+z = \sqrt{7}\left(\frac{10 - 8}{10}\right)
+z
+```
