@@ -164,7 +164,7 @@ Um in dem besten 1% abzuschließen, muss man zumindest `r qnorm(.99,mean=mu,sd=3
 
 Bei der Überprüfung der Lehrqualität scheint es der Verwaltung, dass ein gewisser Dozent andere Noten als andere Dozenten vergibt. Es wird entschieden, dass der Notenspiegel bei den Teilnehmern in einem von seinen Kursen getestet wird, um zu schauen, ob er sich von signifikant von der idealisierten Notenverteilung ($\mu=8,\sigma=3$) unterscheidet. Um zu zeigen, dass Gott $\alpha=0.06$ so viel liebt wie $\alpha=0.05$ `r citep("10.1037/0003-066X.44.10.1276")`, setzt die Verwaltung das Signikanzniveau auf 0.06. 
 
-Der kritische Wert für einen einseitigen $z$-Test ist `r qnorm(0.94)`. 
+Der kritische Wert für einen einseitigen $z$-Test ist `r qnorm(p=1-0.06)`. 
 
 Die kritischen Werte für einen zweiseitigen $z$-Test sind $\pm$ `r qnorm(p=1-(0.06/2))`.
 
