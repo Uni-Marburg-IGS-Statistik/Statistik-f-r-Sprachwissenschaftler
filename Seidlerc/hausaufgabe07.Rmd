@@ -86,8 +86,8 @@ for(s in c(3,4,5) ){
 Aber wir hoffen alle, dass wir doch eine gute Note bekommen. Fügen Sie einen Code-Block hier ein, der das gleiche aber mit "ausgezeichneten" Noten (=1 bzw. >= 13) macht. (Bei evtl. Copy-Paste nicht vergessen, "fallen...durch" durch etwas Passendes zu ersetzen!)  
 
 ```{r}
-for(s in c(13,14,15)){
-  bestehen <- pnorm(13,mean=mu, sd=s)
+for(s in c(3,4,5)){
+  bestehen <- pnorm(13,mean=mu, sd=s, lower.tail=FALSE)
   output <- paste("Bei einer Standardabweichung von",s, "werden", bestehen*100, "% mit 'sehr gut' bestehen.")
   print(output)
 }
@@ -95,11 +95,11 @@ for(s in c(13,14,15)){
 
 Wie steht die Anzahl guter Noten in Beziehung zur Anzahl schlechter Noten? 
 
-*Der Anteil derjeniger, die bestehen ist deutlich höher, als derer, die durchfallen.  Es gibt mehr gute Noten, schlechte Noten sind seltener.*
+*Es gibt mehr schlechte Noten als gute Noten.*
 
 Warum?
 
-*Der untersuchte Bereich ist größer für schlechte Noten. Ausgehend von einer Normalverteilung würden die Ergebnisse anders ausfallen und im Vergleich zur Mitte weniger Werte aufweisen als diese.*
+*Der untersuchte Bereich ist größer für schlechte Noten(≤5), gute Noten sind hingegen nur  ≥13, deshalb fallen auch mehr Prozent in den Bereich der schlechten Noten.*
 
 ## Kurtosis und Schiefe
 Kurtosis (im Deutschen auch *Wölbung*) ist ein Maß dafür, wie spitz eine Verteilung ist. Die Normalverteilung wird nie zu extrem spitz -- der Gipfel bleibt immer schön rund, obwohl er manchmal eng wird. Andere Verteilungen (z.B. die Laplace-Verteilung ) haben Gipfel, die nicht rund sind.   
@@ -108,7 +108,7 @@ Schiefe (*skewness*) beschriebt die (A)Symmetrie einer Verteilung. Eine Verteilu
 
 Die Verteilung von Noten ist oft schief mit mehr guten Noten. Ist die Verteilung rechts- oder linksschief?
 
-*Die Verteilung ist rechtsschief. Der Gipfel ist auf der linken Seite.*
+*Die Verteilung ist linksschief. Der Gipfel ist auf der rechten Seite.*
 
 Vielleicht hilft folgende Grafik mit der Visualisierung:
 
@@ -141,15 +141,15 @@ Beantworten Sie ein paar Fragen über die Verteilung, indem Sie den passenden R-
 
 2. Wie viele Studenten bekommen zumindest 10 NP?
 
-    *`r (pnorm(16,mean=mu,sd=3) - pnorm(10,mean=mu,sd=3) ) * n` Studenten bekommen zumindest 10 Notenpunkte.* 
+    *`r pnorm(10,mean=mu,sd=3, lower.tail=FALSE) * n` Studenten bekommen zumindest 10 Notenpunkte.* 
 
 3. Wie viele Studenten bekommen weniger als 10 NP?
 
-    *`r pnorm(10,mean=mu,sd=3)` Studenten bekommen weniger als 10 Notenpunkte.*
+    *`r pnorm(10,mean=mu,sd=3)*n` Studenten bekommen weniger als 10 Notenpunkte.*
     
 4. Wie viele Studenten bekommen weniger als 8 NP?
 
-    *`r pnorm(8,mean=mu,sd=3)` Studenten bekommen weniger als 8 Notenpunkte.*
+    *`r pnorm(8,mean=mu,sd=3)*n` Studenten bekommen weniger als 8 Notenpunkte.*
     
 (Die Einrückung mit 4 Leerschlägen ist die Syntax für mehrere Absätze pro Punkt auf der Liste.)
 
