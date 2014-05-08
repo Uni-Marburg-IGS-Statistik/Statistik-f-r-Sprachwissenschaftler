@@ -9,6 +9,7 @@ Falls die Umlaute in dieser und anderen Dateien nicht korrekt dargestellt werden
 suppressPackageStartupMessages(library(knitcitations))
 ```
 
+
 # Die nächsten Punkte sollten langsam automatisch sein...
 1. Kopieren Sie diese Datei in Ihren Ordner (das können Sie innerhalb RStudio machen oder mit Explorer/Finder/usw.) und öffnen Sie die Kopie. Ab diesem Punkt arbeiten Sie mit der Kopie. Die Kopie bitte `hausaufgabe07.Rmd` nennen und nicht `Kopie...`
 2. Sie sehen jetzt im Git-Tab, dass der neue Ordner als unbekannt (mit gelbem Fragezeichen) da steht. Geben Sie Git Bescheid, dass Sie die Änderungen im Ordner verfolgen möchten (auf Stage klicken). Die neue Datei steht automatisch da.
@@ -94,11 +95,11 @@ for(s in c(13,14,15)){
 
 Wie steht die Anzahl guter Noten in Beziehung zur Anzahl schlechter Noten? 
 
-Der Anteil derjeniger, die bestehen ist deutlich höher, als derer, die durchfallen.  Es gibt mehr gute Noten, schlechte Noten sind seltener.
+*Der Anteil derjeniger, die bestehen ist deutlich höher, als derer, die durchfallen.  Es gibt mehr gute Noten, schlechte Noten sind seltener.*
 
 Warum?
 
-Der untersuchte Bereich ist größer für schlechte Noten. Ausgehend von einer Normalverteilung würden die Ergebnisse anders ausfallen und im Vergleich zur Mitte weniger Werte aufweisen als diese.
+*Der untersuchte Bereich ist größer für schlechte Noten. Ausgehend von einer Normalverteilung würden die Ergebnisse anders ausfallen und im Vergleich zur Mitte weniger Werte aufweisen als diese.*
 
 ## Kurtosis und Schiefe
 Kurtosis (im Deutschen auch *Wölbung*) ist ein Maß dafür, wie spitz eine Verteilung ist. Die Normalverteilung wird nie zu extrem spitz -- der Gipfel bleibt immer schön rund, obwohl er manchmal eng wird. Andere Verteilungen (z.B. die Laplace-Verteilung ) haben Gipfel, die nicht rund sind.   
@@ -107,7 +108,7 @@ Schiefe (*skewness*) beschriebt die (A)Symmetrie einer Verteilung. Eine Verteilu
 
 Die Verteilung von Noten ist oft schief mit mehr guten Noten. Ist die Verteilung rechts- oder linksschief?
 
-Die Verteilung ist rechtsschief. Der Gipfel ist auf der linken Seite.
+*Die Verteilung ist rechtsschief. Der Gipfel ist auf der linken Seite.*
 
 Vielleicht hilft folgende Grafik mit der Visualisierung:
 
@@ -126,28 +127,29 @@ noten.dist
 
 Jetzt können wir die absoluten Häufigkeiten auch plotten:
 ```{r}
-ggplot(data=noten.dist$Anzahl,aes(x=Notenpunkte,y=P,color=Standardabweichung)) + geom_line() + scale_x_continuous(limits=c(0,16))
+library(ggplot2)
+ggplot(data=noten.dist,aes(x=Notenpunkte,y=P,color=Standardabweichung)) + geom_line() + scale_x_continuous(limits=c(0,16))
 ```
 
 Beantworten Sie ein paar Fragen über die Verteilung, indem Sie den passenden R-Code einsetzen:
 
 1. Wie viele Studenten bekommen zwischen 7 und 9 NP bei einer Standardabweichung von 3?
 
-    `r (pnorm(9,mean=mu,sd=3) - pnorm(7,mean=mu,sd=3) ) * n` Studenten bekommen zwischen 7 und 9 Notenpunkten. 
+    *`r (pnorm(9,mean=mu,sd=3) - pnorm(7,mean=mu,sd=3) ) * n` Studenten bekommen zwischen 7 und 9 Notenpunkten.* 
     
     Wichtig: bei Wahrscheinlichkeits- und Häufigkeitsverteilung ist der linke Rand inklusiv aber der rechte Rand exklusiv! Das heißt, wir zählen hiermit die Leute, die bis zu 9 NP bekommen haben aber nicht die, die tatsächlich 9 NP bekommen haben!
 
 2. Wie viele Studenten bekommen zumindest 10 NP?
 
-    `r (pnorm(16,mean=mu,sd=3) - pnorm(10,mean=mu,sd=3) ) * n` Studenten bekommen zumindest 10 Notenpunkte.` 
+    *`r (pnorm(16,mean=mu,sd=3) - pnorm(10,mean=mu,sd=3) ) * n` Studenten bekommen zumindest 10 Notenpunkte.* 
 
 3. Wie viele Studenten bekommen weniger als 10 NP?
 
-    `r pnorm(10,mean=mu,sd=3)` Studenten bekommen weniger als 10 Notenpunkte.
+    *`r pnorm(10,mean=mu,sd=3)` Studenten bekommen weniger als 10 Notenpunkte.*
     
 4. Wie viele Studenten bekommen weniger als 8 NP?
 
-    `r pnorm(8,mean=mu,sd=3)` Studenten bekommen weniger als 8 Notenpunkte.
+    *`r pnorm(8,mean=mu,sd=3)` Studenten bekommen weniger als 8 Notenpunkte.*
     
 (Die Einrückung mit 4 Leerschlägen ist die Syntax für mehrere Absätze pro Punkt auf der Liste.)
 
@@ -160,7 +162,6 @@ Nicht so überraschend, dass "überdurchschnittlich" auch "mehr Punkte als den D
 
 Um in dem besten 1% abzuschließen, muss man zumindest `r qnorm(.99,mean=mu,sd=3)` Notenpunkte bekommen.
 
-## 
 Bei der Überprüfung der Lehrqualität scheint es der Verwaltung, dass ein gewisser Dozent andere Noten als andere Dozenten vergibt. Es wird entschieden, dass der Notenspiegel bei den Teilnehmern in einem von seinen Kursen getestet wird, um zu schauen, ob er sich von signifikant von der idealisierten Notenverteilung ($\mu=8,\sigma=3$) unterscheidet. Um zu zeigen, dass Gott $\alpha=0.06$ so viel liebt wie $\alpha=0.05$ `r citep("10.1037/0003-066X.44.10.1276")`, setzt die Verwaltung das Signikanzniveau auf 0.06. 
 
 Der kritische Wert für einen einseitigen $z$-Test ist `r qnorm(0.94)`. 
@@ -180,7 +181,7 @@ In einer Vorlesung vom selben Dozenten mit 50 Teilnehmern beträgt der Durchschn
 
 `r z <- sqrt(50) \left(\frac{10-8}{10}\right)`
 
-# Das ist ein **signifikanter** Unterschied. 
+## Das ist ein **signifikanter** Unterschied. 
 
 Ist die Benotung vom Dozenten weniger als ideal? 
 
@@ -194,7 +195,7 @@ Berechnen Sie den $z$-Test:
 `r z <- sqrt(20) \left(\frac{7-8}{7}\right)`
 
 
-# Das ist ein **insignifikanter** Unterschied. 
+## Das ist ein **insignifikanter** Unterschied. 
 
 Später ergibt sich, dass es eigentlich 25 Studenten im Kurs gab. (Der Dozent hat "einen Tippfehler" gemacht, als er seine Teilnehmerzahl per Mail an die Verwaltung geschickt hat.) Der Durchschnittswert bleibt -- behauptet der Dozent -- immer noch bei 7. Er behauptet weiterhin, dass das wunderbar nah am Erwartungswert (8) ist, und dass man ihn in Ruhe lassen sollte. Ist er zu streng?
 
@@ -202,7 +203,7 @@ Berechnen Sie den $z$-Test:
 
 `r z <- sqrt(25) \left(\frac{7-8}{7}\right)`
 
-# Das ist ein **signifikanter** Unterschied.
+## Das ist ein **signifikanter** Unterschied.
 
 ## Zum Überlegen
 Gibt es einen Grund, weshalb die Noten normal verteilt sein sollten? Warum ist das die übliche Annahme?
