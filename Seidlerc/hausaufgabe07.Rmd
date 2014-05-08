@@ -175,14 +175,16 @@ In einem kleinen Seminar mit 7 Studenten beträgt der Durchschnittswert 10. Unte
 ```{r}
 z <- sqrt(7) \left(\frac{10 - 8 }{10}\right)
 ```
+
 ## Das ist ein **insignifikanter** Unterschied. 
 
 In einer Vorlesung vom selben Dozenten mit 50 Teilnehmern beträgt der Durchschnittswert wieder 10. (Es scheint, dass der Dozent 10 besonders toll findet.) Berechnen Sie den $z$-Test:
 
 ```{r}
-z <- sqrt(50) \left(\frac{10 - 8 }{10}\right)
+z <- sqrt(50) \left(\frac{10-8}{10}\right)
 ```
-## Das ist ein **signifikanter** Unterschied. 
+
+# Das ist ein **signifikanter** Unterschied. 
 
 Ist die Benotung vom Dozenten weniger als ideal? 
 
@@ -194,20 +196,20 @@ In einem mittelgroßen Seminar mit 20 Studenten beträgt der Durchschnittswert 7
 Berechnen Sie den $z$-Test:
 
 ```{r}
-z <- sqrt(20) \left(\frac{7 - 8 }{7}\right)
+z <- sqrt(20) \left(\frac{7-8}{7}\right)
 ```
 
-## Das ist ein **insignifikanter** Unterschied. 
+# Das ist ein **insignifikanter** Unterschied. 
 
 Später ergibt sich, dass es eigentlich 25 Studenten im Kurs gab. (Der Dozent hat "einen Tippfehler" gemacht, als er seine Teilnehmerzahl per Mail an die Verwaltung geschickt hat.) Der Durchschnittswert bleibt -- behauptet der Dozent -- immer noch bei 7. Er behauptet weiterhin, dass das wunderbar nah am Erwartungswert (8) ist, und dass man ihn in Ruhe lassen sollte. Ist er zu streng?
 
 Berechnen Sie den $z$-Test:
 
 ```{r}
-z <- sqrt(25) \left(\frac{7 - 8 }{7}\right)
+z <- sqrt(25) \left(\frac{7-8}{7}\right)
 ```
 
-## Das ist ein **signifikanter** Unterschied.
+# Das ist ein **signifikanter** Unterschied.
 
 ## Zum Überlegen
 Gibt es einen Grund, weshalb die Noten normal verteilt sein sollten? Warum ist das die übliche Annahme?
