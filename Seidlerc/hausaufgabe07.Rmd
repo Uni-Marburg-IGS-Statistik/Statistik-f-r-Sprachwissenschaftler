@@ -173,13 +173,19 @@ Bei diesem Dozenten ist die Verwaltung wirklich unsicher, ob und was für einen 
 
 In einem kleinen Seminar mit 7 Studenten beträgt der Durchschnittswert 10. Unterscheidet sich der Notenspiegel von dem idealen? Berechnen Sie den $z$-Test:
 
-`r z <- sqrt(7) \left(\frac{10-8}{10}\right)`
+```{r}
+ zS7 <- sqrt(7)*((10-8)/3)
+ print(zS7)
+```
 
 ## Das ist ein **insignifikanter** Unterschied. 
 
 In einer Vorlesung vom selben Dozenten mit 50 Teilnehmern beträgt der Durchschnittswert wieder 10. (Es scheint, dass der Dozent 10 besonders toll findet.) Berechnen Sie den $z$-Test:
 
-`r z <- sqrt(50) \left(\frac{10-8}{10}\right)`
+```{r}
+  zS50 <- sqrt(50)*((10-8)/3)
+  print(zS50)
+```
 
 ## Das ist ein **signifikanter** Unterschied. 
 
@@ -192,8 +198,10 @@ In einem mittelgroßen Seminar mit 20 Studenten beträgt der Durchschnittswert 7
 
 Berechnen Sie den $z$-Test:
 
-`r z <- sqrt(20) \left(\frac{7-8}{7}\right)`
-
+```{r}
+ zS20 <- sqrt(20)*((7-8)/3)
+ print(zS20)
+```
 
 ## Das ist ein **insignifikanter** Unterschied. 
 
@@ -201,7 +209,10 @@ Später ergibt sich, dass es eigentlich 25 Studenten im Kurs gab. (Der Dozent ha
 
 Berechnen Sie den $z$-Test:
 
-`r z <- sqrt(25) \left(\frac{7-8}{7}\right)`
+```{r}
+ zS25 <- sqrt(25)*((7-8)/3)
+ print(zS25)
+```
 
 ## Das ist ein **signifikanter** Unterschied.
 
