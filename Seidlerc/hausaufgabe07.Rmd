@@ -166,14 +166,14 @@ Bei der Überprüfung der Lehrqualität scheint es der Verwaltung, dass ein gewi
 
 Der kritische Wert für einen einseitigen $z$-Test ist `r qnorm(0.94)`. 
 
-Die kritischen Werte für einen zweiseitigen $z$-Test sind $\pm$`r qnorm(0.97)`.
+Die kritischen Werte für einen zweiseitigen $z$-Test sind $\pm$ `r qnorm(p=1-(0.06/2))`.
 
 ### Gibt es einen Unterschied?
 Bei diesem Dozenten ist die Verwaltung wirklich unsicher, ob und was für einen Unterschied es geben könnte. (Welche Testart sollte man hier nutzen?)
 
 In einem kleinen Seminar mit 7 Studenten beträgt der Durchschnittswert 10. Unterscheidet sich der Notenspiegel von dem idealen? Berechnen Sie den $z$-Test:
 
-`r z <- sqrt(7) \left(\frac{10 - 8 }{10}\right)`
+`r z <- sqrt(7) \left(\frac{10-8}{10}\right)`
 
 ## Das ist ein **insignifikanter** Unterschied. 
 
