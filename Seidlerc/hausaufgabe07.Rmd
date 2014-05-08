@@ -95,7 +95,7 @@ for(s in c(3,4,5)){
 
 Wie steht die Anzahl guter Noten in Beziehung zur Anzahl schlechter Noten? 
 
-*Die Anzah der guten Noten ist geringer als die Anzahl der schlechten Noten. Es gibt mehr schlechte Noten als gute Noten.*
+*Die Anzahl der guten Noten ist geringer als die Anzahl der schlechten Noten. Es gibt mehr schlechte Noten als gute Noten.*
 
 Warum?
 
