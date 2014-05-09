@@ -183,15 +183,14 @@ x=qnorm(0.97)
 
 if (z >= qnorm(0.97))
   {
-  output <- paste("Da |z|>=", x,"wird die H0 abgelehnt.")
+  output <- paste("Da z=", z,"und |z|>=", x,"ist, wird die H0 abgelehnt.")
   }else{
-  output <- paste("Da |z|<", x,"wird die H0 angenommen.")
+  output <- paste("Da z=", z,"und |z|<", x,"ist, wird die H0 angenommen.")
   }
 print(output)
 ```
-Der Unterschied ist nicht signifikant.
 
-Das ist ein **_eins_von_signifikanter_insignifikanter_** Unterschied. 
+Das ist ein **_insignifikanter_** Unterschied. 
 
 In einer Vorlesung vom selben Dozenten mit 50 Teilnehmern beträgt der Durchschnittswert wieder 10. (Es scheint, dass der Dozent 10 besonders toll findet.) Berechnen Sie den $z$-Test:
 
@@ -203,15 +202,14 @@ x=qnorm(0.97)
 
 if (z >= qnorm(0.97))
   {
-  output <- paste("Da |z|>=", x,"wird die H0 abgelehnt.")
+  output <- paste("Da z=", z,"und |z|>=", x,"ist, wird die H0 abgelehnt.")
   }else{
-  output <- paste("Da |z|<", x,"wird die H0 angenommen.")
+  output <- paste("Da z=", z,"und |z|<", x,"ist, wird die H0 angenommen.")
   }
 print(output)
 ```
-Der Unterschied ist signifikant.
 
-Das ist ein **_eins_von_signifikanter_insignifikanter_** Unterschied. 
+Das ist ein **_signifikanter_** Unterschied. 
 
 Ist die Benotung vom Dozenten weniger als ideal? 
 
@@ -226,19 +224,18 @@ Berechnen Sie den $z$-Test:
 n=20
 m=7
 z=sqrt(n)*((m-mu)/3)
-x=qnorm(0.94)
+x=qnorm(0.06)
 
-if (z <= qnorm(0.94))
+if (z <= qnorm(0.06))
   {
-  output <- paste("Da z<=", x,"wird die H0 abgelehnt.")
+  output <- paste("Da z=", z,"und z<=", x,"ist, wird die H0 abgelehnt.")
   }else{
-  output <- paste("Da z>", x,"wird die H0 angenommen.")
+  output <- paste("Da z=", z,"und z>", x,"ist, wird die H0 angenommen.")
   }
 print(output)
 ```
-Der Unterschied ist signifikant.
 
-Das ist ein **_eins_von_signifikanter_insignifikanter_** Unterschied. 
+Das ist ein **_insignifikanter_** Unterschied. 
 
 Später ergibt sich, dass es eigentlich 25 Studenten im Kurs gab. (Der Dozent hat "einen Tippfehler" gemacht, als er seine Teilnehmerzahl per Mail an die Verwaltung geschickt hat.) Der Durchschnittswert bleibt -- behauptet der Dozent -- immer noch bei 7. Er behauptet weiterhin, dass das wunderbar nah am Erwartungswert (8) ist, und dass man ihn in Ruhe lassen sollte. Ist er zu streng?
 
@@ -248,19 +245,18 @@ Berechnen Sie den $z$-Test:
 n=25
 m=7
 z=sqrt(n)*((m-mu)/3)
-x=qnorm(0.94)
+x=qnorm(0.06)
 
-if (z <= qnorm(0.94))
+if (z <= qnorm(0.06))
   {
-  output <- paste("Da z<=", x,"wird die H0 abgelehnt.")
+  output <- paste("Da z=", z,"und z<=", x,"ist, wird die H0 abgelehnt.")
   }else{
-  output <- paste("Da z>", x,"wird die H0 angenommen.")
+  output <- paste("Da z=", z,"und z>", x,"ist, wird die H0 angenommen.")
   }
 print(output)
 ```
-Der Unterschied ist signifikant.
 
-Das ist ein **_eins_von_signifikanter_insignifikanter_** Unterschied. 
+Das ist ein **_signifikanter_** Unterschied. 
 
 ## Zum Überlegen
 Gibt es einen Grund, weshalb die Noten normal verteilt sein sollten? Warum ist das die übliche Annahme?
