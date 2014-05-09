@@ -94,11 +94,11 @@ for(s in c(3,4,5) ){
 
 Wie steht die Anzahl guter Noten in Beziehung zur Anzahl schlechter Noten? 
 
-antwort_hier
+Die Anzahl guter Noten ist geringer als die Anzahl schlechter Noten. 
 
 Warum?
 
-antwort_hier
+Die Möglichkeiten eine gute Note zu erzielen ist geringer, da der Durschnitt bei 8 NP liegt.
 
 ## Kurtosis und Schiefe
 Kurtosis (im Deutschen auch *Wölbung*) ist ein Maß dafür, wie spitz eine Verteilung ist. Die Normalverteilung wird nie zu extrem spitz -- der Gipfel bleibt immer schön rund, obwohl er manchmal eng wird. Andere Verteilungen (z.B. die Laplace-Verteilung ) haben Gipfel, die nicht rund sind.   
@@ -107,7 +107,7 @@ Schiefe (*skewness*) beschriebt die (A)Symmetrie einer Verteilung. Eine Verteilu
 
 Die Verteilung von Noten ist oft schief mit mehr guten Noten. Ist die Verteilung rechts- oder linksschief?
 
-antwort_hier
+Die Verteilung der Noten ist also linksschief.
 
 Vielleicht hilft folgende Grafik mit der Visualisierung:
 
@@ -126,7 +126,10 @@ noten.dist
 
 Jetzt können wir die absoluten Häufigkeiten auch plotten:
 
-code_block_hier
+```{r}
+ggplot(data=noten.dist,aes(x=Notenpunkte,y=Anzahl,color=Standardabweichung)) + geom_line() + scale_x_continuous(limits=c(0,16))
+```
+
 
 Beantworten Sie ein paar Fragen über die Verteilung, indem Sie den passenden R-Code einsetzen:
 
@@ -138,15 +141,15 @@ Beantworten Sie ein paar Fragen über die Verteilung, indem Sie den passenden R-
 
 2. Wie viele Studenten bekommen zumindest 10 NP?
 
-    `code_hier` Studenten bekommen zumindest 10 Notenpunkte.
+   `r (pnorm(10,mean=mu,sd=3,lower.tail=FALSE)) * n` Studenten bekommen mindestens 10 NP
 
 3. Wie viele Studenten bekommen weniger als 10 NP?
 
-    `code_hier` Studenten bekommen weniger als 10 Notenpunkte.
+   `r (pnorm(10,mean=mu,sd=3)) * n` Studenten bekommen weniger als 10 NP
 
 4. Wie viele Studenten bekommen weniger als 8 NP?
 
-    `code_hier` Studenten bekommen weniger als 8 Notenpunkte.
+    `r (pnorm(8,mean=mu,sd=3)) * n` Studenten bekommen weniger als 8 Notenpunkte.
 
 
 (Die Einrückung mit 4 Leerschlägen ist die Syntax für mehrere Absätze pro Punkt auf der Liste.)
