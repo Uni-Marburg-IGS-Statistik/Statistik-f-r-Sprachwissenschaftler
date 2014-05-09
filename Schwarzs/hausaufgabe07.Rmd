@@ -1,6 +1,6 @@
 % Hausaufgabe 07
-% Phillip Alday <phillip.alday@staff.uni-marburg.de>
-% 2014-05-07
+% Corinna Schwarz <co-schwarz@web.de>
+% 2014-05-09
 
 Falls die Umlaute in dieser und anderen Dateien nicht korrekt dargestellt werden, sollten Sie File > Reopen with Encoding > UTF-8 sofort machen (und auf jeden Fall ohne davor zu speichern), damit die Enkodierung korrekt erkannt wird! 
 
@@ -84,7 +84,13 @@ for(s in c(3,4,5) ){
 
 Aber wir hoffen alle, dass wir doch eine gute Note bekommen. Fügen Sie einen Code-Block hier ein, der das gleiche aber mit "ausgezeichneten" Noten (=1 bzw. >= 13) macht. (Bei evtl. Copy-Paste nicht vergessen, "fallen...durch" durch etwas Passendes zu ersetzen!)  
 
-code_block_hier
+```{r}
+for(s in c(3,4,5) ){
+  ausgezeichnet <- pnorm(13,mean=mu,sd=s,lower.tail=FALSE)
+  output <- paste("Bei einer Standabweichung von",s, "haben",ausgezeichnet*100,"% ausgezeichnet.")
+  print(output)
+}
+```
 
 Wie steht die Anzahl guter Noten in Beziehung zur Anzahl schlechter Noten? 
 
