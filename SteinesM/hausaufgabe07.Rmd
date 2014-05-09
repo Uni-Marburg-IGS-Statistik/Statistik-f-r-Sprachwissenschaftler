@@ -216,13 +216,27 @@ Das ist ein **_eins_von_signifikanter_insignifikanter_** Unterschied.
 Ist die Benotung vom Dozenten weniger als ideal? 
 
 ### Ein anderer, böserer? Dozent
-Die Verwaltung ist auch auf einen anderen Dozenten aufmerksam geworden, weil manche Studenten behaupten, er würde zu streng benoten. (Welche Testart sollte man hier nutzen?)
+Die Verwaltung ist auch auf einen anderen Dozenten aufmerksam geworden, weil manche Studenten behaupten, er würde zu streng benoten. (Welche Testart sollte man hier nutzen?) gerichteter z-Test
 
 In einem mittelgroßen Seminar mit 20 Studenten beträgt der Durchschnittswert 7. Der Dozent sagt, dass das wunderbar nah am Erwartungswert (8) ist, und dass man ihn in Ruhe lassen sollte. Ist er zu streng?
 
 Berechnen Sie den $z$-Test:
 
-code_hier
+```{r}
+n=20
+m=7
+z=sqrt(n)*((m-mu)/3)
+x=qnorm(0.94)
+
+if (z <= qnorm(0.94))
+  {
+  output <- paste("Da z<=", x,"wird die H0 abgelehnt.")
+  }else{
+  output <- paste("Da z>", x,"wird die H0 angenommen.")
+  }
+print(output)
+```
+Der Unterschied ist signifikant.
 
 Das ist ein **_eins_von_signifikanter_insignifikanter_** Unterschied. 
 
@@ -230,7 +244,21 @@ Später ergibt sich, dass es eigentlich 25 Studenten im Kurs gab. (Der Dozent ha
 
 Berechnen Sie den $z$-Test:
 
-code_hier
+```{r}
+n=25
+m=7
+z=sqrt(n)*((m-mu)/3)
+x=qnorm(0.94)
+
+if (z <= qnorm(0.94))
+  {
+  output <- paste("Da z<=", x,"wird die H0 abgelehnt.")
+  }else{
+  output <- paste("Da z>", x,"wird die H0 angenommen.")
+  }
+print(output)
+```
+Der Unterschied ist signifikant.
 
 Das ist ein **_eins_von_signifikanter_insignifikanter_** Unterschied. 
 
