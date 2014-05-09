@@ -84,20 +84,22 @@ for(s in c(3,4,5) ){
 
 Aber wir hoffen alle, dass wir doch eine gute Note bekommen. Fügen Sie einen Code-Block hier ein, der das gleiche aber mit "ausgezeichneten" Noten (=1 bzw. >= 13) macht. (Bei evtl. Copy-Paste nicht vergessen, "fallen...durch" durch etwas Passendes zu ersetzen!)  
 
+```{r}
 for (s in c(3, 4, 5)) {
     ausgezeichnet <- pnorm(13, mean = mu, sd = s,lower.tail=FALSE)
     output <- paste("Bei einer Standabweichung von", s, "erzielen", ausgezeichnet * 
         100, "% der Studenten eine 1.")
     print(output)
 }
+```
 
 Wie steht die Anzahl guter Noten in Beziehung zur Anzahl schlechter Noten? 
 
-antwort_hier
+Je größer die Standardabweichung, desto flacher die Kurve und größer die Randbereiche. Das heißt, wenn viele Studenten eine 1 erzielen, fallen auch mehr Studenten durch. Bei einer geringen SD hingegen, liegen die meisten Werte in der Mitte und es gibt sehr wenige schlechte sowie wenige sehr gute Noten.
 
 Warum?
 
-antwort_hier
+Eine größere Standardabweichung bedeutet, dass auch die Varianz der Daten größer ist und es mehr Extremwerte gibt. Bei einer geringen Standardabweichung hingegen, befinden sich die meisten Werte nahe am Mittelwert. Für unser Beispiel würde das bedeuten, dass ein großer Prozentsatz der Studenten besteht, allerdings mit einer eher mittelmäßigen Note.
 
 ## Kurtosis und Schiefe
 Kurtosis (im Deutschen auch *Wölbung*) ist ein Maß dafür, wie spitz eine Verteilung ist. Die Normalverteilung wird nie zu extrem spitz -- der Gipfel bleibt immer schön rund, obwohl er manchmal eng wird. Andere Verteilungen (z.B. die Laplace-Verteilung ) haben Gipfel, die nicht rund sind.   
@@ -106,7 +108,7 @@ Schiefe (*skewness*) beschriebt die (A)Symmetrie einer Verteilung. Eine Verteilu
 
 Die Verteilung von Noten ist oft schief mit mehr guten Noten. Ist die Verteilung rechts- oder linksschief?
 
-antwort_hier
+Die Notenverteilung ist rechtsschief, mit mehr Werten im oberen / rechten Bereich und einem linken Gipfel.
 
 Vielleicht hilft folgende Grafik mit der Visualisierung:
 
