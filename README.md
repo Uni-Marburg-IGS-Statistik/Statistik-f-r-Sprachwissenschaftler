@@ -5,7 +5,7 @@
 Diese Veranstaltung bietet eine praktische Einführung in statistische Verfahren und deren Anwendung auf sprachliche Beispiele. Sie vermittelt Grundlagenwissen sowohl aus dem Bereich der deskriptiven Statistik als auch über die gängigsten inferenzstatistischen Verfahren, die im Bereich der Sprache angewendet werden. Alle theoretischen Grundkenntnisse werden anhand von praktischen Übungen vertieft, die mit Hilfe des (frei verfügbaren) Statistikprogramms "R" durchgeführt werden. Nachdem die Teilnehmer Grundlagenkenntnisse in R erworben haben, werden darauf aufbauend Beispielfragestellungen aus unterschiedlichen sprachrelevanten Bereichen bearbeitet. Dabei wird neben der Frage nach einem angemessenen experimentellen Design und dem geeigneten statistischen Verfahren auch die praktische Umsetzung der Auswertung in R im Mittelpunkt stehen. Nach Besuch dieser Veranstaltung sollten Teilnehmer in der Lage sein, eigene Daten statistisch zu analysieren.
 
 # Organisatorisches
-- **Termin** montags 12-14 Uhr c.t. und dienstags 10-12 Uhr c.t.; Raum 03C01
+- **Termin** montags 12-14 Uhr c.t. Raum HSG +1/0120 und dienstags 10-12 Uhr c.t. WR6 01C08; 
 - **Anzahl der ECTS-Punkte und Art der Prüfung (Klausur, "Hausarbeit") nach der jeweilgen Prüfungsordnung.**
 - **Vorausgesetzt für die Zulassung zur Prüfung sind**
     - regelmäßige Teilnahme, inkl. Hausaufgaben zu jedem Termin -- siehe Blatt dazu
@@ -24,31 +24,45 @@ Woche | Datum          | Themen
 01.   | **14.04.2014** | Formalia, Einführung, (Textdateien &) DVCS, Warm-Up: Kombinatorik
 |     | **15.04.2014** | Warum Statistik? R, RStudio, Git
 02.   | **21.04.2014** | fällt aus! (Ostermontag) Ersatz-Lektüre: Stevens (1946)
-|     | **22.04.2014** | Beschreibungsstatistik  I
-03.   | **28.04.2014** | Beschreibungsstatistik  II
-|     | **29.04.2014** | 
-04.   | **05.05.2014** | Statistische Inteferenz; Bevolkerung vs. Stichprobe; Intuition von "Messfehler" und "Wahrscheinlichkeit"
-|     | **06.05.2014** |  
-05.   | **12.05.2014** | $p$-Werte, Fehler-Arten, Frequentism vs Bayes
+|     | **22.04.2014** | Warum Statistik? Ziele der Forschung, Modelle, Beschreibungsstatistik  I (Maße der zentralen Tendenz)
+|     |                | *Hausaufgabe bis 28.04.2014, 12 Uhr:* (in der Reihenfolge machen!)
+|     |                | 1. `hausaufgabe03a.Rmd`
+|     |                | 2. `hausaufgabe03b.R` 
+03.   | **28.04.2014** | Beschreibungsstatistik  II: Dispersions- und Streuungsmaße
+|     |                | *Hausaufgabe bis 29.04.2014 8 Uhr:*
+|     |                | 1. An Fragenbogen "Verteilungen" (bei ILIAS) teilnehmen
+|     |                | 2. Handout zu Logarithmen anschauen 
+|     | **29.04.2014** | Visualisierung der Daten: `ggplot2`-Basics
+|     |                | *Hausaufgabe bis 05.05.2014 12 Uhr:*
+|     |                | 1. `hausaufgabe05.R`
+04.   | **05.05.2014** | Auf dem Weg zu Interferenzstatistik: $z$-Tranformation, Wahrscheinlichkeitsverteilungen, Population vs. Stichprobe
+|     |                | *Hausaufgabe bis 06.05.2014 10 Uhr:*
+|     |                | Lesen Sie:
+|     |                | 1. [wie Statistik oft misbraucht wird](http://www.cracked.com/article_20318_the-5-most-popular-ways-statistics-are-used-to-lie-to-you.html).
+|     |                | 2. [warum es in den letzten Jahren eine Krise in der Wissenschaft gibt](http://www.economist.com/news/briefing/21588057-scientists-think-science-self-correcting-alarming-degree-it-not-trouble).
+|     | **06.05.2014** | Statistische Inteferenz, $p$-Werte, Intuition von "Messfehler" und "Wahrscheinlichkeit", Fehler-Arten
+|     |                | *Hausaufgabe bis 12.05.2014 12 Uhr:*
+|     |                | 1. `hausaufgabe07.Rmd`
+05.   | **12.05.2014** | Mehr zu Stichproben, Vergleich von Gruppen ($t$-Test) und Condidence-Intervale, evtl. [BEST](http://www.indiana.edu/~kruschke/BEST/) (etwa bayes'scher $t$-Test) und Credible-Intervale  
 |     | **13.05.2014** | Interferenz in der Praxis: Der Sinn von statischen Tests, neuartige Fehler 
-06.   | **19.05.2014** | 
-|     | **20.05.2014** | 
-07.   | **26.05.2014** | 
-|     | **27.05.2014** | 
-08.   | **02.06.2014** | 
-|     | **03.06.2014** | 
-09.   | **09.06.2014** |  fällt aus! (Pfingstmontag)
-|     | **10.06.2014** | 
-10.   | **16.06.2014** | 
-|     | **17.06.2014** | 
-11.   | **23.06.2014** | 
-|     | **24.06.2014** | 
-12.   | **30.06.2014** | 
-|     | **01.07.2014** | 
-13.   | **07.07.2014** | 
-|     | **08.07.2014** | 
-14.   | **14.07.2014** | 
-|     | **15.07.2014** | 
+06.   | **19.05.2014** | ANOVA I
+|     | **20.05.2014** | ANOVA II
+07.   | **26.05.2014** | ANOVA III
+|     | **27.05.2014** | ANOVA IV (evtl. auch Fixed vs. Random Effects à Clark 1973)
+08.   | **02.06.2014** | lineare Regression I 
+|     | **03.06.2014** | lineare Regression II
+09.   | **09.06.2014** | fällt aus! (Pfingstmontag)
+|     | **10.06.2014** | Korrelationen I  
+10.   | **16.06.2014** | Korrelationen II, $\chi^2$, logLikelihood & Likelihood-Ratio 
+|     | **17.06.2014** | das generalisierte lineare Model (GLM), logit-Regression
+11.   | **23.06.2014** | gemischte Modelle I
+|     | **24.06.2014** | gemischte Modelle II
+12.   | **30.06.2014** | Nicht-parametrische Tests I
+|     | **01.07.2014** | Nicht-parametrische Tests II 
+13.   | **07.07.2014** | Nicht-parametrische Tests III
+|     | **08.07.2014** | Experimentaldesign
+14.   | **14.07.2014** | Fragestunde / Puffer
+|     | **15.07.2014** | Klausur
 
 # Software
 - [R](http://cran.r-project.org/)
@@ -75,6 +89,7 @@ Die Reihe *Use R!* von Springer ist **kostenlos** über das Uni-Netz elektronisc
 * [R Bloggers](http://www.r-bloggers.com/)
 * [RSeek](http://rseek.org/)
 * [CrossValidated](http://stats.stackexchange.com/)
+* [How to Search for R Materials](http://stackoverflow.com/questions/102056/how-to-search-for-r-materials)
   
 # License
 This work is licensed under the Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Germany License. To view a copy of this license, visit http://creativecommons.org/licenses/by-nc-sa/3.0/de/.
