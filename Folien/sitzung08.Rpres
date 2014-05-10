@@ -1,0 +1,99 @@
+Statistik für Sprachwissenschaftler
+========================================================
+author: Phillip M . Alday
+date: 2014-05-12   
+autosize: false
+
+```{r setup, include=FALSE}
+opts_chunk$set(cache=TRUE,prompt=TRUE)
+library(knitcitations)
+library(ggplot2)
+library(reshape2)
+cite_options(tooltip = TRUE
+             , linked = TRUE
+             , numerical = TRUE
+             , bibtex_data = FALSE)
+```
+
+
+Aufwachen und sich errinnern!
+====================================
+type: section
+
+
+Bisher
+===============
+- Von Häufigkeitsverteilung zu Wahrscheinlichkeitsverteilungen
+- Standardisierung von Verteilungen
+- Einige wichtige Verteilungen
+- (Population vs. Stichprobe)
+- Anwendung der Verteilungen: Inferenzstatistik
+- Frequentism vs. Bayesianism
+- Fehlerarten
+- $p$-Werte
+
+Heute
+=======
+- Mehr zu Stichproben
+- Vergleich von Gruppen ($t$-Test)
+- Confidence-Intervale
+
+Morgen
+========
+- was wir heute nicht schaffen
+- evtl. [BEST](http://www.indiana.edu/~kruschke/BEST/) (etwa bayes'scher $t$-Test) und Credible-Intervale  
+- Interferenz in der Praxis: Der Sinn von statischen Tests, neuartige Fehler 
+
+p-Werte
+===========
+- In Publikationen werden meist sogenannte p-Werte berichtet
+- $p$-Wert = das beobachtete Signifikanzniveau
+- Ermittlung wieder über die Prüfgröße
+- bei einem einseitigen Test entspricht der p-Wert der Fläche, die unter der Standardnormalverteilung durch die Prüfgröße abgeschnitten wird im Beispiel (Lernmethode): p-Wert = $P(z > 1,73) = 0.042$
+- dazu: Tabellen
+- oder: R `pnorm()`
+- ganz oft falsch verstanden
+
+Das eigentliche Problem mit NHST und p-Werten
+===============================================
+incremental: true
+Welche Frage haben wir gestellt und welche Frage beantworten wir?
+- $P(H_0|E) \neq P(E|H_0)$
+  - Keine Aussage, wie wahrscheinlich $H_1$ ist
+  - Keine Aussage, wie wahrscheinlich $H_0$ ist
+- Vergleichsbasis ("The Null is never true")
+
+Das eigentliche Problem mit NHST und p-Werten
+===============================================
+incremental: true
+Welche Frage haben wir gestellt und welche Frage beantworten wir?
+- Existenz vs. Form 
+  - Parameterschätzung
+  - Effektgröße
+  - ...
+- Messen "Effort" (*Aufwand*) `r citep("http://www.johnmyleswhite.com/notebook/2012/07/17/criticism-5-of-nhst-p-values-measure-effort-not-truth/")`
+
+Andere Schwierigkeiten (mehr später)
+======================================
+- multiples Testen (v.a. bei frequentistischen Tests)
+- optional Stopping
+- ....
+
+Stichprobe vs. Population
+====================================
+type: section
+
+
+Verglecich von Gruppen
+====================================
+type: section
+
+Bibliography
+=============
+```{r, echo=FALSE,results='hide'}
+```
+<span style="font-size: 10%;">
+```{r,results='asis',echo=FALSE}
+bibliography(style="markdown",bulleted=FALSE)
+```
+</span>
