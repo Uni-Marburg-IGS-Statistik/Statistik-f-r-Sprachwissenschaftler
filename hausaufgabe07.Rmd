@@ -61,7 +61,8 @@ ggplot(data=noten.dist,aes(x=Notenpunkte,y=P,color=Standardabweichung)) + geom_l
 ```
 Ich habe die Grenzen der Grafik ein bisschen breiter gestellt, sodass man die Endpunkte klar sieht und Sie auch einen weiteren `ggplot`-Befehl kennen lernen. 
 
-Welche Verteilung sieht am fairsten aus? Warum?
+Welche Verteilung sieht am fairsten aus? Warum? 
+# Die Verteilung mit der standardabweichung "drei" sieht am fairsten aus weil die meisten Leute durchkommen (Die Fläche über den Punktwerten 0-5 scheint am kleinsten zu sein)
 
 Wir können das konkreter machen: welcher Anteil der Studenten bekommt bei den jeweiligen Verteilungen eine 1 (zumindest 13 NP)? Für die Verteilung mit $\sigma = 3$ sieht die Berechnung mit R so aus:
 ```{r}
@@ -75,24 +76,35 @@ pnorm(5,mean=mu,sd=3)
 Wenn wir das für alle drei Gruppen wiederholen möchten, ist es ziemlich ärgerlich, wenn wir jede Gruppe einzeln eingeben müssen. Dafür können wir eine **`for`-Schleife** nutzen:
 
 ```{r}
-for(s in c(3,4,5) ){
-  durchfall <- pnorm(5,mean=mu,sd=s)
+for(s in c(3,4,5) ){durchfall <- pnorm(5,mean=mu,sd=s)
   output <- paste("Bei einer Standabweichung von",s, "fallen",durchfall*100,"% durch.")
-  print(output)
-}
+  print(output)}
 ```
 
 Aber wir hoffen alle, dass wir doch eine gute Note bekommen. Fügen Sie einen Code-Block hier ein, der das gleiche aber mit "ausgezeichneten" Noten (=1 bzw. >= 13) macht. (Bei evtl. Copy-Paste nicht vergessen, "fallen...durch" durch etwas Passendes zu ersetzen!)  
+```{r}
+pnorm(13,mean=mu,sd=3)
+```
+```{r}
+for(s in c(3,4,5) ){Überflieger <- pnorm(13,mean=mu,sd=s)
+  output <- paste("Bei einer Standabweichung von",s, "gibt es",(1-Überflieger)*100,"% Überflieger.")
+  print(output)}
+```
 
-code_block_hier
 
 Wie steht die Anzahl guter Noten in Beziehung zur Anzahl schlechter Noten? 
 
-antwort_hier
+# Je weniger sehr gute Noten es gibt, desto weniger sehr schlechte Noten gibt es und umgekehrt. 
+# bei s=3 gibt es 4,8% Überflieger und 15,9% fallen durch
+# bei s=4 gibt es 10,6% Überflieger und 22,7% fallen durch
+# bei s=5 gibt es 15,9% Überflieger und 27,4% fallen durch
+
 
 Warum?
 
-antwort_hier
+# Weil eine Normalverteilung vom Mittelwert ausgehend nach links und rechts symmetrisch verläuft.
+# Folglich gibt es gleich viele Negative und Positive Exreme. Im Fall der Notenpunkte gibt es 
+# mehr Leute die Durchfallen als Überflieger weil die Fläche über 0 bis 5 größer ist als jene #über13 bis 15 Notenpunkten.
 
 ## Kurtosis und Schiefe
 Kurtosis (im Deutschen auch *Wölbung*) ist ein Maß dafür, wie spitz eine Verteilung ist. Die Normalverteilung wird nie zu extrem spitz -- der Gipfel bleibt immer schön rund, obwohl er manchmal eng wird. Andere Verteilungen (z.B. die Laplace-Verteilung ) haben Gipfel, die nicht rund sind.   
@@ -101,7 +113,8 @@ Schiefe (*skewness*) beschriebt die (A)Symmetrie einer Verteilung. Eine Verteilu
 
 Die Verteilung von Noten ist oft schief mit mehr guten Noten. Ist die Verteilung rechts- oder linksschief?
 
-antwort_hier
+# Eine Verteilung mit mehr guten Noten, also dem Gipfel auf der rechten Seite, ist linksschief.
+
 
 Vielleicht hilft folgende Grafik mit der Visualisierung:
 
@@ -120,6 +133,8 @@ noten.dist
 
 Jetzt können wir die absoluten Häufigkeiten auch plotten:
 
+
+ 
 code_block_hier
 
 Beantworten Sie ein paar Fragen über die Verteilung, indem Sie den passenden R-Code einsetzen:
