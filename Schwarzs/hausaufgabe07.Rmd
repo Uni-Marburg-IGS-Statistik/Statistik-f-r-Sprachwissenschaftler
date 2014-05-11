@@ -1,6 +1,6 @@
 % Hausaufgabe 07
 % Corinna Schwarz <co-schwarz@web.de>
-% 2014-05-09
+% 2014-05-11
 
 Falls die Umlaute in dieser und anderen Dateien nicht korrekt dargestellt werden, sollten Sie File > Reopen with Encoding > UTF-8 sofort machen (und auf jeden Fall ohne davor zu speichern), damit die Enkodierung korrekt erkannt wird! 
 
@@ -94,11 +94,11 @@ for(s in c(3,4,5) ){
 
 Wie steht die Anzahl guter Noten in Beziehung zur Anzahl schlechter Noten? 
 
-Die Anzahl guter Noten ist geringer als die Anzahl schlechter Noten. 
+Die Anzahl guter Noten ist deutlich geringer als die Anzahl schlechter Noten.Die Diskrepanz zwischen der Anzahl guter und schlechter Noten wird aber mit zunehmender Standardabweichung geringer. 
 
 Warum?
 
-Die Möglichkeiten eine gute Note zu erzielen ist geringer, da der Durschnitt bei 8 NP liegt.
+Es gibt mehr schlechte Noten, da wir eine größere Range von schlechten Noten im Vergleich zu guten Noten betrachten: als gute Noten haben wir nur 13 Punkte oder größer, also 13,14 und 15 Punkte, betrachtet, für schlechte Noten jedoch 0,1,2,3,4,5 Notenpunkte.
 
 ## Kurtosis und Schiefe
 Kurtosis (im Deutschen auch *Wölbung*) ist ein Maß dafür, wie spitz eine Verteilung ist. Die Normalverteilung wird nie zu extrem spitz -- der Gipfel bleibt immer schön rund, obwohl er manchmal eng wird. Andere Verteilungen (z.B. die Laplace-Verteilung ) haben Gipfel, die nicht rund sind.   
@@ -107,7 +107,7 @@ Schiefe (*skewness*) beschriebt die (A)Symmetrie einer Verteilung. Eine Verteilu
 
 Die Verteilung von Noten ist oft schief mit mehr guten Noten. Ist die Verteilung rechts- oder linksschief?
 
-Die Verteilung der Noten ist also linksschief.
+Die Verteilung der Noten mit mehr guten Noten ist dementsprechend linksschief.
 
 Vielleicht hilft folgende Grafik mit der Visualisierung:
 
@@ -234,4 +234,4 @@ bibliography()
 
 
 # Lizenz
-Dieses Werk ist lizenziert unter einer CC-BY-NC-SA Lizenz.
+Nur zu Prüfungszwecken.
