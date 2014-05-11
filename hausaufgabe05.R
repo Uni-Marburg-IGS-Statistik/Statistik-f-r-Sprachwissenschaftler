@@ -1,12 +1,22 @@
+<<<<<<< HEAD
 # Hausaufgabe 04
 # Isabelle Franz <Franzis@students.uni-marburg.de>
 # 2014-05-01
 # Diese Datei darf nur Prüfungszwecken dienen.
+=======
+# Hausaufgabe 05
+# Phillip Alday <phillip.alday@staff.uni-marburg.de>
+# 2014-05-02
+# Dieses Werk ist lizenziert unter einer CC-BY-NC-SA Lizenz.
+>>>>>>> 6b0b6a6065d1ac322ceb938a4393611eba539bfa
 
 # Sie sollten die Datei auch in Ihren Ordner kopieren und einen Commit machen, 
 # bevor Sie die Kopie weiter anpassen! Vergessen Sie dabei nicht, Namen, Datum 
 # und ggf. Lizenz zu ändern. Um einiges leichter zu machen, sollten Sie auch die
-# Datei body_dim_long.tab aus dem Data-Ordner kopieren, stagen und commiten.
+# Datei body_dim_long.tab aus dem Data-Ordner kopieren, stagen und commiten. Sie
+# müssen ggf. Ihr Arbeitsverzeichnis setzen, wenn R die .tab-Datei nicht finden
+# kann: 
+# Session > Set Working Directory > Source File Location
 
 # (Im folgenden müssen Sie die Code-Zeilen wieder aktiv setzen -- ich habe sie
 # vorläufig auskommentiert, damit der Output beim ersten Beispiel sehr
