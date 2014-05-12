@@ -111,6 +111,7 @@ $\sigma = 15.86$
 Wiederholte Stichprobenziehungen (k = 25), Umfang variiert (n = 10,20,30)
 ========================================================================================
 ```{r echo=FALSE}
+set.seed(42)
 population <- rnorm(150,mean=66.73,sd=15.86)
 n10 <- replicate(25, sample(population,10))
 n20 <- replicate(25, sample(population,20))
@@ -148,6 +149,12 @@ tail(sim.sd)
 
 Stichprobenkennwerteverteilung von Stichprobenmittelwerten bei n = 10, 20, 30
 ===============================================================================
+|            | Population       | $n=10$                                 | $n=20$                                 | $n=30$                                 |
+|------------|------------------|----------------------------------------|----------------------------------------|----------------------------------------|
+| Mittelwert | $\mu = 66.73$    | $\bar{x}_\bar{x} = `r mean(n10.mean)`$ | $\bar{x}_\bar{x} = `r mean(n30.mean)`$ | $\bar{x}_\bar{x} = `r mean(n30.mean)`$ | 
+| SD         | $\sigma = 15.86$ | $s_\bar{x} = `r sd(n10.mean)*9/10`$    | $s_\bar{x} = `r sd(n20.mean)*19/20`$   | $s_\bar{x} = `r sd(n30.mean)*29/30`$   |
+
+
 
 Beobachtungen
 =======================
