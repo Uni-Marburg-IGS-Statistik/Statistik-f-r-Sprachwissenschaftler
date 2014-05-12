@@ -19,7 +19,7 @@ shinyUI(fluidPage(
                                 ,"Number of points to simulate for the population"
                                 ,min = 10
                                 ,max = 10000
-                                ,value = 1000)
+                                ,value = 250)
                  ,  sliderInput("n"
                                 ,"Number of points to use in each sample"
                                 ,min = 1
@@ -41,8 +41,8 @@ shinyUI(fluidPage(
     )
     ,mainPanel(h2("Sample means")
                ,plotOutput("sample.means")
-               #,h2("Confidence Interval (via t.test)")
-               #,uiOutput("ttest")
+               ,h2("Confidence Interval (via t.test)")
+               ,uiOutput("ttest")
                ,h2("Sample distributions")
                ,plotOutput("sample.distributions")
                ,h2("Population")

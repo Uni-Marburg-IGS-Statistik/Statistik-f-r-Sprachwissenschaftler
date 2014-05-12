@@ -45,9 +45,18 @@ shinyServer(function(input, output) {
     plots  
   })
   
-#  output$ttest <- renderUI({ 
-#    t <- t.test(get.population(),conf.level = input$conf.level)
-#  })
+  output$ttest <- renderUI({
+    # first column is index, second column is first sample
+    s <- get.samples()[,2]
+    print(head(get.samples()))
+    print(s)
+    s.text <- paste0(s,collapse=", ")
+    t <- t.test(s,conf.level = input$conf.level)
+    text <- paste0("The confidence interval calculated from the first sample is ",t$conf.int[1], " to ", t$conf.int[2], " with mean ",mean(s),".")
+    #paste(text, "For reference, this sample was:", s.text)
+    
+    "More explanatory text coming soon."
+  })
   
   output$sample.means <- renderPlot({
       plots <- runSimulation()
