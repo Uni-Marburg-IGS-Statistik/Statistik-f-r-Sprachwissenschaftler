@@ -43,7 +43,7 @@ Woche | Datum          | Themen
 |     | **06.05.2014** | Statistische Inteferenz, $p$-Werte, Intuition von "Messfehler" und "Wahrscheinlichkeit", Fehler-Arten
 |     |                | *Hausaufgabe bis 12.05.2014 12 Uhr:*
 |     |                | 1. `hausaufgabe07.Rmd`
-05.   | **12.05.2014** | Mehr zu Stichproben, Vergleich von Gruppen ($t$-Test) und Condidence-Intervale, evtl. [BEST](http://www.indiana.edu/~kruschke/BEST/) (etwa bayes'scher $t$-Test) und Credible-Intervale  
+05.   | **12.05.2014** | Mehr zu Stichproben, Vergleich von Gruppen ($t$-Test) und Confidence-Intervale, evtl. [BEST](http://www.indiana.edu/~kruschke/BEST/) (etwa bayes'scher $t$-Test) und Credible-Intervale  
 |     | **13.05.2014** | Interferenz in der Praxis: Der Sinn von statischen Tests, neuartige Fehler 
 06.   | **19.05.2014** | ANOVA I
 |     | **20.05.2014** | ANOVA II
@@ -90,7 +90,47 @@ Die Reihe *Use R!* von Springer ist **kostenlos** über das Uni-Netz elektronisc
 * [RSeek](http://rseek.org/)
 * [CrossValidated](http://stats.stackexchange.com/)
 * [How to Search for R Materials](http://stackoverflow.com/questions/102056/how-to-search-for-r-materials)
-  
+* [Git -- the simple guide](http://rogerdudler.github.io/git-guide/)
+* [Literate programming, version control, reproducible research, collaboration, and all that](http://rpubs.com/bbolker/3153)
+* [Handy statistical lexicon](http://andrewgelman.com/2009/05/24/handy_statistic/)
+
+# Kommentare zu p-Werten, NHST, und der üblichen statistischen Praxis
+* John Myles White
+    1. [Good Tools for Individual Researchers are not Good Tools for Research Communities](http://www.johnmyleswhite.com/notebook/2012/05/10/criticism-1-of-nhst-good-tools-for-individual-researchers-are-not-good-tools-for-research-communities/)
+    2. [NHST Conflates Rare Events with Evidence Against the Null Hypothesis](http://www.johnmyleswhite.com/notebook/2012/05/12/criticism-2-of-nhst-nhst-conflates-rare-events-with-evidence-against-the-null-hypothesis/)
+    3. [Essential Information is Lost When Transforming 2D Data into a 1D Measure](http://www.johnmyleswhite.com/notebook/2012/05/14/criticism-3-of-nhst-essential-information-is-lost-when-transforming-2d-data-into-a-1d-measure/)
+    4. [No Mechanism for Producing Substantive Cumulative Knowledge
+](http://www.johnmyleswhite.com/notebook/2012/05/18/criticism-4-of-nhst-no-mechanism-for-producing-substantive-cumulative-knowledge/)
+    5. [p-Values Measure Effort, Not Truth](http://www.johnmyleswhite.com/notebook/2012/07/17/criticism-5-of-nhst-p-values-measure-effort-not-truth/)
+    6. [A Cheap Criticism of p-Values](http://www.johnmyleswhite.com/notebook/2012/12/06/a-cheap-criticism-of-p-values/)
+* Andrew Gelman
+    - [The p-value is not...](http://andrewgelman.com/2012/12/05/the-p-value-is-not/)
+    - [Revised statistical standards for evidence](http://andrewgelman.com/2014/04/25/revised-statistical-standards-evidence-comments-val-johnsons-comments-comments-vals-comments-p-values/)  
+    - [One-tailed or two-tailed?](http://andrewgelman.com/2014/04/18/one-tailed-two-tailed/)
+    - [Interrogating p-values](http://andrewgelman.com/2013/06/04/interrogating-p-values/)
+    - [The problem with p-values is how they're used](http://www.stat.columbia.edu/~gelman/research/published/murtaugh2.pdf)
+    - [The Difference Between "Significant" and "Not Significant" is not Itself Statistically Significant](http://dx.doi.org/10.1198/000313006X152649 )
+    - [Researcher degrees of freedom and accidental p-hacking](http://www.stat.columbia.edu/~gelman/research/unpublished/p_hacking.pdf)
+    - [P-Values and Statistical Practice](http://www.stat.columbia.edu/~gelman/research/published/pvalues3.pdf)
+    
+# Andere Perspektive und Interessantes zur Statistik
+* [Famous statistician quotes](http://stats.stackexchange.com/questions/726/famous-statistician-quotes)
+* [Common statistical sins](http://stats.stackexchange.com/questions/4551/what-are-common-statistical-sins)
+* [Modes, Medians and Means: A Unifying Perspective](http://www.johnmyleswhite.com/notebook/2013/03/22/modes-medians-and-means-an-unifying-perspective/)
+* [How do we choose our default methods?](http://www.stat.columbia.edu/~gelman/research/published/copss.pdf)
+* ["The graph clearly shows that mammography adds virtually nothing to survival and if anything, decreases survival (and increases cost and provides unnecessary treatment)"](http://andrewgelman.com/2014/05/03/graph-clearly-shows-mammography-adds-virtually-nothing-survival-anything-decreases-survival-increases-cost-provides-unnecessary-treatment/) -- ein wichtiges Beispiel von Effektgröße vs. "signifikant" mit Brustkrebs!
+* [Ken Rice presents a unifying approach to statistical inference and hypothesis testing](http://andrewgelman.com/2014/04/29/ken-rice-presents-unifying-approach-statistical-inference-hypothesis-testing/)
+* [Understanding Simpson’s paradox using a graph](http://andrewgelman.com/2014/04/08/understanding-simpsons-paradox-using-graph/)
+* [loess explained in a GIF](http://simplystatistics.org/2014/02/13/loess-explained-in-a-gif/)
+* [On Chomsky and the Two Cultures of Statistical Learning](http://norvig.com/chomsky.html)
+* [Big Data…Big Deal? Maybe, if Used with Caution.](http://andrewgelman.com/2014/04/27/big-data-big-deal-maybe-used-caution/)
+* [Schools of Statistical Thought as Religion](http://andrewgelman.com/2014/04/12/schools-of-statistical-thoughts-are-sometimes-jokingly-likened-to-religions-this-analogy-is-not-perfect-unlike-religions-statistical-methods-have-no-supernatural-content-and-make-essentially-no-d/)
+* Software für Bayesian Modelling (wird nicht im Kurs genutzt, aber vielleicht interessant)
+    - [Stan](http://mc-stan.org/)
+    - [JAGS](http://mcmc-jags.sourceforge.net/)
+    - [BUGS](http://www.openbugs.net/w/FrontPage)
+    - [Fitting linear mixed models using JAGS and Stan: A tutorial](http://www.ling.uni-potsdam.de/~vasishth/BayesLMMs.html)
+
 # License
 This work is licensed under the Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Germany License. To view a copy of this license, visit http://creativecommons.org/licenses/by-nc-sa/3.0/de/.
 

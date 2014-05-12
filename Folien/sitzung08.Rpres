@@ -1,0 +1,461 @@
+Statistik für Sprachwissenschaftler
+========================================================
+author: Phillip M . Alday
+date: 2014-05-12   
+autosize: false
+
+```{r setup, include=FALSE}
+opts_chunk$set(cache=TRUE,prompt=TRUE)
+library(knitcitations)
+library(ggplot2)
+library(reshape2)
+cite_options(tooltip = TRUE
+             , linked = TRUE
+             , numerical = TRUE
+             , bibtex_data = FALSE)
+```
+
+
+Aufwachen und sich errinnern!
+====================================
+type: section
+
+
+Bisher
+===============
+- Von Häufigkeitsverteilung zu Wahrscheinlichkeitsverteilungen
+- Standardisierung von Verteilungen
+- Einige wichtige Verteilungen
+- (Population vs. Stichprobe)
+- Anwendung der Verteilungen: Inferenzstatistik
+- Frequentism vs. Bayesianism
+- Fehlerarten
+- $p$-Werte
+
+Heute
+=======
+- Mehr zu Stichproben
+- Vergleich von Gruppen ($t$-Test)
+- Confidence-Intervale
+
+Morgen
+========
+- was wir heute nicht schaffen
+- evtl. [BEST](http://www.indiana.edu/~kruschke/BEST/) (etwa bayes'scher $t$-Test) und Credible-Intervale  
+- Interferenz in der Praxis: Der Sinn von statischen Tests, neuartige Fehler 
+
+p-Werte
+===========
+- In Publikationen werden meist sogenannte p-Werte berichtet
+- $p$-Wert = das beobachtete Signifikanzniveau
+- Ermittlung wieder über die Prüfgröße
+- bei einem einseitigen Test entspricht der p-Wert der Fläche, die unter der Standardnormalverteilung durch die Prüfgröße abgeschnitten wird im Beispiel (Lernmethode): p-Wert = $P(z > 1,73) = 0.042$
+- dazu: Tabellen
+- oder: R `pnorm()`
+- ganz oft falsch verstanden
+
+Das eigentliche Problem mit NHST und p-Werten
+===============================================
+incremental: true
+Welche Frage haben wir gestellt und welche Frage beantworten wir?
+- $P(H_0|E) \neq P(E|H_0)$
+  - Keine Aussage, wie wahrscheinlich $H_1$ ist
+  - Keine Aussage, wie wahrscheinlich $H_0$ ist
+- Vergleichsbasis ("The Null is never true")
+
+Das eigentliche Problem mit NHST und p-Werten
+===============================================
+incremental: true
+Welche Frage haben wir gestellt und welche Frage beantworten wir?
+- Existenz vs. Form 
+  - Parameterschätzung
+  - Effektgröße
+  - ...
+- Messen "Effort" (*Aufwand*) `r citep("http://www.johnmyleswhite.com/notebook/2012/07/17/criticism-5-of-nhst-p-values-measure-effort-not-truth/")`
+
+Andere Schwierigkeiten (mehr später)
+======================================
+- multiples Testen (v.a. bei frequentistischen Tests)
+- optional Stopping
+- ....
+
+Stichprobe vs. Population
+====================================
+type: section
+
+Stichprobe vs. Population
+====================================
+![](inference_sample_pop.png)
+<small> Danke und (c) IBS </small>
+
+Zentrale Thematik der schließenden Statistik
+=================================================
+incremental: true
+Testen von statistischen Hypothesen 
+  - eine statistische Hypothese wird in Bezug auf einen/mehrere Populationsparameter formuliert
+  - es wird die Wahrscheinlichkeit bestimmt, mit der eine Stichprobe relativ zur Gesamtpopulation auftritt
+
+Wie kann man aufgrund von Stichprobendaten auf zugrundeliegende Populationen schließen?
+
+Zentrale Thematik der schließenden Statistik
+=================================================
+incremental: true
+Schätzung von (unbekannten) Populationsparametern
+  - mit welcher Sicherheit kann von beobachteten Ereignissen auf allgemeine Gesetzmäßigkeiten geschlossen werden?
+  - d.h. woran erkennt man, was eine gute Schätzung ist?
+
+
+Beispiel: Begabungstest für Schüler
+=======================================
+- 100 Aufgaben (entweder richtig oder falsch), daher Messwerte zwischen 0 und 100
+- Mit 150 Schülern durchgeführt
+- Populationsmittelwert $\mu = 66.73$; Populationsstandardabweichung
+$\sigma = 15.86$
+-  Was passiert nun, wenn wir wiederholt Stichproben unterschiedlichen Umfangs aus der Population ziehen?
+
+Wiederholte Stichprobenziehungen (k = 25), Umfang variiert (n = 10,20,30)
+========================================================================================
+```{r echo=FALSE}
+set.seed(42)
+population <- rnorm(150,mean=66.73,sd=15.86)
+n10 <- replicate(25, sample(population,10))
+n20 <- replicate(25, sample(population,20))
+n30 <- replicate(25, sample(population,30))
+n10.mean <- apply(n10,2,mean)
+n20.mean <- apply(n20,2,mean)
+n30.mean <- apply(n30,2,mean)
+sim.mean <- data.frame("n=10"=n10.mean,"n=20"=n20.mean,"n=30"=n30.mean)
+# "correct" the R sd formula for demonstrative purposes
+n10.sd <- apply(n10,2,sd)*(10-1)/10
+n20.sd <- apply(n20,2,sd)*(20-1)/20
+n30.sd <- apply(n30,2,sd)*(30-1)/30
+sim.sd <- data.frame("n=10"=n10.sd,"n=20"=n20.sd,"n=30"=n30.sd)
+
+head(sim.mean)
+tail(sim.mean)
+```
+
+Beobachtungen
+===============
+- Stichprobenmittelwerte als Schätzwerte für den Populationsmittelwert?
+  - stichprobenspezifischer Fehler (zufälliger Schätzfehler), der von der zufälligen Zusammensetzung der Stichprobe abhängt (z.B. davon, ob zufälligerweise Ausreißer- oder Extremwerte mit eingeflossen sind)
+
+- Zwei systematische Muster:
+  - Kleine Abweichungen zwischen dem Stichprobenmittelwert und dem Populationsmittelwert kommen häufiger vor als große
+ Abweichungen
+  - Die Größe der Schätzfehler nimmt mit der Stichprobengröße ab
+
+Wiederholte Stichprobenziehungen (k = 25), Umfang variiert (n = 10,20,30)
+========================================================================================
+```{r echo=FALSE}
+head(sim.sd)
+tail(sim.sd)
+```
+
+Stichprobenkennwerteverteilung von Stichprobenmittelwerten bei n = 10, 20, 30
+===============================================================================
+|            | Population       | $n=10$                                 | $n=20$                                 | $n=30$                                 |
+|------------|------------------|----------------------------------------|----------------------------------------|----------------------------------------|
+| Mittelwert | $\mu = 66.73$    | $\bar{x}_\bar{x} = `r mean(n10.mean)`$ | $\bar{x}_\bar{x} = `r mean(n30.mean)`$ | $\bar{x}_\bar{x} = `r mean(n30.mean)`$ | 
+| SD         | $\sigma = 15.86$ | $s_\bar{x} = `r sd(n10.mean)*9/10`$    | $s_\bar{x} = `r sd(n20.mean)*19/20`$   | $s_\bar{x} = `r sd(n30.mean)*29/30`$   |
+
+
+
+Beobachtungen
+=======================
+- Der Mittelwert der Stichprobenmittelwerte liegt recht nahe am Populationsmittelwert
+  - näher bei größerer Stichprobengröße
+- Geringere Streuung bei größeren Stichproben
+- Schätzung des Populationsmittelwerts wird also mit größer werdenden Stichproben genauer
+  - geringere Wahrscheinlichkeit, dass die Stichprobe überwiegend extreme Werte enthält
+
+
+Erwartungswert und Standardfehler
+=====================================
+- Geht die Anzahl der gezogenen Stichproben gegen unendlich, näher sich der Mittelwert der Stichprobenmittelwerte dem Populationsmittelwert an
+- Standardfehler des Mittelwerts
+    - $\sigma_\bar{x} = \sqrt{\frac{\sigma_x^2}{n}} = \frac{\sigma_x}{\sqrt{n}}$ 
+    - Ein Mittelwert ist ein umso besserer Schätzer des Populationsmittels, desto geringer der Standardfehler
+- Standardfehler wird kleiner bei größerem Stichprobenumfang
+
+Noch einmal zurück zum z-Test
+===============================
+- Prüfgröße für einen $z$-Test:
+  $$ z = \sqrt{n} \left(\frac{\bar{x}-\mu_0}{\sigma}\right)$$
+- Aber der Standardfehler ist: 
+  $$\sigma_\bar{x} = \frac{\sigma_x}{\sqrt{n}}$$ 
+- und so:
+$$z = \frac{\bar{x}-\mu}{\sigma\bar{_x}} $$ 
+
+Stichprobenvarianz und Stichprobenstandardabweichung
+============================================================
+- Der Stichprobenmittelwert ist ein erwartungstreuer Schätzer des Populationsmittelwerts
+- Dies gilt allerdings nicht für die Stichprobenvarianz bzw. -standardabweichung: systematische Unterschätzung der Populationsvarianz um den Faktor $n/(n-1)$
+- Daher: Multiplikation der empirischen Varianz durch diesen Faktor
+- Stichprobenvarianz:
+  $$\hat{\sigma}_x^2 = \frac{\sum_i=1^n (x_i - \bar{x})^2}{n-1} = \sigma_x^2 \cdot \frac{n}{n-1} $$
+
+
+Standardfehler bei unbekannter Populationsvarianz
+========================================================
+- Da wir meist die Populationsvarianz nicht kennen, müssen wir auch die Berechnung des Standardfehlers anpassen
+
+- Varianz wird durch die Stichprobenvarianz ersetzt
+$$\hat{\sigma}_\bar{x} = \sqrt{\frac{\hat{\sigma}_x^2}{n}} = \sqrt{\frac{s_x^2}{n-1}} $$ 
+
+
+Zusammenfassung der Notation
+==============================
+|            | Mittelwert | Varianz          | Standardweichung |
+|------------|------------|------------------|------------------|
+| empirisch  |  $\bar{x}$ | $s^2$            | $s$              |
+| Stichprobe |  $\bar{x}$ | $\hat{\sigma}^2$ | $\hat{\sigma}$   |
+| Population |  $\mu$     | $\sigma^2$       | $\sigma$         |
+
+
+Gedächtnistraining 
+======================================
+- Populationsverteilung der Testwerte: $\mu$ = 50,$\sigma^2$= 100
+- Mittelwert in der Gruppe der trainierten Personen: $\bar{x}$ = 58
+- Annahme: $n$ = 12 (Stichprobe)
+
+Hypothesen testen bei unbekannter Populationsvarianz
+======================================================
+- Was ist, wenn wir bei unserem Gedächtnistest die Populationsvarianz nicht gekannt hätten, sondern nur den Erwartungswert unter der Nullhypothese? 
+- $z$-Test geht nicht:
+  $$z_\bar{x} = \frac{\bar{x}-\mu}{\sigma_\bar{x}} $$ 
+- Nun wird die Prüfgröße $t$ mit dem aus der Stichprobenstandardabweichung geschätzen Standardfehler berechnet:
+$$t_\bar{x} = \frac{\bar{x}-\mu}{\hat{\sigma}_\bar{x}} $$ 
+
+Hypothesen testen bei unbekannter Populationsvarianz
+======================================================
+- Annahme, $\hat{\sigma}^2 = 114.95$ 
+- $\hat{\sigma}_\bar{x} = \sqrt{\frac{\hat{\sigma}^2}{n-1}} = \sqrt{\frac{114.95}{12-1}} = 3.23$
+- $t_\bar{x} = \frac{\bar{x}-\mu}{\hat{\sigma}_\bar{x}}$  
+- $t_\bar{x} = \frac{58-50}{3.23} =2.48$ 
+
+t-Test (hier: Einstichproben t-Test)
+==============================================
+- Die Prüfgröße $t$ folgt einer $t$-Verteilung. Bei großem $n$ geht sie in eine Standardnormalverteilung über. Bei kleinem $n$ ist sie breiter als die Standardnormalverteilung 
+- Verteilung hängt von der Anzahl der Freiheitsgrade ab
+- Freiheitsgrade (df für *degress of freedom*) = $n-1$
+
+t-Test (hier: Einstichproben t-Test)
+==============================================
+- Unser Wert 2.48 hat bei einem einseitigen Test mit df = 11 eine Wahrscheinlichkeit von $p$ = 0.015. Damit wird die Nullhypothese
+abgelehnt
+```{r}
+1 - pt(2.48,df=11)
+```
+- kritischer Wert bei einem einseitigen Test, df = 11, $\alpha$ = 0.05: 1.80
+```{r}
+qt(0.95,df=11)
+```
+4
+
+t-Verteilung
+===================
+```{r echo=FALSE}
+t.dist <- data.frame(x=seq(-3,3,length.out = 100))
+t.dist$"1" = dt(t.dist$x,df=1)                 
+t.dist$"10" = dt(t.dist$x,df=10)
+t.dist$"100" = dt(t.dist$x,df=100)
+t.dist <- melt(t.dist, id.var="x",variable.name="df",value.name="Dichte")
+qplot(x=x,y=Dichte,data=t.dist,color=df,geom="line")
+```
+
+Was hat es mit den Freiheitsgraden auf sich?
+==============================================
+- Freiheitsgrade eines Kennwerts: Anzahl der Werte, die bei seiner Berechnung frei variieren können
+  - Mittelwert: $n$ Freiheitsgrade
+- Varianz: $n-1$ Freiheitsgrade. Die Summe der Abweichungen vom Mittelwert ist 0. Hat man also z.B. bei einer Stichprobe mit $n$ = 3, $x_1 - \bar{x} = -4$ und $x_2 - \bar{x} = 0$, dann muss $x_3 - \bar{x} = 4$ sein, damit die Summe aller Abweichungen 0 ergibt.
+- $t$-Test: $n-1$ Freiheitsgrade
+
+Voraussetzungen für den 1-Stichproben t-Test
+==============================================
+- Die Daten wurden aufgrund einer Zufallsstichprobe erhoben
+- Das Merkmal ist in der Population normalverteilt
+
+Vergleich von Gruppen
+====================================
+type: section
+
+Beispiel
+===========
+- Zwei Gruppen an Kindern: eine mit einem erblichen Risiko für Dyslexie, die andere ohne dieses Risiko
+  - Unterscheiden sich die Kinder in ihrem Wortschatzerwerb?
+- Studie: Aus jeder Gruppe werden jeweils 80 Kinder eine Woche lang beobachtet und die Anzahl der neuen Wortnennenung wird notiert
+- Ergebnis: 
+  - Risikogruppe: $\bar{x} = 14, s = 2$
+  - Kontrollgruppe: $\bar{x} = 16, s = 2.5$
+- Kann aufgrund dieser Daten die Nullhypothese (kein Unterschied zwischen den Gruppen) zurückgewiesen werden?
+- $t$-Test für unabhängige Stichproben
+
+Was die bisher betrachteten Tests (z-Test und 1-Stichproben t-Test) gemeinsam haben
+=====================================================================================
+- Prüfgröße besteht ...
+  - im Zähler aus einer Differenz zwischen einem beobachteten Kennwert (Beo) und einem theoretischen Wert (Theo), welcher durch die Nullhypothese festgelegt wird.
+  - im Nenner: Standardabweichung des beobachteten Kennwerts im Zähler
+  $$ \text{Prüfgröße} = \frac{\text{Beo} - \text{Theo}}{s_\text{Beo}} $$ 
+- Dieser Logik wird auch der t-Test für unabhängige Stichproben folgen
+
+t-Test für unabhängige Stichproben
+=====================================
+$$ \text{Prüfgröße} = \frac{ (\bar{x}_1 - \bar{x}_2) - (\mu_1-\mu_2) }{\hat{\sigma}_{\bar{x}_1 - \bar{x}_2}} $$ 
+  
+aber $(\mu_1-\mu_2) = 0$ unter der $H_0$, und so 
+
+$$ \text{Prüfgröße} = \frac{ (\bar{x}_1 - \bar{x}_2)}{\hat{\sigma}_{\bar{x}_1 - \bar{x}_2}} $$ 
+
+t-Test für unabhängige Stichproben
+=====================================
+Der Standardfehler im Nenner schätzt man aus den geschätzten Populationsvarianzen:
+$$ \hat{\sigma}_{\bar{x}_1 - \bar{x}_2} = \sqrt{\frac{\hat{\sigma}_\text{inn}}{n_1} + \frac{\hat{\sigma}_\text{inn}}{n_2}}$$
+
+Dafür brauche man die gemeinsame ("gepoolte") Innerhalb-Varianz?:
+
+$$ \hat{\sigma}^2_\text{inn} = \frac{\hat{\sigma}^2_1 \cdot{} (n_1 - 1) + \hat{\sigma}^2_2 \cdot{} (n_2 - 1)}{(n_1 - 1) + (n_2 - 1)}$$ 
+
+t-Test für unabhängige Stichproben
+=====================================
+Wie berechnet man die gemeinsame ("gepoolte") Innerhalb-Varianz?
+
+$$ \hat{\sigma}^2_\text{inn} = \frac{\hat{\sigma}^2_1 \cdot{} (n_1 - 1) + \hat{\sigma}^2_2 \cdot{} (n_2 - 1)}{(n_1 - 1) + (n_2 - 1)}$$ 
+
+- Gewichteter Mittelwert der beiden Stichprobenvarianzen
+
+Gesamtvarianz und Innerhalb-Varianzen
+========================================
+- Beispiel: kleine Population aus 8 Personen (4 Männer, 4 Frauen); 
+- Annahme: Geschlechterunterschied hinsichtlich eines Merkmals X, Frauen erzielen höhere Werte ($\mu_1 - \mu_2 = 2$). 
+
+Gesamtvarianz und Innerhalb-Varianzen
+========================================
+- Gesamtvarianz ist größer als die Varianz innerhalb der Gruppen, da der Mittelwertsunterschied zwischen den Gruppen zur Gesamtvarianz beiträgt
+
+|        |  Population    | $\mu$ |  $\sigma^2$ |
+|--------| ---------------|-------|------------|
+| Männer | 12, 14, 14, 16 | 14    |  2         |
+| Frauen | 14, 16, 16, 18,| 16    |  2         |
+
+$$\mu_1 - \mu_2 = 2, \mu_x = 15, \sigma^2_x = 3 $$
+
+
+Gesamtvarianz und Innerhalb-Varianzen
+========================================
+- Ohne diesen Mittelwertsunterschied: Gesamtvarianz = Varianz der Teilpopulationen
+
+|        |  Population    | $\mu$ |  $\sigma^2$ |
+|--------| ---------------|-------|------------|
+| Männer | 12, 14, 14, 16 | 14    |  2         |
+| Frauen | 12, 14, 14, 16 | 14    |  2         |
+
+$$\mu_1 - \mu_2 = 0, \mu_x = 14, \sigma^2_x = 2 $$
+
+
+
+
+EVIL ALGEBRA
+=============
+type:alert
+incremental: true
+DON'T DO IT
+
+
+$\sqrt{a + b} =  \sqrt{a} + \sqrt{b}$
+
+only true for $a = 0$ or $b = 0$
+
+in general:
+$\sqrt{a + b} \leq  \sqrt{a} + \sqrt{b}$
+
+
+Beispiel
+===========
+- Risikogruppe: $\bar{x} = 14, s = 2, n=80$
+- Kontrollgruppe: $\bar{x} = 16, s = 2.5, n=80$
+
+$$ \hat{\sigma}^2_\text{inn} = \frac{\hat{\sigma}^2_1 \cdot{} (n_1 - 1) + \hat{\sigma}^2_2 \cdot{} (n_2 - 1)}{(n_1 - 1) + (n_2 - 1)}$$ 
+
+
+Beispiel
+===========
+- Risikogruppe: $\bar{x} = 14, s = 2, n=80$
+- Kontrollgruppe: $\bar{x} = 16, s = 2.5, n=80$
+
+$$ \hat{\sigma}_{\bar{x}_1 - \bar{x}_2} = \sqrt{\frac{\hat{\sigma}_\text{inn}}{n_1} + \frac{\hat{\sigma}_\text{inn}}{n_2}}$$
+
+
+Beispiel
+===========
+- Risikogruppe: $\bar{x} = 14, s = 2, n=80$
+- Kontrollgruppe: $\bar{x} = 16, s = 2.5, n=80$
+
+$$ \text{Prüfgröße} = \frac{ (\bar{x}_1 - \bar{x}_2)}{\hat{\sigma}_{\bar{x}_1 - \bar{x}_2}} $$ 
+
+Beispiel
+===========
+- Risikogruppe: $\bar{x} = 14, s = 2, n=80$
+- Kontrollgruppe: $\bar{x} = 16, s = 2.5, n=80$
+- $t = -5.56$
+- kritischer Wert bei $\alpha = 0.05$ (zweiseitig) und df = 158: -1.975
+- Die Nullhypothese kann also zurückgewiesen werden!
+
+***
+```{r}
+qt(0.025,158)
+pt(-5.56,158)
+```
+
+t-Test für unabhängige Stichproben: Voraussetzungen
+======================================================
+- Beide Teilstichproben müssen unabhängige Zufallsstichproben sein
+- Das Merkmal muss in beiden Teilpopulationen stetig und normalverteilt sein; bei hinreichend großen Stichproben (Faustregel: $n$ > 30) ist der Test gegenüber Verletzungen der Verteilungsannahme robust
+- Die Varianzen innerhalb der beiden Stichproben müssen homogen sein
+- bei gleich großen Stichproben ist der Test gegenüber Verletzungen dieser Annahme relativ robust
+
+Beispiel: Speech Science v. Klinische Linguistik
+==================================================
+```{r, eval=FALSE}
+kurs <- read.table("Data/body_dim_long.tab",header = T)
+```
+```{r, echo=FALSE}
+# the path in the previous block isn't correct, so run this one
+kurs <- read.table(normalizePath("../Data/body_dim_long.tab"),header = T)
+```
+```{r}
+klinisch <- subset(kurs, major=="M.A..Klinische.Linguistik")
+speech <- subset(kurs, major=="M.A..Speech.Science")
+```
+
+Speech Science v. Klinische Linguistik: Alter
+===============================================
+```{r}
+t.test(klinisch$age,speech$age)
+```
+
+Speech Science v. Klinische Linguistik: Gewicht
+===============================================
+```{r}
+t.test(klinisch$weight,speech$weight)
+```
+
+Speech Science v. Klinische Linguistik: Größe
+===============================================
+```{r}
+t.test(klinisch$height,speech$height)
+```
+
+Hausaufgabe
+============
+Bis morgen, schauen Sie sich [das Video zu BEST](https://www.youtube.com/watch?v=fhw1j1Ru2i0) an.
+
+Bibliography
+=============
+```{r, echo=FALSE,results='hide'}
+```
+<span style="font-size: 10%;">
+```{r,results='asis',echo=FALSE}
+bibliography(style="markdown",bulleted=FALSE)
+```
+</span>

@@ -8,3 +8,6 @@ packages.used <- c("knitr","knitcitations"
                    )
 
 install.packages(packages.used,dependencies = TRUE)
+
+# Debian/Ubuntu-Nutzer  
+# sudo apt-get install libxml2-dev libcurl4-openssel-dev jags
