@@ -193,7 +193,7 @@ Stichprobenvarianz und Stichprobenstandardabweichung
 - Dies gilt allerdings nicht für die Stichprobenvarianz bzw. -standardabweichung: systematische Unterschätzung der Populationsvarianz um den Faktor $n/(n-1)$
 - Daher: Multiplikation der empirischen Varianz durch diesen Faktor
 - Stichprobenvarianz:
-  $$\hat{\sigma}_x^2 = \frac{\sum_i=1^n (x_i - \bar{x})^2}{n-1} = \sigma_x^2 \cdot \frac{n}{n-1} $$
+  $$\hat{\sigma}_x^2 = \frac{\sum_{i=1}^n (x_i - \bar{x})^2}{n-1} = \sigma_x^2 \cdot \frac{n}{n-1} $$
 
 
 Standardfehler bei unbekannter Populationsvarianz
@@ -312,7 +312,7 @@ t-Test für unabhängige Stichproben
 Der Standardfehler im Nenner schätzt man aus den geschätzten Populationsvarianzen:
 $$ \hat{\sigma}_{\bar{x}_1 - \bar{x}_2} = \sqrt{\frac{\hat{\sigma}_\text{inn}}{n_1} + \frac{\hat{\sigma}_\text{inn}}{n_2}}$$
 
-Dafür brauche man die gemeinsame ("gepoolte") Innerhalb-Varianz?:
+Dafür brauche man die gemeinsame ("gepoolte") Innerhalb-Varianz:
 
 $$ \hat{\sigma}^2_\text{inn} = \frac{\hat{\sigma}^2_1 \cdot{} (n_1 - 1) + \hat{\sigma}^2_2 \cdot{} (n_2 - 1)}{(n_1 - 1) + (n_2 - 1)}$$ 
 
