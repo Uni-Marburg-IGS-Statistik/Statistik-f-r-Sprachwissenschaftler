@@ -324,6 +324,37 @@ $$ \hat{\sigma}^2_\text{inn} = \frac{\hat{\sigma}^2_1 \cdot{} (n_1 - 1) + \hat{\
 
 - Gewichteter Mittelwert der beiden Stichprobenvarianzen
 
+Gesamtvarianz und Innerhalb-Varianzen
+========================================
+- Beispiel: kleine Population aus 8 Personen (4 Männer, 4 Frauen); 
+- Annahme: Geschlechterunterschied hinsichtlich eines Merkmals X, Frauen erzielen höhere Werte ($\mu_1 - \mu_2 = 2$). 
+
+Gesamtvarianz und Innerhalb-Varianzen
+========================================
+- Gesamtvarianz ist größer als die Varianz innerhalb der Gruppen, da der Mittelwertsunterschied zwischen den Gruppen zur Gesamtvarianz beiträgt
+
+|        |  Population    | $\mu$ |  $\sigma^2$ |
+|--------| ---------------|-------|------------|
+| Männer | 12, 14, 14, 16 | 14    |  2         |
+| Frauen | 14, 16, 16, 18,| 16    |  2         |
+
+$$\mu_1 - \mu_2 = 2, \mu_x = 15, \sigma^2_x = 3 $$
+
+
+Gesamtvarianz und Innerhalb-Varianzen
+========================================
+- Ohne diesen Mittelwertsunterschied: Gesamtvarianz = Varianz der Teilpopulationen
+
+|        |  Population    | $\mu$ |  $\sigma^2$ |
+|--------| ---------------|-------|------------|
+| Männer | 12, 14, 14, 16 | 14    |  2         |
+| Frauen | 12, 14, 14, 16 | 14    |  2         |
+
+$$\mu_1 - \mu_2 = 0, \mu_x = 14, \sigma^2_x = 2 $$
+
+
+
+
 EVIL ALGEBRA
 =============
 type:alert
@@ -369,6 +400,8 @@ Beispiel
 - $t = -5.56$
 - kritischer Wert bei $\alpha = 0.05$ (zweiseitig) und df = 158: -1.975
 - Die Nullhypothese kann also zurückgewiesen werden!
+
+***
 ```{r}
 qt(0.025,158)
 pt(-5.56,158)
