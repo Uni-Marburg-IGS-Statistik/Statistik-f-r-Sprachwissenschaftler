@@ -83,6 +83,11 @@ Stichprobe vs. Population
 ====================================
 type: section
 
+Stichprobe vs. Population
+====================================
+![](inference_sample_pop.png)
+<small> Danke und (c) IBS </small>
+
 Zentrale Thematik der schließenden Statistik
 =================================================
 incremental: true
