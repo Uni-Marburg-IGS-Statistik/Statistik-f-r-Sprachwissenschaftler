@@ -1,0 +1,468 @@
+Statistik für Sprachwissenschaftler
+========================================================
+author: Phillip M . Alday
+date: 2014-05-13
+autosize: false
+
+```{r setup, include=FALSE}
+opts_chunk$set(cache=TRUE,prompt=TRUE)
+library(knitcitations)
+library(ggplot2)
+library(reshape2)
+cite_options(tooltip = TRUE
+             , linked = TRUE
+             , numerical = TRUE
+             , bibtex_data = FALSE)
+```
+
+
+Aufwachen und sich errinnern!
+====================================
+type: section
+
+
+Bisher
+=======
+- Mehr zu Stichproben
+- Vergleich von Gruppen ($t$-Test)
+- Confidence-Intervale
+
+Morgen
+========
+- Vergleich von Gruppen ($t$-Test) II
+- Mehr zu Confidence-Intervalen
+- evtl. [BEST](http://www.indiana.edu/~kruschke/BEST/) (etwa bayes'scher $t$-Test) und Credible-Intervale  
+- Interferenz in der Praxis: Der Sinn von statischen Tests, neuartige Fehler 
+
+
+t-Test für unabhängige Stichproben: Voraussetzungen
+======================================================
+- Beide Teilstichproben müssen unabhängige Zufallsstichproben sein
+- Das Merkmal muss in beiden Teilpopulationen stetig und normalverteilt sein; bei hinreichend großen Stichproben (Faustregel: $n$ > 30) ist der Test gegenüber Verletzungen der Verteilungsannahme robust
+- Die Varianzen innerhalb der beiden Stichproben müssen homogen sein
+- bei gleich großen Stichproben ist der Test gegenüber Verletzungen dieser Annahme relativ robust
+
+
+Vergleich von Gruppen II
+=========================
+type: section
+Voraussetzungen des Vergleichs
+
+
+Datensatz für heute: Aphasiker
+================================
+```{r, eval=FALSE}
+aphasiker <- read.csv2("Data/aphasiker.csv",header = T)
+```
+```{r, echo=FALSE}
+# the path in the previous block isn't correct, so run this one
+aphasiker <- read.csv2(normalizePath("../Data/aphasiker.csv"),header = T)
+```
+```{r}
+head(aphasiker)
+```
+
+Datensatz für heute: Aphasiker
+================================
+```{r}
+qplot(x=Lex_Dec,
+      data=na.omit(aphasiker),
+      geom="density",
+      fill=Aphasie, alpha=I(0.3))
+```
+
+Datensatz für heute: Aphasiker
+================================
+```{r}
+broca.lex.dec <- aphasiker[aphasiker$Aphasie == "B","Lex_Dec"]
+wernicke.lex.dec <- aphasiker[aphasiker$Aphasie == "W","Lex_Dec"]
+```
+
+Datensatz für heute: Aphasiker
+================================
+```{r}
+mean(broca.lex.dec)
+mean(wernicke.lex.dec)
+```
+Ist der Unterschied signifikant? 
+
+Aphasiker: t-test für unabhänige Stichproben
+===============================================
+$t = \frac{\bar{x}-\mu}{\hat{\sigma}_\bar{x}}$ &nbsp;&nbsp;&nbsp;&nbsp;
+$\hat{\sigma}_{\bar{x}_1 - \bar{x}_2} = \sqrt{\frac{\hat{\sigma}_\text{inn}}{n_1} + \frac{\hat{\sigma}_\text{inn}}{n_2}}$
+```{r}
+zaehler = mean(broca.lex.dec) - mean(wernicke.lex.dec)
+zaehler
+pooled = (var(broca.lex.dec) + var(wernicke.lex.dec)) / 2
+pooled
+```
+
+Aphasiker: t-test für unabhänige Stichproben
+===============================================
+$t = \frac{\bar{x}-\mu}{\hat{\sigma}_\bar{x}}$ &nbsp;&nbsp;&nbsp;&nbsp;
+$\hat{\sigma}_{\bar{x}_1 - \bar{x}_2} = \sqrt{\frac{\hat{\sigma}_\text{inn}}{n_1} + \frac{\hat{\sigma}_\text{inn}}{n_2}}$
+```{r}
+nenner = sqrt((pooled/length(broca.lex.dec)) +  (pooled/length(wernicke.lex.dec))  )
+nenner
+t_wert = zaehler / nenner
+t_wert
+```
+
+Aphasiker: t-test für unabhänige Stichproben
+===============================================
+```{r}
+dfs = length(broca.lex.dec) - 1 + length(wernicke.lex.dec) - 1
+dfs
+abs(qt(0.025,df=16)) # symmetrische Verteilung, zweiseitiger Test
+```
+
+t-Test für unabhängige Stichproben: Voraussetzungen
+======================================================
+- Beide Teilstichproben müssen unabhängige Zufallsstichproben sein
+- Das Merkmal muss in beiden Teilpopulationen stetig und normalverteilt sein; bei hinreichend großen Stichproben (Faustregel: $n$ > 30) ist der Test gegenüber Verletzungen der Verteilungsannahme robust
+- Die Varianzen innerhalb der beiden Stichproben müssen homogen sein
+- bei gleich großen Stichproben ist der Test gegenüber Verletzungen dieser Annahme relativ robust
+
+*Zur Überprüfung gleich mehr...*
+
+Aphasiker: t-test für unabhänige Stichproben
+===============================================
+```{r}
+# wenn Varianzhomogenität vorliegt
+t.test(broca.lex.dec,wernicke.lex.dec,
+       var.equal=TRUE)
+```
+
+Aphasiker: t-test für unabhänige Stichproben
+===============================================
+```{r}
+# 1 < 2
+t.test(broca.lex.dec,wernicke.lex.dec,
+       var.equal=TRUE,alternative="less")
+```
+
+Aphasiker: t-test für unabhänige Stichproben
+===============================================
+```{r}
+# 1 > 2
+t.test(broca.lex.dec,wernicke.lex.dec,
+       var.equal=TRUE,alternative="greater")
+```
+
+Alternative Syntax für den t-Test
+==================================
+```{r}
+aphasie.bw <- aphasiker[aphasiker$Aphasie == "W" | aphasiker$Aphasie == "B", c("Aphasie","Lex_Dec")] 
+head(aphasie.bw)
+```
+<small>Wenn die Daten in dieser Form vorliegen, können wir statistische Tests für Gruppenunterschiede durchführen, indem wir die abhängige Variable nach den Stufen der unabhängigen Variable aufteilen (und so unsere beiden Gruppen erhalten)</small>
+
+Alternative Syntax für den t-Test
+==================================
+<small>in diesem Fall ist die Syntax für die Funktion t.test() etwas anders: man verwendet statt eines Kommas eine Tilde, um die Relation zwischen abhängiger und unabhängiger Variable zu verdeutlichen 
+```{r}
+t.test(aphasie.bw$Lex_Dec ~ aphasie.bw$Aphasie, var.equal = TRUE)
+```
+</small>
+
+Homogenität der Varianzen?
+===========================
+<small>
+- Dies kann man in R mit der Funktion var.test herausfinden; diese führt den so genannten Fisher's $F$-Test durch, bei dem die größere Varianz durch die kleinere geteilt wird 
+- Bei identischen Varianzen ist das Ergebnis 1; die Frage ist also, ob sich der Quotient signifikant von 1 unterscheidet
+</small>
+
+Homogenität der Varianzen?
+===========================
+```{r}
+var.test(aphasie.bw$Lex_Dec ~ aphasie.bw$Aphasie)
+```
+
+Homogenität der Varianzen?
+===========================
+```{r}
+var.test(broca.lex.dec,wernicke.lex.dec)
+```
+
+Homogenität der Varianzen?
+===========================
+- der $F$-Test geht auf die $F$-Verteilung zurück (mehr dazu später), die zwei Parameter für Freiheitsgrad (Nenner und Zähler) hat
+```{r}
+df.nenner <- length(broca.lex.dec) - 1 
+df.zaehler <- length(wernicke.lex.dec) - 1
+var.nenner <- var(broca.lex.dec)
+var.zaehler <- var(wernicke.lex.dec)
+var.ratio <- var.nenner / var.zaehler
+var.ratio
+```
+
+Homogenität der Varianzen?
+===========================
+- der $F$-Test geht auf die $F$-Verteilung zurück (mehr dazu später), die zwei Parameter für Freiheitsgrad (Nenner und Zähler) hat
+```{r}
+# * 2 weil two-tailed
+pf(var.ratio, df1=df.nenner, df2=df.zaehler,lower.tail=F) * 2
+```
+Mehr dazu später! 
+
+Homogenität der Varianzen?
+===========================
+- Alternativ zur Überprüfung der Varianzhomogenität mit dem F-Test kann man auch den so genannten Levene-Test (aus dem Paket `car`) anwenden
+- dieser Test hat den Vorteil, dass er robuster gegenüber Verletzungen der Normalverteilungsannahme ist (dies ist ein Problem des F-Tests!)
+```{r}
+library(car)
+```
+
+
+Homogenität der Varianzen?
+===========================
+<small>
+- in diesem Fall ist unsere Nullhypothese unsere "Wunschhypothese"
+- d.h. wenn die Nullhypothese beibehalten werden kann, gehen wir davon aus, dass sich die Populationsvarianzen nicht signifikant voneinander unterscheiden
+```{r}
+leveneTest(aphasie.bw$Lex_Dec ~ aphasie.bw$Aphasie)
+```
+
+*Hier funktioniert nur die Syntax mit der Tilde!* 
+</small>
+
+Wenn die Varianzhomogenität verletzt ist?
+===========================================
+<small>
+- wenn Varianzungleichheit der Populationen vorliegt, greift man auf eine t-Test Variante mit der so genannten Welch-Korrektur zurück
+- der Welch-Test korrigiert zum einen die Freiheitsgrade - er verringert sie und macht den Test damit strenger - zum anderen wird auch die eigentliche t-Prüfgröße anders berechnet, da es aufgrund der Varianzheterogenität keine gepoolte Innerhalb-Varianz gibt
+- die gute Nachricht: Simulationen haben gezeigt, dass der t-Test bei gleich großen Stichproben relativ robust gegen Verletzungen der Varianzhomogenität ist (die Welch-Korrektur führt hier nur zu einer Korrektur der Freiheitsgrade, der t-Wert verändert sich durch die Korrektur nicht!)
+</small>
+
+t-test mit Varianzheterogenität
+==================================
+<small>
+```{r}
+t.test(broca.lex.dec,wernicke.lex.dec,
+       var.equal=TRUE)
+```
+</small>
+
+t-test mit Varianzheterogenität
+==================================
+<small>
+```{r}
+t.test(broca.lex.dec,wernicke.lex.dec)
+```
+*Lässt man den Parameter `var.equal=TRUE` weg, gibt man damit an, dass die Voraussetzung der Varianzhomogenität nicht erfüllt ist!*
+</small>
+
+Beispiel: Speech Science v. Klinische Linguistik
+==================================================
+```{r, eval=FALSE}
+kurs <- read.table("Data/body_dim_long.tab",header = T)
+```
+```{r, echo=FALSE}
+# the path in the previous block isn't correct, so run this one
+kurs <- read.table(normalizePath("../Data/body_dim_long.tab"),header = T)
+```
+```{r}
+klinisch <- subset(kurs, major=="M.A..Klinische.Linguistik")
+speech <- subset(kurs, major=="M.A..Speech.Science")
+```
+
+Maß der Menschen: Varianzhomogenität
+=====================================
+```{r}
+var.test(klinisch$age,speech$age)
+```
+
+Maß der Menschen: Varianzhomogenität
+=====================================
+```{r}
+var.test(klinisch$weight,speech$weight)
+```
+
+Maß der Menschen: Varianzhomogenität
+=====================================
+```{r}
+var.test(klinisch$height,speech$height)
+```
+
+Normalverteilung der Populationen?
+====================================
+- eine weitere Voraussetzung für den $t$-Test ist, dass das gemessene Merkmal in den zu vergleichenden Population stetig und normalverteilt ist
+- hier gilt allerdings auch, dass der Test ab einer Stichprobengröße von $n>30$ gegenüber Verletzungen dieser Annahme robust ist (folgt aus dem **zentralen Grenzwertsatz**, *central limit theorem*)
+- wie können wir aber z.B. bei kleineren Stichproben überprüfen ob Normalverteilung vorliegt?
+
+Überprüfung der Normalverteilung
+==================================
+- rund 40 Tests, mit denen auf unterschiedlichen Wegen getestet werden kann, ob die Häufigkeitsverteilung der Stichprobe signifikant von einer Normalverteilung abweicht - d.h. auch hier ist die Nullhypothese die "Wunschhypothese"
+- hier der **Shapiro-Wilk-Test** (bessere Trennschärfe als beim Kolmogorow-Smirnow-Anpassungstest) 
+
+Überprüfung der Normalverteilung
+==================================
+```{r}
+shapiro.test(broca.lex.dec)
+shapiro.test(wernicke.lex.dec)
+```
+*Keine signifikante Abweichung von der Normalverteilung!*
+
+Visuelle Überprüfung der Normalverteilung
+===========================================
+```{r}
+plot(density(broca.lex.dec))
+```
+***
+```{r}
+qplot(broca.lex.dec,geom="density")
+```
+
+Visuelle Überprüfung der Normalverteilung
+===========================================
+```{r}
+plot(density(wernicke.lex.dec))
+```
+***
+```{r}
+qplot(wernicke.lex.dec,geom="density")
+```
+
+wenn Normalverteilung nicht gegeben ist?
+==========================================
+- Daten transformieren (mit Vorsicht genießen!): 
+  - strecken (Exponentialtransformation)
+  - stauchen (logaritmische Transformation)
+- verteilungsfreie (nicht-parametrische Tests) ausweichen 
+- evtl. auch bayes'sche Alternativen, wo man die Grundverteilung (den Prior) anders feststellen bzw. festlegen kann
+
+Unterschiede zwischen zwei abhängigen Stichproben
+===================================================
+type:section
+
+Was bedeutet abhängig?
+=======================
+incremental:true
+ein Messwert in Stichprobe 1 wird von einem Messwert in Stichprobe 2 beeinflusst
+
+- **Messwiederholung**: z.B. Messwertpaare der gleichen Person zu unterschiedlichen Zeiten (z.B. vorher,nachher) bzw. unter verschiedenen Bedingungen
+- **Natürliche Paare**: z.B. Geschwisterppare, Ehepaare 
+- **Parallelisierung**: Aufteilung in Gruppen nicht zufällig, sondern systematische nach einem bestimmten Kriterium
+
+Beispiel
+=========
+eine neue Diät:
+- 10 freiwillige Teilnehmer
+- zwei Messpunkte: vorher und nachher
+```{r}
+vorher  <- c(65.4, 77.6, 66.9, 61.3, 66.5, 67.4, 73.9, 72.6, 70.7, 68.9) 
+nachher <- c(47.8, 50.1, 58.9, 67.2, 75.5, 58.1, 69.8, 59.4, 44.3, 63.8) 
+nachher - vorher
+```
+
+t-Test für abhängige Stichproben
+=================================
+- ähnliche Logik zum $t$-Test für unabhänige Stichproben: unterscheiden sich zwei Stichprobenmittelwerte bedeutsam?
+- $H_0$: $\mu_1 - \mu_2 = 0$
+- dazu: Differenzen als eigentliche Stichprobe
+$$ d_i = x_{1,i} - x_{2,i}$$
+
+
+$$ \bar{x}_d = \frac{\sum_{i=1}^n d_i}{n} $$
+
+
+Unterschied zum Test für unabhängige Stichproben
+==================================================
+- die Varianz der einen Messreihe wird durch die Varianz der anderen Messreihe beeinflusst 
+- davon auszugehen, dass sich zwei Werte *innerhalb* eines Messwertpaares ähnlicher sind als zwei Messwerte *zwischen* unterschiedlichen Messwertpaaren: keine Berechnung der Innerhalb-Varianz
+- $df = n-1$ ($n$ = Anzahl der Messwertpaare!)
+
+Prüfgröße berechnen
+=====================
+type: incremental
+$$ \text{Prüfgröße} = \frac{\text{Beo} - \text{Theo}}{s_\text{Beo}} $$ 
+
+$$ t = \frac{\bar{x}_d - \mu_d}{\hat{\sigma}_{\bar{x}_d}} $$ 
+
+aber $H_0$ besagt $\mu_d = 0$, daher
+
+$$ t_{\bar{x}_d} = \frac{\bar{x}_d}{\hat{\sigma}_{\bar{x}_d}} $$ 
+
+Standardfehler der Differenzen:
+==================================
+$$ \hat{\sigma}_{\bar{x}_d} = \frac{\hat{\sigma}_{d}}{\sqrt{n}} $$
+
+(Standardabweichung durch Quadratwurzel von $n$, wie üblich!)
+
+mit  
+$$ \hat{\sigma}_{d} = \sqrt{\frac{  \sum_{i=1}^n \left(d_i - \bar{x}_d \right)^2   }{n-1}}$$
+
+(Summe der quardrierten Abstände zum Mittelwert, durch  $n-1$ dividierd, dann Quadratwurzel des Ganzen -- wie üblich!)
+
+Einsetzen
+============
+```{r}
+diff <- nachher - vorher
+diff.sd <- sd(diff)
+diff.sd
+diff.se <- diff.sd / sqrt(length(diff))
+diff.se
+t <- mean(diff) / diff.se
+t
+```
+
+Kritische Werte
+=================
+```{r}
+# two-tailed test
+pt(t,df=length(diff)-1) * 2
+# critical values
+qt(0.025,df=length(diff)-1)
+qt(1 - 0.025,df=length(diff)-1)
+```
+
+Mit R
+==========
+```{r}
+t.test(nachher,vorher,paired = TRUE)
+```
+
+Aber eigentlich wollen wir abnehmen, nicht bloß ändern
+========================================================
+```{r}
+t.test(nachher,vorher,paired = TRUE, alternative = "less")
+```
+
+Voraussetzungen abhängiger t-Test
+===================================
+- die Stichproben müssen abhängig voneinander sein (Messwiederholung, natürliche Paare, Parallelisierung)
+- die stetige Differenzvariable $d$ muss in der Population normalverteilt sein, bei ausreichend großen Stichproben ($n>30$) ist der Test trotz einer Verletzung dieses Kriteriums relativ robust
+
+Confidence Intervale
+===================
+type:section
+Frequentistische Interferenz ist manchmal nicht so leicht ...
+
+
+Speech Science v. Klinische Linguistik: Alter
+===============================================
+```{r}
+t.test(klinisch$age,speech$age)
+```
+
+Speech Science v. Klinische Linguistik: Gewicht
+===============================================
+```{r}
+t.test(klinisch$weight,speech$weight)
+```
+
+Speech Science v. Klinische Linguistik: Größe
+===============================================
+```{r}
+t.test(klinisch$height,speech$height)
+```
+
+Bibliography
+=============
+```{r, echo=FALSE,results='hide'}
+```
+<span style="font-size: 10%;">
+```{r,results='asis',echo=FALSE}
+bibliography(style="markdown",bulleted=FALSE)
+```
+</span>

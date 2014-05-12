@@ -5,6 +5,7 @@ packages.used <- c("knitr","knitcitations"
                    ,"reshape2"
                    ,"reshape"
                    ,"sn"
+                   ,"car"
                    )
 
 install.packages(packages.used,dependencies = TRUE)
