@@ -138,7 +138,7 @@ rt <- read.table("punkt_rt.tab",header=TRUE)
 # CODE_HIER
 
 # Hat die logarithmische Transformation insgesamt geholfen? Berechnen Sie zum
-# Schluss den (Welch) t-Test für die logarithmische Daten. Bekommen Sie das
+# Schluss den (Welch) t-Test für die logarithmischen Daten. Bekommen Sie das
 # gleiche Ergebnisse wie bei den Ausgangsdaten?
 
 # CODE_HIER
