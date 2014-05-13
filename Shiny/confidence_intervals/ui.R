@@ -9,12 +9,14 @@ shinyUI(fluidPage(
                                 ,"Confidence Level"
                                 ,min = 0.01
                                 ,max = 0.99
-                                ,value = 0.95)
+                                ,value = 0.95
+                                ,animate=animationOptions(interval=6000,loop=TRUE))
                  ,  sliderInput("sd"
                                 ,"Standard Deviation"
                                 ,min = 1
                                 ,max = 10
-                                ,value = 1)
+                                ,value = 1
+                                ,animate=animationOptions(interval=6000,loop=TRUE))
                  ,  sliderInput("population"
                                 ,"Number of points to simulate for the population"
                                 ,min = 10
@@ -25,7 +27,7 @@ shinyUI(fluidPage(
                                 ,min = 1
                                 ,max = 100
                                 ,value = 10,
-                                ,animate=animationOptions(interval=2000,loop=TRUE))
+                                ,animate=animationOptions(interval=6000,loop=TRUE))
                  ,h5("Features that may slow things down, but provide a finer picture")
                  ,  sliderInput("nsamples"
                                 ,"Number of samples"
@@ -43,10 +45,11 @@ shinyUI(fluidPage(
                ,plotOutput("sample.means")
                #,h2("Confidence Interval (via t.test)")
                #,uiOutput("ttest")
-               ,h2("Sample distributions")
-               ,plotOutput("sample.distributions")
                ,h2("Population")
                ,plotOutput("population.distribution")
+               ,h2("Sample distributions")
+               ,plotOutput("sample.distributions",height=768)
+
     )
   )
   
