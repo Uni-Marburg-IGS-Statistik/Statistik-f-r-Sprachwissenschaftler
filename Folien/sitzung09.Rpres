@@ -5,6 +5,7 @@ date: 2014-05-13
 autosize: false
 
 ```{r setup, include=FALSE}
+library(knitr)
 opts_chunk$set(cache=TRUE,prompt=TRUE)
 library(knitcitations)
 library(ggplot2)
