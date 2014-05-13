@@ -43,12 +43,16 @@ Woche | Datum          | Themen
 |     | **06.05.2014** | Statistische Inteferenz, $p$-Werte, Intuition von "Messfehler" und "Wahrscheinlichkeit", Fehler-Arten
 |     |                | *Hausaufgabe bis 12.05.2014 12 Uhr:*
 |     |                | 1. `hausaufgabe07.Rmd`
-05.   | **12.05.2014** | Mehr zu Stichproben, Vergleich von Gruppen ($t$-Test) und Confidence-Intervale, evtl. [BEST](http://www.indiana.edu/~kruschke/BEST/) (etwa bayes'scher $t$-Test) und Credible-Intervale  
-|     | **13.05.2014** | Interferenz in der Praxis: Der Sinn von statischen Tests, neuartige Fehler 
-06.   | **19.05.2014** | ANOVA I
-|     | **20.05.2014** | ANOVA II
-07.   | **26.05.2014** | ANOVA III
-|     | **27.05.2014** | ANOVA IV (evtl. auch Fixed vs. Random Effects à Clark 1973)
+05.   | **12.05.2014** | Mehr zu Stichproben, Vergleich von Gruppen ($t$-Test), Erwähnung von Confidence-Intervalen und . [BEST](http://www.indiana.edu/~kruschke/BEST/) (etwa bayes'scher $t$-Test) 
+|     |                | *Hausaufgabe bis 13.05.2014 10 Uhr:*
+|     |                | 1. Schauen Sie sich [das Video zu BEST](https://www.youtube.com/watch?v=fhw1j1Ru2i0) BEST an.
+|     | **13.05.2014** | Vergleich von Gruppen ($t$-Test) II: Voraussetzungen und Varianten
+|     |                | *Hausaufgabe bis 19.05.2014 12 Uhr:*
+|     |                | 1. `hausaufgabe09.R`
+06.   | **19.05.2014** | Confidence und Credible-Intervale, BEST, Interferenz in der Praxis: Der Sinn von statischen Tests, neuartige Fehler, Unterschiede in frequentistischen und bayes'schen Aussagen
+|     | **20.05.2014** | ANOVA I
+07.   | **26.05.2014** | ANOVA II
+|     | **27.05.2014** | ANOVA III (evtl. auch Fixed vs. Random Effects à Clark 1973)
 08.   | **02.06.2014** | lineare Regression I 
 |     | **03.06.2014** | lineare Regression II
 09.   | **09.06.2014** | fällt aus! (Pfingstmontag)
