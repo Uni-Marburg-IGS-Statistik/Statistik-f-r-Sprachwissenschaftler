@@ -64,9 +64,9 @@ rt <- read.table("punkt_rt.tab",header=TRUE)
 # ausführen, schauen Sie sich nochmal die Grafik an. Haben beide Verteilungen in
 # etwa die gleiche Streuung, auch wenn sich die Modalwerte (grafisch: höchste 
 # Gipfel) unterscheiden? Sind die Gruppen beide normal verteilt? Hier müssen Sie
-# keine Antwort aber Sie sollten schon auf ein Stück Schmierpapier schreiben,
+# keine Antwort geben, aber Sie sollten schon auf ein Stück Schmierpapier schreiben,
 # was Sie da denken. Sie können dann nämlich sich selber nicht täuschen, dass
-# Sie vorne an etwas behaupten haben.
+# Sie von vorneherein etwas behaupten haben.
 
 # Berechnen Sie jetzt den F-Test:
 #print(CODE_HIER)
@@ -90,7 +90,7 @@ rt <- read.table("punkt_rt.tab",header=TRUE)
 # print(two.sample)
 # print(welch)
 
-# Das Ergebnisse der verschiedenen Test-Funktionen in R ist übrigens eine Liste.
+# Das Ergebnis der verschiedenen Test-Funktionen in R ist übrigens eine Liste.
 # Wir können das ausnutzen, um zu schauen, ob es einen Unterschied zwischen den
 # beiden Testverfahren gab. Wenn die Varianz homogen war, sollten wir keinen
 # Unterschied sehen:
@@ -132,14 +132,13 @@ rt <- read.table("punkt_rt.tab",header=TRUE)
 
 # Sind die Daten "normaler" gewordern? Berechnen Sie den Shapiro-Test für beide 
 # Gruppen. Nach jeder Gruppe sollten Sie auch programmatisch (=durch if-Blöcke)
-# ausdrücken, ob die Daten normal verteilt sind.
+# ausdrücken, ob die Daten normal verteilt sind. 
+# (Für die fortgeschrittenen: hier könnte man auch eine for-Schleife nutzen...)
 
 # CODE_HIER
 
 # Hat die logarithmische Transformation insgesamt geholfen? Berechnen Sie zum
 # Schluss den (Welch) t-Test für die logarithmische Daten. Bekommen Sie das
-# gleiche Ergebnisse wie beim Ausgangsdaten?
+# gleiche Ergebnisse wie bei den Ausgangsdaten?
 
 # CODE_HIER
-
-
