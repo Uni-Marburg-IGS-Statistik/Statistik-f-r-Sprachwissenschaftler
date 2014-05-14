@@ -143,16 +143,15 @@ if (shapiro2$p.value > 0.05){
 # Daten. Nach jedem Test sollten Sie auch programmatisch (=durch if-Blöcke)
 # ausdrücken, ob die Varianzen homogen sind.
 
-f-testErgebnis <- var.test(rt$logrt, rt$subj == "1" ~rt$logrt, rt$subj == "2")
-levene-testErgebnis <- leveneTest(rt$logrt, rt$subj == "1" ~ rt$logrt, rt$subj == "2")
-
-if (f-testErgebnis$p.value < 1){
+f-testErgebnis <- var.test(rt$logRT, rt$subj == 1 ~ rt$logRT, rt$subj == 2)
+levene-testErgebnis <- leveneTest(rt$logRT, rt$subj == 1 ~ rt$logRT, rt$subj == 2)
+if (f-testErgebnis < 1){
   print ("Varianzen sind homogen")
 }else{
   print ("Varianzen sind nicht homogen")
 }
 
-if (levene-testErgebnis$p.value > 0){
+if (levene-testErgebnis > 0){
   print ("Varianzen sind homogen")
 }else{
   print ("Varianzen sind nicht homogen")
@@ -163,7 +162,15 @@ if (levene-testErgebnis$p.value > 0){
 # ausdrücken, ob die Daten normal verteilt sind. 
 # (Für die fortgeschrittenen: hier könnte man auch eine for-Schleife nutzen...)
 
-#CODE
+#shapiro <- shapiro.test(rt[rt$subj==1,"RT"])
+for (i in rt$subj) {
+  shapiro <- shapiro.test(rt[rt$subj, "RT"])
+  if (shapiro$p.value > .05){
+    print("Shapiro's test für Person ".rt$subj." insignikant, die Daten sind normal verteilt.")
+  }else{
+          print("Shapiro's test für Person ".rt$subj." signikant, die Daten sind nicht normal verteilt.")
+        }
+}
 
 # Hat die logarithmische Transformation insgesamt geholfen? Berechnen Sie zum
 # Schluss den (Welch) t-Test für die logarithmischen Daten. Bekommen Sie das
