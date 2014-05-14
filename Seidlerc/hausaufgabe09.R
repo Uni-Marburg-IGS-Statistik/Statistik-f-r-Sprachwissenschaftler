@@ -1,6 +1,6 @@
 # Hausaufgabe 09
-# Phillip Alday <phillip.alday@staff.uni-marburg.de>
-# 2014-05-02
+# Carmen Seidler <seidlerc@students.uni-marburg.de>
+# 2014-05-14
 # Dieses Werk ist lizenziert unter einer CC-BY-NC-SA Lizenz.
 
 
@@ -43,14 +43,14 @@ library(car)
 rt <- read.table("punkt_rt.tab",header=TRUE) 
 # Die Daten sind Reaktionszeiten von zwei Versuchspersonen auf einen weißen
 # Punkt auf einem schwarzen Bildschirm. Die Verzögerung (delay) zwischen Trials
-# (Läufen) war zufällig und mitaugenommen. 
+# (Läufen) war zufällig und mitaufgenommen. 
 
 # (Wie würden Sie abschneiden? Wenn Sie wollen, können Sie das Experiment (im
 # Data-Ordner) mit Hilfe der open source Software OpenSesame
 # (http://osdoc.cogsci.nl/) auch zu Hause ausführen!)
 
 # Wir schauen uns erst mal eine Zusammenfassung der Daten an:
-# print(summary(rt))
+ print(summary(rt))
 
 # Wir sehen sofort, dass R die Variabel "subj" als numerische Variable
 # behandelt hat, obwohl sie eigentlich kategorisch ist. Das müssen wir ändern:
