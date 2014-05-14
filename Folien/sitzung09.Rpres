@@ -5,6 +5,7 @@ date: 2014-05-13
 autosize: false
 
 ```{r setup, include=FALSE}
+library(knitr)
 opts_chunk$set(cache=TRUE,prompt=TRUE)
 library(knitcitations)
 library(ggplot2)
@@ -27,13 +28,11 @@ Bisher
 - Vergleich von Gruppen ($t$-Test)
 - Confidence-Intervale
 
-Morgen
+Heute
 ========
 - Vergleich von Gruppen ($t$-Test) II
 - Mehr zu Confidence-Intervalen
 - evtl. [BEST](http://www.indiana.edu/~kruschke/BEST/) (etwa bayes'scher $t$-Test) und Credible-Intervale  
-- Interferenz in der Praxis: Der Sinn von statischen Tests, neuartige Fehler 
-
 
 t-Test für unabhängige Stichproben: Voraussetzungen
 ======================================================
