@@ -9,12 +9,22 @@ shinyUI(fluidPage(
                                 ,"Confidence Level"
                                 ,min = 0.01
                                 ,max = 0.99
+<<<<<<< HEAD
                                 ,value = 0.95)
+=======
+                                ,value = 0.95
+                                ,animate=animationOptions(interval=6000,loop=TRUE))
+>>>>>>> 2d35a226033d802734551a5f346bca9d24ad9652
                  ,  sliderInput("sd"
                                 ,"Standard Deviation"
                                 ,min = 1
                                 ,max = 10
+<<<<<<< HEAD
                                 ,value = 1)
+=======
+                                ,value = 1
+                                ,animate=animationOptions(interval=6000,loop=TRUE))
+>>>>>>> 2d35a226033d802734551a5f346bca9d24ad9652
                  ,  sliderInput("population"
                                 ,"Number of points to simulate for the population"
                                 ,min = 10
@@ -25,7 +35,11 @@ shinyUI(fluidPage(
                                 ,min = 1
                                 ,max = 100
                                 ,value = 10,
+<<<<<<< HEAD
                                 ,animate=animationOptions(interval=2000,loop=TRUE))
+=======
+                                ,animate=animationOptions(interval=6000,loop=TRUE))
+>>>>>>> 2d35a226033d802734551a5f346bca9d24ad9652
                  ,h5("Features that may slow things down, but provide a finer picture")
                  ,  sliderInput("nsamples"
                                 ,"Number of samples"
@@ -43,10 +57,18 @@ shinyUI(fluidPage(
                ,plotOutput("sample.means")
                #,h2("Confidence Interval (via t.test)")
                #,uiOutput("ttest")
+<<<<<<< HEAD
                ,h2("Sample distributions")
                ,plotOutput("sample.distributions")
                ,h2("Population")
                ,plotOutput("population.distribution")
+=======
+               ,h2("Population")
+               ,plotOutput("population.distribution")
+               ,h2("Sample distributions")
+               ,plotOutput("sample.distributions",height=768)
+
+>>>>>>> 2d35a226033d802734551a5f346bca9d24ad9652
     )
   )
   
