@@ -171,5 +171,7 @@ if (shapiro$p.value > 0.05){
 # Schluss den (Welch) t-Test für die logarithmischen Daten. Bekommen Sie das
 # gleiche Ergebnisse wie bei den Ausgangsdaten?
 
-welch <- t.test(rt$logRT~rt$subj)
+subjgroup1.logRT<-log(rt[rt$subj=="1","RT"])
+subjgroup2.logRT<-log(rt[rt$subj=="2","RT"])
+welch<-t.test(subjgroup1.logRT,subjgroup2.logRT)
 print(welch)
