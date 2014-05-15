@@ -73,13 +73,13 @@ print(rt.plot)
 
 # Berechnen Sie jetzt den F-Test:
 
-var.test(rt$subj.bw$Lex_Dec ~ rt$subj.bw$rt)
+var.test(rt$subj.bw ~ rt$subj.bw$rt)
 
 # Sind die Varianzen homogen? Vergessen Sie nicht, dass die Nullhypothese beim
 # F-Test "Varianzen Ungleich" ist.
 
 # Berechenen Sie den Levene Test:
-leveneTest(rt$subj.bw$Lex_Dec ~ rt$subj.bw$rt)
+leveneTest(rt$subj.bw ~ rt$subj.bw$rt)
 
 # Sind die Varianzen homogen? Vergessen Sie nicht, dass die Nullhypothese beim
 # Levene Test "Varianzen Gleich" ist.
@@ -102,17 +102,16 @@ print(welch)
 # print(paste("Die Differenz zwischen den beiden t-Werten ist",t.diff,"."))
 
 # Sind die Daten normal verteilt? Wir berechnen Sie den Shapiro Test für erste Versuchsperson:
-# shapiro <- shapiro.test(rt[rt$subj==1,"RT"])
-# 
-# print(shapiro)
+shapiro <- shapiro.test(rt[rt$subj==1,"RT"])
+print(shapiro)
 
 # Wir können auch "Entscheidungen" im Code treffen. Die Syntax dafür ist wie
 # folgt -- die runden und geschweiften Klammern sind alle sehr wichtig!
-# if (shapiro$p.value > 0.05){
-#   print("Shapiro's test insignikant, die Daten sind normal verteilt.")
-# }else{
-#   print("Shapiro's test signikant, die Daten sind nicht normal verteilt.")
-# }
+if (shapiro$p.value > 0.05){
+print("Shapiro's test insignikant, die Daten sind normal verteilt.")
+}else{
+print("Shapiro's test signikant, die Daten sind nicht normal verteilt.")
+}
 
 # Berechnen Sie Shapiro's Test für die andere Versuchsperson und drücken Sie mit
 # einem if-Block aus, ob die Daten normal verteilt sind.
@@ -122,10 +121,10 @@ print(welch)
 # Wir haben auch Transformationen bei schiefen Datenverteilungen angesprochen.
 # Die logaritmische Verteilung ist ziemlich beliebt bei Reaktionszeitsdaten.
 
-# rt$logRT <- log(rt$RT)
-# print(summary(rt$logRT))
-# logrt.plot <- CODE_HIER
-# print(logrt.plot)
+rt$logRT <- log(rt$RT)
+print(summary(rt$logRT))
+ogrt.plot <- CODE_HIER
+print(logrt.plot)
 
 # Sieht die Verteilung besser aus? Sind die Varianzen "homogener" geworden? 
 # Berechnen Sie den F-Test und den Levene-Test für die logaritmisch skalierten 
