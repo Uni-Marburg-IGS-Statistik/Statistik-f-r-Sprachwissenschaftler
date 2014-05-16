@@ -38,9 +38,14 @@ shinyServer(function(input, output) {
     
     #bw <- diff(range(sample.means$mean)) / input$n
     bw <- input$bw
-    m <- ggplot(sample.means) + geom_histogram(aes(x=mean,y=..density..),binwidth=bw,color="black",alpha=0.9,position="dodge") +  geom_vline(xintercept=left,color="darkred") +  geom_vline(xintercept=right,color="darkred")
+    m <- ggplot(sample.means) + 
+      geom_histogram(aes(x=mean,y=..density..),binwidth=bw,color="black",alpha=0.9,position="dodge") +  
+      scale_x_continuous(limits=c(-4,4)) + 
+      geom_vline(xintercept=left,color="darkred") +  
+      geom_vline(xintercept=right,color="darkred")
     dist <- ggplot(samples) + geom_density(aes(x=value)) +  
       # geom_vline(aes(xintercept=mean(value)), color="darkred") +
+      scale_x_continuous(limits=c(-4,4)) + 
       facet_wrap(~sample) + theme(strip.background = element_blank(),strip.text.x = element_blank()) 
     plots <- list(distributions=dist,means=m)
   
@@ -72,6 +77,9 @@ shinyServer(function(input, output) {
 
   output$population.distribution <- renderPlot({
     population <- get.population()
-    print(qplot(population,geom="density") +  geom_vline(xintercept=mean(population), color="darkred") )
+    popplot <- qplot(population,geom="density") +  
+      scale_x_continuous(limits=c(-4,4)) + 
+      geom_vline(xintercept=mean(population), color="darkred")
+    print(popplot)
   })
 })

@@ -43,12 +43,16 @@ Woche | Datum          | Themen
 |     | **06.05.2014** | Statistische Inteferenz, $p$-Werte, Intuition von "Messfehler" und "Wahrscheinlichkeit", Fehler-Arten
 |     |                | *Hausaufgabe bis 12.05.2014 12 Uhr:*
 |     |                | 1. `hausaufgabe07.Rmd`
-05.   | **12.05.2014** | Mehr zu Stichproben, Vergleich von Gruppen ($t$-Test) und Confidence-Intervale, evtl. [BEST](http://www.indiana.edu/~kruschke/BEST/) (etwa bayes'scher $t$-Test) und Credible-Intervale  
-|     | **13.05.2014** | Interferenz in der Praxis: Der Sinn von statischen Tests, neuartige Fehler 
-06.   | **19.05.2014** | ANOVA I
-|     | **20.05.2014** | ANOVA II
-07.   | **26.05.2014** | ANOVA III
-|     | **27.05.2014** | ANOVA IV (evtl. auch Fixed vs. Random Effects à Clark 1973)
+05.   | **12.05.2014** | Mehr zu Stichproben, Vergleich von Gruppen ($t$-Test), Erwähnung von Confidence-Intervalen und . [BEST](http://www.indiana.edu/~kruschke/BEST/) (etwa bayes'scher $t$-Test) 
+|     |                | *Hausaufgabe bis 13.05.2014 10 Uhr:*
+|     |                | 1. Schauen Sie sich [das Video zu BEST](https://www.youtube.com/watch?v=fhw1j1Ru2i0) BEST an.
+|     | **13.05.2014** | Vergleich von Gruppen ($t$-Test) II: Voraussetzungen und Varianten
+|     |                | *Hausaufgabe bis 19.05.2014 12 Uhr:*
+|     |                | 1. `hausaufgabe09.R`
+06.   | **19.05.2014** | Confidence und Credible-Intervale, BEST, Interferenz in der Praxis: Der Sinn von statischen Tests, neuartige Fehler, Unterschiede in frequentistischen und bayes'schen Aussagen
+|     | **20.05.2014** | ANOVA I
+07.   | **26.05.2014** | ANOVA II
+|     | **27.05.2014** | ANOVA III (evtl. auch Fixed vs. Random Effects à Clark 1973)
 08.   | **02.06.2014** | lineare Regression I 
 |     | **03.06.2014** | lineare Regression II
 09.   | **09.06.2014** | fällt aus! (Pfingstmontag)
@@ -125,6 +129,7 @@ Die Reihe *Use R!* von Springer ist **kostenlos** über das Uni-Netz elektronisc
 * [On Chomsky and the Two Cultures of Statistical Learning](http://norvig.com/chomsky.html)
 * [Big Data…Big Deal? Maybe, if Used with Caution.](http://andrewgelman.com/2014/04/27/big-data-big-deal-maybe-used-caution/)
 * [Schools of Statistical Thought as Religion](http://andrewgelman.com/2014/04/12/schools-of-statistical-thoughts-are-sometimes-jokingly-likened-to-religions-this-analogy-is-not-perfect-unlike-religions-statistical-methods-have-no-supernatural-content-and-make-essentially-no-d/)
+* [Bayesian Modelling of Anscombe's Quartet](http://www.sumsar.net/blog/2013/06/bayesian-modeling-of-anscombes-quartet/)
 * Software für Bayesian Modelling (wird nicht im Kurs genutzt, aber vielleicht interessant)
     - [Stan](http://mc-stan.org/)
     - [JAGS](http://mcmc-jags.sourceforge.net/)
