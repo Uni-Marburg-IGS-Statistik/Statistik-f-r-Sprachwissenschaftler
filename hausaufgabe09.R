@@ -73,13 +73,21 @@ print(rt.plot)
 
 # Berechnen Sie jetzt den F-Test:
 
-var.test(rt$subj.bw ~ rt$subj.bw$rt)
+subj1.RT <- rt[rt$subj == "1", "RT"]
+subj2.RT <- rt[rt$subj == "2", "RT"]
+
+var.test(subj1.RT, subj2.RT)
+
+#oder einfach nur:
+print (var.test(rt$RT~rt$subj))
+
+#liefert selbes Ergebnis
 
 # Sind die Varianzen homogen? Vergessen Sie nicht, dass die Nullhypothese beim
 # F-Test "Varianzen Ungleich" ist.
 
 # Berechenen Sie den Levene Test:
-leveneTest(rt$subj.bw ~ rt$subj.bw$rt)
+leveneTest(rt$RT~rt$subj)
 
 # Sind die Varianzen homogen? Vergessen Sie nicht, dass die Nullhypothese beim
 # Levene Test "Varianzen Gleich" ist.
@@ -88,8 +96,19 @@ leveneTest(rt$subj.bw ~ rt$subj.bw$rt)
 # eine Korrektur der Freiheitsgerade macht. Bei homogener Varianz sollten beide
 # Variante ähnliche bzw. (fast) gleiche Ergebnisse liefern. Ist das hier der
 # Fall?
-# two.sample <- CODE_HIER
-# welch <- CODE_HIER
+#T-Test:
+two.sample <- t.test(subj1.RT, subj2.RT,var.equal=TRUE)
+
+#oder zweite Variante:
+
+two.sample <- t.test(rt$RT~rt$subj,var.equal=TRUE)
+
+#Welche-Test:
+
+welch <- t.test(subj1.RT, subj2.RT)
+
+#oder zweite Variante:
+welch <- t.test(rt$RT~rt$subj,var.equal=TRUE)
 
 print(two.sample)
 print(welch)
@@ -98,8 +117,8 @@ print(welch)
 # Wir können das ausnutzen, um zu schauen, ob es einen Unterschied zwischen den
 # beiden Testverfahren gab. Wenn die Varianz homogen war, sollten wir keinen
 # Unterschied sehen:
-# t.diff <- welch$statistic - two.sample$statistic
-# print(paste("Die Differenz zwischen den beiden t-Werten ist",t.diff,"."))
+t.diff <- welch$statistic - two.sample$statistic
+print(paste("Die Differenz zwischen den beiden t-Werten ist",t.diff,"."))
 
 # Sind die Daten normal verteilt? Wir berechnen Sie den Shapiro Test für erste Versuchsperson:
 shapiro <- shapiro.test(rt[rt$subj==1,"RT"])
@@ -116,15 +135,25 @@ print("Shapiro's test signikant, die Daten sind nicht normal verteilt.")
 # Berechnen Sie Shapiro's Test für die andere Versuchsperson und drücken Sie mit
 # einem if-Block aus, ob die Daten normal verteilt sind.
 
-# CODE_HIER
+shapiro2 <- shapiro.test(rt[rt$subj==2,"RT"])
+print(shapiro2)
+
+
+if (shapiro2$p.value > 0.05){
+  print("Shapiro's test insignikant, die Daten sind normal verteilt.")
+}else{
+  print("Shapiro's test signikant, die Daten sind nicht normal verteilt.")
+}
 
 # Wir haben auch Transformationen bei schiefen Datenverteilungen angesprochen.
 # Die logaritmische Verteilung ist ziemlich beliebt bei Reaktionszeitsdaten.
 
 rt$logRT <- log(rt$RT)
 print(summary(rt$logRT))
-ogrt.plot <- CODE_HIER
+ogrt.plot <- logrt.plot <- ggplot(data=rt) + geom_density(aes(x=rt$logRT,color=subj,fill=subj),alpha=0.6)
+print(rt.plot)
 print(logrt.plot)
+
 
 # Sieht die Verteilung besser aus? Sind die Varianzen "homogener" geworden? 
 # Berechnen Sie den F-Test und den Levene-Test für die logaritmisch skalierten 
