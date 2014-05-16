@@ -80,13 +80,19 @@ var.test(group1$RT,group2$RT)
 # Sind die Varianzen homogen? Vergessen Sie nicht, dass die Nullhypothese beim
 # F-Test "Varianzen Gleich" ist.
 
+# Die Varianzen sind ungleich.
+
 # Berechenen Sie den Levene Test:
 RT_Groups <- rt[rt$subj == "1" | rt$subj == "2", c("subj", "RT")]
 print(RT_Groups)
-leveneTest(RT_Groups$RT ~RT_Groups$subj)
+Levene_Groups <- leveneTest(RT_Groups$RT ~RT_Groups$subj)
+print(Levene_Groups)
+
 
 # Sind die Varianzen homogen? Vergessen Sie nicht, dass die Nullhypothese beim
 # Levene Test "Varianzen Gleich" ist.
+
+# Varianzen sind homogen.
 
 # Für heterogene Varianzen haben wir eine Variante des t-Tests gesehen, die
 # eine Korrektur der Freiheitsgerade macht. Bei homogener Varianz sollten beide
@@ -97,6 +103,8 @@ leveneTest(RT_Groups$RT ~RT_Groups$subj)
 
  print(two.sample)
  print(welch)
+
+# Die Ergebnisse sind sehr ähnlich.
 
 # Das Ergebnis der verschiedenen Test-Funktionen in R ist übrigens eine Liste.
 # Wir können das ausnutzen, um zu schauen, ob es einen Unterschied zwischen den
@@ -143,8 +151,27 @@ if (shapiro2$p.value > 0.05){
 # Daten. Nach jedem Test sollten Sie auch programmatisch (=durch if-Blöcke)
 # ausdrücken, ob die Varianzen homogen sind.
 
-var.test(rt$logRT~rt$subj)
-leveneTest(rt$logRT~rt$subj)
+group1_logRT <- rt[rt$subj == "1", "logRT"]
+group2_logRT <- rt[rt$subj == "2", "logRT"]
+log_F <- var.test(group1_logRT, group2_logRT)
+print(log_F)
+if (log_F$p.value > .05){
+  print("Der F-Test ist insignifikant, die Varianzen der Gruppen sind gleich.")
+}else{
+  print("Der F-Test ist insignifikant, die Varianzen der Gruppen sind ungleich")
+}
+
+logRT_Groups <- rt[rt$subj == "1" | rt$subj == "2", c("subj","logRT")]
+print(logRT_Groups)
+
+log_levene <- leveneTest(logRT_Groups$logRT ~ logRT_Groups$subj)
+print(log_levene)
+if (log_levene$`Pr(>F)`[1] > 0.05){
+  print("Levene-Test ist insignifikant, die Varianzen der Gruppen sind gleich.")
+}else{
+  print("Levene-Test ist signifikant, die Varianzen der Gruppen sind ungleich.")
+}
+
 
 # Sind die Daten "normaler" gewordern? Berechnen Sie den Shapiro-Test für beide 
 # Gruppen. Nach jeder Gruppe sollten Sie auch programmatisch (=durch if-Blöcke)
@@ -173,5 +200,5 @@ if (shapiro$p.value > 0.05){
 
 subjgroup1.logRT<-log(rt[rt$subj=="1","RT"])
 subjgroup2.logRT<-log(rt[rt$subj=="2","RT"])
-welch<-t.test(subjgroup1.logRT,subjgroup2.logRT)
-print(welch)
+welch_log<-t.test(subjgroup1.logRT,subjgroup2.logRT)
+print(welch_log)
