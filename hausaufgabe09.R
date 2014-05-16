@@ -1,6 +1,6 @@
 # Hausaufgabe 09
 # Corinna Schwarz <co-schwarz@web.de>
-# 2014-05-13
+# 2014-05-16
 # Nur zu Prüfungszwecken.
 
 
@@ -81,7 +81,7 @@ var.test(subj1.RT, subj2.RT)
 #oder einfach nur:
 print (var.test(rt$RT~rt$subj))
 
-#liefert selbes Ergebnis
+# führt zu gleichem Ergebnis
 
 # Sind die Varianzen homogen? Vergessen Sie nicht, dass die Nullhypothese beim
 # F-Test "Varianzen Gleich" ist.
@@ -108,7 +108,7 @@ two.sample <- t.test(rt$RT~rt$subj,var.equal=TRUE)
 welch <- t.test(subj1.RT, subj2.RT)
 
 #oder zweite Variante:
-welch <- t.test(rt$RT~rt$subj,var.equal=TRUE)
+welch <- t.test(rt$RT~rt$subj)
 
 print(two.sample)
 print(welch)
