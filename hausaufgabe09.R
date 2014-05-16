@@ -84,7 +84,7 @@ print (var.test(rt$RT~rt$subj))
 #liefert selbes Ergebnis
 
 # Sind die Varianzen homogen? Vergessen Sie nicht, dass die Nullhypothese beim
-# F-Test "Varianzen Ungleich" ist.
+# F-Test "Varianzen Gleich" ist.
 
 # Berechenen Sie den Levene Test:
 leveneTest(rt$RT~rt$subj)
