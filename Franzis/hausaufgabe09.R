@@ -133,11 +133,23 @@ print(logrt.plot)
 # Berechnen Sie den F-Test und den Levene-Test für die logaritmisch skalierten 
 # Daten. 
 
+gruppe1_logrt <- rt[rt$subj == "1","logRT"]
+gruppe2_logrt <- rt[rt$subj == "2","logRT"]
+log_F <- var.test(gruppe1_logrt,gruppe2_logrt)
+print(log_F)
+(log_F$p.value > 0.05)
+{
+print("Der F-Test ist insignifikant, die Varianzen der Gruppen sind ungleich.")}
+{print("Der F-Test ist signifikant, die Varianzen der Gruppen sind gleich.")}
+
 
 # Nach jedem Test sollten Sie auch programmatisch (=durch if-Blöcke)
 # ausdrücken, ob die Varianzen homogen sind.
 
-# CODE_HIER
+logRT_Gruppen <- rt[rt$subj == "1" | rt$subj == "2", c("subj","logRT")]
+print(logRT_Gruppen)
+
+
 
 # Sind die Daten "normaler" gewordern? Berechnen Sie den Shapiro-Test für beide 
 # Gruppen. Nach jeder Gruppe sollten Sie auch programmatisch (=durch if-Blöcke)
