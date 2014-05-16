@@ -78,7 +78,7 @@ print(group2)
 var.test(group1$RT,group2$RT)
 
 # Sind die Varianzen homogen? Vergessen Sie nicht, dass die Nullhypothese beim
-# F-Test "Varianzen Ungleich" ist.
+# F-Test "Varianzen Gleich" ist.
 
 # Berechenen Sie den Levene Test:
 RT_Groups <- rt[rt$subj == "1" | rt$subj == "2", c("subj", "RT")]
