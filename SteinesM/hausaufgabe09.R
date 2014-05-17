@@ -1,6 +1,6 @@
 # Hausaufgabe 09
 # Miriam Steines <Steines@students.uni-marburg.de>
-# 2014-05-14
+# 2014-05-17
 # Dieses Werk ist lizenziert unter einer CC-BY-NC-SA Lizenz.
 
 
@@ -93,7 +93,7 @@ print(leveneTest(RT.both.sub$RT ~ RT.both.sub$subj))
 # Für heterogene Varianzen haben wir eine Variante des t-Tests gesehen, die
 # eine Korrektur der Freiheitsgerade macht. Bei homogener Varianz sollten beide
 # Variante ähnliche bzw. (fast) gleiche Ergebnisse liefern. Ist das hier der
-# Fall? 
+# Fall? ja
 two.sample <- t.test(RT.sub1,RT.sub2, var.equal=TRUE)
 welch <- t.test(RT.sub1,RT.sub2)
 
