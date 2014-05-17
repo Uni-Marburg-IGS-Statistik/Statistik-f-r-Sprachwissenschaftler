@@ -76,7 +76,7 @@ print(var.test(RT.sub1,RT.sub2))
 # Sind die Varianzen homogen? Vergessen Sie nicht, dass die Nullhypothese beim
 # F-Test "Varianzen Gleich" ist.
 
-# Der F-Test ist signifikant, mit p = 0.04371, daher kann die Nullhypothese verworfen werden. 
+# Der F-Test ist signifikant, mit p = 0.04371, daher könnte die Nullhypothese verworfen werden. 
 # Wir können davon ausgehen, dass die Varianzen heterogen sind.
 
 # Berechenen Sie den Levene Test:
@@ -90,15 +90,15 @@ print(leveneTest(RT.both.sub$RT ~ RT.both.sub$subj))
 # Daher sollte von der Homogenität der Varianzen ausgegangen werden. Der Unterschied zwischen
 # F-Test und Levene Test beruht auf der Annahme einer Normalverteilung beim F-Test.
 
-# Für heterogene Varianzen haben wir eine Variante des  t-Tests gesehen, die
+# Für heterogene Varianzen haben wir eine Variante des t-Tests gesehen, die
 # eine Korrektur der Freiheitsgerade macht. Bei homogener Varianz sollten beide
 # Variante ähnliche bzw. (fast) gleiche Ergebnisse liefern. Ist das hier der
-# Fall?
-# two.sample <- CODE_HIER
-# welch <- CODE_HIER
+# Fall? Nein, die beiden Tests liefern leicht unterschiedliche Ergebnisse.
+two.sample <- t.test(RT.sub1,RT.sub2, var.equal=TRUE)
+welch <- t.test(RT.sub1,RT.sub2)
 
-# print(two.sample)
-# print(welch)
+print(two.sample)
+print(welch)
 
 # Das Ergebnis der verschiedenen Test-Funktionen in R ist übrigens eine Liste.
 # Wir können das ausnutzen, um zu schauen, ob es einen Unterschied zwischen den
