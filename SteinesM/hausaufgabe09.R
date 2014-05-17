@@ -146,7 +146,27 @@ print(logrt.plot)
 # Daten. Nach jedem Test sollten Sie auch programmatisch (=durch if-Blöcke)
 # ausdrücken, ob die Varianzen homogen sind.
 
-# CODE_HIER
+# F-Test:
+logRT.sub1 <- rt[rt$subj == "1","logRT"]
+logRT.sub2 <- rt[rt$subj == "2","logRT"]
+F.test <- var.test(logRT.sub1,logRT.sub2)
+
+if (F.test$p.value > 0.05){
+  print("F-Test ist insignikant, die Daten sind homogen.")
+}else{
+  print("F-Test ist signikant, die Daten sind heterogen.")
+}
+
+# Levene Test:
+logRT.both.sub <- rt[rt$subj == "1" | rt$subj == "2", c("subj","logRT")]
+levTest <- leveneTest(logRT.both.sub$logRT ~ logRT.both.sub$subj)
+
+if (levTest$`Pr(>F)`[1] > 0.05){
+  print("Levene Test ist insignikant, die Daten sind homogen.")
+}else{
+  print("Levene Test ist signikant, die Daten sind heterogen.")
+}
+
 
 # Sind die Daten "normaler" gewordern? Berechnen Sie den Shapiro-Test für beide 
 # Gruppen. Nach jeder Gruppe sollten Sie auch programmatisch (=durch if-Blöcke)
