@@ -173,7 +173,19 @@ if (levTest$`Pr(>F)`[1] > 0.05){
 # ausdrücken, ob die Daten normal verteilt sind. 
 # (Für die fortgeschrittenen: hier könnte man auch eine for-Schleife nutzen...)
 
-# CODE_HIER
+shapiro.log <- shapiro.test(rt[rt$subj==1,"logRT"])
+shapiro.log2 <- shapiro.test(rt[rt$subj==2,"logRT"])
+
+shap <- c(shapiro.log$p.value, shapiro.log2$p.value)
+x=1
+for ( i in shap )
+  if (i > 0.05){
+    cat("Subject", x,": Shapiro's test insignikant, die Daten sind normal verteilt. ")
+    }else{
+      cat("Subject", x,": Shapiro's test signikant, die Daten sind nicht normal verteilt. ")
+      x <- x+1
+}
+
 
 # Hat die logarithmische Transformation insgesamt geholfen? Berechnen Sie zum
 # Schluss den (Welch) t-Test für die logarithmischen Daten. Bekommen Sie das
