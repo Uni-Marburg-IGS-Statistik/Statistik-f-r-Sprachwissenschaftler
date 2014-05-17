@@ -191,4 +191,5 @@ for ( i in shap )
 # Schluss den (Welch) t-Test für die logarithmischen Daten. Bekommen Sie das
 # gleiche Ergebnisse wie bei den Ausgangsdaten?
 
-# CODE_HIER
+welch.log <- t.test(logRT.sub1,logRT.sub2)
+print(welch.log)
