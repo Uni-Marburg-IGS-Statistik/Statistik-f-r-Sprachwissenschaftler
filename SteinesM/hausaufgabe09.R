@@ -80,10 +80,15 @@ print(var.test(RT.sub1,RT.sub2))
 # Wir können davon ausgehen, dass die Varianzen heterogen sind.
 
 # Berechenen Sie den Levene Test:
-#print(CODE_HIER)
+RT.both.sub <- rt[rt$subj == "1" | rt$subj == "2", c("subj","RT")]
+print(leveneTest(RT.both.sub$RT ~ RT.both.sub$subj))
 
 # Sind die Varianzen homogen? Vergessen Sie nicht, dass die Nullhypothese beim
 # Levene Test "Varianzen Gleich" ist.
+
+# Der Levene Test ergibt p = 0.3656, also keinen signifikanten Unterschied. 
+# Daher sollte von der Homogenität der Varianzen ausgegangen werden. Der Unterschied zwischen
+# F-Test und Levene Test beruht auf der Annahme einer Normalverteilung beim F-Test.
 
 # Für heterogene Varianzen haben wir eine Variante des  t-Tests gesehen, die
 # eine Korrektur der Freiheitsgerade macht. Bei homogener Varianz sollten beide
