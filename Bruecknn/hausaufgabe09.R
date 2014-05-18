@@ -1,6 +1,6 @@
 # Hausaufgabe 09
-# Phillip Alday <phillip.alday@staff.uni-marburg.de>
-# 2014-05-02
+# Nadine Brückner <bruecknn@students.uni-marburg.de>
+# 2014-05-18
 # Dieses Werk ist lizenziert unter einer CC-BY-NC-SA Lizenz.
 
 
@@ -44,6 +44,7 @@ rt <- read.table("punkt_rt.tab",header=TRUE)
 # Die Daten sind Reaktionszeiten von zwei Versuchspersonen auf einen weißen
 # Punkt auf einem schwarzen Bildschirm. Die Verzögerung (delay) zwischen Trials
 # (Läufen) war zufällig und mitaugenommen. 
+# (Läufen) war zufällig und mitaufgenommen. 
 
 # (Wie würden Sie abschneiden? Wenn Sie wollen, können Sie das Experiment (im
 # Data-Ordner) mit Hilfe der open source Software OpenSesame
@@ -51,13 +52,18 @@ rt <- read.table("punkt_rt.tab",header=TRUE)
 
 # Wir schauen uns erst mal eine Zusammenfassung der Daten an:
 # print(summary(rt))
+print(summary(rt))
+
 
 # Wir sehen sofort, dass R die Variabel "subj" als numerische Variable
 # behandelt hat, obwohl sie eigentlich kategorisch ist. Das müssen wir ändern:
 # rt$subj <- as.factor(rt$subj)
+rt$subj <- as.factor(rt$subj)
 # 
 # rt.plot <- qplot(x=RT,color=subj,fill=subj,data=rt, geom="density",alpha=I(0.3))
 # print(rt.plot)
+rt.plot <- qplot(x=RT,color=subj,fill=subj,data=rt, geom="density",alpha=I(0.3))
+print(rt.plot)
 
 # Haben die Daten der beiden Gruppen -- die wiederholten Messwerte der einzelnen
 # Probanden bilden ja Gruppen -- homogene Varianz? Bevor Sie irgendwelche Tests 
@@ -70,12 +76,20 @@ rt <- read.table("punkt_rt.tab",header=TRUE)
 
 # Berechnen Sie jetzt den F-Test:
 #print(CODE_HIER)
+group1 <- subset(rt, rt$subj=="1")
+print(group1)
+group2 <- subset(rt, rt$subj=="2")
+print(group2)
+var.test(group1$RT,group2$RT)
 
 # Sind die Varianzen homogen? Vergessen Sie nicht, dass die Nullhypothese beim
 # F-Test "Varianzen Gleich" ist.
 
 # Berechenen Sie den Levene Test:
 #print(CODE_HIER)
+RT_Groups <- rt[rt$subj == "1" | rt$subj == "2", c("subj", "RT")]
+print(RT_Groups)
+leveneTest(RT_Groups$RT ~RT_Groups$subj)
 
 # Sind die Varianzen homogen? Vergessen Sie nicht, dass die Nullhypothese beim
 # Levene Test "Varianzen Gleich" ist.
@@ -87,8 +101,13 @@ rt <- read.table("punkt_rt.tab",header=TRUE)
 # two.sample <- CODE_HIER
 # welch <- CODE_HIER
 
+two.sample <- t.test(group1$RT, group2$RT, var.equal = TRUE)
+welch <- t.test(group1$RT, group2$RT)
+
 # print(two.sample)
 # print(welch)
+print(two.sample)
+print(welch)
 
 # Das Ergebnis der verschiedenen Test-Funktionen in R ist übrigens eine Liste.
 # Wir können das ausnutzen, um zu schauen, ob es einen Unterschied zwischen den
