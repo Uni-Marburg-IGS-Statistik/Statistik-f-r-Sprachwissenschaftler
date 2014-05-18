@@ -137,8 +137,7 @@ print(shapiro)
 
 if (shapiro$p.value > 0.05){
 print("Shapiro's test insignikant, die Daten sind normal verteilt.")
-}
-else{
+}else{
 print("Shapiro's test signikant, die Daten sind nicht normal verteilt.")
 }
 
@@ -150,10 +149,9 @@ print("Shapiro's test signikant, die Daten sind nicht normal verteilt.")
 shapiro2 <- shapiro.test(rt[rt$subj==2,"RT"])
 print(shapiro2)
 if (shapiro2$p.value > 0.05){
-print("Shapiro's test (2) insignikant, die Daten sind normal verteilt.")
-}
-else{
-print("Shapiro's test (2) signikant, die Daten sind nicht normal verteilt.")
+print("Shapiro's test (2) insignfiikant, die Daten sind normal verteilt.")
+}else{
+print("Shapiro's test (2) signifikant, die Daten sind nicht normal verteilt.")
 }
 
 
@@ -164,6 +162,11 @@ print("Shapiro's test (2) signikant, die Daten sind nicht normal verteilt.")
 # print(summary(rt$logRT))
 # logrt.plot <- CODE_HIER
 # print(logrt.plot)
+rt$logRT <- log(rt$RT)
+print(summary(rt$logRT))
+logrt.plot <- log(rt$logRT)
+print(logrt.plot)
+
 
 # Sieht die Verteilung besser aus? Sind die Varianzen "homogener" geworden? 
 # Berechnen Sie den F-Test und den Levene-Test für die logaritmisch skalierten 
@@ -171,6 +174,20 @@ print("Shapiro's test (2) signikant, die Daten sind nicht normal verteilt.")
 # ausdrücken, ob die Varianzen homogen sind.
 
 # CODE_HIER
+f-testErgebnis <- var.test(rt$logrt, rt$subj == "1" ~rt$logrt, rt$subj == "2")
+levene-testErgebnis <- leveneTest(rt$logrt, rt$subj == "1" ~ rt$logrt, rt$subj == "2")
+if (f-testErgebnis$p.value < 1){
+print ("Varianzen sind homogen")
+}else{
+print ("Varianzen sind nicht homogen")
+}
+if (levene-testErgebnis$p.value > 0){
+print ("Varianzen sind homogen")
+}else{
+print ("Varianzen sind nicht homogen")
+}
+var.test(rt$logRT~rt$subj)
+leveneTest(rt$logRT~rt$subj)
 
 # Sind die Daten "normaler" gewordern? Berechnen Sie den Shapiro-Test für beide 
 # Gruppen. Nach jeder Gruppe sollten Sie auch programmatisch (=durch if-Blöcke)
@@ -178,9 +195,26 @@ print("Shapiro's test (2) signikant, die Daten sind nicht normal verteilt.")
 # (Für die fortgeschrittenen: hier könnte man auch eine for-Schleife nutzen...)
 
 # CODE_HIER
+shapirolog1 <- shapiro.test(rt[rt$subj==1,"RT"])
+print(shapirolog1)
+if (shapiro$p.value > 0.05){
+print("Shapiro's test insignifikant, die Daten sind normal verteilt.")
+}else{
+print("Shapiro's test signifikant, die Daten sind nicht normal verteilt.")
+}
+shapirolog2 <- shapiro.test(rt[rt$subj==2,"RT"])
+print(shapirolog2)
+if (shapiro$p.value > 0.05){
+print("Shapiro's test insignifikant, die Daten sind normal verteilt.")
+}else{
+print("Shapiro's test signifikant, die Daten sind nicht normal verteilt.")
+}
+
 
 # Hat die logarithmische Transformation insgesamt geholfen? Berechnen Sie zum
 # Schluss den (Welch) t-Test für die logarithmischen Daten. Bekommen Sie das
 # gleiche Ergebnisse wie bei den Ausgangsdaten?
 
 # CODE_HIER
+welch <- t.test(rt$logRT~rt$subj)
+print(welch)
