@@ -127,9 +127,10 @@ Die Reihe *Use R!* von Springer ist **kostenlos** über das Uni-Netz elektronisc
 * [Understanding Simpson’s paradox using a graph](http://andrewgelman.com/2014/04/08/understanding-simpsons-paradox-using-graph/)
 * [loess explained in a GIF](http://simplystatistics.org/2014/02/13/loess-explained-in-a-gif/)
 * [On Chomsky and the Two Cultures of Statistical Learning](http://norvig.com/chomsky.html)
-* [Big Data…Big Deal? Maybe, if Used with Caution.](http://andrewgelman.com/2014/04/27/big-data-big-deal-maybe-used-caution/)
+* [Big Data...Big Deal? Maybe, if Used with Caution.](http://andrewgelman.com/2014/04/27/big-data-big-deal-maybe-used-caution/)
 * [Schools of Statistical Thought as Religion](http://andrewgelman.com/2014/04/12/schools-of-statistical-thoughts-are-sometimes-jokingly-likened-to-religions-this-analogy-is-not-perfect-unlike-religions-statistical-methods-have-no-supernatural-content-and-make-essentially-no-d/)
 * [Bayesian Modelling of Anscombe's Quartet](http://www.sumsar.net/blog/2013/06/bayesian-modeling-of-anscombes-quartet/)
+* [Bayesian or Frequentist, Which Are You?](http://videolectures.net/mlss09uk_jordan_bfway/) vielleicht die beste holistische Perspektive!
 * Software für Bayesian Modelling (wird nicht im Kurs genutzt, aber vielleicht interessant)
     - [Stan](http://mc-stan.org/)
     - [JAGS](http://mcmc-jags.sourceforge.net/)
