@@ -25,11 +25,17 @@ shinyServer(function(input, output) {
   output$pvalues <- renderPlot({
         test <- runSimulation()
         
+        tplot <- test$tvals.plot +  
+          theme(axis.title.x = element_blank()
+                ,axis.text.x= element_blank()
+                ,axis.ticks.x=element_blank()
+                ,plot.margin=unit(c(1,1,-0.75,1), "lines")) 
+        
         pplot <- test$pvals.plot +  
           theme(axis.title.x = element_blank()
                 ,axis.text.x= element_blank()
                 ,axis.ticks.x=element_blank()
-                ,plot.margin=unit(c(1,1,-1,1), "lines")) 
+                ,plot.margin=unit(c(0.5,1,-0.75,1), "lines")) 
         
         ciplot <- test$samples.plot + 
           geom_ribbon(aes(x=idx,ymin=lower,ymax=upper,y=diff),color=NA,fill="black",alpha=I(1/8),data=test$conf.int) + 
@@ -38,7 +44,7 @@ shinyServer(function(input, output) {
           theme(legend.position = "none"
                 ,plot.margin=unit(c(0.5,1,1,1), "lines"))
         
-        combiplot <- arrangeGrob(pplot, ciplot, ncol=1, nrow=2, widths=c(4), heights=c(1, 4))
+        combiplot <- arrangeGrob(tplot, pplot, ciplot, ncol=1, nrow=3, widths=c(4), heights=c(1, 1, 4))
         print(combiplot)
         
   })
