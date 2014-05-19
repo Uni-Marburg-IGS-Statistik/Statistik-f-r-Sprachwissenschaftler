@@ -27,8 +27,9 @@ shinyServer(function(input, output) {
     input$runagain # alpha sd populatio n
     population <- get.population() 
     samples <- get.samples()
-    samples <- melt(samples, id.var="index",variable.name = "sample")
-    sample.means <- aggregate(value ~ sample, FUN=mean, data=samples)
+    samples <- melt(samples, id.var="index")
+    sample.means <- aggregate(value ~ variable, FUN=mean, data=samples)
+    names(samples) <- c("index","sample","value")
     names(sample.means) <- c("sample","mean")
     sorted.means <- sort(sample.means$mean)
     left <- (1 - input$conf.level) / 2 * length(sorted.means)
