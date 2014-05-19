@@ -127,14 +127,22 @@ Die Reihe *Use R!* von Springer ist **kostenlos** über das Uni-Netz elektronisc
 * [Understanding Simpson’s paradox using a graph](http://andrewgelman.com/2014/04/08/understanding-simpsons-paradox-using-graph/)
 * [loess explained in a GIF](http://simplystatistics.org/2014/02/13/loess-explained-in-a-gif/)
 * [On Chomsky and the Two Cultures of Statistical Learning](http://norvig.com/chomsky.html)
-* [Big Data…Big Deal? Maybe, if Used with Caution.](http://andrewgelman.com/2014/04/27/big-data-big-deal-maybe-used-caution/)
+* [Big Data...Big Deal? Maybe, if Used with Caution.](http://andrewgelman.com/2014/04/27/big-data-big-deal-maybe-used-caution/)
 * [Schools of Statistical Thought as Religion](http://andrewgelman.com/2014/04/12/schools-of-statistical-thoughts-are-sometimes-jokingly-likened-to-religions-this-analogy-is-not-perfect-unlike-religions-statistical-methods-have-no-supernatural-content-and-make-essentially-no-d/)
 * [Bayesian Modelling of Anscombe's Quartet](http://www.sumsar.net/blog/2013/06/bayesian-modeling-of-anscombes-quartet/)
+* [Bayesian or Frequentist, Which Are You?](http://videolectures.net/mlss09uk_jordan_bfway/) vielleicht die beste holistische Perspektive!
 * Software für Bayesian Modelling (wird nicht im Kurs genutzt, aber vielleicht interessant)
     - [Stan](http://mc-stan.org/)
     - [JAGS](http://mcmc-jags.sourceforge.net/)
     - [BUGS](http://www.openbugs.net/w/FrontPage)
     - [Fitting linear mixed models using JAGS and Stan: A tutorial](http://www.ling.uni-potsdam.de/~vasishth/BayesLMMs.html)
+* xkcd
+    - [Correlation](http://xkcd.com/552/)
+    - [Correlation and Trends](http://www.xkcd.com/925/)
+    - [Correlation and Heatmaps](http://www.xkcd.com/1138/)
+    - [Conditional Risk](http://xkcd.com/795/)
+    - [Null Hypothesis](http://www.xkcd.com/892/)
+    - [Frequentists vs. Bayesians](http://xkcd.com/1132/)
 
 # License
 This work is licensed under the Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Germany License. To view a copy of this license, visit http://creativecommons.org/licenses/by-nc-sa/3.0/de/.
