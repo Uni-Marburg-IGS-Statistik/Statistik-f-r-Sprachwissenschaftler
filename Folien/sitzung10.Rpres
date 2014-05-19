@@ -24,16 +24,16 @@ type: section
 Bisher
 ========
 - frequentistischer Vergleich von Gruppen ($t$-Test)
-- Andeutungen zu Confidence-Intervalen
-- Andeutungen zu [BEST](http://www.indiana.edu/~kruschke/BEST/) (etwa bayes'scher $t$-Test) und Credible-Intervale  
+- Andeutungen zu Confidence-Intervallen
+- Andeutungen zu [BEST](http://www.indiana.edu/~kruschke/BEST/) (etwa bayes'scher $t$-Test) und Credible-Intervallen  
 
 Heute
 =======
 - Mehr zu Git
 - QQPlots
-- Confidence Intervale & frequentistische Inferenz
+- Konfidenz-Intervalle & frequentistische Inferenz
 - Optional Stopping
-- Credible Intervale (HDI) und bayes'sche Inferenz, BEST
+- Credible Intervalle (HDI) und bayes'sche Inferenz, BEST
 
 Datensätze für heute: Aphasiker und RT
 ==========================================
@@ -117,7 +117,7 @@ Logarithmische Transformation
 ggplot(rt) + stat_qq(aes(sample=log(RT))) + facet_wrap(~subj)
 ```
 
-Confidence Intervale
+Konfidenz-Intervalle
 ====================
 type:section
 
@@ -126,7 +126,7 @@ The New Statistiics
 - Punktschätzungen (*point estimates*) problematisch wegen Unsicherheit 
 - $p$-Werte problematisch wegen ... und ein $p$-Wert = eine Punktschätzung
 - Effektgröße als tatsächliches Maß der erklärten Varianz
-- Confidence-Interval als Schätzungen mit expliziter (Un)Sicherheit
+- Confidence-Intervall als Schätzungen mit expliziter (Un)Sicherheit
 
 vgl. `r citet("10.1177/0956797613504966")` und viele Andere
 
@@ -145,7 +145,7 @@ Statistische Fehler
 
 Quelle: [Andrew Gelman](http://andrewgelman.com/2004/12/29/type_1_type_2_t/)
 
-(95%) Confidence Intervale
+(95%) Konfidenz-Intervalle
 ===========================
 incremental: true
 - Bereich so berechnet, dass er in 95% solcher Experimente den wahren (Populations)wert enthält.
@@ -154,7 +154,7 @@ incremental: true
 - Ungenauigkeit in der Messung durch usere Stichprobe und ihre beschränkte $n$ 
 - Variante für Unterschiede in Mittelwerten, Mittelwerte, und ganz viele andere Parameter
 
-(95%) Confidence Intervale
+(95%) Konfidenz-Intervalle
 ===========================
 incremental: true
 - intuitiv "klar" 
@@ -162,11 +162,11 @@ incremental: true
 - genaue Bedeutung (sowie bei $p$-Werten) schwierig
 - Hören Sie genau hin -- ich mache bestimmt einen Fehler!
 
-Confidence Intervale
+Konfidenz-Intervalle
 ====================
 type: prompt
 
-Confidence Intervale: Berechnung
+Konfidenz-Intervalle: Berechnung
 =================================
 - analytisch: Mittelwert $\pm$ 1.96 SD
 - Bootstrapping: Resampling Verfahren um mehrere Mittelwertsschätzungen zu bekommen 
@@ -190,9 +190,9 @@ Frequentismus
   - Optional Stopping
 - [Problematik oft nicht bewusst!](http://www.stat.columbia.edu/~gelman/research/unpublished/p_hacking.pdf)
 
-Confidence Intervale
+Konfidenz-Intervalle
 ====================
-> An exact 95% confidence interval is calculated such that it includes the true value of the estimated parameter 95% of the time. We do not know, however, if the interval we have is one of those that are correct or not. It is like a person who tells the truth 95% of the time, but we do not know whether a particular statement is true or not.
+> An exact 95% Konfidenz-Intervall is calculated such that it includes the true value of the estimated parameter 95% of the time. We do not know, however, if the Intervall we have is one of those that are correct or not. It is like a person who tells the truth 95% of the time, but we do not know whether a particular statement is true or not.
 
 `r citet("10.1080/00031305.2012.752408")`
 
@@ -224,7 +224,7 @@ Optional Stopping
 type: prompt
 
 
-Credible Intervale
+Credible Intervalle
 ====================
 type:section
 
@@ -234,20 +234,20 @@ Bayes'sche Interferenz
 - Aussagen über Überzeugung
 - Aussagen in Form von Verteilungen
 
-Credible Intervale
+Credible Intervalle
 ====================
-- Intervale, wo die meisten Parameterschätzungen fallen
+- Intervalle, wo die meisten Parameterschätzungen fallen
 - zwei Arten: 
-  - symmetrische um das Zentrum (etwa bayes'sche Confidence Intervale)
-  - Highest Density Interval (HDI): das Interval mit der höchsten Dichte, *auch wenn es nicht symmetrisch ist!*
+  - symmetrische um das Zentrum (etwa bayes'sche Konfidenz-Intervalle)
+  - Highest Density Intervall (HDI): das Intervall mit der höchsten Dichte, *auch wenn es nicht symmetrisch ist!*
 - Aussage: wir glauben, der wahre Wert des Parameters liegt in diesem Bereich
 
 ROPE
 ====
 - Region of Practical Equivalence
 - *keine* Verteilung
-- (Null-)Hypothese zurücklegen: das Credible Interval überlappt nicht mit die ROPE um den hypothetischen (Null)-Wert 
-- Hypothese annehmen: die ROPE um den hypothetischen (Null)-Wert liegt komplett innerhalb des Credible Intervals
+- (Null-)Hypothese zurücklegen: das Credible Intervall überlappt nicht mit die ROPE um den hypothetischen (Null)-Wert 
+- Hypothese annehmen: die ROPE um den hypothetischen (Null)-Wert liegt komplett innerhalb des Credible Intervalls
 - ROPE schließt u.a. "signifikante" aber unbedeutsame Unterschiede aus (wieder Effektgröße)
 
 BEST
@@ -281,7 +281,7 @@ Nicht ausführen, wenn Sie wenig Akku haben!
 
 The Goal is Precision
 ======================
-> Can't I measure precision with a frequentist confidence interval instead of a Bayesian posterior HDI?" No, because a frequentist confidence interval depends on the stopping and testing intention. Change, say, the testing intention --e.g., there's a second coin you're testing-- and the confidence interval changes. But not the Bayesian HDI.
+> Can't I measure precision with a frequentist Konfidenz-Intervall instead of a Bayesian posterior HDI?" No, because a frequentist Konfidenz-Intervall depends on the stopping and testing intention. Change, say, the testing intention --e.g., there's a second coin you're testing-- and the Konfidenz-Intervall changes. But not the Bayesian HDI.
 
 Quelle: [John Kruschke](http://doingbayesiandataanalysis.blogspot.de/2013/11/optional-stopping-in-data-collection-p.html)
 
@@ -305,7 +305,7 @@ Hausaufgabe
 ===========
 - Sinn des $F$-Tests als Varianzvergleich verstehen
 - die einfache Überlegungen hinter den bisherigen Tests verstehen:
-  - Prüfgröße $ =  \frac{\text{Beo} - \text{Theo}}{s_\text{Beo}}$
+  - $$ \text{Prüfgröße}  =  \frac{\text{Beo} - \text{Theo}}{s_\text{Beo}} $$
   - Vergleich der Prüfgröße mit einer Referenzverteilung 
   - Abhängige Variable = Model der Unabhängigen Variable + Fehler
 
