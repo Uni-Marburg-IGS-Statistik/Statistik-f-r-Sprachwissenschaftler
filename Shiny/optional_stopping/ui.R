@@ -33,7 +33,7 @@ shinyUI(fluidPage(
                         ,"from the same distribution, you will generally get a significant difference for any given p at "
                         ,"some point. (Well, always, if you have time to let an obscence number of iterations run.) The "
                         ,"solid lines represent the estimated mean for each group up until that point, the dark line "
-                        ,"represents the difference between the means and the shading around that represnet the 95% confidence interval."
+                        ,"represents the difference between the means and the shading around that represents the 95% confidence interval."
                         ," p-Values and confidence intervals are not calculated on a rolling basis for the inital observations."))
               ,h1("Why do I care?")
               ,p(HTML(paste0("Well, not jump on the big bandwagon of all the literature about how problematic p-values are, but you can"
