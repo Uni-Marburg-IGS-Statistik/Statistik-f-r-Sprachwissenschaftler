@@ -151,11 +151,19 @@ if (f.wert < 1 AND lev.wert > 0){
 
 #shapiro <- shapiro.test(rt[rt$subj==1,"RT"])
 for (i in rt$subj) {
+<<<<<<< HEAD
     shapiro <- shapiro.test(rt[i, "RT"])
     if (shapiro$p.value > 0.05){
       print("Shapiro's test für Person ".i." insignikant, die Daten sind normal verteilt.")
     }else{
       print("Shapiro's test für Person ".i." signikant, die Daten sind nicht normal verteilt.")
+=======
+    shapiro <- shapiro.test(rt[rt$subj, "RT"])
+    if (shapiro$p.value > 0.05){
+      print("Shapiro's test für Person ".rt$subj." insignikant, die Daten sind normal verteilt.")
+    }else{
+      print("Shapiro's test für Person ".rt$subj." signikant, die Daten sind nicht normal verteilt.")
+>>>>>>> a983c698557253073ca95b5f15c558cfc1a2bf01
     }
 }
 
