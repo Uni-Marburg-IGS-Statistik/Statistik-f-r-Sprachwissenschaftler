@@ -136,6 +136,13 @@ Die Reihe *Use R!* von Springer ist **kostenlos** über das Uni-Netz elektronisc
     - [JAGS](http://mcmc-jags.sourceforge.net/)
     - [BUGS](http://www.openbugs.net/w/FrontPage)
     - [Fitting linear mixed models using JAGS and Stan: A tutorial](http://www.ling.uni-potsdam.de/~vasishth/BayesLMMs.html)
+* xkcd
+    - [Correlation](http://xkcd.com/552/)
+    - [Correlation and Trends](http://www.xkcd.com/925/)
+    - [Correlation and Heatmaps](http://www.xkcd.com/1138/)
+    - [Conditional Risk](http://xkcd.com/795/)
+    - [Null Hypothesis](http://www.xkcd.com/892/)
+    - [Frequentists vs. Bayesians](http://xkcd.com/1132/)
 
 # License
 This work is licensed under the Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Germany License. To view a copy of this license, visit http://creativecommons.org/licenses/by-nc-sa/3.0/de/.
