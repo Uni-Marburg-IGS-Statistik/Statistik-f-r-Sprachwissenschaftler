@@ -24,16 +24,16 @@ type: section
 Bisher
 ========
 - frequentistischer Vergleich von Gruppen ($t$-Test)
-- Andeutungen zu Confidence-Intervalen
-- Andeutungen zu [BEST](http://www.indiana.edu/~kruschke/BEST/) (etwa bayes'scher $t$-Test) und Credible-Intervale  
+- Andeutungen zu Konfidenz-Intervallen
+- Andeutungen zu [BEST](http://www.indiana.edu/~kruschke/BEST/) (etwa bayes'scher $t$-Test) und Credible-Intervallen  
 
 Heute
 =======
 - Mehr zu Git
 - QQPlots
-- Confidence Intervale & frequentistische Inferenz
+- Konfidenz-Intervalle & frequentistische Inferenz
 - Optional Stopping
-- Credible Intervale (HDI) und bayes'sche Inferenz, BEST
+- Credible Intervalle (HDI) & bayes'sche Inferenz, BEST
 
 Datensätze für heute: Aphasiker und RT
 ==========================================
@@ -75,6 +75,7 @@ QQ Plots: Vergleich mit der Normalverteilung
 ==============================================
 ```{r}
 qqnorm(broca.lex.dec)
+qqline(broca.lex.dec)
 ```
 
 
@@ -102,7 +103,7 @@ qplot(sample=rt1, stat="qq")
 QQ Plots: Vergleich mit der Normalverteilung
 ==============================================
 ```{r}
-ggplot() + stat_qq(aes(sample=rt1))
+ggplot() + stat_qq(aes(sample=rt2))
 ```
 
 QQ Plots: Vergleich mit der Normalverteilung
@@ -117,16 +118,16 @@ Logarithmische Transformation
 ggplot(rt) + stat_qq(aes(sample=log(RT))) + facet_wrap(~subj)
 ```
 
-Confidence Intervale
+Konfidenz-Intervalle
 ====================
 type:section
 
-The New Statistiics
+The New Statistics
 ======================
 - Punktschätzungen (*point estimates*) problematisch wegen Unsicherheit 
 - $p$-Werte problematisch wegen ... und ein $p$-Wert = eine Punktschätzung
 - Effektgröße als tatsächliches Maß der erklärten Varianz
-- Confidence-Interval als Schätzungen mit expliziter (Un)Sicherheit
+- Konfidenz-Intervall als Schätzungen mit expliziter (Un)Sicherheit
 
 vgl. `r citet("10.1177/0956797613504966")` und viele Andere
 
@@ -145,167 +146,11 @@ Statistische Fehler
 
 Quelle: [Andrew Gelman](http://andrewgelman.com/2004/12/29/type_1_type_2_t/)
 
-(95%) Confidence Intervale
-===========================
-incremental: true
-- Bereich so berechnet, dass er in 95% solcher Experimente den wahren (Populations)wert enthält.
-- Bereich, wo $p < 0.05$ wäre
-- Bereich, wo 95% aller gleich geschätzten Mittelwerte fallen würden
-- Ungenauigkeit in der Messung durch usere Stichprobe und ihre beschränkte $n$ 
-- Variante für Unterschiede in Mittelwerten, Mittelwerte, und ganz viele andere Parameter
-
-(95%) Confidence Intervale
-===========================
-incremental: true
-- intuitiv "klar" 
-- Unsicherheitsbereich der Messung
-- genaue Bedeutung (sowie bei $p$-Werten) schwierig
-- Hören Sie genau hin -- ich mache bestimmt einen Fehler!
-
-Confidence Intervale
-====================
-type: prompt
-
-Confidence Intervale: Berechnung
-=================================
-- analytisch: Mittelwert $\pm$ 1.96 SD
-- Bootstrapping: Resampling Verfahren um mehrere Mittelwertsschätzungen zu bekommen 
-- normalerweise relativ nah aneinander
-
-Übrigens
-==========
-```{r}
-t.test(rt1)
-```
-
-Frequentismus
-===============
-- Aussagen über die Vorkommenshäufigkeit über (unendliche) Wiederholungen
-- keine Aussage über ein einzelnes Ergebnise, sondern nur seine Häufigkeit über mehrfache Wiederholungen
-- Annahmen dazu über:
-  - Unabhängigkeit der Tests
-  - Anzahl der Tests 
-- Verletzung der Annahmen durch:
-  - Multiples Testen (*multiple comparison*)
-  - Optional Stopping
-- [Problematik oft nicht bewusst!](http://www.stat.columbia.edu/~gelman/research/unpublished/p_hacking.pdf)
-
-Confidence Intervale
-====================
-> An exact 95% confidence interval is calculated such that it includes the true value of the estimated parameter 95% of the time. We do not know, however, if the interval we have is one of those that are correct or not. It is like a person who tells the truth 95% of the time, but we do not know whether a particular statement is true or not.
-
-`r citet("10.1080/00031305.2012.752408")`
-
-The New Statistics
-====================
-
-[![Quelle: xkcd](http://imgs.xkcd.com/comics/null_hypothesis.png)](http://www.xkcd.com/892/)
-
-Ist der Vergleich mit der Null sinnvoll? Auch CIs nutzen die Null.
-
-Optional Stopping
-====================
-- Optional Stopping ist eine Art multiples Testing.
-- Mit $\alpha=0.05$ bekommt man [1 von 20 mal ein falsches Positiv](http://xkcd.com/882/) 
-- Auch CIs dafür anfällig
-- vgl. `r citet("10.1177/0956797611417632")` und viele andere
-
-Optional Stopping
-====================
-
-> Stopping for extreme data precludes subsequent collection of compensating data
-
-Quelle: [John Krusche](https://www.youtube.com/watch?feature=player_detailpage&v=OIX6d2YEB04#t=348)
-
-Es ist immer möglich (obleich bei ausreichender $n$ nicht unbedingt wahrscheinlich), einen $p$-Wert über oder unten einen gewissen $alpha$-Wert zu bekommen.
-
-Optional Stopping
-====================
-type: prompt
-
-
-Credible Intervale
-====================
-type:section
-
-Bayes'sche Interferenz
-==========================
-- Wahrscheinlichkeit als Glaubwürdigkeit
-- Aussagen über Überzeugung
-- Aussagen in Form von Verteilungen
-
-Credible Intervale
-====================
-- Intervale, wo die meisten Parameterschätzungen fallen
-- zwei Arten: 
-  - symmetrische um das Zentrum (etwa bayes'sche Confidence Intervale)
-  - Highest Density Interval (HDI): das Interval mit der höchsten Dichte, *auch wenn es nicht symmetrisch ist!*
-- Aussage: wir glauben, der wahre Wert des Parameters liegt in diesem Bereich
-
-ROPE
-====
-- Region of Practical Equivalence
-- *keine* Verteilung
-- (Null-)Hypothese zurücklegen: das Credible Interval überlappt nicht mit die ROPE um den hypothetischen (Null)-Wert 
-- Hypothese annehmen: die ROPE um den hypothetischen (Null)-Wert liegt komplett innerhalb des Credible Intervals
-- ROPE schließt u.a. "signifikante" aber unbedeutsame Unterschiede aus (wieder Effektgröße)
-
-BEST
-=====
-- Vorteile:
-  - viele Parameter geschätzt
-  - wenig Annahmen über Verteilung der Daten
-  - sehr robust
-- Nachteile
-  - computionell aufwendiger
-  - weniger bekannt
-- [Interaktives Beispiel](http://www.sumsar.net/best_online/)
-
-Vergleich mit t-Test
-=====================
-```{r}
-t.test(rt1,rt2)
-```
-
-
-BEST: in R
-============
-```{r, eval=FALSE}
-library(BEST)
-best <- BESTmcmc(rt1,rt2)
-print(best)
-print(summary(best))
-```
-
-Nicht ausführen, wenn Sie wenig Akku haben!
-
-The Goal is Precision
-======================
-> Can't I measure precision with a frequentist confidence interval instead of a Bayesian posterior HDI?" No, because a frequentist confidence interval depends on the stopping and testing intention. Change, say, the testing intention --e.g., there's a second coin you're testing-- and the confidence interval changes. But not the Bayesian HDI.
-
-Quelle: [John Kruschke](http://doingbayesiandataanalysis.blogspot.de/2013/11/optional-stopping-in-data-collection-p.html)
-
-Optional Stopping
-=================
-- bayes'sche Methoden z.T. auch dafür anfällig, wenn man von Hypothesen-Testing ausgeht
-- weniger so, wenn man von gewünschter Präzision ausgeht
-- s. dazu John Kruschkes Videos dazu:
-  - [Teil 1](https://www.youtube.com/watch?v=lh5btlAvrLs)
-  - [Teil 2](https://www.youtube.com/watch?v=ObCrb5I49qo)
-  - [Teil 3](https://www.youtube.com/watch?v=OIX6d2YEB04)
-  - [Teil 4](https://www.youtube.com/watch?v=bKj5irH99OI)    
-
-Übrigens
-============
-Bedingte Wahrscheinlichkeit ist oft wichtig und natürlich:
-
-[![Quelle: xkcd](http://imgs.xkcd.com/comics/conditional_risk.png)](http://xkcd.com/795/)
-
 Hausaufgabe
 ===========
 - Sinn des $F$-Tests als Varianzvergleich verstehen
 - die einfache Überlegungen hinter den bisherigen Tests verstehen:
-  - Prüfgröße $ =  \frac{\text{Beo} - \text{Theo}}{s_\text{Beo}}$
+  - $$ \text{Prüfgröße}  =  \frac{\text{Beo} - \text{Theo}}{s_\text{Beo}} $$
   - Vergleich der Prüfgröße mit einer Referenzverteilung 
   - Abhängige Variable = Model der Unabhängigen Variable + Fehler
 
