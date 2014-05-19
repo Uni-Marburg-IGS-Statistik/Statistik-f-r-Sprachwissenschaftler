@@ -156,6 +156,7 @@ for (i in rt$subj) {
       print("Shapiro's test für Person ".i." insignikant, die Daten sind normal verteilt.")
     }else{
       print("Shapiro's test für Person ".i." signikant, die Daten sind nicht normal verteilt.")
+    }
 }
 
 # Hat die logarithmische Transformation insgesamt geholfen? Berechnen Sie zum
