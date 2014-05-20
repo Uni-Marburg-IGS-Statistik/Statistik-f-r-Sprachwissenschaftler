@@ -1,0 +1,82 @@
+Statistik für Sprachwissenschaftler
+========================================================
+author: Phillip M . Alday
+date: 2014-05-20
+autosize: false
+
+```{r setup, include=FALSE}
+library(knitr)
+opts_chunk$set(cache=TRUE,prompt=TRUE)
+library(knitcitations)
+library(ggplot2)
+library(reshape2)
+cite_options(tooltip = TRUE
+             , linked = TRUE
+             , numerical = TRUE
+             , bibtex_data = FALSE)
+```
+
+Aufwachen und sich errinnern!
+====================================
+type: section
+
+Bisher
+=======
+- Konfidenz-Intervalle & frequentistische Inferenz
+- Optional Stopping
+- Credible Intervalle (HDI) & bayes'sche Inferenz, BEST
+
+Heute
+========
+- Varianzanalyse
+- F-Test 
+- einfaktorielle ANOVA
+
+Morgen
+========
+-
+
+Datensätze für heute: Aphasiker und RT
+==========================================
+```{r, eval=FALSE}
+aphasiker <- read.csv2("Data/aphasiker.csv",header = T)
+rt <- read.table("Data/punkt_rt.tab",header = T)
+rt$subj <- as.factor(rt$subj)
+```
+```{r, echo=FALSE}
+# the path in the previous block isn't correct, so run this one
+aphasiker <- read.csv2(normalizePath("../Data/aphasiker.csv"),header = T)
+rt <- read.table(normalizePath("../Data/punkt_rt.tab"),header = T)
+rt$subj <- as.factor(rt$subj)
+```
+
+Datensatz für heute: Aphasiker
+================================
+```{r, echo=FALSE}
+qplot(x=Lex_Dec,geom="density",color=Aphasie,fill=Aphasie,data=aphasiker,alpha=I(0.3))
+```
+
+Datensatz für heute: RT
+================================
+```{r, echo=FALSE}
+ggplot(data=rt) + geom_density(aes(x=RT,color=subj,fill=subj),alpha=0.5)
+
+```
+
+Varianzanalyse
+=================
+type: section
+
+Hausaufgabe
+===========
+
+
+Bibliography
+=============
+```{r, echo=FALSE,results='hide'}
+```
+<span style="font-size: 10%;">
+```{r,results='asis',echo=FALSE}
+bibliography(style="markdown",bulleted=FALSE)
+```
+</span>
