@@ -9,24 +9,21 @@ library(plyr)
 
 shinyServer(function(input, output) {
   get.population <- reactive({
-    # force update when user clicks on "Run Again"
-    input$runagain
+    # force update when user clicks on "New Population"
+    input$new.population
     #print("New population")
     rnorm(input$population,sd=input$sd)
   })
   
   get.samples <- reactive({
-    # force update when user clicks on "Run Again"
-    input$runagain
+    # force update when user clicks on "New Samples"
+    input$new.samples
     population <- get.population()
     #print("New samples")
     data.frame(index=1: input$n,sapply(1: input$nsamples, function(x) sample(population,input$n)))
   })
   
   runSimulation <- reactive({
-    # force update when user clicks on "Run Again"
-    input$runagain # alpha sd populatio n
-    
     population <- get.population()
     mu <- mean(population)
     samples <- get.samples()
