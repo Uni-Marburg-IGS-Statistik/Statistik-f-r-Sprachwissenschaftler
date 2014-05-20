@@ -52,7 +52,6 @@ shinyServer(function(input, output) {
     cis <- x$cis
     population <- x$population
     mu <- mean(population)
-    print(mu)
     sample.means <- x$sample.means
     samples <- x$samples
     
