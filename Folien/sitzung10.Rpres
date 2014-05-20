@@ -2,7 +2,7 @@ Statistik für Sprachwissenschaftler
 ========================================================
 author: Phillip M . Alday
 date: 2014-05-19
-autosize: false
+autosize: true
 
 ```{r setup, include=FALSE}
 library(knitr)
@@ -76,7 +76,7 @@ QQ Plots: Vergleich mit der Normalverteilung
 ```{r}
 qqnorm(broca.lex.dec)
 ```
-
+qqline(broca.lex.dec)
 
 QQ Plots: Vergleich mit der Normalverteilung
 ==============================================
