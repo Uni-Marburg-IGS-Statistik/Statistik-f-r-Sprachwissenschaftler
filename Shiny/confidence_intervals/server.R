@@ -54,15 +54,21 @@ shinyServer(function(input, output) {
       geom_vline(aes(xintercept=mean(population))) + 
       theme(axis.title.y = element_blank()
             ,axis.text.y = element_blank()
-            ,axis.ticks.y = element_blank(),
-            strip.background = element_blank(),
-            strip.text.x = element_blank())
+            ,axis.ticks.y = element_blank()
+            ,strip.background = element_blank()
+            ,axis.title.x = element_blank()
+            ,strip.text.x = element_blank())
     
     pop <- qplot(population,geom="density") +  
-      scale_x_continuous(limits=c(-4,4)) + 
-      geom_vline(aes(xintercept=mean),data=sample.means, color="darkred",alpha=0.1,size=3) + 
-      geom_vline(xintercept=mean(population),size=1) +
-      geom_segment(aes(x=left,xend=right,y=0,yend=0),size=3,data=cis,alpha=0.1) 
+      scale_x_continuous(limits=c(-4,4)) + xlab("") 
+    
+    if(input$sample.mean.overlay)
+      pop <- pop + geom_vline(aes(xintercept=mean),data=sample.means, color="darkred",alpha=0.1,size=3) 
+    
+    pop <- pop + geom_vline(xintercept=mean(population),size=1)
+    
+    if(input$sample.ci.overlay)
+      pop <- pop + geom_segment(aes(x=left,xend=right,y=0,yend=0),size=3,data=cis,alpha=0.1) 
       
     
     plots <- list(distributions=dist,population=pop)
