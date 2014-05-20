@@ -17,6 +17,13 @@ shinyUI(fluidPage(
                                 ,max = 10
                                 ,value = 1
                                 ,animate=animationOptions(interval=6000,loop=TRUE))
+                 , actionButton("runagain",label = "Run Again")
+                 ,h5("Population Plot")
+                 ,  radioButtons("sample.mean.overlay","Display sample means",c("yes"=TRUE,"no"=FALSE),selected=FALSE)
+                 ,  radioButtons("sample.ci.overlay","Display sample CIs",c("yes"=TRUE,"no"=FALSE),selected=FALSE)
+                 ,h2("Population")
+                 ,plotOutput("population.distribution")
+                 ,h2("Advanced Settings")
                  ,h5("Features that may slow things down, but provide a finer picture")
                  ,  sliderInput("population"
                                 ,"Number of points to simulate for the population"
@@ -34,12 +41,7 @@ shinyUI(fluidPage(
                                 ,min = 1
                                 ,max = 1000
                                 ,value = 100)
-                 , actionButton("runagain",label = "Run Again")
-                 ,h5("Population Plot")
-                 ,  radioButtons("sample.mean.overlay","Display sample means",c("yes"=TRUE,"no"=FALSE),selected=FALSE)
-                 ,  radioButtons("sample.ci.overlay","Display sample CIs",c("yes"=TRUE,"no"=FALSE),selected=FALSE)
-                 ,h2("Population")
-                 ,plotOutput("population.distribution")
+                 
     )
     ,mainPanel(h2("Sample distributions")
                ,plotOutput("sample.distributions",height=768)
