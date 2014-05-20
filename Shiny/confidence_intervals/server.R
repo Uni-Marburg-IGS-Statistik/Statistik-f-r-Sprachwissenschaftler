@@ -60,8 +60,10 @@ shinyServer(function(input, output) {
     
     pop <- qplot(population,geom="density") +  
       scale_x_continuous(limits=c(-4,4)) + 
-      geom_vline(xintercept=mean(population), color="darkred")
-    
+      geom_vline(aes(xintercept=mean),data=sample.means, color="darkred",alpha=0.1,size=3) + 
+      geom_vline(xintercept=mean(population),size=1) +
+      geom_segment(aes(x=left,xend=right,y=0,yend=0),size=3,data=cis,alpha=0.1) 
+      
     
     plots <- list(distributions=dist,population=pop)
   
