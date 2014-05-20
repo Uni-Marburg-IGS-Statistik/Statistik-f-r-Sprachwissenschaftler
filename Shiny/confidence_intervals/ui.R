@@ -34,20 +34,11 @@ shinyUI(fluidPage(
                                 ,min = 1
                                 ,max = 1000
                                 ,value = 100)
-                 ,  sliderInput("bw"
-                                ,"Bin width for the historgram"
-                                ,min = 0.001
-                                ,max = 1
-                                ,value = 0.1)
-                 , actionButton("runagain",label = "Run Again")                
+                 , actionButton("runagain",label = "Run Again") 
+                 ,h2("Population")
+                 ,plotOutput("population.distribution")
     )
-    ,mainPanel(h2("Sample means")
-               ,plotOutput("sample.means")
-               #,h2("Confidence Interval (via t.test)")
-               #,uiOutput("ttest")
-               ,h2("Population")
-               ,plotOutput("population.distribution")
-               ,h2("Sample distributions")
+    ,mainPanel(h2("Sample distributions")
                ,plotOutput("sample.distributions",height=768)
 
     )
