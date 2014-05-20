@@ -58,7 +58,12 @@ shinyServer(function(input, output) {
             strip.background = element_blank(),
             strip.text.x = element_blank())
     
-    plots <- list(distributions=dist)
+    pop <- qplot(population,geom="density") +  
+      scale_x_continuous(limits=c(-4,4)) + 
+      geom_vline(xintercept=mean(population), color="darkred")
+    
+    
+    plots <- list(distributions=dist,population=pop)
   
     plots  
   })
@@ -82,10 +87,8 @@ shinyServer(function(input, output) {
   })
 
   output$population.distribution <- renderPlot({
-    population <- get.population()
-    popplot <- qplot(population,geom="density") +  
-      scale_x_continuous(limits=c(-4,4)) + 
-      geom_vline(xintercept=mean(population), color="darkred")
-    print(popplot)
+    plots <- runSimulation()
+    print(plots$distributions)
+    print(plots$population)
   })
 })
