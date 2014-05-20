@@ -17,6 +17,7 @@ shinyUI(fluidPage(
                                 ,max = 10
                                 ,value = 1
                                 ,animate=animationOptions(interval=6000,loop=TRUE))
+                 ,h5("Features that may slow things down, but provide a finer picture")
                  ,  sliderInput("population"
                                 ,"Number of points to simulate for the population"
                                 ,min = 10
@@ -28,7 +29,6 @@ shinyUI(fluidPage(
                                 ,max = 100
                                 ,value = 10,
                                 ,animate=animationOptions(interval=6000,loop=TRUE))
-                 ,h5("Features that may slow things down, but provide a finer picture")
                  ,  sliderInput("nsamples"
                                 ,"Number of samples"
                                 ,min = 1
