@@ -44,8 +44,16 @@ shinyServer(function(input, output) {
     names(sample.means) <- c("sample","mean")
     #sorted.means <- sort(sample.means$mean)
     
+    list(population=population, cis=cis, sample.means=sample.means)
+  })
+
+  output$sample.distributions <- renderPlot({
+    x <- runSimulation()
+    cis <- x$cis
+    population <- x$population
+    sample.means <- x$sample.means
     
-    dist <- ggplot(samples) + geom_density(aes(x=value)) +  scale_x_continuous(limits=c(-4,4)) + 
+    plots <- ggplot(samples) + geom_density(aes(x=value)) +  scale_x_continuous(limits=c(-4,4)) + 
       facet_wrap(~sample) + 
       geom_vline(aes(xintercept=mean),linetype="dashed",data=sample.means) +
       geom_segment(aes(x=left,xend=right,y=0,yend=0,color=`population mean`),size=3,data=cis) + 
@@ -58,6 +66,14 @@ shinyServer(function(input, output) {
             ,strip.background = element_blank()
             ,axis.title.x = element_blank()
             ,strip.text.x = element_blank())
+    print(plots)
+  })
+
+  output$population.distribution <- renderPlot({
+    x <- runSimulation()
+    cis <- x$cis
+    population <- x$population
+    sample.means <- x$sample.means
     
     pop <- qplot(population,geom="density") +  
       scale_x_continuous(limits=c(-4,4)) + xlab("") 
@@ -69,34 +85,7 @@ shinyServer(function(input, output) {
     
     if(input$sample.ci.overlay)
       pop <- pop + geom_segment(aes(x=left,xend=right,y=0,yend=0),size=3,data=cis,alpha=0.1) 
-      
     
-    plots <- list(distributions=dist,population=pop)
-  
-    plots  
-  })
-  
-  output$ttest <- renderUI({
-    # first column is index, second column is first sample
-    s <- get.samples()[,2]
-    #print(head(get.samples()))
-    #print(s)
-    s.text <- paste0(s,collapse=", ")
-    t <- t.test(s,conf.level = input$conf.level)
-    text <- paste0("The confidence interval calculated from the first sample is ",t$conf.int[1], " to ", t$conf.int[2], " with mean ",mean(s),".")
-    #paste(text, "For reference, this sample was:", s.text)
-    
-    "More explanatory text coming soon."
-  })
-  
-  output$sample.distributions <- renderPlot({
-    plots <- runSimulation()
-    print(plots$distributions)
-  })
-
-  output$population.distribution <- renderPlot({
-    plots <- runSimulation()
-    print(plots$distributions)
-    print(plots$population)
+    print(pop)
   })
 })
