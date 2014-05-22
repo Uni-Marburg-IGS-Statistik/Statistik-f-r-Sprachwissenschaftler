@@ -218,6 +218,62 @@ ss_tot <- sum( (Lex_Dec - mean(Lex_Dec))^2 )
 ss_tot
 ```
 
+Exkurs: Warum immer Quadrate?
+=============================
+- Kurz und knapp: Satz vom Pythagoras: 
+
+$$ c^2 = a^ + b^2$$ 
+
+- angewandt: die Entfernung zwischen zwei Punkte, $p_1=(x_1,y_1), p_2=(x_2,y_2)$, ist 
+
+$$ d(p_1,p_2) = \sqrt{ (x_1 - x_2)^2 - (y_1 - y_2)^2} $$
+
+- üblicher Begriff von "Entfernung" (*Distanz*): Euclid'sche Distanz ($L_2$-Metrik)
+
+Exkurs: Warum immer Quadrate?
+=============================
+- Abweichung von der Modellinie ist die **Standabweichung**
+- Abweichung von der Modellinie ist die Entfernung vom Mittelwert: $$ \sqrt{(x_0 - \bar{x})^2}$$ 
+- wenn wir das für alle Punkte einer Gruppe machen:
+$$\Rightarrow \sqrt{\sum_m (x_m - \bar{x})^2}$$
+
+Exkurs: Warum immer Quadrate?
+=============================
+- Aber Quadratwurzel macht keinen Spaß, daher arbeiten wir mit der **Varianz**, die dann eine Summe von Quadraten (**Quadratsumme**) ist: $$(x_0 - \bar{x})^2$$
+- wenn wir das für alle Punkte einer Gruppe machen:
+$$ \Rightarrow \sum_m (x_m - \bar{x})^2 $$
+- Uns interessiert die *Gesamt*abweichung über alle Gruppen hinweg, also die Summe der Quadratsummen: $$\sum_j \sum_m (x_m - \bar{x})^2$$
+
+Exkurs zum Exkurs: Gibt es andere Distanzen?
+=============================================
+- ja und zwar ganze viele!
+- zwei wichtige:
+    - Manhattan ($L_1$): $$d(p_1 + p_2) = |x_1 - x_2| + |y_1 - y_2| $$ (Straßenentfernung)
+    - Null-Eins ($L_0$):  $$\begin{cases} 1 &\text{wenn}\quad p_1 = p_2 \\ 0 &\text{wenn}\quad p_1 \neq p_2 \end{cases} $$ (alles oder nichts, mit Kronecker-$\delta$-Funktion verwandt)
+
+Exkurs zum Exkurs: Gibt es andere Distanzen?
+=============================================
+incremental: true
+- Warum nutzen wir sie nicht?
+- tun wir schon!
+- Erwartungswert als der Wert, der die summierte Entfernung reduziert: $$E(x) = \arg \min_{z} \sum_i d(z,x_i)$$
+- das "Zentrum" nach einer Entfernungsart
+
+Exkurs zum Exkurs: Gibt es andere Distanzen?
+=============================================
+- Modus, Median und Mittelwerte Erwartungswerte nach verschiedenen Entfernungsarten:
+    - Modus: $L_0$-Metrik
+    - Median: $L_1$-Metrik
+    - (aritmetischer) Mittelwert: $L_2$-Metrik
+    
+Idee vereinfacht von `#r citet("http://www.johnmyleswhite.com/notebook/2013/03/22/modes-medians-and-means-an-unifying-perspective/")`
+    
+Exkurs zum Exkurs: Gibt es andere Distanzen?
+=============================================
+- aber zählt das wirklich? Warum Mittelwert statt Median? 
+- Quadrate haben gewisse Eigenschaften bzgl. **Konvergenz** (Annäherung an *einen* Wert über Wiederholungen hinwweg)
+- entprischt auch Entfernung im (üblichen) "Raum"
+
 Zerlegung der Gesamtquadratsumme
 ===================================
 <small>
