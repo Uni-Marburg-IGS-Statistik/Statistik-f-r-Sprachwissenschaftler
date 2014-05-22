@@ -318,13 +318,19 @@ $$F = \frac{MSS_\text{zw}}{MSS_\text{inn}} $$
 
 Prüfgröße F
 =============
-plot goes here
+```{r, echo=FALSE}
+sumsq <- summary(aov(Lex_Dec ~ Aphasie,data=aphasiker))[[1]]$`Sum Sq`
+sumsq.df <- data.frame(MSS=c("zwischen","innerhalb"),wert=sumsq)
+piechart.theme <- theme(axis.ticks = element_blank(), axis.title=element_blank(),axis.text=element_blank(), panel.background=element_blank())
+pie <- qplot(x=factor(1),y=wert,fill=MSS,stat="identity",geom="bar",width=1,data=sumsq.df) + coord_polar(theta="y", direction = -1) + piechart.theme
+pie
+```
 
 Prüfgröße F
 =============
 - die Prüfgröße stellt einen Quotienten aus zwei Quadratsummen dar, d.h. dass er nur positive Werte annehmen kann (im Falle der Nullhypothese näher er sich dem Wert 1 an)
 - F-Werte können daher zwischen 0 und +unendlich variieren, wir können nur die rechte Seite, also nur einseitig testen
-- Zusammenhang der Prüfgrößen F und t: für den Fall der einfaktoriellen ANOVA mit zwei Faktorstufen gilt: $F = t^2$
+- Zusammenhang der Prüfgrößen F und t: für den Fall der einfaktoriellen ANOVA mit zwei Faktorstufen gilt: $F = t^2$ (warum?)
 
 Berechnung der Prüfgröße F
 ===========================
@@ -339,10 +345,14 @@ Berechnung in R mit aov
 
 Logik der SS-Zerlegung
 ========================
+left: 70
 - Die totale QS (Gesamtvarianz) wird zerlegt in zwei Bestandteile
 - ist die QS-zwischen (erklärt durch unseren Faktor) ausreichend größer als die QS-innerhalb (Fehler), kann die Nullhypothese (kein Gruppenunterschied) zurückgewiesen werden
 
-Pie Chart here
+***
+```{r, echo=FALSE}
+pie
+```
 
 ANOVA und t-Test
 ====================
