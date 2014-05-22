@@ -34,7 +34,9 @@ Heute
 
 Morgen
 ========
--
+- einfaktorielle ANOVA
+- mehrfaktorielle ANOVA
+- ANOVA mit wiederholten Messwerten
 
 Datensätze für heute: Aphasiker und RT
 ==========================================
@@ -96,29 +98,39 @@ incremental: true
 - Gruppe als unabhängige Variable
 - Mittelwert als eine Funkion der Gruppe + Fehler
 
-$$\text{Welt} = (\text{model}) + \text{Fehler}$$  
+- $$\text{Welt} = (\text{model}) + \text{Fehler}$$  
 
-$$\text{Y} = F(X) + \epsilon{} $$  
+- $$\text{Y} = F(X) + \epsilon{} $$  
 
-$$\text{Y} = \beta{}X + \epsilon{} $$  
+- $$\text{Y} = \beta{}X + \epsilon{} $$  
 
 Eine andere Perspektive
 =========================
 ```{r, echo=FALSE}
-ggplot(rt, aes(x=subj,y=RT)) + geom_point() + geom_smooth(method="lm")
+m <- mean(rt[rt$subj == 2,"RT"]) - mean(rt[rt$subj == 1,"RT"])
+b <- mean(rt[rt$subj == 1,"RT"]) - m
+ggplot(rt, aes(x=subj,y=RT)) + geom_point() + geom_abline(slope=m, intercept=b, color="red")
 ```
 
 Eine andere Perspektive
 =========================
 ```{r, echo=FALSE}
-ggplot(subset(aphasiker, Aphasie %in% c("B","W"))) + geom_point(aes(x=Aphasie,y=Lex_Dec,color=Aphasie))
+m <- mean(aphasiker[aphasiker$Aphasie == "W","Lex_Dec"]) - mean(aphasiker[aphasiker$Aphasie == "B","Lex_Dec"])
+b <- mean(aphasiker[aphasiker$Aphasie == "B","Lex_Dec"]) - m
+ggplot(subset(aphasiker, Aphasie %in% c("B","W"))) + geom_point(aes(x=Aphasie,y=Lex_Dec)) + geom_abline(slope=m, intercept=b, color="red")
+```
+
+Eine andere Perspektive
+=========================
+```{r, echo=FALSE}
+ggplot(aphasiker,aes(x=Aphasie,y=Lex_Dec)) + geom_point(aes(color=Aphasie)) + geom_smooth(aes(x=as.numeric(Aphasie),y=Lex_Dec),method="lm", se=FALSE,color="red")
 ```
 
 Eine andere Perspektive
 =========================
 ```{r, echo=FALSE}
 aphasiker$Aphasie <- factor(as.character(aphasiker$Aphasie), levels=c("C","A","B","W"))
-ggplot(aphasiker) + geom_point(aes(x=Aphasie,y=Lex_Dec,color=Aphasie))
+ggplot(aphasiker,aes(x=Aphasie,y=Lex_Dec)) + geom_point(aes(color=Aphasie)) + geom_smooth(aes(x=as.numeric(Aphasie),y=Lex_Dec),method="lm", se=FALSE,color="red")
 ```
 
 Eine andere Perspektive
