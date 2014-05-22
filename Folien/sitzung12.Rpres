@@ -71,9 +71,9 @@ Varianzanalyse
 =================
 type: section
 
-
+Was passiert, wenn wir mehr als zwei Gruppen vergleichen möchten?
 ==================
-was passiert, wenn wir mehr als zwei Gruppen vergleichen möchten?
+type: prompt
 
 Lösungsvorschlag I
 ===================
@@ -154,10 +154,11 @@ incremental: true
 
 Einfaktorielle ANOVA
 =====================
-- beim Aphasiker-Datensatz untersuchen wir den Einfluss von nur einem Faktor, nämlich der Art der Aphasie
-- denkbar wäre aber auch, dass der Einfluss eines weiterer Faktor, z.B. das Geschlecht der Versuchspersonen oder das der Modellperson mit berück-sichtigt wird -->  zwei-, bzw. dreifaktorielle ANOVA
-- im Falle der dreifaktoriellen ANOVA (3x2x2) müssten wir also schon 12 Mittelwerte miteinander vergleichen!
+- <small> beim Aphasiker-Datensatz untersuchen wir den Einfluss von nur einem Faktor, nämlich der Art der Aphasie
+- denkbar wäre aber auch, dass der Einfluss eines weiterer Faktor, z.B. das Geschlecht der Versuchspersonen mit berücksichtigt wird -->  zwei-, bzw. dreifaktorielle ANOVA
+- im Falle der zweifaktoriellen ANOVA (4x2) müssten wir also schon 8 Mittelwerte miteinander vergleichen!
 - auch bei der ANOVA kann zwischen unabhängigen (ohne Messwiederholung) und abhängigen (mit Messwiederholung) Stichproben unterschieden werden
+</small>
 
 Grundidee der Varianzanalyse
 ==============================
@@ -169,24 +170,27 @@ Grundidee der Varianzanalyse
 
 Grundidee der Varianzanalyse
 ================================
-- in welchem Maße ist die Gesamtvariation auf die unterschiedlichen Faktorstufen, also die experimentelle Manipulation zurückzuführen?
+- <small> in welchem Maße ist die Gesamtvariation auf die unterschiedlichen Faktorstufen, also die experimentelle Manipulation zurückzuführen?
 - Ist die Varianz innerhalb der Gruppen größer als die Varianz zwischen den Gruppen?
 - wenn dies der Fall ist, dann spricht es dafür, dass die Unterschiede der Mittelwerte zufällig, d.h. durch die zufällige Zusammensetzung der Stichprobe zustande gekommen sind 
 - statistische Hypothesen:
     - $H_0: \mu_1 = \mu_2 = \mu_3$ d.h. die Mittelwerte stammen aus Populationen mit gleichen Parametern
     - $H_1: \mu_i \neq \mu_j$ für mindestens ein Paar $(i,j), i \neq j$, d.h. mindestens zwei Mittelwerte unterscheiden sich
+</small>
 
-Daten
-===========
+Daten: Mittelwert
+=================
 ```{r}
 aggregate(Lex_Dec ~ Aphasie, data=aphasiker, FUN = mean)
 ```
-***
+
+Daten: Varianz
+===============
 ```{r}
 aggregate(Lex_Dec ~ Aphasie, data=aphasiker, FUN = var)
 ```
 
-Welchen Größen werden zur Berechnung benötigt?
+Welche Größen werden zur Berechnung benötigt?
 ==================================================
 <small>
 Als Maß der Variation dient die Gesamtvarianz bzw. Gesamtquadratsumme $SS_\text{tot}$ (SS für engl. *sum of squares*):
@@ -197,7 +201,7 @@ $$ \hat{\sigma}^2_\text{tot} = \frac{SS_\text{tot}}{df_\text{tot}} = \frac{\sum_
 </small>
 
 
-Welchen Größen werden zur Berechnung benötigt?
+Welche Größen werden zur Berechnung benötigt?
 ==================================================
 <small>
 $$ SS_\text{tot} = \sum_j \sum_m \left(x_{m,j} - \bar{x} \right)^2 $$
@@ -221,6 +225,11 @@ Zerlegung der Gesamtquadratsumme
 - die Zwischen-Quadratsumme $SS_\text{zw}$  drückt die Variabilität zwischen den Bedingungen/Gruppen aus:
   - wird berechnet durch die Abweichungen der Gruppenmittelwerte vom Gesamtmittelwert
     $$ SS_\text{zw} = \sum_{j=1}^{p} \sum_{m=1}^{n_j} \left(\bar{x}_j - \bar{x} \right)^2 $$
+</small>
+
+Zerlegung der Gesamtquadratsumme
+===================================
+<small>
 - Varianz zwischen den Gruppen: MSSzw (mittlere Qudratsumme zwischen):
     $$ MSSzw = \frac{SS_\text{zw}}{p-1}$$   (mit $p$ = Anzahl an Faktorstufen)
 </small>
@@ -228,13 +237,14 @@ Zerlegung der Gesamtquadratsumme
 Berechnung der Zwischen-Quadratsumme
 ========================================
 
-Zerlegung der Gesamtquadratsumme
+Zerlegung der Innerhalb-Duadratsumme
 ========================================
-- die Innerhalb-Quadratsumme QSinn  drückt die Variabilität innerhalb den Bedingungen/Gruppen aus (wird auch als Fehlerquadratsumme bezeichnet):
+- <small> die Innerhalb-Quadratsumme QSinn  drückt die Variabilität innerhalb den Bedingungen/Gruppen aus (wird auch als Fehlerquadratsumme bezeichnet):
     - wird berechnet durch die Abweichungen der einzelnen Werte einer Gruppe  vom Gruppenmittelwert:
       $$ SS_\text{inn} = \sum_{j=1}^{p} \sum_{m=1}^{n_j} \left(x_{mj} - \bar{x}_j \right)^2 $$
     - Varianz innerhalb den Gruppen: $MSS_\text{inn}$ (mittlere Quadratsumme innerhalb)
     $$ MSS_\text{inn} = \frac{SS_\text{inn}}{n-p} $$ mit $n$ = Stichprobenumfang, $p$ = Faktorstufen  
+</small>
 
 Berechnung der Innerhalb-Quadratsumme
 ========================================
