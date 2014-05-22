@@ -248,8 +248,8 @@ Exkurs zum Exkurs: Gibt es andere Distanzen?
 =============================================
 - ja und zwar ganze viele!
 - zwei wichtige:
-    - Manhattan ($L_1$): $$d(p_1 + p_2) = |x_1 - x_2| + |y_1 - y_2| $$ (Straßenentfernung)
-    - Null-Eins ($L_0$):  $$\begin{cases} 1 &\text{wenn}\quad p_1 = p_2 \\ 0 &\text{wenn}\quad p_1 \neq p_2 \end{cases} $$ (alles oder nichts, mit Kronecker-$\delta$-Funktion verwandt)
+    - Manhattan ($L_1$): $$d(p_1, p_2) = |x_1 - x_2| + |y_1 - y_2| $$ (Straßenentfernung)
+    - Null-Eins ($L_0$):  $$d(p_1, p_2) = \begin{cases} 1 &\text{wenn}\quad p_1 = p_2 \\ 0 &\text{wenn}\quad p_1 \neq p_2 \end{cases} $$ (alles oder nichts, mit Kronecker-$\delta$-Funktion verwandt)
 
 Exkurs zum Exkurs: Gibt es andere Distanzen?
 =============================================
@@ -307,8 +307,7 @@ Berechnung der Innerhalb-Quadratsumme
 
 Prüfgröße F
 =============
-<small>
-- für den Signifikanztest benötigen wird die Prüfgröße $F$, deren Verteilung durch die Zählerfreiheitsgrade($p-1$) und Nennerfreiheitsgrade ($n-p$) beschrieben wird:
+- <small> für den Signifikanztest benötigen wird die Prüfgröße $F$, deren Verteilung durch die Zählerfreiheitsgrade($p-1$) und Nennerfreiheitsgrade ($n-p$) beschrieben wird:
 
 $$F = \frac{MSS_\text{zw}}{MSS_\text{inn}} $$
 
