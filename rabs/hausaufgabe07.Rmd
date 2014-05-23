@@ -1,6 +1,6 @@
 % Hausaufgabe 07
 % Elisabeth Rabs <rabs@students.uni-marburg.de>
-% 2014-05-08
+% 2014-05-23
 
 Falls die Umlaute in dieser und anderen Dateien nicht korrekt dargestellt werden, sollten Sie File > Reopen with Encoding > UTF-8 sofort machen (und auf jeden Fall ohne davor zu speichern), damit die Enkodierung korrekt erkannt wird! 
 
@@ -174,15 +174,33 @@ Bei diesem Dozenten ist die Verwaltung wirklich unsicher, ob und was für einen 
 
 In einem kleinen Seminar mit 7 Studenten beträgt der Durchschnittswert 10. Unterscheidet sich der Notenspiegel von dem idealen? Berechnen Sie den $z$-Test:
 
-code_hier
+```{r}
+n=7
+xm=10
+sigma=3
 
-Das ist ein **_eins_von_signifikanter_insignifikanter_** Unterschied. 
+z = ((xm-mu)/sigma) * sqrt(n)
+print(z)
+f = z > qnorm(0.97)
+print(f)
+```
+
+Das ist ein **_insignifikanter_** Unterschied. 
 
 In einer Vorlesung vom selben Dozenten mit 50 Teilnehmern beträgt der Durchschnittswert wieder 10. (Es scheint, dass der Dozent 10 besonders toll findet.) Berechnen Sie den $z$-Test:
 
-code_hier
+```{r}
+n=50
+xm=10
+sigma=3
 
-Das ist ein **_eins_von_signifikanter_insignifikanter_** Unterschied. 
+z = ((xm-mu)/sigma) * sqrt(n)
+print(z)
+f = z > qnorm(0.97)
+print(f)
+```
+
+Das ist ein **_signifikanter_** Unterschied. 
 
 Ist die Benotung vom Dozenten weniger als ideal? 
 
@@ -193,17 +211,35 @@ In einem mittelgroßen Seminar mit 20 Studenten beträgt der Durchschnittswert 7
 
 Berechnen Sie den $z$-Test:
 
-code_hier
+```{r}
+n=20
+xm=7
+sigma=3
 
-Das ist ein **_eins_von_signifikanter_insignifikanter_** Unterschied. 
+z = ((xm-mu)/sigma) * sqrt(n)
+print(z)
+f = z > qnorm(0.97)
+print(f)
+```
+
+Das ist ein **_insignifikanter_** Unterschied. 
 
 Später ergibt sich, dass es eigentlich 25 Studenten im Kurs gab. (Der Dozent hat "einen Tippfehler" gemacht, als er seine Teilnehmerzahl per Mail an die Verwaltung geschickt hat.) Der Durchschnittswert bleibt -- behauptet der Dozent -- immer noch bei 7. Er behauptet weiterhin, dass das wunderbar nah am Erwartungswert (8) ist, und dass man ihn in Ruhe lassen sollte. Ist er zu streng?
 
 Berechnen Sie den $z$-Test:
 
-code_hier
+```{r}
+n=25
+xm=7
+sigma=3
 
-Das ist ein **_eins_von_signifikanter_insignifikanter_** Unterschied. 
+z = ((xm-mu)/sigma) * sqrt(n)
+print(z)
+f = z > qnorm(0.97)
+print(f)
+```
+
+Das ist ein **_insignifikanter_** Unterschied. 
 
 ## Zum Überlegen
 Gibt es einen Grund, weshalb die Noten normal verteilt sein sollten? Warum ist das die übliche Annahme?
