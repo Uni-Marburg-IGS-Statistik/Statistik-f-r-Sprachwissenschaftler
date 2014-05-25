@@ -9,7 +9,7 @@ library(knitr)
 opts_chunk$set(cache=TRUE,prompt=TRUE)
 library(knitcitations)
 library(ggplot2)
-library(reshape2)
+library(xtable)
 cite_options(tooltip = TRUE
              , linked = TRUE
              , numerical = TRUE
@@ -222,11 +222,11 @@ Exkurs: Warum immer Quadrate?
 =============================
 - Kurz und knapp: Satz vom Pythagoras: 
 
-$$ c^2 = a^ + b^2$$ 
+$$ c^2 = a^2 + b^2$$ 
 
 - angewandt: die Entfernung zwischen zwei Punkte, $p_1=(x_1,y_1), p_2=(x_2,y_2)$, ist 
 
-$$ d(p_1,p_2) = \sqrt{ (x_1 - x_2)^2 - (y_1 - y_2)^2} $$
+$$ d(p_1,p_2) = \sqrt{ (x_1 - x_2)^2 + (y_1 - y_2)^2} $$
 
 - üblicher Begriff von "Entfernung" (*Distanz*): Euclid'sche Distanz ($L_2$-Metrik)
 
@@ -242,14 +242,14 @@ Exkurs: Warum immer Quadrate?
 - Aber Quadratwurzel macht keinen Spaß, daher arbeiten wir mit der **Varianz**, die dann eine Summe von Quadraten (**Quadratsumme**) ist: $$(x_0 - \bar{x})^2$$
 - wenn wir das für alle Punkte einer Gruppe machen:
 $$ \Rightarrow \sum_m (x_m - \bar{x})^2 $$
-- Uns interessiert die *Gesamt*abweichung über alle Gruppen hinweg, also die Summe der Quadratsummen: $$\sum_j \sum_m (x_m - \bar{x})^2$$
+- Uns interessiert die **Gesamt**abweichung über alle Gruppen hinweg, also die Summe der Quadratsummen: $$\sum_j \sum_m (x_m - \bar{x})^2$$
 
 Exkurs zum Exkurs: Gibt es andere Distanzen?
 =============================================
 - ja und zwar ganze viele!
 - zwei wichtige:
     - Manhattan ($L_1$): $$d(p_1, p_2) = |x_1 - x_2| + |y_1 - y_2| $$ (Straßenentfernung)
-    - Null-Eins ($L_0$):  $$d(p_1, p_2) = \begin{cases} 1 &\text{wenn}\quad p_1 = p_2 \\ 0 &\text{wenn}\quad p_1 \neq p_2 \end{cases} $$ (alles oder nichts, mit Kronecker-$\delta$-Funktion verwandt)
+    - Null-Eins ($L_0$):  $$d(p_1, p_2) = \begin{cases} 1 &\text{wenn}\quad p_1 \neq p_2 \\ 0 &\text{wenn}\quad p_1 = p_2 \end{cases} $$ (alles oder nichts, mit Kronecker-$\delta$-Funktion verwandt)
 
 Exkurs zum Exkurs: Gibt es andere Distanzen?
 =============================================
@@ -266,18 +266,17 @@ Exkurs zum Exkurs: Gibt es andere Distanzen?
     - Median: $L_1$-Metrik
     - (aritmetischer) Mittelwert: $L_2$-Metrik
     
-Idee vereinfacht von `#r citet("http://www.johnmyleswhite.com/notebook/2013/03/22/modes-medians-and-means-an-unifying-perspective/")`
+Idee vereinfacht von `r citet("http://www.johnmyleswhite.com/notebook/2013/03/22/modes-medians-and-means-an-unifying-perspective/")`
     
 Exkurs zum Exkurs: Gibt es andere Distanzen?
 =============================================
 - aber zählt das wirklich? Warum Mittelwert statt Median? 
-- Quadrate haben gewisse Eigenschaften bzgl. **Konvergenz** (Annäherung an *einen* Wert über Wiederholungen hinwweg)
-- entprischt auch Entfernung im (üblichen) "Raum"
+- Quadrate haben gewisse Eigenschaften bzgl. **Konvergenz** (Annäherung an *einen* Wert über Wiederholungen hinweg)
+- entprischt auch Entfernung in (üblichem) "Raum"
 
 Zerlegung der Gesamtquadratsumme
 ===================================
-<small>
-- die Gesamtqudratsumme $SS_\text{tot}$ wird in zwei Komponenten zerlegt: **Zwischen**-Quadratsumme und **Innerhalb**-Qudratsumme
+- <small> die Gesamtqudratsumme $SS_\text{tot}$ wird in zwei Komponenten zerlegt: **Zwischen**-Quadratsumme und **Innerhalb**-Qudratsumme
 - die Zwischen-Quadratsumme $SS_\text{zw}$  drückt die Variabilität zwischen den Bedingungen/Gruppen aus:
   - wird berechnet durch die Abweichungen der Gruppenmittelwerte vom Gesamtmittelwert
     $$ SS_\text{zw} = \sum_{j=1}^{p} \sum_{m=1}^{n_j} \left(\bar{x}_j - \bar{x} \right)^2 $$
@@ -285,15 +284,19 @@ Zerlegung der Gesamtquadratsumme
 
 Zerlegung der Gesamtquadratsumme
 ===================================
-<small>
-- Varianz zwischen den Gruppen: MSSzw (mittlere Qudratsumme zwischen):
-    $$ MSSzw = \frac{SS_\text{zw}}{p-1}$$   (mit $p$ = Anzahl an Faktorstufen)
+- <small> Varianz zwischen den Gruppen: MSSzw (mittlere Qudratsumme zwischen):
+    $$ MSS_\text{zw} = \frac{SS_\text{zw}}{p-1}$$   (mit $p$ = Anzahl an Faktorstufen)
 </small>
 
 Berechnung der Zwischen-Quadratsumme
 ========================================
+```{r}
+# factor (condition) / model variance
+ss_zw <- 8*(mean(Lex_Dec[Aphasie=="A"]) - mean(Lex_Dec))^2 + 9*(mean(Lex_Dec[Aphasie=="B"]) - mean(Lex_Dec))^2 + 7*(mean(Lex_Dec[Aphasie=="C"]) - mean(Lex_Dec))^2 + 8*(mean(Lex_Dec[Aphasie=="W"]) - mean(Lex_Dec))^2
+ss_zw
+```
 
-Zerlegung der Innerhalb-Duadratsumme
+Zerlegung der Innerhalb-Quadratsumme
 ========================================
 - <small> die Innerhalb-Quadratsumme QSinn  drückt die Variabilität innerhalb den Bedingungen/Gruppen aus (wird auch als Fehlerquadratsumme bezeichnet):
     - wird berechnet durch die Abweichungen der einzelnen Werte einer Gruppe  vom Gruppenmittelwert:
@@ -304,6 +307,12 @@ Zerlegung der Innerhalb-Duadratsumme
 
 Berechnung der Innerhalb-Quadratsumme
 ========================================
+```{r}
+# residual variance (error)
+ss_inn <- sum((Lex_Dec[Aphasie=="A"] - mean (Lex_Dec[Aphasie=="A"]))^2) + sum((Lex_Dec[Aphasie=="B"] - mean (Lex_Dec[Aphasie=="B"]))^2) + sum((Lex_Dec[Aphasie=="C"] - mean (Lex_Dec[Aphasie=="C"]))^2) + sum((Lex_Dec[Aphasie=="W"] - mean (Lex_Dec[Aphasie=="W"]))^2)
+ss_inn
+```
+
 
 Prüfgröße F
 =============
@@ -314,6 +323,31 @@ $$F = \frac{MSS_\text{zw}}{MSS_\text{inn}} $$
 - Logik: Nullhypothese sagt, dass die Bedingungsmittelwerte in den $p$ verschiedenen Populationen gleich sind, dann schätzen beide MSS das gleiche: die zufällig zustande kommende Fehlervariation
 - gilt jedoch die Alternativhypothese, dann wird der $F$-Wert umso größer, je größer die Varianz zwischen den Gruppen ist (--> Einfluss der systematischen Manipulation)
 </small>
+
+Prüfgröße F
+=============
+```{r}
+mss_inn <- ss_inn / 28 # Anzahl Datenpunkte - Anzahl Stufen (32 - 4)
+mss_zw<- ss_zw / 3 # Anzahl Stufen - 1 (4 - 1)
+f <- mss_zw / mss_inn
+f
+```
+
+Prüfgröße F
+=============
+```{r}
+1 - pf(f, df1=3,df2=28)
+```
+
+
+Prüfgröße F
+============
+```{r, echo=FALSE,results='asis'}
+print(xtable(aov(Lex_Dec ~ Aphasie,data=aphasiker),display=c("s","d","f","f","f","fg")),type="html")
+```
+
+Schreibweise: F(3, 28) = 46.69, p = 5.05e-11
+
 
 Prüfgröße F
 =============
@@ -334,12 +368,35 @@ Prüfgröße F
 Berechnung der Prüfgröße F
 ===========================
 
-- Schreibweise: F(Zähler,Nenner) = Wert, p=p-Wert
+- Schreibweise: F(Freihatsgrade-Zähler,Freihatsgrade-Nenner) = Wert, p=p-Wert
+
+Cut Clutter
+==============
+```{r}
+detach(aphasiker)
+```
 
 Berechnung in R mit aov
 =======================
 - Mit `aov()` werden die entsprechenden Quadratsummen berechnet
 - Mit `summary()` kann man sich dann die $F$- und $p$-Werte anzeigen lassen
+
+Berechnung in R mit aov
+=======================
+<small>
+```{r}
+aphasiker.aov <- aov(Lex_Dec ~ Aphasie, data=aphasiker)
+aphasiker.aov
+```
+</small>
+
+Berechnung in R mit aov
+=======================
+<small>
+```{r}
+summary(aphasiker.aov)
+```
+</small>
 
 
 Logik der SS-Zerlegung
@@ -357,7 +414,8 @@ ANOVA und t-Test
 ====================
 <small>
 ```{r}
-t.test(Lex_Dec ~ Aphasie,data=subset(aphasiker,Aphasie %in% c("B","W")))
+aphasiker.bw <- subset(aphasiker,Aphasie %in% c("B","W"))
+t.test(Lex_Dec ~ Aphasie,data=aphasiker.bw,var.equal=TRUE)
 ```
 </small>
 
@@ -365,9 +423,15 @@ ANOVA und t-Test
 ====================
 <small>
 ```{r}
-summary(aov(Lex_Dec ~ Aphasie,data=subset(aphasiker,Aphasie %in% c("B","W"))))
+summary(aov(Lex_Dec ~ Aphasie,data=aphasiker.bw))
 ```
 </small>
+
+ANOVA und t-Test
+====================
+```{r}
+(-7.784)**2
+```
 
 Voraussetzungen
 ================
@@ -395,7 +459,8 @@ Mehrfaktorielle ANOVA
 
 Hausaufgabe
 ===========
-
+Bis morgen:
+- sollten Sie den Stoff von heute einigermaßen verstehen, denn morgen machen wir eine direkte Erweiterung davon!
 
 Bibliography
 =============
