@@ -416,7 +416,8 @@ ANOVA und t-Test
 ====================
 <small>
 ```{r}
-t.test(Lex_Dec ~ Aphasie,data=subset(aphasiker,Aphasie %in% c("B","W")))
+aphasiker.bw <- subset(aphasiker,Aphasie %in% c("B","W"))
+t.test(Lex_Dec ~ Aphasie,data=aphasiker.bw,var.equal=TRUE)
 ```
 </small>
 
@@ -424,9 +425,15 @@ ANOVA und t-Test
 ====================
 <small>
 ```{r}
-summary(aov(Lex_Dec ~ Aphasie,data=subset(aphasiker,Aphasie %in% c("B","W"))))
+summary(aov(Lex_Dec ~ Aphasie,data=aphasiker.bw))
 ```
 </small>
+
+ANOVA und t-Test
+====================
+```{r}
+(-7.784)**2
+```
 
 Voraussetzungen
 ================
