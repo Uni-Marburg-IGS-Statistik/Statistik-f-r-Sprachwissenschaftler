@@ -266,7 +266,7 @@ Exkurs zum Exkurs: Gibt es andere Distanzen?
     - Median: $L_1$-Metrik
     - (aritmetischer) Mittelwert: $L_2$-Metrik
     
-Idee vereinfacht von `#r citet("http://www.johnmyleswhite.com/notebook/2013/03/22/modes-medians-and-means-an-unifying-perspective/")`
+Idee vereinfacht von `r citet("http://www.johnmyleswhite.com/notebook/2013/03/22/modes-medians-and-means-an-unifying-perspective/")`
     
 Exkurs zum Exkurs: Gibt es andere Distanzen?
 =============================================
@@ -461,7 +461,8 @@ Mehrfaktorielle ANOVA
 
 Hausaufgabe
 ===========
-
+Bis morgen:
+- sollten Sie den Stoff von heute einigermaßen verstehen, denn morgen machen wir eine direkte Erweiterung davon!
 
 Bibliography
 =============
