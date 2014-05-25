@@ -9,7 +9,7 @@ library(knitr)
 opts_chunk$set(cache=TRUE,prompt=TRUE)
 library(knitcitations)
 library(ggplot2)
-library(reshape2)
+library(xtable)
 cite_options(tooltip = TRUE
              , linked = TRUE
              , numerical = TRUE
@@ -370,12 +370,35 @@ Prüfgröße F
 Berechnung der Prüfgröße F
 ===========================
 
-- Schreibweise: F(Zähler,Nenner) = Wert, p=p-Wert
+- Schreibweise: F(Freihatsgrade-Zähler,Freihatsgrade-Nenner) = Wert, p=p-Wert
+
+Cut Clutter
+==============
+```{r}
+detach(aphasiker)
+```
 
 Berechnung in R mit aov
 =======================
 - Mit `aov()` werden die entsprechenden Quadratsummen berechnet
 - Mit `summary()` kann man sich dann die $F$- und $p$-Werte anzeigen lassen
+
+Berechnung in R mit aov
+=======================
+<small>
+```{r}
+aphasiker.aov <- aov(Lex_Dec ~ Aphasie, data=aphasiker)
+aphasiker.aov
+```
+</small>
+
+Berechnung in R mit aov
+=======================
+<small>
+```{r}
+summary(aphasiker.aov)
+```
+</small>
 
 
 Logik der SS-Zerlegung
