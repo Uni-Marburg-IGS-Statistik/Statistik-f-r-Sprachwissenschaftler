@@ -10,6 +10,7 @@ packages.used <- c("knitr","knitcitations"
                    ,"scales"
                    ,"gridExtra"
                    ,"zoo"
+                   ,"xtable"
                    )
 
 install.packages(packages.used,dependencies = TRUE)
