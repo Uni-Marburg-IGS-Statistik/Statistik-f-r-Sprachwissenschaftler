@@ -104,6 +104,17 @@ type: section
 was ist mit dem $F$-Test vor dem Test, wenn $F = t^2$?
 
 
+Messwiederholung
+==================
+type: section
+
+Varianzanalyse mit Messwiederholung
+=====================================
+- Ähnlich wie beim t-Test mit abhängigen Stichproben wären unter diesen Umständen die Beobachtungen nicht mehr unabhängig von einander
+- Mögliche Rolle personenbezogener Tendenzen: Manche Probanden könnten z.B. eine inhärent höhere Tendenz zur Nachahmung als andere haben 
+- Diese Variabilität zwischen Personen muss berücksichtigt werden
+    - Varianzanalyse mit Messwiederholung
+
 
 Bibliography
 =============
