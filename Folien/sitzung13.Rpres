@@ -133,14 +133,42 @@ Varianzanalyse mit Messwiederholung
 - Diese Variabilität zwischen Personen muss berücksichtigt werden
     - Varianzanalyse mit Messwiederholung
 
-Lagniappe: SS-"Types"
+
+Sternchen Bonus Runde
+=========================
+type: section
+
+Heißt größeres t immer kleineres p?
+=======================================
+type: prompt
+
+Heißt größeres F immer kleineres p?
+=======================================
+type: prompt
+
+
+Muss die Interaktion in die gleiche Richtung gehen wir der Haupteffekt?
+=======================================
+type: prompt
+
+Lagniappe
+============
+type: section
+
+Mehr zu Spherizität:
+========================
+- Fields et al (2012), Kapitel 13.2 
+- Bortz und Schuster (2010), Kapitel 18.4
+
+SS-"Types"
 =====================
 - Fields et al (2012): 
     - R's Souls' Tip 11.1
     - Jane Superbrain 11.1
-- Bortz und Schuster (2010)
+- Bortz und Schuster (2010):
     - Kapitel 14.3
     - Kapitel 22.2.4
+
 Bibliography
 =============
 ```{r, echo=FALSE,results='hide'}
