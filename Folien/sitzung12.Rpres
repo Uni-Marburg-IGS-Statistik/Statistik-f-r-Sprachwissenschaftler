@@ -222,7 +222,7 @@ Exkurs: Warum immer Quadrate?
 =============================
 - Kurz und knapp: Satz vom Pythagoras: 
 
-$$ c^2 = a^ + b^2$$ 
+$$ c^2 = a^2 + b^2$$ 
 
 - angewandt: die Entfernung zwischen zwei Punkte, $p_1=(x_1,y_1), p_2=(x_2,y_2)$, ist 
 
@@ -242,7 +242,7 @@ Exkurs: Warum immer Quadrate?
 - Aber Quadratwurzel macht keinen Spaß, daher arbeiten wir mit der **Varianz**, die dann eine Summe von Quadraten (**Quadratsumme**) ist: $$(x_0 - \bar{x})^2$$
 - wenn wir das für alle Punkte einer Gruppe machen:
 $$ \Rightarrow \sum_m (x_m - \bar{x})^2 $$
-- Uns interessiert die *Gesamt*abweichung über alle Gruppen hinweg, also die Summe der Quadratsummen: $$\sum_j \sum_m (x_m - \bar{x})^2$$
+- Uns interessiert die **Gesamt**abweichung über alle Gruppen hinweg, also die Summe der Quadratsummen: $$\sum_j \sum_m (x_m - \bar{x})^2$$
 
 Exkurs zum Exkurs: Gibt es andere Distanzen?
 =============================================
@@ -271,13 +271,12 @@ Idee vereinfacht von `r citet("http://www.johnmyleswhite.com/notebook/2013/03/22
 Exkurs zum Exkurs: Gibt es andere Distanzen?
 =============================================
 - aber zählt das wirklich? Warum Mittelwert statt Median? 
-- Quadrate haben gewisse Eigenschaften bzgl. **Konvergenz** (Annäherung an *einen* Wert über Wiederholungen hinwweg)
-- entprischt auch Entfernung im (üblichen) "Raum"
+- Quadrate haben gewisse Eigenschaften bzgl. **Konvergenz** (Annäherung an *einen* Wert über Wiederholungen hinweg)
+- entprischt auch Entfernung in (üblichem) "Raum"
 
 Zerlegung der Gesamtquadratsumme
 ===================================
-<small>
-- die Gesamtqudratsumme $SS_\text{tot}$ wird in zwei Komponenten zerlegt: **Zwischen**-Quadratsumme und **Innerhalb**-Qudratsumme
+- <small> die Gesamtqudratsumme $SS_\text{tot}$ wird in zwei Komponenten zerlegt: **Zwischen**-Quadratsumme und **Innerhalb**-Qudratsumme
 - die Zwischen-Quadratsumme $SS_\text{zw}$  drückt die Variabilität zwischen den Bedingungen/Gruppen aus:
   - wird berechnet durch die Abweichungen der Gruppenmittelwerte vom Gesamtmittelwert
     $$ SS_\text{zw} = \sum_{j=1}^{p} \sum_{m=1}^{n_j} \left(\bar{x}_j - \bar{x} \right)^2 $$
@@ -285,9 +284,8 @@ Zerlegung der Gesamtquadratsumme
 
 Zerlegung der Gesamtquadratsumme
 ===================================
-<small>
-- Varianz zwischen den Gruppen: MSSzw (mittlere Qudratsumme zwischen):
-    $$ MSSzw = \frac{SS_\text{zw}}{p-1}$$   (mit $p$ = Anzahl an Faktorstufen)
+- <small> Varianz zwischen den Gruppen: MSSzw (mittlere Qudratsumme zwischen):
+    $$ MSS_\text{zw} = \frac{SS_\text{zw}}{p-1}$$   (mit $p$ = Anzahl an Faktorstufen)
 </small>
 
 Berechnung der Zwischen-Quadratsumme
