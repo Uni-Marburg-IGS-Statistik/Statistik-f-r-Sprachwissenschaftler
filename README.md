@@ -143,6 +143,7 @@ Die Reihe *Use R!* von Springer ist **kostenlos** über das Uni-Netz elektronisc
     - [Conditional Risk](http://xkcd.com/795/)
     - [Null Hypothesis](http://www.xkcd.com/892/)
     - [Frequentists vs. Bayesians](http://xkcd.com/1132/)
+* [Spurious Correlations](http://www.tylervigen.com/)
 
 # License
 This work is licensed under the Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Germany License. To view a copy of this license, visit http://creativecommons.org/licenses/by-nc-sa/3.0/de/.
