@@ -66,10 +66,19 @@ Woche | Datum          | Themen
 |     |                | *Hausaufgabe bis 19.05.2014 12 Uhr:*
 |     |                | 1. `hausaufgabe09.R`
 06.   | **19.05.2014** | Confidence und Credible-Intervale, BEST, Interferenz in der Praxis: Der Sinn von statischen Tests, neuartige Fehler, Unterschiede in frequentistischen und bayes'schen Aussagen
+<<<<<<< HEAD
 |     | **20.05.2014** | ANOVA I
 07.   | **26.05.2014** | ANOVA II
 |     | **27.05.2014** | ANOVA III (evtl. auch Fixed vs. Random Effects à Clark 1973)
 >>>>>>> 2d35a226033d802734551a5f346bca9d24ad9652
+=======
+|     | **20.05.2014** | Intervale II
+|     |                | *Hausaufgabe bis 26.05.2014 12 Uhr:*
+|     |                | 1. Shiny apps anschauen
+|     |                | 2. sich erholen
+07.   | **26.05.2014** | ANOVA I
+|     | **27.05.2014** | ANOVA II (evtl. auch Fixed vs. Random Effects à Clark 1973)
+>>>>>>> c36f07d9f256c9b799dd8239e71bbc1fb7028ae8
 08.   | **02.06.2014** | lineare Regression I 
 |     | **03.06.2014** | lineare Regression II
 09.   | **09.06.2014** | fällt aus! (Pfingstmontag)
@@ -160,6 +169,7 @@ Die Reihe *Use R!* von Springer ist **kostenlos** über das Uni-Netz elektronisc
     - [Conditional Risk](http://xkcd.com/795/)
     - [Null Hypothesis](http://www.xkcd.com/892/)
     - [Frequentists vs. Bayesians](http://xkcd.com/1132/)
+* [Spurious Correlations](http://www.tylervigen.com/)
 
 # License
 This work is licensed under the Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Germany License. To view a copy of this license, visit http://creativecommons.org/licenses/by-nc-sa/3.0/de/.
