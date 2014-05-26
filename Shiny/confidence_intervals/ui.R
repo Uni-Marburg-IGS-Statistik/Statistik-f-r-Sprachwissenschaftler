@@ -17,11 +17,14 @@ shinyUI(fluidPage(
                                 ,max = 10
                                 ,value = 1
                                 ,animate=animationOptions(interval=6000,loop=TRUE))
-                 , actionButton("runagain",label = "Run Again")
+                 ,fluidRow(column(6,actionButton("new.samples",label = "New Samples"))
+                          ,column(6,actionButton("new.population",label = "New Population"))
+                          )
                  ,h5("Population Plot")
-                 ,  radioButtons("sample.mean.overlay","Display sample means",c("yes"=TRUE,"no"=FALSE),selected=FALSE)
-                 ,  radioButtons("sample.ci.overlay","Display sample CIs",c("yes"=TRUE,"no"=FALSE),selected=FALSE)
-                 ,h2("Population")
+                 ,fluidRow(column(6,radioButtons("sample.mean.overlay","Display sample means",c("yes"=TRUE,"no"=FALSE),selected=FALSE))
+                          ,column(6,radioButtons("sample.ci.overlay","Display sample CIs",c("yes"=TRUE,"no"=FALSE),selected=FALSE))
+                          )
+                ,h2("Population")
                  ,plotOutput("population.distribution")
                  ,h2("Advanced Settings")
                  ,h5("Features that may slow things down, but provide a finer picture")

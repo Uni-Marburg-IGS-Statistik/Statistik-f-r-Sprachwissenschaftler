@@ -9,24 +9,21 @@ library(plyr)
 
 shinyServer(function(input, output) {
   get.population <- reactive({
-    # force update when user clicks on "Run Again"
-    input$runagain
+    # force update when user clicks on "New Population"
+    input$new.population
     #print("New population")
     rnorm(input$population,sd=input$sd)
   })
   
   get.samples <- reactive({
-    # force update when user clicks on "Run Again"
-    input$runagain
+    # force update when user clicks on "New Samples"
+    input$new.samples
     population <- get.population()
     #print("New samples")
     data.frame(index=1: input$n,sapply(1: input$nsamples, function(x) sample(population,input$n)))
   })
   
   runSimulation <- reactive({
-    # force update when user clicks on "Run Again"
-    input$runagain # alpha sd populatio n
-    
     population <- get.population()
     mu <- mean(population)
     samples <- get.samples()
@@ -35,8 +32,7 @@ shinyServer(function(input, output) {
     names(cis) <- c("left","right")
     cis$sample <- row.names(cis)
     cis <- cis[2:(input$nsamples+1),]
-    cis$`population mean` <- factor(ifelse(mu > cis$left & mu < cis$right,"hit","miss"))
-    cis$`population mean` <- relevel(cis$`population mean`,ref="miss")
+    cis$`population mean` <- factor(ifelse(mu > cis$left & mu < cis$right,"hit","miss"), levels=c("miss","hit"))
     
     samples <- melt(samples, id.var="index")
     sample.means <- aggregate(value ~ variable, FUN=mean, data=samples)
@@ -44,22 +40,26 @@ shinyServer(function(input, output) {
     names(sample.means) <- c("sample","mean")
     #sorted.means <- sort(sample.means$mean)
     
-    list(population=population, cis=cis, sample.means=sample.means)
+    list(population=population, cis=cis, sample.means=sample.means, samples=samples)
   })
 
   output$sample.distributions <- renderPlot({
     x <- runSimulation()
     cis <- x$cis
     population <- x$population
+    mu <- mean(population)
     sample.means <- x$sample.means
+    samples <- x$samples
     
     plots <- ggplot(samples) + geom_density(aes(x=value)) +  scale_x_continuous(limits=c(-4,4)) + 
       facet_wrap(~sample) + 
       geom_vline(aes(xintercept=mean),linetype="dashed",data=sample.means) +
       geom_segment(aes(x=left,xend=right,y=0,yend=0,color=`population mean`),size=3,data=cis) + 
+      scale_color_hue(limits=c("miss","hit")) + 
       geom_rect(aes(fill = `population mean`),xmin = -Inf,xmax = Inf,ymin = -Inf,ymax = Inf,alpha = 0.2,data=cis) +
+      scale_fill_hue(limits=c("miss","hit")) + 
       guides(fill=FALSE) + 
-      geom_vline(aes(xintercept=mean(population))) + 
+      geom_vline(xintercept=mu) + 
       theme(axis.title.y = element_blank()
             ,axis.text.y = element_blank()
             ,axis.ticks.y = element_blank()
