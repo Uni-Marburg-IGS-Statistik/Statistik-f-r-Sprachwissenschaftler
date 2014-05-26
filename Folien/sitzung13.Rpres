@@ -1,0 +1,116 @@
+Statistik für Sprachwissenschaftler
+========================================================
+author: Phillip M . Alday
+date: 2014-05-27
+autosize: false
+
+```{r setup, include=FALSE}
+library(knitr)
+opts_chunk$set(cache=TRUE,prompt=TRUE)
+library(knitcitations)
+library(ggplot2)
+library(xtable)
+cite_options(tooltip = TRUE
+             , linked = TRUE
+             , numerical = TRUE
+             , bibtex_data = FALSE)
+```
+
+Aufwachen und sich errinnern!
+====================================
+type: section
+
+Gestern
+=======
+- Varianzanalyse
+- F-Test 
+- einfaktorielle ANOVA
+
+Heute
+========
+- einfaktorielle ANOVA
+- mehrfaktorielle ANOVA
+- ANOVA mit wiederholten Messwerten
+
+Datensätze für heute: Aphasiker und Priming
+===============================================
+```{r, eval=FALSE}
+aphasiker <- read.csv2("Data/aphasiker.csv",header = T)
+aphasiker <- na.omit(aphasiker)
+priming <- read.table("Data/priming.tab",header = T)
+priming$subj <- as.factor(priming$subj)
+priming$item <- as.factor(priming$item)
+```
+```{r, echo=FALSE}
+# the path in the previous block isn't correct, so run this one
+aphasiker <- read.csv2(normalizePath("../Data/aphasiker.csv"),header = T)
+aphasiker <- na.omit(aphasiker)
+priming <- read.table(normalizePath("../Data/priming.tab"),header = T)
+priming$subj <- as.factor(priming$subj)
+priming$item <- as.factor(priming$item)
+```
+
+Datensatz für heute: Aphasiker
+================================
+```{r, echo=FALSE}
+qplot(x=Lex_Dec,geom="density",color=Aphasie,fill=Aphasie,data=aphasiker,alpha=I(0.3))
+```
+
+Datensatz für heute: RT
+================================
+```{r, echo=FALSE}
+ggplot(data=priming) + geom_density(aes(x=RT,color=cond,fill=cond),alpha=0.3)
+```
+
+Datensatz für heute: RT
+================================
+```{r, echo=FALSE}
+ggplot(data=priming) + geom_density(aes(x=RT,color=prime,fill=prime),alpha=0.3)
+```
+
+Datensatz für heute: RT
+================================
+```{r, echo=FALSE}
+ggplot(data=priming) + geom_density(aes(x=RT,color=target,fill=target),alpha=0.3)
+```
+
+ANOVA: Voraussetzungen
+=========================
+- Teilstichproben müssen unabhängig sein
+- abhängige Variable muss mindestens intervallskaliert sein
+- für Stichproben $n < 30$ muss die abhängige Variable in ihrer Population normalverteilt sein
+- die Varianzen innerhalb aller Populationen müssen homogen sein, bei größeren Stichproben ist der Test auch bei Verletzung dieses Kriteriums robust
+
+Interpretation der Ergebnisse
+===============================
+- wir haben in unserem Beispiel also einen $F$-Wert gefunden, der extremer ist als der entsprechende kritische $F$-Wert in der Verteilung
+- dieser Wert sagt uns allerdings nur, dass sich mindestens zwei der drei Gruppen in ihren Mittelwerten signifikant unterscheiden, jedoch nicht, wie genau diese Unterschiede aussehen
+
+Interpretation der Ergebnisse
+==============================
+- dazu werden post-hoc Tests durchgeführt, die gezielte Paarvergleiche anstellen
+- hierbei ist jedoch das Problem der $\alpha$-Fehler-Kumulierung (oder -Inflation) zu berücksichtigen: je mehr Paarvergleiche (und damit Hypothesen) berechnet werden, desto größer ist die Chance die $H_0$ fälschlicherweise zu verwerfen
+- es gibt hierfür entsprechende Korrekturen, die die post-hoc Tests "konservativer" machen
+
+Mehrfaktorielle ANOVA
+=======================
+- wir haben uns nur den einfachsten Fall, eine einfaktorielle ANOVA ohne Messwiederholung, angeschaut
+- wird in der Varianzanalyse der Einfluss von mehr als einem Faktor auf die abhängige Variable getestet, dann erhält man nicht nur **Haupteffekte** der einzelnen Faktoren, sondern auch **Interaktionen** zwischen den Faktoren
+- würden wir in unserem Beispiel den Faktor "Geschlecht der Versuchsperson" hinzufügen, dann wäre es denkbar, dass wir unterschiedlichen Mittelwerte für das Nachahmungsverhalten in Abhängigkeit vom Geschlecht fänden
+
+Sternchen verdient!
+========================================================
+type: section
+was ist mit dem $F$-Test vor dem Test, wenn $F = t^2$?
+
+
+
+Bibliography
+=============
+```{r, echo=FALSE,results='hide'}
+```
+<span style="font-size: 10%;">
+```{r,results='asis',echo=FALSE}
+bibliography(style="markdown",bulleted=FALSE)
+```
+</span>
