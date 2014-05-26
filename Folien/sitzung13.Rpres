@@ -115,7 +115,14 @@ Varianzanalyse mit Messwiederholung
 - Diese Variabilität zwischen Personen muss berücksichtigt werden
     - Varianzanalyse mit Messwiederholung
 
-
+Lagniappe: SS-"Types"
+=====================
+- Fields et al (2012): 
+    - R's Souls' Tip 11.1
+    - Jane Superbrain 11.1
+- Bortz und Schuster (2010)
+    - Kapitel 14.3
+    - Kapitel 22.2.4
 Bibliography
 =============
 ```{r, echo=FALSE,results='hide'}
