@@ -226,7 +226,7 @@ $$ c^2 = a^2 + b^2$$
 
 - angewandt: die Entfernung zwischen zwei Punkte, $p_1=(x_1,y_1), p_2=(x_2,y_2)$, ist 
 
-$$ d(p_1,p_2) = \sqrt{ (x_1 - x_2)^2 - (y_1 - y_2)^2} $$
+$$ d(p_1,p_2) = \sqrt{ (x_1 - x_2)^2 + (y_1 - y_2)^2} $$
 
 - üblicher Begriff von "Entfernung" (*Distanz*): Euclid'sche Distanz ($L_2$-Metrik)
 
@@ -249,7 +249,7 @@ Exkurs zum Exkurs: Gibt es andere Distanzen?
 - ja und zwar ganze viele!
 - zwei wichtige:
     - Manhattan ($L_1$): $$d(p_1, p_2) = |x_1 - x_2| + |y_1 - y_2| $$ (Straßenentfernung)
-    - Null-Eins ($L_0$):  $$d(p_1, p_2) = \begin{cases} 1 &\text{wenn}\quad p_1 = p_2 \\ 0 &\text{wenn}\quad p_1 \neq p_2 \end{cases} $$ (alles oder nichts, mit Kronecker-$\delta$-Funktion verwandt)
+    - Null-Eins ($L_0$):  $$d(p_1, p_2) = \begin{cases} 1 &\text{wenn}\quad p_1 \neq p_2 \\ 0 &\text{wenn}\quad p_1 = p_2 \end{cases} $$ (alles oder nichts, mit Kronecker-$\delta$-Funktion verwandt)
 
 Exkurs zum Exkurs: Gibt es andere Distanzen?
 =============================================
@@ -343,7 +343,7 @@ Prüfgröße F
 Prüfgröße F
 ============
 ```{r, echo=FALSE,results='asis'}
-print(xtable(aov(Lex_Dec ~ Aphasie,data=aphasiker)),type="html")
+print(xtable(aov(Lex_Dec ~ Aphasie,data=aphasiker),display=c("s","d","f","f","f","fg")),type="html")
 ```
 
 Schreibweise: F(3, 28) = 46.69, p = 5.5e-11
