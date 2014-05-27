@@ -404,6 +404,8 @@ type: prompt
 Muss die Interaktion in die gleiche Richtung gehen wir der Haupteffekt?
 =======================================
 type: prompt
+incremental: true
+- Ist es möglich, dass es mehr Frauen in jeder Abteilung gibt, jedoch insgesamt mehr Männer?
 
 Lagniappe
 ============
