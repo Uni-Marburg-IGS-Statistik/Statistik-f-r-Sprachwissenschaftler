@@ -56,6 +56,8 @@ Woche | Datum          | Themen
 |     |                | 2. sich erholen
 07.   | **26.05.2014** | ANOVA I
 |     | **27.05.2014** | ANOVA II (evtl. auch Fixed vs. Random Effects à Clark 1973)
+|     |                | *Hausaufgabe bis 02.06.2014 12 Uhr:*
+|     |                | 1. `hausaufgabe13.Rmd`
 08.   | **02.06.2014** | lineare Regression I 
 |     | **03.06.2014** | lineare Regression II
 09.   | **09.06.2014** | fällt aus! (Pfingstmontag)
