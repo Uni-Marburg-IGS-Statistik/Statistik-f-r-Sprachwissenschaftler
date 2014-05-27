@@ -1,5 +1,5 @@
 % Hausaufgabe 13
-% Phillip Alday <phillip.alday@staff.uni-marburg.de>
+% Carmen Seidler <seidlerc@students.uni-marburg.de>
 % 2014-05-27
 
 Falls die Umlaute in dieser und anderen Dateien nicht korrekt dargestellt werden, sollten Sie File > Reopen with Encoding > UTF-8 sofort machen (und auf jeden Fall ohne davor zu speichern), damit die Enkodierung korrekt erkannt wird! 
@@ -103,13 +103,20 @@ Sind alle Plots gleich gut?
 ### By Item
 Bei "Item" berechnen wir die Mittelwerte aller Trials innerhalb eines Items, d.h. wir nehmen den itemweise Mittelwert über Versuchpersonen hinweg. Dafür können wir `aggregate()` nutzen.
 
+CODE_BLOCK_HIER
 ```{r}
-# priming.by.item <- CODE_HIER
+priming.by.item <- aggregate(RT ~ cond * item,data=priming,FUN = mean)
+
+
 ```
 
 Wir wollen auch hier die Daten tabellerisch darstellen. Erstellen Sie eine Tabelle in Wide-Format für die Mittelwerte by Item.
 
 CODE_BLOCK_HIER
+```{r}
+priming.by.item.wide2 <- dcast(priming.by.item,cond ~ item, value.var="RT")
+print(xtable(priming.by.item.wide2),type="html",include.rownames=FALSE)
+```
 
 Und *eine* passende Grafik für die Daten by Item sollten wir auch generieren:
 
@@ -208,8 +215,18 @@ print(xtable(priming.f1.englisch.target$ANOVA
 # Deutsches Target
 Führen Sie die entsprechende Analyse für deutsches Target aus.
 
-CODE_BLOCK_HIER
-
+```{r, results='asis'}
+priming.f1.deutsch.target <- ezANOVA(subset(priming, target == "D")
+                                      , dv=.(RT)
+                                      , wid=.(subj)
+                                      , within=.(prime)
+                                      , detailed=TRUE
+                                      )
+print(xtable(priming.f1.deutsch.target$ANOVA
+             , display=c("s","s","d","d","f","f","f","fg","s","g")
+             , digits=c(0,0,0,0,2,2,2,2,0,2))
+      ,type="html",include.rownames=FALSE)
+```
 
 # Lizenz
 Dieses Werk ist lizenziert unter einer CC-BY-NC-SA Lizenz.
