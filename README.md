@@ -58,8 +58,8 @@ Woche | Datum          | Themen
 |     | **27.05.2014** | ANOVA II (evtl. auch Fixed vs. Random Effects à Clark 1973)
 |     |                | *Hausaufgabe bis 02.06.2014 12 Uhr:*
 |     |                | 1. `hausaufgabe13.Rmd`
-08.   | **02.06.2014** | lineare Regression I 
-|     | **03.06.2014** | lineare Regression II
+08.   | **02.06.2014** | ANOVA III: Auswertung und Interpretation 
+|     | **03.06.2014** | lineare Regression I
 09.   | **09.06.2014** | fällt aus! (Pfingstmontag)
 |     | **10.06.2014** | Korrelationen I  
 10.   | **16.06.2014** | Korrelationen II, $\chi^2$, logLikelihood & Likelihood-Ratio 
