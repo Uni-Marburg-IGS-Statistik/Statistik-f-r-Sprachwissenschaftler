@@ -106,8 +106,6 @@ Bei "Item" berechnen wir die Mittelwerte aller Trials innerhalb eines Items, d.h
 CODE_BLOCK_HIER
 ```{r}
 priming.by.item <- aggregate(RT ~ cond * item,data=priming,FUN = mean)
-
-
 ```
 
 Wir wollen auch hier die Daten tabellerisch darstellen. Erstellen Sie eine Tabelle in Wide-Format für die Mittelwerte by Item.
@@ -120,7 +118,10 @@ print(xtable(priming.by.item.wide2),type="html",include.rownames=FALSE)
 
 Und *eine* passende Grafik für die Daten by Item sollten wir auch generieren:
 
-CODE_BLOCK_HIER
+```{r, echo=FALSE}
+ggplot(data=priming.by.item) + geom_density(aes(x=RT,color=cond,fill=cond),alpha=0.3)  
+```
+
 
 Sehen die Daten by Subject und by Item gleich aus? Wie sehen sie im Vergleich zu den Single-Trial-Daten aus?
 
