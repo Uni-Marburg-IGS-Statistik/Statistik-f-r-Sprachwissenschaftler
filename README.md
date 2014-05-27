@@ -56,8 +56,10 @@ Woche | Datum          | Themen
 |     |                | 2. sich erholen
 07.   | **26.05.2014** | ANOVA I
 |     | **27.05.2014** | ANOVA II (evtl. auch Fixed vs. Random Effects à Clark 1973)
-08.   | **02.06.2014** | lineare Regression I 
-|     | **03.06.2014** | lineare Regression II
+|     |                | *Hausaufgabe bis 02.06.2014 12 Uhr:*
+|     |                | 1. `hausaufgabe13.Rmd`
+08.   | **02.06.2014** | ANOVA III: Auswertung und Interpretation 
+|     | **03.06.2014** | lineare Regression I
 09.   | **09.06.2014** | fällt aus! (Pfingstmontag)
 |     | **10.06.2014** | Korrelationen I  
 10.   | **16.06.2014** | Korrelationen II, $\chi^2$, logLikelihood & Likelihood-Ratio 
@@ -100,7 +102,7 @@ Die Reihe *Use R!* von Springer ist **kostenlos** über das Uni-Netz elektronisc
 * [Git -- the simple guide](http://rogerdudler.github.io/git-guide/)
 * [Literate programming, version control, reproducible research, collaboration, and all that](http://rpubs.com/bbolker/3153)
 * [Handy statistical lexicon](http://andrewgelman.com/2009/05/24/handy_statistic/)
-
+    
 # Kommentare zu p-Werten, NHST, und der üblichen statistischen Praxis
 * John Myles White
     1. [Good Tools for Individual Researchers are not Good Tools for Research Communities](http://www.johnmyleswhite.com/notebook/2012/05/10/criticism-1-of-nhst-good-tools-for-individual-researchers-are-not-good-tools-for-research-communities/)
@@ -134,6 +136,7 @@ Die Reihe *Use R!* von Springer ist **kostenlos** über das Uni-Netz elektronisc
 * [Schools of Statistical Thought as Religion](http://andrewgelman.com/2014/04/12/schools-of-statistical-thoughts-are-sometimes-jokingly-likened-to-religions-this-analogy-is-not-perfect-unlike-religions-statistical-methods-have-no-supernatural-content-and-make-essentially-no-d/)
 * [Bayesian Modelling of Anscombe's Quartet](http://www.sumsar.net/blog/2013/06/bayesian-modeling-of-anscombes-quartet/)
 * [Bayesian or Frequentist, Which Are You?](http://videolectures.net/mlss09uk_jordan_bfway/) vielleicht die beste holistische Perspektive!
+* [Positioning Bayesian inference as a particular application of frequentist inference and vice versa](http://dx.doi.org/10.6084/m9.figshare.867707)
 * Software für Bayesian Modelling (wird nicht im Kurs genutzt, aber vielleicht interessant)
     - [Stan](http://mc-stan.org/)
     - [JAGS](http://mcmc-jags.sourceforge.net/)
@@ -147,6 +150,26 @@ Die Reihe *Use R!* von Springer ist **kostenlos** über das Uni-Netz elektronisc
     - [Null Hypothesis](http://www.xkcd.com/892/)
     - [Frequentists vs. Bayesians](http://xkcd.com/1132/)
 * [Spurious Correlations](http://www.tylervigen.com/)
+
+# Weitere Links zu spezifischen Themen
+* Gemischte Modelle
+    - Tutorials
+        * [von Bodo  Winter](http://www.bodowinter.com/tutorial/bw_LME_tutorial.pdf)
+        * [T. Florian Jaeger](https://hlplab.wordpress.com/2014/02/05/updated-slides-on-glm-glmm-plyr-etc-available/)
+        * [Baayen, Davidson und Bates 2008](http://dx.doi.org/10.1016/j.jml.2007.12.005)(und alle anderen Artikel aus der Ausgabe des *Journal of Memory and Language*)
+    - [Random Effects: Should I stay or should I go?](https://hlplab.wordpress.com/2009/05/14/random-effect-structure/) (vgl. auch [Barr et al 2013](        http://dx.doi.org/10.1016/j.jml.2012.11.001))
+    - [Going full Bayesian with mixed effects regression models](https://hlplab.wordpress.com/2013/12/13/going-full-bayesian-with-mixed-effects-regression-models/)
+    - [Diagnosing collinearity in mixed models from lme4](https://hlplab.wordpress.com/2011/02/24/diagnosing-collinearity-in-lme4/)
+    - [Multinomial random effects models in R](https://hlplab.wordpress.com/2009/05/07/multinomial-random-effects-models-in-r/)
+    - [Plotting effects for glmer(, family=”binomial”) models](https://hlplab.wordpress.com/2009/01/19/plotting-effects-for-glmer-familybimomial-models/)
+    - [Nagelkerke and CoxSnell Pseudo R2 for Mixed Logit Models](https://hlplab.wordpress.com/2009/08/29/nagelkerke-and-coxsnell-pseudo-r2-for-mixed-logit-models/)
+    - [old and new lme4](https://hlplab.wordpress.com/2014/03/17/old-and-new-lme4/)
+    - Nützliche Pakete
+        * `lme4`
+        * `lmerTest`
+        * `effects`
+        * `LMERConvenienceFunctions`
+        * `languageR`
 
 # License
 This work is licensed under the Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Germany License. To view a copy of this license, visit http://creativecommons.org/licenses/by-nc-sa/3.0/de/.
