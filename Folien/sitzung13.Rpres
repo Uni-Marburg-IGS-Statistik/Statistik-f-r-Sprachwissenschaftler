@@ -1,0 +1,462 @@
+Statistik für Sprachwissenschaftler
+========================================================
+author: Phillip M . Alday
+date: 2014-05-27
+autosize: false
+
+```{r setup, include=FALSE}
+library(knitr)
+opts_chunk$set(cache=TRUE,prompt=TRUE)
+library(knitcitations)
+library(ggplot2)
+library(xtable)
+cite_options(tooltip = TRUE
+             , linked = TRUE
+             , numerical = TRUE
+             , bibtex_data = FALSE)
+```
+
+Aufwachen und sich errinnern!
+====================================
+type: section
+
+Gestern
+=======
+- Varianzanalyse
+- F-Test 
+- einfaktorielle ANOVA
+
+Heute
+========
+- einfaktorielle ANOVA
+- mehrfaktorielle ANOVA
+- ANOVA mit wiederholten Messwerten
+
+Datensätze für heute: Aphasiker und Priming
+===============================================
+```{r, eval=FALSE}
+aphasiker <- read.csv2("Data/aphasiker.csv",header = T)
+aphasiker <- na.omit(aphasiker)
+priming <- read.table("Data/priming.tab",header = T)
+priming$subj <- as.factor(priming$subj)
+priming <- subset(priming, item <= 20) # Filler ausschließen
+priming$item <- as.factor(priming$item)
+```
+```{r, echo=FALSE}
+# the path in the previous block isn't correct, so run this one
+aphasiker <- read.csv2(normalizePath("../Data/aphasiker.csv"),header = T)
+aphasiker <- na.omit(aphasiker)
+priming <- read.table(normalizePath("../Data/priming.tab"),header = T)
+priming$subj <- as.factor(priming$subj)
+priming <- subset(priming, item <= 20) # Filler ausschließen
+priming$item <- as.factor(priming$item)
+```
+
+Datensatz für heute: Aphasiker
+================================
+```{r, echo=FALSE}
+qplot(x=Lex_Dec,geom="density",color=Aphasie,fill=Aphasie,data=aphasiker,alpha=I(0.3))
+```
+
+Datensatz für heute: RT
+================================
+```{r, echo=FALSE}
+ggplot(data=priming) + geom_density(aes(x=RT,color=cond,fill=cond),alpha=0.3)
+```
+
+Datensatz für heute: RT
+================================
+```{r, echo=FALSE}
+ggplot(data=priming) + geom_density(aes(x=RT,color=prime,fill=prime),alpha=0.3)
+```
+
+Datensatz für heute: RT
+================================
+```{r, echo=FALSE}
+ggplot(data=priming) + geom_density(aes(x=RT,color=target,fill=target),alpha=0.3)
+```
+
+ANOVA: Voraussetzungen
+=========================
+- Teilstichproben müssen unabhängig sein
+- abhängige Variable muss mindestens intervallskaliert sein
+- für Stichproben $n < 30$ muss die abhängige Variable in ihrer Population normalverteilt sein
+- die Varianzen innerhalb aller Populationen müssen homogen sein, bei größeren Stichproben ist der Test auch bei Verletzung dieses Kriteriums robust
+
+Interpretation der Ergebnisse
+===============================
+- wir haben in unserem Beispiel also einen $F$-Wert gefunden, der extremer ist als der entsprechende kritische $F$-Wert in der Verteilung
+- dieser Wert sagt uns allerdings nur, dass sich mindestens zwei der drei Gruppen in ihren Mittelwerten signifikant unterscheiden, jedoch nicht, wie genau diese Unterschiede aussehen
+
+Interpretation der Ergebnisse
+==============================
+- dazu werden post-hoc Tests durchgeführt, die gezielte Paarvergleiche anstellen
+- hierbei ist jedoch das Problem der $\alpha$-Fehler-Kumulierung (oder -Inflation) zu berücksichtigen: je mehr Paarvergleiche (und damit Hypothesen) berechnet werden, desto größer ist die Chance die $H_0$ fälschlicherweise zu verwerfen
+- es gibt hierfür entsprechende Korrekturen, die die post-hoc Tests "konservativer" machen
+
+Sternchen verdient!
+========================================================
+type: section
+was ist mit dem $F$-Test vor dem Test, wenn $F = t^2$?
+
+F-Test in ANOVA vs. F-Test vor t-Test
+=======================================
+incremental:true
+- bei ANOVA: 
+  - $$F = \frac{\text{durschnittliche Varianz zwischen Gruppen}}{\text{durschnittliche Varianz innerhalb Gruppen}} $$
+  - Ist die Varianz zwischen den Gruppen (Model) größer als die Varianz innerhalb der Gruppen (Fehler)?
+- bei $t$-Test: 
+  - $$F = \frac{\text{Varianz innerhalb Gruppe 1}}{\text{Varianz innerhalb Gruppe 2}} $$
+  - Ist die Größe der Fehler bei beiden Gruppen vergleichbar?
+
+Vergleichbarkeit von Gruppen
+=======================================
+- Annahme, dass die Fehler ähnlich sind 
+- auch bei komplizierten ANOVA-Verfahren (mehr dazu später)
+- **Symmetrie** der Fehler über Gruppen hinaus
+- Asymetrie (unterschiedliche Varianzen) führt zur Verzerrung der Ergebnisse (Gleichgewicht zerstört) 
+
+Mehrfaktorielle ANOVA
+==================
+type:section
+
+Mehrfaktorielle ANOVA
+=======================
+- wir haben uns nur den einfachsten Fall, eine einfaktorielle ANOVA ohne Messwiederholung, angeschaut
+- wird in der Varianzanalyse der Einfluss von mehr als einem Faktor auf die abhängige Variable getestet, dann erhält man nicht nur **Haupteffekte** der einzelnen Faktoren, sondern auch **Interaktionen** zwischen den Faktoren
+- würden wir in unserem Beispiel den Faktor "Geschlecht der Versuchsperson" hinzufügen, dann wäre es denkbar, dass wir unterschiedlichen Mittelwerte für das Nachahmungsverhalten in Abhängigkeit vom Geschlecht fänden
+
+ungleich n
+=========================
+type: alert
+Die Gruppen im Aphasiker-Datensatz sind nicht gleich groß, d.h. die Berechnung der SS ist verzerrt! 
+
+Die Berechnung hier ist nur exemplarisch -- die qualitativen Unterschiede auf den folgenden Folien stimmen, aber die genauen Werte (SS,F und p) sind leicht verzerrt!
+
+Aphasiker: ein Haupteffekt
+============================
+<small>
+```{r}
+summary(aov(Lex_Dec ~ Aphasie, data=aphasiker))
+```
+</small>
+
+Aphasiker: (k)ein Haupteffekt
+============================
+<small>
+```{r}
+summary(aov(Lex_Dec ~ Geschlecht, data=aphasiker))
+```
+</small>
+
+Aphasiker: zwei Haupteffekte
+==============================
+<small>
+```{r}
+aov(Lex_Dec ~ Aphasie + Geschlecht, data=aphasiker)
+```
+</small>
+
+Aphasiker: zwei Haupteffekte
+==============================
+<small>
+```{r}
+summary(aov(Lex_Dec ~ Aphasie + Geschlecht, data=aphasiker))
+```
+</small>
+
+Aphasiker: zwei Haupteffekte
+==============================
+<small>
+```{r}
+aov(Lex_Dec ~ Aphasie * Geschlecht, data=aphasiker)
+```
+</small>
+
+Aphasiker: zwei Haupteffekte
+==============================
+<small>
+```{r}
+summary(aov(Lex_Dec ~ Aphasie * Geschlecht, data=aphasiker))
+```
+</small>
+
+
+Messwiederholung
+==================
+type: section
+
+Was passiert, wenn wir die gleichen Probanden für alle Bedingungen haben?
+=============================================================================
+type: prompt
+
+Varianzanalyse mit Messwiederholung
+=====================================
+- Ähnlich wie beim t-Test mit abhängigen Stichproben wären unter diesen Umständen die Beobachtungen nicht mehr unabhängig von einander
+- Mögliche Rolle personenbezogener Tendenzen: Manche Probanden könnten z.B. eine inhärent höhere Reaktionszeit, usw. als andere haben 
+- Diese Variabilität zwischen Personen muss berücksichtigt werden
+    - Varianzanalyse mit Messwiederholung
+
+
+Varianzanalyse mit Messwiederholung
+======================================
+- Allgemeine Unterschiede zwischen Probanden
+- Effekte, die auf die experimentelle Manipulation zurückgehen  und bei allen Probanden feststellbar sind
+- Interaktionseffekte zwischen Personen und Bedingungseffekten
+- Weitere Anteile der intraindividuellen Variation, die nicht systematisch zu erfassen sind (Fehlerquellen)
+
+Varianzanalyse mit Messwiederholung
+======================================
+Varianzquellen bei einfaktorieller ANOVA **ohne** Messwiederholung:
+- Zwischen Bedingung/Faktor/Gruppe (*Model* -- "erklärt")
+- Innerhalb Bedingung/Faktor/Gruppe (*Residual* bzw. *Fehler* -- "unerklärt")
+
+
+Varianzanalyse mit Messwiederholung
+======================================
+Varianzquellen bei einfaktorieller ANOVA **mit** Messwiederholung:
+- Zwischen Probanden (Interinviduelle Variation, struktuierte Varianz)
+- Innerhalb Probanden 
+    - Zwischen Bedingungen (Wirkung des Experiments, strukuierte Varianz)
+    - Intraindividualle Varianz (Fehler, unstruktuierte Varianz)
+    
+Varianzanalyse mit Messwiederholung
+======================================
+<small> aov` ohne Berücksichtung dieser weiterer Strukturierung der Varianz fehlerhaft
+```{r}
+aov(RT ~ cond,data=priming)
+```
+</small>
+
+Varianzanalyse mit Messwiederholung
+======================================
+<small> aov` ohne Berücksichtung dieser weiterer Strukturierung der Varianz fehlerhaft
+```{r}
+aov(RT ~ cond + Error(subj/cond),data=priming)
+```
+</small>
+
+Exkurs: Ziele der Statistik
+================================================
+ein paar Vorschläge
+
+1. Das Signal vom Rauschen unterscheiden
+2. "Nah genug" bzw. "weit genug" quantifizieren
+3. Unterscheidung der Systematik vom Zufall
+4. Möglichst viel Varianz erklären
+
+Warum ist Versuchsperson jetzt ein Faktor?
+===================================
+- Fixe versus zufällige Faktoren
+- Fixer Faktor: begrenzte Anzahl an Stufen, die innerhalb der experimentellen Manipulation realisiert werden
+- Zufälliger Faktor: (potentiell) unendliche Anzahl an Stufen; z.B. potentiell unendlich viele Unterschiede in Personenmerkmalen zwischen einzelnen Probanden
+- Person / Proband ist hier ein zufälliger Faktor; Bedingung ist ein fixer Faktor
+- Die Betrachtung von Person als Faktor hilft bei der Quadratsummenzerlegung
+
+Zufällige Faktoren in der Psycho-/Neurolinguistik
+==================================================
+-  In psycho-/neurolinguistischen Studien werden sowohl Probanden als auch unterschiedliche Lexikalisierungen des Materials ("Items") typischerweise als zufällige Faktoren in Varianzanalysen mit Messwiederholung modelliert 
+- Beispiel: RT-Priming Datensatz
+  - 4 Bedingungen
+  - Wiederholungen über Probanden und Items
+- Meist werden Faktoren innerhalb Probanden *und* Items realisiert (evtl. dazu später mehr in einer Sitzung zu experimentellen Design)
+
+Zufällige Faktoren in der Psycho-/Neurolinguistik
+==================================================
+- ANOVA "by participants/subjects" ($F_1$) und ANOVA "by items" ($F_2$) 
+- Probleme: 
+  - was passiert, wenn die zwei ANOVAs unterschiedliche Ergebnisse liefern?
+  - was passiert, wenn es eine Interaktion zwischen Item und Subject gibt?
+  - was passiert, wenn die akkumulierte Variation (zwei Haupteffekte ohne Interkation) einen Schwellenwert der Wirkung erreicht?
+
+Zufällige Faktoren in der Psycho-/Neurolinguistik
+==================================================
+- In allen Fällen werden die Varianzen in der einen Dimension ignoriert, um die Varianzen in die andere Richtung modellieren zu können
+- unterschiedliche $n$ in den zwei Dimensionen -- falscher Nenner für Standardfehler, CIs, usw.
+
+Zufällige Faktoren in der Psycho-/Neurolinguistik
+==================================================
+<small>
+- Überlegungen dazu:
+  - $F_1$ und $F_2$ kombinieren `r citep("10.1016/S0022-5371(73)80014-3")`
+  - $F_1$ reicht unter Umständen aus `r citep("10.1006/jmla.1999.2650")`
+  - ANOVA vergessen, "moderne" Methoden nutzen `r citep(c("10.1016/j.jml.2007.12.005","10.1037/a0028347"))`
+- Blogging dazu (leichter zu lesen, mit vielen Links)
+  - Neuroskeptic  `r citep("http://neuroskeptic.blogspot.co.uk/2012/06/beware-stimulus-effects-in-psychology.html")`
+  - R-Bloggers  `r citep("http://www.r-bloggers.com/the-stimuli-as-a-fixed-effect-fallacy/")`
+</small>
+
+Beispiel: RT-Priming Datensatz
+==================================================
+- Bedingungen (2 x 2)
+    - `prime`: Englisch, Deutsch
+    - `target`: Englisch, Deutsch
+- Wiederholungen
+    - unterschiedliche Probanden `subj` `$n_1 = 30$)
+    - unterschiedliche Items `item` ($n_2=20$)
+
+RT-Priming by Subject
+=======================
+```{r, echo=FALSE}
+ggplot(data=priming) + geom_density(aes(x=RT,color=cond,fill=cond),alpha=0.1) + facet_wrap(~subj)
+```
+
+RT-Priming by Item
+=======================
+```{r, echo=FALSE}
+ggplot(data=priming) + geom_density(aes(x=RT,color=cond,fill=cond),alpha=0.1) + facet_wrap(~item)
+```
+
+
+ANOVA made easy
+==================
+```{r}
+library(ez)
+priming.f1 <- ezANOVA(priming
+                      , dv=.(RT)
+                      , wid=.(subj)
+                      , within=.(cond)
+                      )
+```
+
+ANOVA made easy
+==================
+<small>
+```{r}
+priming.f1
+```
+</small>
+
+ANOVA made easy
+==================
+```{r}
+library(ez)
+priming.f1 <- ezANOVA(priming
+                      , dv=.(RT)
+                      , wid=.(subj)
+                      , within=.(cond)
+                      , detailed=TRUE
+                      )
+priming.f2 <- ezANOVA(priming
+                      , dv=.(RT)
+                      , wid=.(item)
+                      , within=.(cond)
+                      , detailed=TRUE
+                      )
+```
+
+ANOVA made easy
+==================
+<small>
+```{r}
+priming.f1
+```
+</small>
+
+ANOVA made easy
+==================
+<small>
+```{r}
+priming.f2
+```
+</small>
+
+Voraussetzungen für ANOVA mit wiederholten Messungen
+=====================================================
+- Bei der Varianzanalyse ohne Messwiederholung: Messungen zwischen unterschiedlichen Faktorstufen müssen unabhängig sein
+- Dies ist bei der Varianzanalyse mit Messwiederholung in der Regel nicht der Fall
+- Dafür: zusätzliche Voraussetzungen die die Korrelation zwischen den Messzeitpunkten betreffen
+- werden diese verletzt, führen sie zu "progressiven" Entscheidungen, die die H1 häufiger begünstigen als zu erwarten wäre
+
+Spherizität 
+=============
+- generalisierte Form der Symmetrie (Homogenität der Varianzen) der *Differenzen* 
+- Daten sollten spherisch sein -- symmetrisch in ihrer Abweichung entlang aller Achsen
+
+Korrektur
+==========
+- Anpassung der Freiheitsgrade um einen Faktor, der dazu führt, dass der kritische F-Wert mit einem größeren kritischen F-Wert verglichen wird als beim "normalen" F-Test
+- verringert die Wahrscheinlichkeit einer progressiven Entscheidung zugunsten der H1
+- Gängige Korrekturverfahren
+    - Greenhouse-Geisser
+    - Huynh-Feldt
+- In ezANOVA bereits implementiert!
+
+Zusammenfassung ANOVA
+===========================
+- Varianzanalytische Methoden für viele Fragestellungen innerhalb der Sprachwissenschaft angewandt
+- Oft spielen dabei Messwiederholungen bzw. auch Kombinationen aus Messwiederholungen ("innerhalb" bzw. "within"-Faktoren) und Faktoren ohne Messwiederholung ("between"-Faktoren) eine Rolle
+- Mit ezANOVA lässt sich diese Logik aber auch sehr einfach auf komplexere Designs anwenden
+- zur theoretischen Herleitung komplexerer Designs, siehe Bortz & Schuster (2010), Kapitel 18.
+
+Sternchen Bonus Runde
+=========================
+type: section
+
+Heißt größeres t immer kleineres p?
+=======================================
+type: prompt
+
+Heißt größeres F immer kleineres p?
+=======================================
+type: prompt
+
+Muss die Interaktion in die gleiche Richtung gehen wir der Haupteffekt?
+=======================================
+type: prompt
+incremental: true
+- Ist es möglich, dass es mehr Frauen in jeder Abteilung gibt, jedoch insgesamt mehr Männer?
+
+Lagniappe
+============
+type: section
+
+Mehr zu Spherizität:
+========================
+- Fields et al (2012), Kapitel 13.2 
+- Bortz und Schuster (2010), Kapitel 18.4
+
+SS-"Types"
+=====================
+- Fields et al (2012): 
+    - R's Souls' Tip 11.1
+    - Jane Superbrain 11.1
+- Bortz und Schuster (2010):
+    - Kapitel 14.3
+    - Kapitel 22.2.4
+  
+Hausaufgabe
+=============
+bis Montag, den 02.06. um 12 Uhr:
+- vollständige Analyse des Datensatzes `priming.tab`
+- Vorlage und Details zum Experiment werden bis Donnerstag hochgeladen
+
+Hausaufgabe: Vorschau
+=====================
+<small>
+```{r,echo=FALSE,results='asis'}
+priming.anova <- ezANOVA(priming
+                      , dv=.(RT)
+                      , wid=.(subj)
+                      , within=.(target,prime)
+                      , detailed=TRUE
+                      )
+print(xtable(priming.anova$ANOVA),type="html")
+```
+</small>
+
+Hausaufgabe: Vorschau
+=====================
+```{r, echo=FALSE}
+ggplot(data=priming) + geom_density(aes(x=RT,color=target,fill=target),alpha=0.3) + facet_wrap(~prime)
+```
+
+Bibliography
+=============
+```{r, echo=FALSE,results='hide'}
+```
+<span style="font-size: 10%;">
+```{r,results='asis',echo=FALSE}
+bibliography(style="markdown",bulleted=FALSE)
+```
+</span>

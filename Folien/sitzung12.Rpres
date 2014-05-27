@@ -296,7 +296,7 @@ ss_zw <- 8*(mean(Lex_Dec[Aphasie=="A"]) - mean(Lex_Dec))^2 + 9*(mean(Lex_Dec[Aph
 ss_zw
 ```
 
-Zerlegung der Innerhalb-Duadratsumme
+Zerlegung der Innerhalb-Quadratsumme
 ========================================
 - <small> die Innerhalb-Quadratsumme QSinn  drückt die Variabilität innerhalb den Bedingungen/Gruppen aus (wird auch als Fehlerquadratsumme bezeichnet):
     - wird berechnet durch die Abweichungen der einzelnen Werte einer Gruppe  vom Gruppenmittelwert:
@@ -346,7 +346,7 @@ Prüfgröße F
 print(xtable(aov(Lex_Dec ~ Aphasie,data=aphasiker),display=c("s","d","f","f","f","fg")),type="html")
 ```
 
-Schreibweise: F(3, 28) = 46.69, p = 5.5e-11
+Schreibweise: F(3, 28) = 46.69, p = 5.05e-11
 
 
 Prüfgröße F
