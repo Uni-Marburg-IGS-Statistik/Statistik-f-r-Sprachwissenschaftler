@@ -149,7 +149,7 @@ Die Reihe *Use R!* von Springer ist **kostenlos** über das Uni-Netz elektronisc
     - [Frequentists vs. Bayesians](http://xkcd.com/1132/)
 * [Spurious Correlations](http://www.tylervigen.com/)
 
-# Weitere Links zu spezifischen Thema
+# Weitere Links zu spezifischen Themen
 * Gemischte Modelle
     - Tutorials
         * [von Bodo  Winter](http://www.bodowinter.com/tutorial/bw_LME_tutorial.pdf)
