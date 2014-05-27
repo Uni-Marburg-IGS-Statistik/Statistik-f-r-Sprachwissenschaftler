@@ -111,7 +111,7 @@ priming.by.item <- aggregate(RT ~ cond * item,data=priming,FUN = mean)
 Wir wollen auch hier die Daten tabellerisch darstellen. Erstellen Sie eine Tabelle in Wide-Format für die Mittelwerte by Item.
 
 CODE_BLOCK_HIER
-```{r}
+```{r, results='asis'}
 priming.by.item.wide2 <- dcast(priming.by.item,cond ~ item, value.var="RT")
 print(xtable(priming.by.item.wide2),type="html",include.rownames=FALSE)
 ```
