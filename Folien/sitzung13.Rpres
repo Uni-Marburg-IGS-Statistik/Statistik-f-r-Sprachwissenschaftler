@@ -2,7 +2,7 @@ Statistik für Sprachwissenschaftler
 ========================================================
 author: Phillip M . Alday
 date: 2014-05-27
-autosize: false
+autosize: true
 
 ```{r setup, include=FALSE}
 library(knitr)
