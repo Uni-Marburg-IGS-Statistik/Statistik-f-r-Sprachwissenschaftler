@@ -301,7 +301,7 @@ RT-Priming by Subject
 ggplot(data=priming) + geom_density(aes(x=RT,color=cond,fill=cond),alpha=0.1) + facet_wrap(~subj)
 ```
 
-RT-Priming by Subject
+RT-Priming by Item
 =======================
 ```{r, echo=FALSE}
 ggplot(data=priming) + geom_density(aes(x=RT,color=cond,fill=cond),alpha=0.1) + facet_wrap(~item)
