@@ -94,7 +94,7 @@ print(xtable(priming.by.subject), type = "html", include.rownames = FALSE)
 ```
 
 <!-- html table generated in R 3.1.0 by xtable 1.7-3 package -->
-<!-- Wed May 28 11:03:38 2014 -->
+<!-- Wed May 28 14:19:44 2014 -->
 <TABLE border=1>
 <TR> <TH> cond </TH> <TH> subj </TH> <TH> RT </TH>  </TR>
   <TR> <TD> DD </TD> <TD> 1 </TD> <TD align="right"> 569.75 </TD> </TR>
@@ -230,7 +230,7 @@ print(xtable(priming.by.subject.wide1), type = "html", include.rownames = FALSE)
 ```
 
 <!-- html table generated in R 3.1.0 by xtable 1.7-3 package -->
-<!-- Wed May 28 11:03:38 2014 -->
+<!-- Wed May 28 14:19:44 2014 -->
 <TABLE border=1>
 <TR> <TH> subj </TH> <TH> DD </TH> <TH> DE </TH> <TH> ED </TH> <TH> EE </TH>  </TR>
   <TR> <TD> 1 </TD> <TD align="right"> 569.75 </TD> <TD align="right"> 655.15 </TD> <TD align="right"> 592.00 </TD> <TD align="right"> 587.70 </TD> </TR>
@@ -274,7 +274,7 @@ print(xtable(priming.by.subject.wide2), type = "html", include.rownames = FALSE)
 ```
 
 <!-- html table generated in R 3.1.0 by xtable 1.7-3 package -->
-<!-- Wed May 28 11:03:38 2014 -->
+<!-- Wed May 28 14:19:44 2014 -->
 <TABLE border=1>
 <TR> <TH> cond </TH> <TH> 1 </TH> <TH> 2 </TH> <TH> 3 </TH> <TH> 4 </TH> <TH> 5 </TH> <TH> 6 </TH> <TH> 7 </TH> <TH> 8 </TH> <TH> 9 </TH> <TH> 10 </TH> <TH> 11 </TH> <TH> 12 </TH> <TH> 13 </TH> <TH> 14 </TH> <TH> 15 </TH> <TH> 16 </TH> <TH> 17 </TH> <TH> 18 </TH> <TH> 19 </TH> <TH> 20 </TH> <TH> 21 </TH> <TH> 22 </TH> <TH> 23 </TH> <TH> 24 </TH> <TH> 25 </TH> <TH> 26 </TH> <TH> 27 </TH> <TH> 28 </TH> <TH> 29 </TH> <TH> 30 </TH>  </TR>
   <TR> <TD> DD </TD> <TD align="right"> 569.75 </TD> <TD align="right"> 512.95 </TD> <TD align="right"> 503.15 </TD> <TD align="right"> 616.45 </TD> <TD align="right"> 698.45 </TD> <TD align="right"> 562.75 </TD> <TD align="right"> 584.60 </TD> <TD align="right"> 546.15 </TD> <TD align="right"> 457.35 </TD> <TD align="right"> 496.60 </TD> <TD align="right"> 496.35 </TD> <TD align="right"> 556.10 </TD> <TD align="right"> 491.45 </TD> <TD align="right"> 556.90 </TD> <TD align="right"> 417.20 </TD> <TD align="right"> 526.90 </TD> <TD align="right"> 502.75 </TD> <TD align="right"> 470.75 </TD> <TD align="right"> 626.45 </TD> <TD align="right"> 815.25 </TD> <TD align="right"> 673.60 </TD> <TD align="right"> 534.50 </TD> <TD align="right"> 532.80 </TD> <TD align="right"> 513.20 </TD> <TD align="right"> 491.65 </TD> <TD align="right"> 415.60 </TD> <TD align="right"> 500.70 </TD> <TD align="right"> 494.65 </TD> <TD align="right"> 507.90 </TD> <TD align="right"> 512.10 </TD> </TR>
@@ -324,13 +324,120 @@ Bei "Item" berechnen wir die Mittelwerte aller Trials innerhalb eines Items, d.h
 
 
 ```r
-# priming.by.item <- CODE_HIER
+priming.by.item <- aggregate(RT ~ cond * item, data = priming, FUN = mean)
 ```
 
 
 Wir wollen auch hier die Daten tabellerisch darstellen. Erstellen Sie eine Tabelle in Wide-Format für die Mittelwerte by Item.
 
-CODE_BLOCK_HIER
+```r
+print(xtable(priming.by.item), type = "html", include.rownames = FALSE)
+```
+
+<!-- html table generated in R 3.1.0 by xtable 1.7-3 package -->
+<!-- Wed May 28 14:19:46 2014 -->
+<TABLE border=1>
+<TR> <TH> cond </TH> <TH> item </TH> <TH> RT </TH>  </TR>
+  <TR> <TD> DD </TD> <TD> 1 </TD> <TD align="right"> 521.33 </TD> </TR>
+  <TR> <TD> DE </TD> <TD> 1 </TD> <TD align="right"> 620.40 </TD> </TR>
+  <TR> <TD> ED </TD> <TD> 1 </TD> <TD align="right"> 551.40 </TD> </TR>
+  <TR> <TD> EE </TD> <TD> 1 </TD> <TD align="right"> 602.17 </TD> </TR>
+  <TR> <TD> DD </TD> <TD> 2 </TD> <TD align="right"> 538.47 </TD> </TR>
+  <TR> <TD> DE </TD> <TD> 2 </TD> <TD align="right"> 606.87 </TD> </TR>
+  <TR> <TD> ED </TD> <TD> 2 </TD> <TD align="right"> 563.03 </TD> </TR>
+  <TR> <TD> EE </TD> <TD> 2 </TD> <TD align="right"> 593.37 </TD> </TR>
+  <TR> <TD> DD </TD> <TD> 3 </TD> <TD align="right"> 516.27 </TD> </TR>
+  <TR> <TD> DE </TD> <TD> 3 </TD> <TD align="right"> 521.73 </TD> </TR>
+  <TR> <TD> ED </TD> <TD> 3 </TD> <TD align="right"> 572.77 </TD> </TR>
+  <TR> <TD> EE </TD> <TD> 3 </TD> <TD align="right"> 505.57 </TD> </TR>
+  <TR> <TD> DD </TD> <TD> 4 </TD> <TD align="right"> 479.60 </TD> </TR>
+  <TR> <TD> DE </TD> <TD> 4 </TD> <TD align="right"> 559.33 </TD> </TR>
+  <TR> <TD> ED </TD> <TD> 4 </TD> <TD align="right"> 513.80 </TD> </TR>
+  <TR> <TD> EE </TD> <TD> 4 </TD> <TD align="right"> 496.00 </TD> </TR>
+  <TR> <TD> DD </TD> <TD> 5 </TD> <TD align="right"> 538.43 </TD> </TR>
+  <TR> <TD> DE </TD> <TD> 5 </TD> <TD align="right"> 548.83 </TD> </TR>
+  <TR> <TD> ED </TD> <TD> 5 </TD> <TD align="right"> 567.37 </TD> </TR>
+  <TR> <TD> EE </TD> <TD> 5 </TD> <TD align="right"> 587.40 </TD> </TR>
+  <TR> <TD> DD </TD> <TD> 6 </TD> <TD align="right"> 543.53 </TD> </TR>
+  <TR> <TD> DE </TD> <TD> 6 </TD> <TD align="right"> 651.40 </TD> </TR>
+  <TR> <TD> ED </TD> <TD> 6 </TD> <TD align="right"> 612.50 </TD> </TR>
+  <TR> <TD> EE </TD> <TD> 6 </TD> <TD align="right"> 643.63 </TD> </TR>
+  <TR> <TD> DD </TD> <TD> 7 </TD> <TD align="right"> 592.90 </TD> </TR>
+  <TR> <TD> DE </TD> <TD> 7 </TD> <TD align="right"> 576.97 </TD> </TR>
+  <TR> <TD> ED </TD> <TD> 7 </TD> <TD align="right"> 611.87 </TD> </TR>
+  <TR> <TD> EE </TD> <TD> 7 </TD> <TD align="right"> 551.90 </TD> </TR>
+  <TR> <TD> DD </TD> <TD> 8 </TD> <TD align="right"> 579.70 </TD> </TR>
+  <TR> <TD> DE </TD> <TD> 8 </TD> <TD align="right"> 628.93 </TD> </TR>
+  <TR> <TD> ED </TD> <TD> 8 </TD> <TD align="right"> 566.93 </TD> </TR>
+  <TR> <TD> EE </TD> <TD> 8 </TD> <TD align="right"> 637.20 </TD> </TR>
+  <TR> <TD> DD </TD> <TD> 9 </TD> <TD align="right"> 537.37 </TD> </TR>
+  <TR> <TD> DE </TD> <TD> 9 </TD> <TD align="right"> 663.47 </TD> </TR>
+  <TR> <TD> ED </TD> <TD> 9 </TD> <TD align="right"> 531.30 </TD> </TR>
+  <TR> <TD> EE </TD> <TD> 9 </TD> <TD align="right"> 528.77 </TD> </TR>
+  <TR> <TD> DD </TD> <TD> 10 </TD> <TD align="right"> 510.43 </TD> </TR>
+  <TR> <TD> DE </TD> <TD> 10 </TD> <TD align="right"> 541.37 </TD> </TR>
+  <TR> <TD> ED </TD> <TD> 10 </TD> <TD align="right"> 537.00 </TD> </TR>
+  <TR> <TD> EE </TD> <TD> 10 </TD> <TD align="right"> 546.43 </TD> </TR>
+  <TR> <TD> DD </TD> <TD> 11 </TD> <TD align="right"> 536.23 </TD> </TR>
+  <TR> <TD> DE </TD> <TD> 11 </TD> <TD align="right"> 590.47 </TD> </TR>
+  <TR> <TD> ED </TD> <TD> 11 </TD> <TD align="right"> 523.20 </TD> </TR>
+  <TR> <TD> EE </TD> <TD> 11 </TD> <TD align="right"> 543.93 </TD> </TR>
+  <TR> <TD> DD </TD> <TD> 12 </TD> <TD align="right"> 495.17 </TD> </TR>
+  <TR> <TD> DE </TD> <TD> 12 </TD> <TD align="right"> 534.77 </TD> </TR>
+  <TR> <TD> ED </TD> <TD> 12 </TD> <TD align="right"> 511.33 </TD> </TR>
+  <TR> <TD> EE </TD> <TD> 12 </TD> <TD align="right"> 576.03 </TD> </TR>
+  <TR> <TD> DD </TD> <TD> 13 </TD> <TD align="right"> 609.37 </TD> </TR>
+  <TR> <TD> DE </TD> <TD> 13 </TD> <TD align="right"> 585.43 </TD> </TR>
+  <TR> <TD> ED </TD> <TD> 13 </TD> <TD align="right"> 618.37 </TD> </TR>
+  <TR> <TD> EE </TD> <TD> 13 </TD> <TD align="right"> 569.63 </TD> </TR>
+  <TR> <TD> DD </TD> <TD> 14 </TD> <TD align="right"> 527.83 </TD> </TR>
+  <TR> <TD> DE </TD> <TD> 14 </TD> <TD align="right"> 684.73 </TD> </TR>
+  <TR> <TD> ED </TD> <TD> 14 </TD> <TD align="right"> 549.20 </TD> </TR>
+  <TR> <TD> EE </TD> <TD> 14 </TD> <TD align="right"> 620.07 </TD> </TR>
+  <TR> <TD> DD </TD> <TD> 15 </TD> <TD align="right"> 516.53 </TD> </TR>
+  <TR> <TD> DE </TD> <TD> 15 </TD> <TD align="right"> 593.93 </TD> </TR>
+  <TR> <TD> ED </TD> <TD> 15 </TD> <TD align="right"> 511.27 </TD> </TR>
+  <TR> <TD> EE </TD> <TD> 15 </TD> <TD align="right"> 556.70 </TD> </TR>
+  <TR> <TD> DD </TD> <TD> 16 </TD> <TD align="right"> 519.73 </TD> </TR>
+  <TR> <TD> DE </TD> <TD> 16 </TD> <TD align="right"> 673.70 </TD> </TR>
+  <TR> <TD> ED </TD> <TD> 16 </TD> <TD align="right"> 524.10 </TD> </TR>
+  <TR> <TD> EE </TD> <TD> 16 </TD> <TD align="right"> 612.93 </TD> </TR>
+  <TR> <TD> DD </TD> <TD> 17 </TD> <TD align="right"> 547.93 </TD> </TR>
+  <TR> <TD> DE </TD> <TD> 17 </TD> <TD align="right"> 600.40 </TD> </TR>
+  <TR> <TD> ED </TD> <TD> 17 </TD> <TD align="right"> 567.90 </TD> </TR>
+  <TR> <TD> EE </TD> <TD> 17 </TD> <TD align="right"> 606.13 </TD> </TR>
+  <TR> <TD> DD </TD> <TD> 18 </TD> <TD align="right"> 508.90 </TD> </TR>
+  <TR> <TD> DE </TD> <TD> 18 </TD> <TD align="right"> 593.23 </TD> </TR>
+  <TR> <TD> ED </TD> <TD> 18 </TD> <TD align="right"> 558.57 </TD> </TR>
+  <TR> <TD> EE </TD> <TD> 18 </TD> <TD align="right"> 558.97 </TD> </TR>
+  <TR> <TD> DD </TD> <TD> 19 </TD> <TD align="right"> 643.90 </TD> </TR>
+  <TR> <TD> DE </TD> <TD> 19 </TD> <TD align="right"> 731.47 </TD> </TR>
+  <TR> <TD> ED </TD> <TD> 19 </TD> <TD align="right"> 597.90 </TD> </TR>
+  <TR> <TD> EE </TD> <TD> 19 </TD> <TD align="right"> 675.93 </TD> </TR>
+  <TR> <TD> DD </TD> <TD> 20 </TD> <TD align="right"> 526.37 </TD> </TR>
+  <TR> <TD> DE </TD> <TD> 20 </TD> <TD align="right"> 604.73 </TD> </TR>
+  <TR> <TD> ED </TD> <TD> 20 </TD> <TD align="right"> 544.33 </TD> </TR>
+  <TR> <TD> EE </TD> <TD> 20 </TD> <TD align="right"> 522.93 </TD> </TR>
+   </TABLE>
+
+
+Mit Bedingungen als Zeilen und Versuchspersonen als Spalten;macht finde ich, mehr Sinn, weil man die Daten für die einzelnen VP schneller ablesen kann.
+
+```r
+priming.by.item.wide2 <- dcast(priming.by.item, cond ~ item, value.var = "RT")
+print(xtable(priming.by.item.wide2), type = "html", include.rownames = FALSE)
+```
+
+<!-- html table generated in R 3.1.0 by xtable 1.7-3 package -->
+<!-- Wed May 28 14:19:46 2014 -->
+<TABLE border=1>
+<TR> <TH> cond </TH> <TH> 1 </TH> <TH> 2 </TH> <TH> 3 </TH> <TH> 4 </TH> <TH> 5 </TH> <TH> 6 </TH> <TH> 7 </TH> <TH> 8 </TH> <TH> 9 </TH> <TH> 10 </TH> <TH> 11 </TH> <TH> 12 </TH> <TH> 13 </TH> <TH> 14 </TH> <TH> 15 </TH> <TH> 16 </TH> <TH> 17 </TH> <TH> 18 </TH> <TH> 19 </TH> <TH> 20 </TH>  </TR>
+  <TR> <TD> DD </TD> <TD align="right"> 521.33 </TD> <TD align="right"> 538.47 </TD> <TD align="right"> 516.27 </TD> <TD align="right"> 479.60 </TD> <TD align="right"> 538.43 </TD> <TD align="right"> 543.53 </TD> <TD align="right"> 592.90 </TD> <TD align="right"> 579.70 </TD> <TD align="right"> 537.37 </TD> <TD align="right"> 510.43 </TD> <TD align="right"> 536.23 </TD> <TD align="right"> 495.17 </TD> <TD align="right"> 609.37 </TD> <TD align="right"> 527.83 </TD> <TD align="right"> 516.53 </TD> <TD align="right"> 519.73 </TD> <TD align="right"> 547.93 </TD> <TD align="right"> 508.90 </TD> <TD align="right"> 643.90 </TD> <TD align="right"> 526.37 </TD> </TR>
+  <TR> <TD> DE </TD> <TD align="right"> 620.40 </TD> <TD align="right"> 606.87 </TD> <TD align="right"> 521.73 </TD> <TD align="right"> 559.33 </TD> <TD align="right"> 548.83 </TD> <TD align="right"> 651.40 </TD> <TD align="right"> 576.97 </TD> <TD align="right"> 628.93 </TD> <TD align="right"> 663.47 </TD> <TD align="right"> 541.37 </TD> <TD align="right"> 590.47 </TD> <TD align="right"> 534.77 </TD> <TD align="right"> 585.43 </TD> <TD align="right"> 684.73 </TD> <TD align="right"> 593.93 </TD> <TD align="right"> 673.70 </TD> <TD align="right"> 600.40 </TD> <TD align="right"> 593.23 </TD> <TD align="right"> 731.47 </TD> <TD align="right"> 604.73 </TD> </TR>
+  <TR> <TD> ED </TD> <TD align="right"> 551.40 </TD> <TD align="right"> 563.03 </TD> <TD align="right"> 572.77 </TD> <TD align="right"> 513.80 </TD> <TD align="right"> 567.37 </TD> <TD align="right"> 612.50 </TD> <TD align="right"> 611.87 </TD> <TD align="right"> 566.93 </TD> <TD align="right"> 531.30 </TD> <TD align="right"> 537.00 </TD> <TD align="right"> 523.20 </TD> <TD align="right"> 511.33 </TD> <TD align="right"> 618.37 </TD> <TD align="right"> 549.20 </TD> <TD align="right"> 511.27 </TD> <TD align="right"> 524.10 </TD> <TD align="right"> 567.90 </TD> <TD align="right"> 558.57 </TD> <TD align="right"> 597.90 </TD> <TD align="right"> 544.33 </TD> </TR>
+  <TR> <TD> EE </TD> <TD align="right"> 602.17 </TD> <TD align="right"> 593.37 </TD> <TD align="right"> 505.57 </TD> <TD align="right"> 496.00 </TD> <TD align="right"> 587.40 </TD> <TD align="right"> 643.63 </TD> <TD align="right"> 551.90 </TD> <TD align="right"> 637.20 </TD> <TD align="right"> 528.77 </TD> <TD align="right"> 546.43 </TD> <TD align="right"> 543.93 </TD> <TD align="right"> 576.03 </TD> <TD align="right"> 569.63 </TD> <TD align="right"> 620.07 </TD> <TD align="right"> 556.70 </TD> <TD align="right"> 612.93 </TD> <TD align="right"> 606.13 </TD> <TD align="right"> 558.97 </TD> <TD align="right"> 675.93 </TD> <TD align="right"> 522.93 </TD> </TR>
+   </TABLE>
+
 
 Und *eine* passende Grafik für die Daten by Item sollten wir auch generieren:
 
@@ -347,7 +454,7 @@ ggplot(data = priming) + geom_density(aes(x = RT, color = cond, fill = cond),
     alpha = 0.1) + facet_wrap(~subj)
 ```
 
-![plot of chunk unnamed-chunk-13](figure/unnamed-chunk-13.png) 
+![plot of chunk unnamed-chunk-15](figure/unnamed-chunk-15.png) 
 
 
 
@@ -370,7 +477,7 @@ print(xtable(priming.f1$ANOVA), type = "html", include.rownames = FALSE)
 ```
 
 <!-- html table generated in R 3.1.0 by xtable 1.7-3 package -->
-<!-- Wed May 28 11:03:46 2014 -->
+<!-- Wed May 28 14:19:53 2014 -->
 <TABLE border=1>
 <TR> <TH> Effect </TH> <TH> DFn </TH> <TH> DFd </TH> <TH> SSn </TH> <TH> SSd </TH> <TH> F </TH> <TH> p </TH> <TH> p&lt;.05 </TH> <TH> ges </TH>  </TR>
   <TR> <TD> (Intercept) </TD> <TD align="right"> 1.00 </TD> <TD align="right"> 29.00 </TD> <TD align="right"> 38940134.70 </TD> <TD align="right"> 704326.36 </TD> <TD align="right"> 1603.32 </TD> <TD align="right"> 0.00 </TD> <TD> * </TD> <TD align="right"> 0.98 </TD> </TR>
@@ -395,7 +502,7 @@ print(xtable(priming.f1$ANOVA, display = c("s", "s", "d", "d", "f", "f", "f",
 ```
 
 <!-- html table generated in R 3.1.0 by xtable 1.7-3 package -->
-<!-- Wed May 28 11:03:46 2014 -->
+<!-- Wed May 28 14:19:53 2014 -->
 <TABLE border=1>
 <TR> <TH> Effect </TH> <TH> DFn </TH> <TH> DFd </TH> <TH> SSn </TH> <TH> SSd </TH> <TH> F </TH> <TH> p </TH> <TH> p&lt;.05 </TH> <TH> ges </TH>  </TR>
   <TR> <TD> (Intercept) </TD> <TD align="right"> 1 </TD> <TD align="right"> 29 </TD> <TD align="right"> 38940134.70 </TD> <TD align="right"> 704326.36 </TD> <TD align="right"> 1603.32 </TD> <TD align="right"> 0.0000000000000000000000000062 </TD> <TD> * </TD> <TD align="right"> 0.98 </TD> </TR>
@@ -417,7 +524,7 @@ ggplot(data = priming) + geom_density(aes(x = RT, color = cond, fill = cond),
     alpha = 0.1) + facet_wrap(~item)
 ```
 
-![plot of chunk unnamed-chunk-17](figure/unnamed-chunk-17.png) 
+![plot of chunk unnamed-chunk-19](figure/unnamed-chunk-19.png) 
 
 Führen Sie die entsprechende Item-Analyse aus.
 
@@ -442,7 +549,7 @@ ggplot(data = priming) + geom_boxplot(aes(x = prime, y = RT), alpha = 0.45) +
     facet_wrap(~target) + ggtitle("Priming aufgelöst nach target -- Single-Trial-Daten")
 ```
 
-![plot of chunk unnamed-chunk-18](figure/unnamed-chunk-18.png) 
+![plot of chunk unnamed-chunk-20](figure/unnamed-chunk-20.png) 
 
 
 
@@ -453,7 +560,7 @@ ggplot(data = priming.by.subject) + geom_boxplot(aes(x = prime, y = RT), alpha =
     facet_wrap(~target) + ggtitle("Priming aufgelöst nach target -- Mean-by-Subject-Daten")
 ```
 
-![plot of chunk unnamed-chunk-19](figure/unnamed-chunk-19.png) 
+![plot of chunk unnamed-chunk-21](figure/unnamed-chunk-21.png) 
 
 
 Um die Auflösung zu machen, nutzen wir `subset()`. Dabei müssen wir auch beachten, dass `target` nicht mehr als Faktor in der ANOVA auftaucht, denn wir berechnen die ANOVA innerhalb der Stufen von `target`!
@@ -478,7 +585,7 @@ print(xtable(priming.f1.englisch.target$ANOVA, display = c("s", "s", "d", "d",
 ```
 
 <!-- html table generated in R 3.1.0 by xtable 1.7-3 package -->
-<!-- Wed May 28 11:03:51 2014 -->
+<!-- Wed May 28 14:19:57 2014 -->
 <TABLE border=1>
 <TR> <TH> Effect </TH> <TH> DFn </TH> <TH> DFd </TH> <TH> SSn </TH> <TH> SSd </TH> <TH> F </TH> <TH> p </TH> <TH> p&lt;.05 </TH> <TH> ges </TH>  </TR>
   <TR> <TD> (Intercept) </TD> <TD align="right"> 1 </TD> <TD align="right"> 29 </TD> <TD align="right"> 20970809.92 </TD> <TD align="right"> 405363.34 </TD> <TD align="right"> 1500.27 </TD> <TD align="right"> 0.000000000000000000000000016 </TD> <TD> * </TD> <TD align="right"> 0.98 </TD> </TR>
