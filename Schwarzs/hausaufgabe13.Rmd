@@ -35,7 +35,7 @@ Um einiges leichter zu machen, sollten Sie auch die Datei `priming.tab` aus dem 
     - Items `item` ($n_2=20$)
 
 30 Subjects x 20 Items x 8 Bedingungen = `r 30*20*8` Trials.
-```r
+```{r}
 priming <- read.table("priming.tab",header = T)
 priming$subj <- as.factor(priming$subj)
 priming <- subset(priming, item <= 20) # Filler ausschließen
@@ -103,12 +103,19 @@ Sind alle Plots gleich gut?
 Bei "Item" berechnen wir die Mittelwerte aller Trials innerhalb eines Items, d.h. wir nehmen den itemweise Mittelwert über Versuchpersonen hinweg. Dafür können wir `aggregate()` nutzen.
 
 ```{r}
-# priming.by.item <- CODE_HIER
+priming.by.item <- aggregate(RT ~ cond*item, data=priming,FUN=mean)
 ```
 
 Wir wollen auch hier die Daten tabellerisch darstellen. Erstellen Sie eine Tabelle in Wide-Format für die Mittelwerte by Item.
+```{r, results='asis'}
+print(xtable(priming.by.item),type="html",include.rownames=FALSE)
+```
 
-CODE_BLOCK_HIER
+Mit Bedingungen als Zeilen und Versuchspersonen als Spalten;macht finde ich, mehr Sinn, weil man die Daten für die einzelnen VP schneller ablesen kann.
+```{r, results='asis'}
+priming.by.item.wide2 <- dcast(priming.by.item,cond ~ item, value.var="RT")
+print(xtable(priming.by.item.wide2),type="html",include.rownames=FALSE)
+```
 
 Und *eine* passende Grafik für die Daten by Item sollten wir auch generieren:
 
