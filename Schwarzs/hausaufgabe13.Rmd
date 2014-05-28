@@ -36,8 +36,7 @@ Um einiges leichter zu machen, sollten Sie auch die Datei `priming.tab` aus dem 
 
 30 Subjects x 20 Items x 8 Bedingungen = `r 30*20*8` Trials.
 
-print(getwd())
-priming <- read.table("Schwarzs/priming.tab",header = T)
+priming <- read.table("priming.tab",header = T)
 priming$subj <- as.factor(priming$subj)
 priming <- subset(priming, item <= 20) # Filler ausschließen
 priming$item <- as.factor(priming$item)
