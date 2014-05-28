@@ -30,44 +30,12 @@ Um einiges leichter zu machen, sollten Sie auch die Datei `priming.tab` aus dem 
     - Items `item` ($n_2=20$)
 
 30 Subjects x 20 Items x 8 Bedingungen = 4800 Trials.
+print(getwd())
 
-
-```r
-priming <- read.table("Data/priming.tab", header = T)
-```
-
-```
-## Warning: kann Datei 'Data/priming.tab' nicht öffnen: No such file or
-## directory
-```
-
-```
-## Error: kann Verbindung nicht öffnen
-```
-
-```r
+priming <- read.table("Data/priming.tab",header = T)
 priming$subj <- as.factor(priming$subj)
-```
-
-```
-## Error: Objekt 'priming' nicht gefunden
-```
-
-```r
-priming <- subset(priming, item <= 20)  # Filler ausschließen
-```
-
-```
-## Error: Objekt 'priming' nicht gefunden
-```
-
-```r
+priming <- subset(priming, item <= 20) # Filler ausschließen
 priming$item <- as.factor(priming$item)
-```
-
-```
-## Error: Objekt 'priming' nicht gefunden
-```
 
 
 ## Darstellung der Daten ohne Berücksichtigung der Wiederholungen
