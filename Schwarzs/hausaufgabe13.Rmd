@@ -107,20 +107,17 @@ priming.by.item <- aggregate(RT ~ cond*item, data=priming,FUN=mean)
 ```
 
 Wir wollen auch hier die Daten tabellerisch darstellen. Erstellen Sie eine Tabelle in Wide-Format für die Mittelwerte by Item.
-```{r, results='asis'}
-print(xtable(priming.by.item),type="html",include.rownames=FALSE)
-```
 
-Mit Bedingungen als Zeilen und Versuchspersonen als Spalten;macht finde ich, mehr Sinn, weil man die Daten für die einzelnen VP schneller ablesen kann.
+Mit Bedingungen als Zeilen und Versuchspersonen als Spalten;macht, finde ich, mehr Sinn, weil man die Daten für die einzelnen VP schneller ablesen kann.
 ```{r, results='asis'}
 priming.by.item.wide2 <- dcast(priming.by.item,cond ~ item, value.var="RT")
 print(xtable(priming.by.item.wide2),type="html",include.rownames=FALSE)
 ```
 
 Und *eine* passende Grafik für die Daten by Item sollten wir auch generieren:
-
-CODE_BLOCK_HIER
-
+```{r}
+ggplot(data=priming.by.item) + geom_violin(aes(x=cond,y=RT,color=cond,fill=cond),alpha=0.5)
+```
 Sehen die Daten by Subject und by Item gleich aus? Wie sehen sie im Vergleich zu den Single-Trial-Daten aus?
 
 # Subject- und Item-Analysen
