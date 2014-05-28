@@ -1,0 +1,113 @@
+Statistik für Sprachwissenschaftler
+========================================================
+author: Phillip M . Alday
+date: 2014-06-XX
+autosize: false
+
+```{r setup, include=FALSE}
+library(knitr)
+opts_chunk$set(cache=TRUE,prompt=TRUE)
+library(knitcitations)
+library(ggplot2)
+library(xtable)
+cite_options(tooltip = TRUE
+             , linked = TRUE
+             , numerical = TRUE
+             , bibtex_data = FALSE)
+```
+
+Aufwachen und sich errinnern!
+====================================
+type: section
+
+Bisher
+=======
+- Varianzanalyse
+- ANOVA 
+
+Heute
+========
+- General Linear Model (GLM)
+- lineare Regression
+
+Datensatz für heute: Fremdsprachen
+===============================================
+```{r, eval=FALSE}
+
+```
+```{r, echo=FALSE}
+# the path in the previous block isn't correct, so run this one
+aphasiker <- read.csv2(normalizePath("../Data/aphasiker.csv"),header = T)
+aphasiker <- na.omit(aphasiker)
+```
+
+Datensatz für heute: Fremdsprachen
+================================
+```{r, echo=FALSE}
+```
+
+
+Eine andere Perspektive
+=========================
+incremental: true
+- Gruppe als unabhängige Variable
+- Mittelwert als eine Funkion der Gruppe + Fehler
+
+- $$\text{Welt} = (\text{model}) + \text{Fehler}$$  
+
+- $$\text{Y} = F(X) + \epsilon{} $$  
+
+- $$\text{Y} = \beta{}X + \epsilon{} $$  
+
+Eine andere Perspektive
+=========================
+```{r, echo=FALSE}
+m <- mean(aphasiker[aphasiker$Aphasie == "W","Lex_Dec"]) - mean(aphasiker[aphasiker$Aphasie == "B","Lex_Dec"])
+b <- mean(aphasiker[aphasiker$Aphasie == "B","Lex_Dec"]) - m
+ggplot(subset(aphasiker, Aphasie %in% c("B","W"))) + geom_point(aes(x=Aphasie,y=Lex_Dec)) + geom_abline(slope=m, intercept=b, color="red")
+```
+
+Eine andere Perspektive
+=========================
+```{r, echo=FALSE}
+ggplot(aphasiker,aes(x=Aphasie,y=Lex_Dec)) + geom_point(aes(color=Aphasie)) + geom_smooth(aes(x=as.numeric(Aphasie),y=Lex_Dec),method="lm", se=FALSE,color="red")
+```
+
+Eine andere Perspektive
+=========================
+```{r, echo=FALSE}
+aphasiker$Aphasie <- factor(as.character(aphasiker$Aphasie), levels=c("C","A","B","W"))
+ggplot(aphasiker,aes(x=Aphasie,y=Lex_Dec)) + geom_point(aes(color=Aphasie)) + geom_smooth(aes(x=as.numeric(Aphasie),y=Lex_Dec),method="lm", se=FALSE,color="red")
+```
+
+Eine andere Perspektive
+=========================
+incremental:true
+- Ist die Auswirkung vom Model größer als die vom Fehler?
+- Erklärt das Model oder der Fehler mehr Varianz?
+- Erklären Intergruppen-Unterschiede mehr als Intragruppen-Unterschiede?
+
+- Abhängige Variable: Reaktionszeit
+- Unabhängige Variable: Gruppe
+- zur Erinnerung: nominalskalierte unabhangige Variablen heißen auch Faktor, ihre Ausprägungen auch Faktorstufen
+
+das GLM
+=========
+type: section
+
+lineare Regression
+====================
+type: section
+
+Hausaufgabe
+=============
+
+Bibliography
+=============
+```{r, echo=FALSE,results='hide'}
+```
+<span style="font-size: 10%;">
+```{r,results='asis',echo=FALSE}
+bibliography(style="markdown",bulleted=FALSE)
+```
+</span>
