@@ -1,6 +1,6 @@
 % Hausaufgabe 13
-% Phillip Alday <phillip.alday@staff.uni-marburg.de>
-% 2014-05-27
+% Corinna Schwarz <co-schwarz@web.de>
+% 2014-05-28
 
 Falls die Umlaute in dieser und anderen Dateien nicht korrekt dargestellt werden, sollten Sie File > Reopen with Encoding > UTF-8 sofort machen (und auf jeden Fall ohne davor zu speichern), damit die Enkodierung korrekt erkannt wird! 
 
@@ -95,7 +95,7 @@ print(xtable(priming.by.subject), type = "html", include.rownames = FALSE)
 ```
 
 <!-- html table generated in R 3.1.0 by xtable 1.7-3 package -->
-<!-- Wed May 28 09:10:39 2014 -->
+<!-- Wed May 28 09:43:02 2014 -->
 <TABLE border=1>
 <TR> <TH> cond </TH> <TH> subj </TH> <TH> RT </TH>  </TR>
   <TR> <TD> DD </TD> <TD> 1 </TD> <TD align="right"> 569.75 </TD> </TR>
@@ -231,7 +231,7 @@ print(xtable(priming.by.subject.wide1), type = "html", include.rownames = FALSE)
 ```
 
 <!-- html table generated in R 3.1.0 by xtable 1.7-3 package -->
-<!-- Wed May 28 09:10:39 2014 -->
+<!-- Wed May 28 09:43:02 2014 -->
 <TABLE border=1>
 <TR> <TH> subj </TH> <TH> DD </TH> <TH> DE </TH> <TH> ED </TH> <TH> EE </TH>  </TR>
   <TR> <TD> 1 </TD> <TD align="right"> 569.75 </TD> <TD align="right"> 655.15 </TD> <TD align="right"> 592.00 </TD> <TD align="right"> 587.70 </TD> </TR>
@@ -275,7 +275,7 @@ print(xtable(priming.by.subject.wide2), type = "html", include.rownames = FALSE)
 ```
 
 <!-- html table generated in R 3.1.0 by xtable 1.7-3 package -->
-<!-- Wed May 28 09:10:39 2014 -->
+<!-- Wed May 28 09:43:02 2014 -->
 <TABLE border=1>
 <TR> <TH> cond </TH> <TH> 1 </TH> <TH> 2 </TH> <TH> 3 </TH> <TH> 4 </TH> <TH> 5 </TH> <TH> 6 </TH> <TH> 7 </TH> <TH> 8 </TH> <TH> 9 </TH> <TH> 10 </TH> <TH> 11 </TH> <TH> 12 </TH> <TH> 13 </TH> <TH> 14 </TH> <TH> 15 </TH> <TH> 16 </TH> <TH> 17 </TH> <TH> 18 </TH> <TH> 19 </TH> <TH> 20 </TH> <TH> 21 </TH> <TH> 22 </TH> <TH> 23 </TH> <TH> 24 </TH> <TH> 25 </TH> <TH> 26 </TH> <TH> 27 </TH> <TH> 28 </TH> <TH> 29 </TH> <TH> 30 </TH>  </TR>
   <TR> <TD> DD </TD> <TD align="right"> 569.75 </TD> <TD align="right"> 512.95 </TD> <TD align="right"> 503.15 </TD> <TD align="right"> 616.45 </TD> <TD align="right"> 698.45 </TD> <TD align="right"> 562.75 </TD> <TD align="right"> 584.60 </TD> <TD align="right"> 546.15 </TD> <TD align="right"> 457.35 </TD> <TD align="right"> 496.60 </TD> <TD align="right"> 496.35 </TD> <TD align="right"> 556.10 </TD> <TD align="right"> 491.45 </TD> <TD align="right"> 556.90 </TD> <TD align="right"> 417.20 </TD> <TD align="right"> 526.90 </TD> <TD align="right"> 502.75 </TD> <TD align="right"> 470.75 </TD> <TD align="right"> 626.45 </TD> <TD align="right"> 815.25 </TD> <TD align="right"> 673.60 </TD> <TD align="right"> 534.50 </TD> <TD align="right"> 532.80 </TD> <TD align="right"> 513.20 </TD> <TD align="right"> 491.65 </TD> <TD align="right"> 415.60 </TD> <TD align="right"> 500.70 </TD> <TD align="right"> 494.65 </TD> <TD align="right"> 507.90 </TD> <TD align="right"> 512.10 </TD> </TR>
@@ -371,7 +371,7 @@ print(xtable(priming.f1$ANOVA), type = "html", include.rownames = FALSE)
 ```
 
 <!-- html table generated in R 3.1.0 by xtable 1.7-3 package -->
-<!-- Wed May 28 09:10:48 2014 -->
+<!-- Wed May 28 09:43:10 2014 -->
 <TABLE border=1>
 <TR> <TH> Effect </TH> <TH> DFn </TH> <TH> DFd </TH> <TH> SSn </TH> <TH> SSd </TH> <TH> F </TH> <TH> p </TH> <TH> p&lt;.05 </TH> <TH> ges </TH>  </TR>
   <TR> <TD> (Intercept) </TD> <TD align="right"> 1.00 </TD> <TD align="right"> 29.00 </TD> <TD align="right"> 38940134.70 </TD> <TD align="right"> 704326.36 </TD> <TD align="right"> 1603.32 </TD> <TD align="right"> 0.00 </TD> <TD> * </TD> <TD align="right"> 0.98 </TD> </TR>
@@ -396,7 +396,7 @@ print(xtable(priming.f1$ANOVA, display = c("s", "s", "d", "d", "f", "f", "f",
 ```
 
 <!-- html table generated in R 3.1.0 by xtable 1.7-3 package -->
-<!-- Wed May 28 09:10:48 2014 -->
+<!-- Wed May 28 09:43:10 2014 -->
 <TABLE border=1>
 <TR> <TH> Effect </TH> <TH> DFn </TH> <TH> DFd </TH> <TH> SSn </TH> <TH> SSd </TH> <TH> F </TH> <TH> p </TH> <TH> p&lt;.05 </TH> <TH> ges </TH>  </TR>
   <TR> <TD> (Intercept) </TD> <TD align="right"> 1 </TD> <TD align="right"> 29 </TD> <TD align="right"> 38940134.70 </TD> <TD align="right"> 704326.36 </TD> <TD align="right"> 1603.32 </TD> <TD align="right"> 0.0000000000000000000000000062 </TD> <TD> * </TD> <TD align="right"> 0.98 </TD> </TR>
@@ -479,7 +479,7 @@ print(xtable(priming.f1.englisch.target$ANOVA, display = c("s", "s", "d", "d",
 ```
 
 <!-- html table generated in R 3.1.0 by xtable 1.7-3 package -->
-<!-- Wed May 28 09:10:53 2014 -->
+<!-- Wed May 28 09:43:15 2014 -->
 <TABLE border=1>
 <TR> <TH> Effect </TH> <TH> DFn </TH> <TH> DFd </TH> <TH> SSn </TH> <TH> SSd </TH> <TH> F </TH> <TH> p </TH> <TH> p&lt;.05 </TH> <TH> ges </TH>  </TR>
   <TR> <TD> (Intercept) </TD> <TD align="right"> 1 </TD> <TD align="right"> 29 </TD> <TD align="right"> 20970809.92 </TD> <TD align="right"> 405363.34 </TD> <TD align="right"> 1500.27 </TD> <TD align="right"> 0.000000000000000000000000016 </TD> <TD> * </TD> <TD align="right"> 0.98 </TD> </TR>
