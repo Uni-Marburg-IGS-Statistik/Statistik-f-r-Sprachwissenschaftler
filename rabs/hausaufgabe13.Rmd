@@ -226,8 +226,21 @@ print(xtable(priming.f1.englisch.target$ANOVA
 # Deutsches Target
 Führen Sie die entsprechende Analyse für deutsches Target aus.
 
-CODE_BLOCK_HIER
+```{r, results='asis'}
+priming.f1.deutsch.target <- ezANOVA(subset(priming, target == "D")
+                                      , dv=.(RT)
+                                      , wid=.(subj)
+                                      , within=.(prime)
+                                      , detailed=TRUE
+                                      )
+print(xtable(priming.f1.deutsch.target$ANOVA
+             , display=c("s","s","d","d","f","f","f","fg","s","g")
+             , digits=c(0,0,0,0,2,2,2,2,0,2))
+      ,type="html",include.rownames=FALSE)
+
+```
 
 
 # Lizenz
 Dieses Werk ist lizenziert unter einer CC-BY-NC-SA Lizenz.
+Diese Datei darf weiter als Beispiel verwendet werden.
