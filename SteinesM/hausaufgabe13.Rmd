@@ -1,6 +1,6 @@
 % Hausaufgabe 13
-% Phillip Alday <phillip.alday@staff.uni-marburg.de>
-% 2014-05-27
+% Miriam Steines <Steines@students.uni-marburg.de>
+% 2014-05-29
 
 Falls die Umlaute in dieser und anderen Dateien nicht korrekt dargestellt werden, sollten Sie File > Reopen with Encoding > UTF-8 sofort machen (und auf jeden Fall ohne davor zu speichern), damit die Enkodierung korrekt erkannt wird! 
 
@@ -34,10 +34,10 @@ Um einiges leichter zu machen, sollten Sie auch die Datei `priming.tab` aus dem 
     - Probanden `subj` ($n_1 = 30$)
     - Items `item` ($n_2=20$)
 
-30 Subjects x 20 Items x 8 Bedingungen = `r 30*20*8` Trials.
+30 Subjects x 20 Items x 8 Bedingungen = `r 30*20*8` Trials. Nicht 4? DD, DE, EE, ED
 
 ```{r}
-priming <- read.table("Data/priming.tab",header = T)
+priming <- read.table("priming.tab",header = T)
 priming$subj <- as.factor(priming$subj)
 priming <- subset(priming, item <= 20) # Filler ausschließen
 priming$item <- as.factor(priming$item)
