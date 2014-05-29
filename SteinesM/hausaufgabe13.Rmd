@@ -63,7 +63,7 @@ ggplot(data=priming) + geom_boxplot(aes(x=cond,y=RT,color=cond,fill=cond),alpha=
 ## Darstellung der Daten mit Berücksichtigung der Wiederholungen
 Wenn wir naiv die Wiederholungen betrachten, können wir uns entweder auf den zufälligen Faktor **Subject** oder den zufälligen Faktor **Item** dadurch konzentrien, dass wir die Mittelwerte berechnen. 
 
-### By Subject
+### By Subject 
 Bei "Subject" berechnen wir die Mittelwerte aller Trials innerhalb einer Versuchsperson, d.h. wir nehmen den versuchpersonenweise Mittelwert über Items hinweg. Dafür können wir `aggregate()` nutzen.
 ```{r}
 priming.by.subject <- aggregate(RT ~ cond * subj,data=priming,FUN = mean)
