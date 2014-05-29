@@ -166,9 +166,28 @@ Die jeweiligen Faktoren haben alle zwei Stufen, also weniger als drei -- Spheriz
 ```{r}
 ggplot(data=priming) + geom_density(aes(x=RT,color=cond,fill=cond),alpha=0.1) + facet_wrap(~item)
 ```
+
 Führen Sie die entsprechende Item-Analyse aus.
 
-CODE_BLOCK_HIER
+```{r}
+priming.f2 <- ezANOVA(priming
+                      , dv=.(RT)
+                      , wid=.(item)
+                      , within=.(prime,target)
+                      , detailed=TRUE
+                      )
+```
+
+### ANOVA
+
+
+```{r, results='asis'}
+print(xtable(priming.f2$ANOVA
+             , display=c("s","s","d","d","f","f","f","fg","s","g")
+             , digits=c(0,0,0,0,2,2,2,2,0,2))
+      ,type="html",include.rownames=FALSE)
+```
+
 
 # Interaktionen 
 In der Analyse by Subjects haben wir eine Interaktion zwsichen `prime` und `target`. Solche Interaktionen berichtet man in der Regel nur, wenn sie auch in der Auflösung zu finden ist. Hier heißt das, dass wir die Daten innerhalb der verschiedenen Stufen eines Faktors anschauen und weitere ANOVAs berechnen, um zu schauen, ob der verbleibende Faktor (oder die verbleibenden Faktoren bei mehrfaktoriellen ANOVA) noch signifikant wird. Wenn er in keiner Stufe des anderen Faktors signifikant wird, betrachten wir die Interaktion als nicht bedeutsam.
@@ -213,8 +232,19 @@ print(xtable(priming.f1.englisch.target$ANOVA
 # Deutsches Target
 Führen Sie die entsprechende Analyse für deutsches Target aus.
 
-CODE_BLOCK_HIER
+```{r, results='asis'}
+priming.f1.deutsch.target <- ezANOVA(subset(priming, target == "D")
+                                      , dv=.(RT)
+                                      , wid=.(subj)
+                                      , within=.(prime)
+                                      , detailed=TRUE
+                                      )
+print(xtable(priming.f1.deutsch.target$ANOVA
+             , display=c("s","s","d","d","f","f","f","fg","s","g")
+             , digits=c(0,0,0,0,2,2,2,2,0,2))
+      ,type="html",include.rownames=FALSE)
 
+```
 
 # Lizenz
 Dieses Werk ist lizenziert unter einer CC-BY-NC-SA Lizenz.
