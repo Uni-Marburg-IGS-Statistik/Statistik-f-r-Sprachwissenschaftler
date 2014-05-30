@@ -1,0 +1,165 @@
+Statistik für Sprachwissenschaftler
+========================================================
+author: Phillip M . Alday
+date: 2014-05-19
+autosize: false
+
+```{r setup, include=FALSE}
+library(knitr)
+opts_chunk$set(cache=TRUE,prompt=TRUE)
+library(knitcitations)
+library(ggplot2)
+library(reshape2)
+cite_options(tooltip = TRUE
+             , linked = TRUE
+             , numerical = TRUE
+             , bibtex_data = FALSE)
+```
+
+
+Aufwachen und sich errinnern!
+====================================
+type: section
+
+Bisher
+========
+- frequentistischer Vergleich von Gruppen ($t$-Test)
+- Andeutungen zu Konfidenz-Intervallen
+- Andeutungen zu [BEST](http://www.indiana.edu/~kruschke/BEST/) (etwa bayes'scher $t$-Test) und Credible-Intervallen  
+
+Heute
+=======
+- Mehr zu Git
+- QQPlots
+- Konfidenz-Intervalle & frequentistische Inferenz
+- Optional Stopping
+- Credible Intervalle (HDI) & bayes'sche Inferenz, BEST
+
+Datensätze für heute: Aphasiker und RT
+==========================================
+```{r, eval=FALSE}
+aphasiker <- read.csv2("Data/aphasiker.csv",header = T)
+rt <- read.table("Data/punkt_rt.tab",header = T)
+rt$subj <- as.factor(rt$subj)
+```
+```{r, echo=FALSE}
+# the path in the previous block isn't correct, so run this one
+aphasiker <- read.csv2(normalizePath("../Data/aphasiker.csv"),header = T)
+rt <- read.table(normalizePath("../Data/punkt_rt.tab"),header = T)
+rt$subj <- as.factor(rt$subj)
+```
+
+
+Datensätze für heute: Hilfsvariablen 
+================================
+```{r}
+broca.lex.dec <- aphasiker[aphasiker$Aphasie == "B","Lex_Dec"]
+wernicke.lex.dec <- aphasiker[aphasiker$Aphasie == "W","Lex_Dec"]
+rt1 <- rt$RT[rt$subj == 1]
+rt2 <- rt[rt$subj == 2,]$RT
+```
+
+Datensatz für heute: Aphasiker
+================================
+```{r, echo=FALSE}
+qplot(x=Lex_Dec,geom="density",color=Aphasie,fill=Aphasie,data=aphasiker,alpha=I(0.3))
+```
+
+Datensatz für heute: RT
+================================
+```{r, echo=FALSE}
+ggplot(data=rt) + geom_density(aes(x=RT,color=subj,fill=subj),alpha=0.5)
+```
+
+QQ Plots: Vergleich mit der Normalverteilung
+==============================================
+```{r}
+qqnorm(broca.lex.dec)
+qqline(broca.lex.dec)
+```
+
+
+QQ Plots: Vergleich mit der Normalverteilung
+==============================================
+```{r}
+qqnorm(wernicke.lex.dec)
+qqline(wernicke.lex.dec)
+```
+
+QQ Plots: Vergelich mieinander
+=====================================
+```{r}
+qqplot(broca.lex.dec,wernicke.lex.dec)
+```
+
+
+QQ Plots: Vergleich mit der Normalverteilung
+==============================================
+```{r}
+qplot(sample=rt1, stat="qq")
+```
+
+
+QQ Plots: Vergleich mit der Normalverteilung
+==============================================
+```{r}
+ggplot() + stat_qq(aes(sample=rt2))
+```
+
+QQ Plots: Vergleich mit der Normalverteilung
+==============================================
+```{r}
+ggplot(rt) + stat_qq(aes(sample=RT)) + facet_wrap(~subj)
+```
+
+Logarithmische Transformation
+===============================
+```{r}
+ggplot(rt) + stat_qq(aes(sample=log(RT))) + facet_wrap(~subj)
+```
+
+Konfidenz-Intervalle
+====================
+type:section
+
+The New Statistics
+======================
+- Punktschätzungen (*point estimates*) problematisch wegen Unsicherheit 
+- $p$-Werte problematisch wegen ... und ein $p$-Wert = eine Punktschätzung
+- Effektgröße als tatsächliches Maß der erklärten Varianz
+- Konfidenz-Intervall als Schätzungen mit expliziter (Un)Sicherheit
+
+vgl. `r citet("10.1177/0956797613504966")` und viele Andere
+
+Plotting und Effektgröße
+=========================
+Besessenheit mit $p$-Werten kostet Leben!
+
+Effektgröße und Grafiken retten Leben!
+
+[Mammographie und Brustkrebs](http://andrewgelman.com/2014/05/03/graph-clearly-shows-mammography-adds-virtually-nothing-survival-anything-decreases-survival-increases-cost-provides-unnecessary-treatment/)
+
+Statistische Fehler
+====================
+- **Type S**: Sign error (Vorzeichnenfehler)
+- **Type M**: Magnitude Error (Größenfehler)
+
+Quelle: [Andrew Gelman](http://andrewgelman.com/2004/12/29/type_1_type_2_t/)
+
+Hausaufgabe
+===========
+- Sinn des $F$-Tests als Varianzvergleich verstehen
+- die einfache Überlegungen hinter den bisherigen Tests verstehen:
+  - $$ \text{Prüfgröße}  =  \frac{\text{Beo} - \text{Theo}}{s_\text{Beo}} $$
+  - Vergleich der Prüfgröße mit einer Referenzverteilung 
+  - Abhängige Variable = Model der Unabhängigen Variable + Fehler
+
+Bibliography
+=============
+```{r, echo=FALSE,results='hide'}
+```
+<span style="font-size: 10%;">
+```{r,results='asis',echo=FALSE}
+bibliography(style="markdown",bulleted=FALSE)
+```
+</span>

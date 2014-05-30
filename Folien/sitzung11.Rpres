@@ -1,0 +1,260 @@
+Statistik für Sprachwissenschaftler
+========================================================
+author: Phillip M . Alday
+date: 2014-05-20
+autosize: false
+
+```{r setup, include=FALSE}
+library(knitr)
+opts_chunk$set(cache=TRUE,prompt=TRUE)
+library(knitcitations)
+library(ggplot2)
+library(reshape2)
+cite_options(tooltip = TRUE
+             , linked = TRUE
+             , numerical = TRUE
+             , bibtex_data = FALSE)
+```
+
+Aufwachen und sich errinnern!
+====================================
+type: section
+
+Gestern
+========
+- Mehr zu Git
+- QQPlots
+
+Heute
+=======
+- Konfidenz-Intervalle & frequentistische Inferenz
+- Optional Stopping
+- Credible Intervalle (HDI) & bayes'sche Inferenz, BEST
+
+Datensätze für heute: Aphasiker und RT
+==========================================
+```{r, eval=FALSE}
+aphasiker <- read.csv2("Data/aphasiker.csv",header = T)
+rt <- read.table("Data/punkt_rt.tab",header = T)
+rt$subj <- as.factor(rt$subj)
+```
+```{r, echo=FALSE}
+# the path in the previous block isn't correct, so run this one
+aphasiker <- read.csv2(normalizePath("../Data/aphasiker.csv"),header = T)
+rt <- read.table(normalizePath("../Data/punkt_rt.tab"),header = T)
+rt$subj <- as.factor(rt$subj)
+```
+
+
+Datensätze für heute: Hilfsvariablen 
+================================
+```{r}
+broca.lex.dec <- aphasiker[aphasiker$Aphasie == "B","Lex_Dec"]
+wernicke.lex.dec <- aphasiker[aphasiker$Aphasie == "W","Lex_Dec"]
+rt1 <- rt$RT[rt$subj == 1]
+rt2 <- rt[rt$subj == 2,]$RT
+```
+
+Datensatz für heute: Aphasiker
+================================
+```{r, echo=FALSE}
+qplot(x=Lex_Dec,geom="density",color=Aphasie,fill=Aphasie,data=aphasiker,alpha=I(0.3))
+```
+
+Datensatz für heute: RT
+================================
+```{r, echo=FALSE}
+ggplot(data=rt) + geom_density(aes(x=RT,color=subj,fill=subj),alpha=0.5)
+```
+
+The New Statistics
+======================
+- Punktschätzungen (*point estimates*) problematisch wegen Unsicherheit 
+- $p$-Werte problematisch wegen ... und ein $p$-Wert = eine Punktschätzung
+- Effektgröße als tatsächliches Maß der erklärten Varianz
+- Konfidenz-Intervall als Schätzungen mit expliziter (Un)Sicherheit
+
+vgl. `r citet("10.1177/0956797613504966")` und viele Andere
+
+Statistische Fehler
+====================
+- **Type S**: Sign error (Vorzeichnenfehler)
+- **Type M**: Magnitude Error (Größenfehler)
+
+Quelle: [Andrew Gelman](http://andrewgelman.com/2004/12/29/type_1_type_2_t/)
+
+Konfidenz-Intervalle
+====================
+type:section
+
+(95%) Konfidenz-Intervalle
+===========================
+incremental: true
+- Bereich so berechnet, dass er in 95% solcher Experimente den wahren (Populations)wert enthält.
+- Bereich, wo $p < 0.05$ wäre
+- Bereich, wo 95% aller gleich geschätzten Mittelwerte fallen würden
+- Ungenauigkeit in der Messung durch usere Stichprobe und ihre beschränkte $n$ 
+- Variante für Unterschiede in Mittelwerten, Mittelwerte, und ganz viele andere Parameter
+
+(95%) Konfidenz-Intervalle
+===========================
+incremental: true
+- intuitiv "klar" 
+- Unsicherheitsbereich der Messung
+- genaue Bedeutung (sowie bei $p$-Werten) schwierig
+- Hören Sie genau hin -- ich mache bestimmt einen Fehler!
+
+Konfidenz-Intervalle
+====================
+type: prompt
+
+Konfidenz-Intervalle: Berechnung
+=================================
+- analytisch: Mittelwert $\pm$ 1.96 SD
+- Bootstrapping: Resampling Verfahren um mehrere Mittelwertsschätzungen zu bekommen 
+- normalerweise relativ nah aneinander
+
+Übrigens
+==========
+```{r}
+t.test(rt1)
+```
+
+Frequentismus
+===============
+- Aussagen über die Vorkommenshäufigkeit über (unendliche) Wiederholungen
+- keine Aussage über ein einzelnes Ergebnise, sondern nur seine Häufigkeit über mehrfache Wiederholungen
+- Annahmen dazu über:
+  - Unabhängigkeit der Tests
+  - Anzahl der Tests 
+- Verletzung der Annahmen durch:
+  - Multiples Testen (*multiple comparison*)
+  - Optional Stopping
+- [Problematik oft nicht bewusst!](http://www.stat.columbia.edu/~gelman/research/unpublished/p_hacking.pdf)
+
+Konfidenz-Intervalle
+====================
+> An exact 95% confidence interval is calculated such that it includes the true value of the estimated parameter 95% of the time. We do not know, however, if the interval we have is one of those that are correct or not. It is like a person who tells the truth 95% of the time, but we do not know whether a particular statement is true or not.
+
+`r citet("10.1080/00031305.2012.752408")`
+
+The New Statistics
+====================
+
+[![Quelle: xkcd](http://imgs.xkcd.com/comics/null_hypothesis.png)](http://www.xkcd.com/892/)
+
+Ist der Vergleich mit der Null sinnvoll? Auch CIs nutzen die Null.
+
+Optional Stopping
+====================
+- Optional Stopping ist eine Art multiples Testing.
+- Mit $\alpha=0.05$ bekommt man [1 von 20 mal ein falsches Positiv](http://xkcd.com/882/) 
+- Auch CIs dafür anfällig
+- vgl. `r citet("10.1177/0956797611417632")` und viele andere
+
+Optional Stopping
+====================
+
+> Stopping for extreme data precludes subsequent collection of compensating data
+
+Quelle: [John Krusche](https://www.youtube.com/watch?feature=player_detailpage&v=OIX6d2YEB04#t=348)
+
+Es ist immer möglich (obleich bei ausreichender $n$ nicht unbedingt wahrscheinlich), einen $p$-Wert über oder unten einen gewissen $alpha$-Wert zu bekommen.
+
+Optional Stopping
+====================
+type: prompt
+
+
+Credible Intervalle
+====================
+type:section
+
+Bayes'sche Interferenz
+==========================
+- Wahrscheinlichkeit als Glaubwürdigkeit
+- Aussagen über Überzeugung
+- Aussagen in Form von Verteilungen
+
+Credible Intervalle
+====================
+- Intervalle, wo die meisten Parameterschätzungen fallen
+- zwei Arten: 
+  - symmetrische um das Zentrum (etwa bayes'sche Konfidenz-Intervalle)
+  - Highest Density Intervall (HDI): das Intervall mit der höchsten Dichte, *auch wenn es nicht symmetrisch ist!*
+- Aussage: wir glauben, der wahre Wert des Parameters liegt in diesem Bereich
+
+ROPE
+====
+- Region of Practical Equivalence
+- *keine* Verteilung
+- (Null-)Hypothese zurücklegen: das Credible Intervall überlappt nicht mit die ROPE um den hypothetischen (Null)-Wert 
+- Hypothese annehmen: die ROPE um den hypothetischen (Null)-Wert liegt komplett innerhalb des Konfidenz-Intervalls
+- ROPE schließt u.a. "signifikante" aber unbedeutsame Unterschiede aus (wieder Effektgröße)
+
+BEST
+=====
+- Vorteile:
+  - viele Parameter geschätzt
+  - wenig Annahmen über Verteilung der Daten
+  - sehr robust
+- Nachteile
+  - computionell aufwendiger
+  - weniger bekannt
+- [Interaktives Beispiel](http://www.sumsar.net/best_online/)
+
+Vergleich mit t-Test
+=====================
+```{r}
+t.test(rt1,rt2)
+```
+
+
+BEST: in R
+============
+```{r, eval=FALSE}
+library(BEST)
+best <- BESTmcmc(rt1,rt2)
+print(best)
+print(summary(best))
+```
+
+Nicht ausführen, wenn Sie wenig Akku haben!
+
+The Goal is Precision
+======================
+> Can't I measure precision with a frequentist confidence interval instead of a Bayesian posterior HDI?" No, because a frequentist confidence interval depends on the stopping and testing intention. Change, say, the testing intention --e.g., there's a second coin you're testing-- and the confidence interval changes. But not the Bayesian HDI.
+
+Quelle: [John Kruschke](http://doingbayesiandataanalysis.blogspot.de/2013/11/optional-stopping-in-data-collection-p.html)
+
+Optional Stopping
+=================
+- bayes'sche Methoden z.T. auch dafür anfällig, wenn man von Hypothesen-Testing ausgeht
+- weniger so, wenn man von gewünschter Präzision ausgeht
+- s. dazu John Kruschkes Videos dazu:
+  - [Teil 1](https://www.youtube.com/watch?v=lh5btlAvrLs)
+  - [Teil 2](https://www.youtube.com/watch?v=ObCrb5I49qo)
+  - [Teil 3](https://www.youtube.com/watch?v=OIX6d2YEB04)
+  - [Teil 4](https://www.youtube.com/watch?v=bKj5irH99OI)    
+
+Übrigens
+============
+Bedingte Wahrscheinlichkeit ist oft wichtig und natürlich:
+
+[![Quelle: xkcd](http://imgs.xkcd.com/comics/conditional_risk.png)](http://xkcd.com/795/)
+
+Hausaufgabe
+===========
+- sich erholen
+- nächste Woche wird wieder anstregend (ANOVA)
+- evtl. Videos und verlinkte Texte anschauen, mit den Shiny-Apps spielen
+
+Bibliography
+=============
+```{r, echo=FALSE,results='hide'}
+```
+<span style="font-size: 10%;">
+```{r,results='asis',echo=FALSE}
+bibliography(style="markdown",bulleted=FALSE)
+```
+</span>

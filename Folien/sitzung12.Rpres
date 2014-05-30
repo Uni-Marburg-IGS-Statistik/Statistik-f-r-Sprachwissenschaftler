@@ -1,0 +1,473 @@
+Statistik für Sprachwissenschaftler
+========================================================
+author: Phillip M . Alday
+date: 2014-05-26
+autosize: false
+
+```{r setup, include=FALSE}
+library(knitr)
+opts_chunk$set(cache=TRUE,prompt=TRUE)
+library(knitcitations)
+library(ggplot2)
+library(xtable)
+cite_options(tooltip = TRUE
+             , linked = TRUE
+             , numerical = TRUE
+             , bibtex_data = FALSE)
+```
+
+Aufwachen und sich errinnern!
+====================================
+type: section
+
+Bisher
+=======
+- Konfidenz-Intervalle & frequentistische Inferenz
+- Optional Stopping
+- Credible Intervalle (HDI) & bayes'sche Inferenz, BEST
+
+Heute
+========
+- Varianzanalyse
+- F-Test 
+- einfaktorielle ANOVA
+
+Morgen
+========
+- einfaktorielle ANOVA
+- mehrfaktorielle ANOVA
+- ANOVA mit wiederholten Messwerten
+
+Datensätze für heute: Aphasiker und RT
+==========================================
+```{r, eval=FALSE}
+aphasiker <- read.csv2("Data/aphasiker.csv",header = T)
+aphasiker <- na.omit(aphasiker)
+rt <- read.table("Data/punkt_rt.tab",header = T)
+rt$subj <- as.factor(rt$subj)
+```
+```{r, echo=FALSE}
+# the path in the previous block isn't correct, so run this one
+aphasiker <- read.csv2(normalizePath("../Data/aphasiker.csv"),header = T)
+aphasiker <- na.omit(aphasiker)
+rt <- read.table(normalizePath("../Data/punkt_rt.tab"),header = T)
+rt$subj <- as.factor(rt$subj)
+```
+
+Datensatz für heute: Aphasiker
+================================
+```{r, echo=FALSE}
+qplot(x=Lex_Dec,geom="density",color=Aphasie,fill=Aphasie,data=aphasiker,alpha=I(0.3))
+```
+
+Datensatz für heute: RT
+================================
+```{r, echo=FALSE}
+ggplot(data=rt) + geom_density(aes(x=RT,color=subj,fill=subj),alpha=0.5)
+```
+
+
+Varianzanalyse
+=================
+type: section
+
+Was passiert, wenn wir mehr als zwei Gruppen vergleichen möchten?
+==================
+type: prompt
+
+Lösungsvorschlag I
+===================
+incremental: true
+
+- paarweise Vergleiche
+- Multiples Testen
+
+Was macht der t-Test?
+======================
+incremental: true
+
+$$ \frac{ \text{Beo} - \text{Theo} }{ s_\text{Beo}} $$
+
+Ist der betrachtete Unterscheid größer als die Schwankungen, die durch Rauschen entstehen?
+
+Ist der Abstand zwischen Gruppen größer als der Abstand zwischen Punkte innerhalb einer Gruppe?
+
+Eine andere Perspektive
+=========================
+incremental: true
+- Gruppe als unabhängige Variable
+- Mittelwert als eine Funkion der Gruppe + Fehler
+
+- $$\text{Welt} = (\text{model}) + \text{Fehler}$$  
+
+- $$\text{Y} = F(X) + \epsilon{} $$  
+
+- $$\text{Y} = \beta{}X + \epsilon{} $$  
+
+Eine andere Perspektive
+=========================
+```{r, echo=FALSE}
+m <- mean(rt[rt$subj == 2,"RT"]) - mean(rt[rt$subj == 1,"RT"])
+b <- mean(rt[rt$subj == 1,"RT"]) - m
+ggplot(rt, aes(x=subj,y=RT)) + geom_point() + geom_abline(slope=m, intercept=b, color="red")
+```
+
+Eine andere Perspektive
+=========================
+```{r, echo=FALSE}
+m <- mean(aphasiker[aphasiker$Aphasie == "W","Lex_Dec"]) - mean(aphasiker[aphasiker$Aphasie == "B","Lex_Dec"])
+b <- mean(aphasiker[aphasiker$Aphasie == "B","Lex_Dec"]) - m
+ggplot(subset(aphasiker, Aphasie %in% c("B","W"))) + geom_point(aes(x=Aphasie,y=Lex_Dec)) + geom_abline(slope=m, intercept=b, color="red")
+```
+
+Eine andere Perspektive
+=========================
+```{r, echo=FALSE}
+ggplot(aphasiker,aes(x=Aphasie,y=Lex_Dec)) + geom_point(aes(color=Aphasie)) + geom_smooth(aes(x=as.numeric(Aphasie),y=Lex_Dec),method="lm", se=FALSE,color="red")
+```
+
+Eine andere Perspektive
+=========================
+```{r, echo=FALSE}
+aphasiker$Aphasie <- factor(as.character(aphasiker$Aphasie), levels=c("C","A","B","W"))
+ggplot(aphasiker,aes(x=Aphasie,y=Lex_Dec)) + geom_point(aes(color=Aphasie)) + geom_smooth(aes(x=as.numeric(Aphasie),y=Lex_Dec),method="lm", se=FALSE,color="red")
+```
+
+Eine andere Perspektive
+=========================
+incremental:true
+- Ist die Auswirkung vom Model größer als die vom Fehler?
+- Erklärt das Model oder der Fehler mehr Varianz?
+- Erklären Intergruppen-Unterschiede mehr als Intragruppen-Unterschiede?
+
+- Abhängige Variable: Reaktionszeit
+- Unabhängige Variable: Gruppe
+- zur Erinnerung: nominalskalierte unabhangige Variablen heißen auch Faktor, ihre Ausprägungen auch Faktorstufen
+
+
+Lösungsvorschlag II
+====================
+incremental: true
+- schauen, ob die gepoolte Intergruppen-Varianz größer als die gepoolte (durchschnittliche) Intragruppen-Varianz ist 
+- $F$-Test !
+- **AN**alysie **O**f **VA**riance
+
+Einfaktorielle ANOVA
+=====================
+- <small> beim Aphasiker-Datensatz untersuchen wir den Einfluss von nur einem Faktor, nämlich der Art der Aphasie
+- denkbar wäre aber auch, dass der Einfluss eines weiterer Faktor, z.B. das Geschlecht der Versuchspersonen mit berücksichtigt wird -->  zwei-, bzw. dreifaktorielle ANOVA
+- im Falle der zweifaktoriellen ANOVA (4x2) müssten wir also schon 8 Mittelwerte miteinander vergleichen!
+- auch bei der ANOVA kann zwischen unabhängigen (ohne Messwiederholung) und abhängigen (mit Messwiederholung) Stichproben unterschieden werden
+</small>
+
+Grundidee der Varianzanalyse
+==============================
+- die einfache Varianzanalyse kann als eine Erweiterung des t-Tests für unabhängige Stichproben beschrieben werden 
+- auch hier werden zwei Ursachen für Unterschiede zwischen Personen betrachtet: 
+    - Unterschiede zwischen den Bedingungen 
+    - Unterschiede innerhalb der Bedingungen
+- wie die Bezeichnung Varianzanalyse bereits erahnen lässt, handelt es sich hier um ein Verfahren, bei dem die Variation in einer intervallskalierten Variable auf die Variation in einer/mehreren nominalskalierten Variablen/Faktoren zurückgeführt wird
+
+Grundidee der Varianzanalyse
+================================
+- <small> in welchem Maße ist die Gesamtvariation auf die unterschiedlichen Faktorstufen, also die experimentelle Manipulation zurückzuführen?
+- Ist die Varianz innerhalb der Gruppen größer als die Varianz zwischen den Gruppen?
+- wenn dies der Fall ist, dann spricht es dafür, dass die Unterschiede der Mittelwerte zufällig, d.h. durch die zufällige Zusammensetzung der Stichprobe zustande gekommen sind 
+- statistische Hypothesen:
+    - $H_0: \mu_1 = \mu_2 = \mu_3$ d.h. die Mittelwerte stammen aus Populationen mit gleichen Parametern
+    - $H_1: \mu_i \neq \mu_j$ für mindestens ein Paar $(i,j), i \neq j$, d.h. mindestens zwei Mittelwerte unterscheiden sich
+</small>
+
+Daten: Mittelwert
+=================
+```{r}
+aggregate(Lex_Dec ~ Aphasie, data=aphasiker, FUN = mean)
+```
+
+Daten: Varianz
+===============
+```{r}
+aggregate(Lex_Dec ~ Aphasie, data=aphasiker, FUN = var)
+```
+
+Welche Größen werden zur Berechnung benötigt?
+==================================================
+<small>
+Als Maß der Variation dient die Gesamtvarianz bzw. Gesamtquadratsumme $SS_\text{tot}$ (SS für engl. *sum of squares*):
+
+- errechnet sich aus der Summe der quadrierten Abweichungen aller Messwerte vom Mittelwert, geteilt durch die Freiheitsgrade der Varianz ($n \times p - 1$), mit $n$ = Anzahl der Messwerte pro Gruppe, $p$ = Anzahl der Faktorstufen 
+ 
+$$ \hat{\sigma}^2_\text{tot} = \frac{SS_\text{tot}}{df_\text{tot}} = \frac{\sum_i \sum_m \left(x_{m,i} - \bar{x} \right)^2}{np-1}$$
+</small>
+
+
+Welche Größen werden zur Berechnung benötigt?
+==================================================
+<small>
+$$ SS_\text{tot} = \sum_j \sum_m \left(x_{m,j} - \bar{x} \right)^2 $$
+
+Allgemeines Scheme zur Schätzung der Varianzen: $$ \hat{\sigma}^2 = \frac{SS}{df} $$
+
+</small>
+
+Berechnung der Gesamtquadratsumme
+===================================
+```{r}
+attach(aphasiker)
+ss_tot <- sum( (Lex_Dec - mean(Lex_Dec))^2 )
+ss_tot
+```
+
+Exkurs: Warum immer Quadrate?
+=============================
+- Kurz und knapp: Satz vom Pythagoras: 
+
+$$ c^2 = a^2 + b^2$$ 
+
+- angewandt: die Entfernung zwischen zwei Punkte, $p_1=(x_1,y_1), p_2=(x_2,y_2)$, ist 
+
+$$ d(p_1,p_2) = \sqrt{ (x_1 - x_2)^2 + (y_1 - y_2)^2} $$
+
+- üblicher Begriff von "Entfernung" (*Distanz*): Euclid'sche Distanz ($L_2$-Metrik)
+
+Exkurs: Warum immer Quadrate?
+=============================
+- Abweichung von der Modellinie ist die **Standabweichung**
+- Abweichung von der Modellinie ist die Entfernung vom Mittelwert: $$ \sqrt{(x_0 - \bar{x})^2}$$ 
+- wenn wir das für alle Punkte einer Gruppe machen:
+$$\Rightarrow \sqrt{\sum_m (x_m - \bar{x})^2}$$
+
+Exkurs: Warum immer Quadrate?
+=============================
+- Aber Quadratwurzel macht keinen Spaß, daher arbeiten wir mit der **Varianz**, die dann eine Summe von Quadraten (**Quadratsumme**) ist: $$(x_0 - \bar{x})^2$$
+- wenn wir das für alle Punkte einer Gruppe machen:
+$$ \Rightarrow \sum_m (x_m - \bar{x})^2 $$
+- Uns interessiert die **Gesamt**abweichung über alle Gruppen hinweg, also die Summe der Quadratsummen: $$\sum_j \sum_m (x_m - \bar{x})^2$$
+
+Exkurs zum Exkurs: Gibt es andere Distanzen?
+=============================================
+- ja und zwar ganze viele!
+- zwei wichtige:
+    - Manhattan ($L_1$): $$d(p_1, p_2) = |x_1 - x_2| + |y_1 - y_2| $$ (Straßenentfernung)
+    - Null-Eins ($L_0$):  $$d(p_1, p_2) = \begin{cases} 1 &\text{wenn}\quad p_1 \neq p_2 \\ 0 &\text{wenn}\quad p_1 = p_2 \end{cases} $$ (alles oder nichts, mit Kronecker-$\delta$-Funktion verwandt)
+
+Exkurs zum Exkurs: Gibt es andere Distanzen?
+=============================================
+incremental: true
+- Warum nutzen wir sie nicht?
+- tun wir schon!
+- Erwartungswert als der Wert, der die summierte Entfernung reduziert: $$E(x) = \arg \min_{z} \sum_i d(z,x_i)$$
+- das "Zentrum" nach einer Entfernungsart
+
+Exkurs zum Exkurs: Gibt es andere Distanzen?
+=============================================
+- Modus, Median und Mittelwerte Erwartungswerte nach verschiedenen Entfernungsarten:
+    - Modus: $L_0$-Metrik
+    - Median: $L_1$-Metrik
+    - (aritmetischer) Mittelwert: $L_2$-Metrik
+    
+Idee vereinfacht von `r citet("http://www.johnmyleswhite.com/notebook/2013/03/22/modes-medians-and-means-an-unifying-perspective/")`
+    
+Exkurs zum Exkurs: Gibt es andere Distanzen?
+=============================================
+- aber zählt das wirklich? Warum Mittelwert statt Median? 
+- Quadrate haben gewisse Eigenschaften bzgl. **Konvergenz** (Annäherung an *einen* Wert über Wiederholungen hinweg)
+- entprischt auch Entfernung in (üblichem) "Raum"
+
+Zerlegung der Gesamtquadratsumme
+===================================
+- <small> die Gesamtqudratsumme $SS_\text{tot}$ wird in zwei Komponenten zerlegt: **Zwischen**-Quadratsumme und **Innerhalb**-Qudratsumme
+- die Zwischen-Quadratsumme $SS_\text{zw}$  drückt die Variabilität zwischen den Bedingungen/Gruppen aus:
+  - wird berechnet durch die Abweichungen der Gruppenmittelwerte vom Gesamtmittelwert
+    $$ SS_\text{zw} = \sum_{j=1}^{p} \sum_{m=1}^{n_j} \left(\bar{x}_j - \bar{x} \right)^2 $$
+</small>
+
+Zerlegung der Gesamtquadratsumme
+===================================
+- <small> Varianz zwischen den Gruppen: MSSzw (mittlere Qudratsumme zwischen):
+    $$ MSS_\text{zw} = \frac{SS_\text{zw}}{p-1}$$   (mit $p$ = Anzahl an Faktorstufen)
+</small>
+
+Berechnung der Zwischen-Quadratsumme
+========================================
+```{r}
+# factor (condition) / model variance
+ss_zw <- 8*(mean(Lex_Dec[Aphasie=="A"]) - mean(Lex_Dec))^2 + 9*(mean(Lex_Dec[Aphasie=="B"]) - mean(Lex_Dec))^2 + 7*(mean(Lex_Dec[Aphasie=="C"]) - mean(Lex_Dec))^2 + 8*(mean(Lex_Dec[Aphasie=="W"]) - mean(Lex_Dec))^2
+ss_zw
+```
+
+Zerlegung der Innerhalb-Quadratsumme
+========================================
+- <small> die Innerhalb-Quadratsumme QSinn  drückt die Variabilität innerhalb den Bedingungen/Gruppen aus (wird auch als Fehlerquadratsumme bezeichnet):
+    - wird berechnet durch die Abweichungen der einzelnen Werte einer Gruppe  vom Gruppenmittelwert:
+      $$ SS_\text{inn} = \sum_{j=1}^{p} \sum_{m=1}^{n_j} \left(x_{mj} - \bar{x}_j \right)^2 $$
+    - Varianz innerhalb den Gruppen: $MSS_\text{inn}$ (mittlere Quadratsumme innerhalb)
+    $$ MSS_\text{inn} = \frac{SS_\text{inn}}{n-p} $$ mit $n$ = Stichprobenumfang, $p$ = Faktorstufen  
+</small>
+
+Berechnung der Innerhalb-Quadratsumme
+========================================
+```{r}
+# residual variance (error)
+ss_inn <- sum((Lex_Dec[Aphasie=="A"] - mean (Lex_Dec[Aphasie=="A"]))^2) + sum((Lex_Dec[Aphasie=="B"] - mean (Lex_Dec[Aphasie=="B"]))^2) + sum((Lex_Dec[Aphasie=="C"] - mean (Lex_Dec[Aphasie=="C"]))^2) + sum((Lex_Dec[Aphasie=="W"] - mean (Lex_Dec[Aphasie=="W"]))^2)
+ss_inn
+```
+
+
+Prüfgröße F
+=============
+- <small> für den Signifikanztest benötigen wird die Prüfgröße $F$, deren Verteilung durch die Zählerfreiheitsgrade($p-1$) und Nennerfreiheitsgrade ($n-p$) beschrieben wird:
+
+$$F = \frac{MSS_\text{zw}}{MSS_\text{inn}} $$
+
+- Logik: Nullhypothese sagt, dass die Bedingungsmittelwerte in den $p$ verschiedenen Populationen gleich sind, dann schätzen beide MSS das gleiche: die zufällig zustande kommende Fehlervariation
+- gilt jedoch die Alternativhypothese, dann wird der $F$-Wert umso größer, je größer die Varianz zwischen den Gruppen ist (--> Einfluss der systematischen Manipulation)
+</small>
+
+Prüfgröße F
+=============
+```{r}
+mss_inn <- ss_inn / 28 # Anzahl Datenpunkte - Anzahl Stufen (32 - 4)
+mss_zw<- ss_zw / 3 # Anzahl Stufen - 1 (4 - 1)
+f <- mss_zw / mss_inn
+f
+```
+
+Prüfgröße F
+=============
+```{r}
+1 - pf(f, df1=3,df2=28)
+```
+
+
+Prüfgröße F
+============
+```{r, echo=FALSE,results='asis'}
+print(xtable(aov(Lex_Dec ~ Aphasie,data=aphasiker),display=c("s","d","f","f","f","fg")),type="html")
+```
+
+Schreibweise: F(3, 28) = 46.69, p = 5.05e-11
+
+
+Prüfgröße F
+=============
+```{r, echo=FALSE}
+sumsq <- summary(aov(Lex_Dec ~ Aphasie,data=aphasiker))[[1]]$`Sum Sq`
+sumsq.df <- data.frame(MSS=c("zwischen","innerhalb"),wert=sumsq)
+piechart.theme <- theme(axis.ticks = element_blank(), axis.title=element_blank(),axis.text=element_blank(), panel.background=element_blank())
+pie <- qplot(x=factor(1),y=wert,fill=MSS,stat="identity",geom="bar",width=1,data=sumsq.df) + coord_polar(theta="y", direction = -1) + piechart.theme
+pie
+```
+
+Prüfgröße F
+=============
+- die Prüfgröße stellt einen Quotienten aus zwei Quadratsummen dar, d.h. dass er nur positive Werte annehmen kann (im Falle der Nullhypothese näher er sich dem Wert 1 an)
+- F-Werte können daher zwischen 0 und +unendlich variieren, wir können nur die rechte Seite, also nur einseitig testen
+- Zusammenhang der Prüfgrößen F und t: für den Fall der einfaktoriellen ANOVA mit zwei Faktorstufen gilt: $F = t^2$ (warum?)
+
+Berechnung der Prüfgröße F
+===========================
+
+- Schreibweise: F(Freihatsgrade-Zähler,Freihatsgrade-Nenner) = Wert, p=p-Wert
+
+Cut Clutter
+==============
+```{r}
+detach(aphasiker)
+```
+
+Berechnung in R mit aov
+=======================
+- Mit `aov()` werden die entsprechenden Quadratsummen berechnet
+- Mit `summary()` kann man sich dann die $F$- und $p$-Werte anzeigen lassen
+
+Berechnung in R mit aov
+=======================
+<small>
+```{r}
+aphasiker.aov <- aov(Lex_Dec ~ Aphasie, data=aphasiker)
+aphasiker.aov
+```
+</small>
+
+Berechnung in R mit aov
+=======================
+<small>
+```{r}
+summary(aphasiker.aov)
+```
+</small>
+
+
+Logik der SS-Zerlegung
+========================
+left: 70
+- Die totale QS (Gesamtvarianz) wird zerlegt in zwei Bestandteile
+- ist die QS-zwischen (erklärt durch unseren Faktor) ausreichend größer als die QS-innerhalb (Fehler), kann die Nullhypothese (kein Gruppenunterschied) zurückgewiesen werden
+
+***
+```{r, echo=FALSE}
+pie
+```
+
+ANOVA und t-Test
+====================
+<small>
+```{r}
+aphasiker.bw <- subset(aphasiker,Aphasie %in% c("B","W"))
+t.test(Lex_Dec ~ Aphasie,data=aphasiker.bw,var.equal=TRUE)
+```
+</small>
+
+ANOVA und t-Test
+====================
+<small>
+```{r}
+summary(aov(Lex_Dec ~ Aphasie,data=aphasiker.bw))
+```
+</small>
+
+ANOVA und t-Test
+====================
+```{r}
+(-7.784)**2
+```
+
+Voraussetzungen
+================
+- Teilstichproben müssen unabhängig sein
+- abhängige Variable muss mindestens intervallskaliert sein
+- für Stichproben $n < 30$ muss die abhängige Variable in ihrer Population normalverteilt sein
+- die Varianzen innerhalb aller Populationen müssen homogen sein, bei größeren Stichproben ist der Test auch bei Verletzung dieses Kriteriums robust
+
+Interpretation der Ergebnisse
+===============================
+- wir haben in unserem Beispiel also einen $F$-Wert gefunden, der extremer ist als der entsprechende kritische $F$-Wert in der Verteilung
+- dieser Wert sagt uns allerdings nur, dass sich mindestens zwei der drei Gruppen in ihren Mittelwerten signifikant unterscheiden, jedoch nicht, wie genau diese Unterschiede aussehen
+
+Interpretation der Ergebnisse
+==============================
+- dazu werden post-hoc Tests durchgeführt, die gezielte Paarvergleiche anstellen
+- hierbei ist jedoch das Problem der $\alpha$-Fehler-Kumulierung (oder -Inflation) zu berücksichtigen: je mehr Paarvergleiche (und damit Hypothesen) berechnet werden, desto größer ist die Chance die $H_0$ fälschlicherweise zu verwerfen
+- es gibt hierfür entsprechende Korrekturen, die die post-hoc Tests "konservativer" machen
+
+Mehrfaktorielle ANOVA
+=======================
+- wir haben uns nur den einfachsten Fall, eine einfaktorielle ANOVA ohne Messwiederholung, angeschaut
+- wird in der Varianzanalyse der Einfluss von mehr als einem Faktor auf die abhängige Variable getestet, dann erhält man nicht nur **Haupteffekte** der einzelnen Faktoren, sondern auch **Interaktionen** zwischen den Faktoren
+- würden wir in unserem Beispiel den Faktor "Geschlecht der Versuchsperson" hinzufügen, dann wäre es denkbar, dass wir unterschiedlichen Mittelwerte für das Nachahmungsverhalten in Abhängigkeit vom Geschlecht fänden
+
+Hausaufgabe
+===========
+Bis morgen:
+- sollten Sie den Stoff von heute einigermaßen verstehen, denn morgen machen wir eine direkte Erweiterung davon!
+
+Bibliography
+=============
+```{r, echo=FALSE,results='hide'}
+```
+<span style="font-size: 10%;">
+```{r,results='asis',echo=FALSE}
+bibliography(style="markdown",bulleted=FALSE)
+```
+</span>
