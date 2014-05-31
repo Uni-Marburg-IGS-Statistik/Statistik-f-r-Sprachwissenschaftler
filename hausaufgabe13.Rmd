@@ -89,6 +89,7 @@ print(xtable(priming.by.subject.wide2),type="html",include.rownames=FALSE)
 ```
 
 Welches Format macht am meisten Sinn?
+das lange Format ist am übersichtlichsten
 
 Natürlich müssen wir auch die Daten grafisch darstellen:
 ```{r}
@@ -99,21 +100,30 @@ ggplot(data=priming.by.subject) + geom_boxplot(aes(x=cond,y=RT,color=cond,fill=c
 ```
 
 Sind alle Plots gleich gut?
+bei der "density" darstellung sieht man am besten, wo die jeweiligen Höhepunkte sind, also in welcher Bedingung welche Reaktionszeit am häufigsten ist. Bei den mittleren Häufigkeiten wird es aber durch die Mischung der Farben sehr unübersichtlich.
+Bei den Punkten in der jitter Darstellung erkennt man den Trend praktisch gar nicht. Man kann aber sehen wie die eintzelnen Versuchspersonen abgeschnitten haben.
+In der Violin Dartstellung ist die Verteilung in den einzelnen Bedingungen sehr gut sichtbar. Man kann die Trends auch gut miteinander vergleichen. wenn man sich nicht sicher ist, ob zum Beispiel bei 550 ms mehr Versuchspersonen von Bedingung DD oder ED sind, kann man dies in der Density Darstellung nochmal nachprüfen und sieht dann, dass es gleich viele sind.
+Die Boxplot Darstellung zeigt als einzige Darstellung den Median an . dadurh sieht man ob die Verteilung links - oder rechtsschief ist. Außerdem sieht man durch die Box, wo die mittleren 50% der Daten liegen (IQR). Liegen Daten außerhalb des IQR, werden sie durch den Whisker (Linie außerhalb der Box) angezeigt. Die darf in einer Version der Boxplots nicht länger sein als 
+IQR*1,5. Die werte die außerhalb liegen, sind als Punkte dargestellt (meist Ausreißer). Damit zeigt die Boxplot Darstellung die meisten statistisch relevanten Informationen. Die eigentliche Verteilung der Rohwerte innerhalb der Bedingungen sieht man aber in der "violin"" Darstellung am besten.
 
 ### By Item
 Bei "Item" berechnen wir die Mittelwerte aller Trials innerhalb eines Items, d.h. wir nehmen den itemweise Mittelwert über Versuchpersonen hinweg. Dafür können wir `aggregate()` nutzen.
 
 ```{r}
-# priming.by.item <- CODE_HIER
+priming.by.item <- aggregate(RT ~ cond * item,data=priming,FUN = mean)
 ```
 
 Wir wollen auch hier die Daten tabellerisch darstellen. Erstellen Sie eine Tabelle in Wide-Format für die Mittelwerte by Item.
 
-CODE_BLOCK_HIER
+```{r, results='asis'}
+priming.by.item.wide1 <- dcast(priming.by.item,item ~ cond, value.var="RT")
+print(xtable(priming.by.item.wide1),type="html",include.rownames=FALSE)
+```
 
 Und *eine* passende Grafik für die Daten by Item sollten wir auch generieren:
-
-CODE_BLOCK_HIER
+```{r}
+ggplot(data=priming.by.item) + geom_boxplot(aes(x=cond,y=RT,color=cond,fill=cond),alpha=0.5)
+```
 
 Sehen die Daten by Subject und by Item gleich aus? Wie sehen sie im Vergleich zu den Single-Trial-Daten aus?
 
