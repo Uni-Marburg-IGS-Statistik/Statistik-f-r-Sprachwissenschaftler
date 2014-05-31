@@ -101,10 +101,10 @@ ggplot(data=priming.by.subject) + geom_boxplot(aes(x=cond,y=RT,color=cond,fill=c
 
 Sind alle Plots gleich gut?
 bei der "density" darstellung sieht man am besten, wo die jeweiligen Höhepunkte sind, also in welcher Bedingung welche Reaktionszeit am häufigsten ist. Bei den mittleren Häufigkeiten wird es aber durch die Mischung der Farben sehr unübersichtlich.
-Bei den Punkten in der jitter Darstellung erkennt man den Trend praktisch gar nicht. Man kann aber sehen wie die eintzelnen Versuchspersonen abgeschnitten haben.
+Bei den Punkten in der jitter Darstellung erkennt man den Trend praktisch gar nicht. Außerdem werden die einzelnen Datenpunkte durch Rauschen verzerrt. Ich frage mich hier, ih welche Richtung die Verzerrung geht (ms oder Dichte) und auch ob die Verteilung der Punkte nach links und rechts zufällig ist oder nicht. 
 In der Violin Dartstellung ist die Verteilung in den einzelnen Bedingungen sehr gut sichtbar. Man kann die Trends auch gut miteinander vergleichen. wenn man sich nicht sicher ist, ob zum Beispiel bei 550 ms mehr Versuchspersonen von Bedingung DD oder ED sind, kann man dies in der Density Darstellung nochmal nachprüfen und sieht dann, dass es gleich viele sind.
 Die Boxplot Darstellung zeigt als einzige Darstellung den Median an . dadurh sieht man ob die Verteilung links - oder rechtsschief ist. Außerdem sieht man durch die Box, wo die mittleren 50% der Daten liegen (IQR). Liegen Daten außerhalb des IQR, werden sie durch den Whisker (Linie außerhalb der Box) angezeigt. Die darf in einer Version der Boxplots nicht länger sein als 
-IQR*1,5. Die werte die außerhalb liegen, sind als Punkte dargestellt (meist Ausreißer). Damit zeigt die Boxplot Darstellung die meisten statistisch relevanten Informationen. Die eigentliche Verteilung der Rohwerte innerhalb der Bedingungen sieht man aber in der "violin"" Darstellung am besten.
+IQR*1,5. Die werte die außerhalb liegen, sind als Punkte dargestellt (meist Ausreißer). Damit zeigt die Boxplot Darstellung die meisten statistisch relevanten Informationen. Mann kann hier auch die Trends in den einzelnen Bedingungen auf einen Blick vergleichen, wie in der Violin Darstellung. Die eigentliche Verteilung der Rohwerte innerhalb der Bedingungen sieht man aber in der "violin"" Darstellung am besten.
 
 ### By Item
 Bei "Item" berechnen wir die Mittelwerte aller Trials innerhalb eines Items, d.h. wir nehmen den itemweise Mittelwert über Versuchpersonen hinweg. Dafür können wir `aggregate()` nutzen.
@@ -127,7 +127,10 @@ ggplot(data=priming.by.item) + geom_boxplot(aes(x=cond,y=RT,color=cond,fill=cond
 
 Sehen die Daten by Subject und by Item gleich aus? Wie sehen sie im Vergleich zu den Single-Trial-Daten aus?
 
-# Subject- und Item-Analysen
+In allen Bedingungen ist der IQR in der Item-Verteilung kleiner, wobei der Median sehr ähnlich ist (bei DD etwas niedriger) Dementsprechend sind auch die Whiskers kürzer, und trotzdem gibt es nicht mehr Ausreißer. Die Verteilungen bei den Items haben also eine geringere Streung als bei den Versuchspersonen, liegen aber in sehr ähnlichen Bereichen. Items sind hier also bessere Prädiktoren als Vpn.
+
+
+# Subject- und Item-Analysen.
 
 ## Subject-Analyse
 ```{r}
@@ -173,7 +176,17 @@ ggplot(data=priming) + geom_density(aes(x=RT,color=cond,fill=cond),alpha=0.1) + 
 ```
 Führen Sie die entsprechende Item-Analyse aus.
 
-CODE_BLOCK_HIER
+
+```{r}
+priming.f1 <- ezANOVA(priming
+                      , dv=.(RT)
+                      , wid=.(item)
+                      , within=.(prime,target)
+                      , detailed=TRUE
+                      )
+```
+
+
 
 # Interaktionen 
 In der Analyse by Subjects haben wir eine Interaktion zwsichen `prime` und `target`. Solche Interaktionen berichtet man in der Regel nur, wenn sie auch in der Auflösung zu finden ist. Hier heißt das, dass wir die Daten innerhalb der verschiedenen Stufen eines Faktors anschauen und weitere ANOVAs berechnen, um zu schauen, ob der verbleibende Faktor (oder die verbleibenden Faktoren bei mehrfaktoriellen ANOVA) noch signifikant wird. Wenn er in keiner Stufe des anderen Faktors signifikant wird, betrachten wir die Interaktion als nicht bedeutsam.
@@ -217,9 +230,21 @@ print(xtable(priming.f1.englisch.target$ANOVA
 
 # Deutsches Target
 Führen Sie die entsprechende Analyse für deutsches Target aus.
+```{r, results='asis'}
+priming.f1.german.target <- ezANOVA(subset(priming, target == "D")
+                                      , dv=.(RT)
+                                      , wid=.(subj)
+                                      , within=.(prime)
+                                      , detailed=TRUE
+                                      )
+print(xtable(priming.f1.german.target$ANOVA
+             , display=c("s","s","d","d","f","f","f","fg","s","g")
+             , digits=c(0,0,0,0,2,2,2,2,0,2))
+      ,type="html",include.rownames=FALSE)
 
-CODE_BLOCK_HIER
+```
+
 
 
 # Lizenz
-Dieses Werk ist lizenziert unter einer CC-BY-NC-SA Lizenz.
+Dieses Werk darf nur zu Prüfungszwecken dienen.
