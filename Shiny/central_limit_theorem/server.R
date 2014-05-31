@@ -15,15 +15,18 @@ shinyServer(function(input, output) {
     n <- input$n
     random.vars.reuse <- input$reuse
     points <- input$points
-    random.distribution <-  function() rnorm(points,mean=sample(-8:8/2,1),sd=sample(1:9/3,1))
+    random.distribution <-  function() runif(points,min=-4,max=4)
     
     if(random.vars.reuse == "repeat"){
       r <- random.distribution()
-      print(r)
+      cartesian.product <- eval(parse(text=paste("expand.grid(",paste(rep("r",n), collapse=", "),")")))
+      average.distribution <- apply(cartesian.product,1,sum) / n
       plots <- list(
         random=qplot(r,geom="density") + theme(axis.title.x = element_blank())
-        ,central=qplot(rep(r,n),geom="density") + theme(axis.title.x = element_blank())
-        )
+        ,central=qplot(average.distribution,geom="density") + 
+            theme(axis.title.x = element_blank()) + 
+            scale_x_continuous(limits=c(-4,4))
+      )
     }else{
       df.call <- "data.frame("
       for(i in 1:n){
