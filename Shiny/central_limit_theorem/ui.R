@@ -2,7 +2,7 @@ library(shiny)
 
 # Define UI for application that draws a histogram
 shinyUI(fluidPage(
-  titlePanel("Central Limit Theoremr"),
+  titlePanel("Central Limit Theorem"),
   
   sidebarLayout(
     sidebarPanel(h2("Simulation Parameters")
