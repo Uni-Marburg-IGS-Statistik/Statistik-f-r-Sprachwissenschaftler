@@ -100,6 +100,11 @@ ggplot(data=priming.by.subject) + geom_boxplot(aes(x=cond,y=RT,color=cond,fill=c
 
 Sind alle Plots gleich gut?
 
+- Density-Darstellung: Höhepunkte lassen sich sehr gut ablesen (welche Bedinung, welche Reaktionszeit am häufigsten), allerings sehr unübersichtlich bei Darstellung der mittl. Häufigkeit
+- Jitter-Darstellung: Trend lässt sich nicht erkennen, einzelne Punkte werden durch Rauschen verzerrt
+- Violin-Darstellung: Verteilung bei den jew. Bedinungen sehr gut ablesbar und vergleichbar
+- Boxplot-Darstellung: nur hier wird Median angezeigt!, IQR sichtbar, Whiskers, Ausreißer (=statistisch relevanten Daten sind hier am besten ablesbar (exkl. Rohwerte, die sind in Violin-Darstellung am besten ablesbar))
+
 ### By Item
 Bei "Item" berechnen wir die Mittelwerte aller Trials innerhalb eines Items, d.h. wir nehmen den itemweise Mittelwert über Versuchpersonen hinweg. Dafür können wir `aggregate()` nutzen.
 
@@ -122,6 +127,8 @@ ggplot(data=priming.by.item) + geom_density(aes(x=RT,color=cond,fill=cond),alpha
 
 
 Sehen die Daten by Subject und by Item gleich aus? Wie sehen sie im Vergleich zu den Single-Trial-Daten aus?
+
+IQR in der Item-Verteilung ist in allen Bedinungen kleiner (Median sehr änlich). Demzufolge sind die Whiskers kürzer (gibt dennoch nicht mehr Ausreißer). Die Daten by Item zeigen, dass eine geringere Streuung als bei den Versuchspersonen vorliegt (aber in ähnlichen Bereichen). Daraus lässt sich schließen, dass in diesem Fall Items die besseren Prädikatoren als Vpn sind. 
 
 # Subject- und Item-Analysen
 
@@ -171,7 +178,7 @@ Führen Sie die entsprechende Item-Analyse aus.
 
 ```{r}
 priming.f2 <- ezANOVA(priming
-            , dv=.(RT)
+                      , dv=.(RT)
                       , wid=.(item)
                       , within=.(prime,target)
                       , detailed=TRUE
