@@ -19,29 +19,30 @@ library(shiny)
 
 shinyUI(fluidPage(titlePanel("From the binomial distribution to the Gaussian"),
     
-    sidebarLayout(sidebarPanel(h2("Simulation Parameters")
+    sidebarLayout(sidebarPanel(h3("Simulation Parameters")
         ,sliderInput("n"
             ,"Number of dice / coins"
-            ,min = 2
-            ,max = 100
-            ,value = 2
-            ,round=TRUE)
+            ,min = 1
+            ,max = 5
+            ,value = 2)
         ,selectInput("sides"
             ,"Number of sides pro die / coin"
-            ,c(2,4,6,8,20)
+            ,c(2,4,6,8,10,12,20)
             ,selectize=FALSE)
         ,sliderInput("throws"
             ,"Number of throws per coin / die"
             ,min = 1
             ,max = 10000
-            ,value = 100
-            ,round=TRUE)
+            ,value = 100)
         ,radioButtons("type"
             ,"Simulate"
             ,choices=c("Exact solution"="exact","Simulate"="simulate"))
-        ,actionButton("runagain",label = "Run Again"))
+        ,actionButton("runagain",label = "Run Again")
+        )
     ,mainPanel(h2("Individual Dice / Coins")
         ,plotOutput("individual")
         ,h2("Cumulative Distribution")
-        ,plotOutput("cumulative"))
-)))
+        ,plotOutput("cumulative")
+        )
+      )
+))

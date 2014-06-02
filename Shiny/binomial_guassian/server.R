@@ -19,11 +19,9 @@ library(shiny)
 library(ggplot2)
 
 shinyServer(function(input, output) {
-
     runExact <- reactive({
-        print("new exact")
         n <- input$n
-        s <- input$sides
+        s <- as.numeric(input$sides)
         
         r <- 1:s
         cartesian.product <- eval(parse(text=paste("expand.grid(",paste(rep("r",n), collapse=", "),")")))
@@ -37,7 +35,6 @@ shinyServer(function(input, output) {
     })
     
     runSimulation <- reactive({
-        print("new simulation")
         input$runagain
         n <- input$n
         s <- input$sides
@@ -60,7 +57,6 @@ shinyServer(function(input, output) {
     })
   
     output$individual <- renderPlot({
-        print("hello world")
         if(input$type == "simulate"){
             plots <- runSimulation()
         }else if(input$type == "exact"){
