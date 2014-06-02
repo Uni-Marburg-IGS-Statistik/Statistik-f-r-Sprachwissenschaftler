@@ -1,12 +1,36 @@
+# Copyright 2014, Phillip Alday
+#
+# This file is part of Binomial to Gaussian.
+#
+# Binomial to Gaussian is free software: you can redistribute it and/or modify
+# it under the terms of the GNU Affero General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU Affero General Public License for more details.
+#
+# You should have received a copy of the GNU Affero General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 library(shiny)
 library(ggplot2)
 
 shinyServer(function(input, output) {
-
+    output$num.dice <- renderUI({
+      s <- as.numeric(input$sides)
+      sliderInput("n"
+        ,"Number of dice / coins"
+        ,min = 1
+        ,max = max(2, round(30 / s))
+        ,value = 2)
+    })
+  
     runExact <- reactive({
-        print("new exact")
         n <- input$n
-        s <- input$sides
+        s <- as.numeric(input$sides)
         
         r <- 1:s
         cartesian.product <- eval(parse(text=paste("expand.grid(",paste(rep("r",n), collapse=", "),")")))
@@ -20,7 +44,6 @@ shinyServer(function(input, output) {
     })
     
     runSimulation <- reactive({
-        print("new simulation")
         input$runagain
         n <- input$n
         s <- input$sides
@@ -43,7 +66,6 @@ shinyServer(function(input, output) {
     })
   
     output$individual <- renderPlot({
-        print("hello world")
         if(input$type == "simulate"){
             plots <- runSimulation()
         }else if(input$type == "exact"){
