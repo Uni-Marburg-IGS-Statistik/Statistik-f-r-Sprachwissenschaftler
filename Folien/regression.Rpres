@@ -1,0 +1,164 @@
+Statistik für Sprachwissenschaftler
+========================================================
+author: Phillip M . Alday
+date: 2014-06-XX
+autosize: false
+
+```{r setup, include=FALSE}
+library(knitr)
+opts_chunk$set(cache=TRUE,prompt=TRUE)
+library(knitcitations)
+library(ggplot2)
+library(xtable)
+cite_options(tooltip = TRUE
+             , linked = TRUE
+             , numerical = TRUE
+             , bibtex_data = FALSE)
+```
+
+Aufwachen und sich errinnern!
+====================================
+type: section
+
+Bisher
+=======
+- Varianzanalyse
+- ANOVA 
+
+Heute
+========
+- General Linear Model (GLM)
+- lineare Regression
+
+Datensatz für heute: Fremdsprachen
+===============================================
+```{r, eval=FALSE}
+fremdsprachen <- read.table("Data/fremdsprachen.tab",header = T)
+fremdsprachen$subj <- as.factor(fremdsprachen)
+```
+```{r, echo=FALSE}
+# the path in the previous block isn't correct, so run this one
+aphasiker <- read.csv2(normalizePath("../Data/aphasiker.csv"),header = T)
+aphasiker <- na.omit(aphasiker)
+fremdsprachen <- read.table(normalizePath("../Data/fremdsprachen.tab"),header = T)
+```
+
+Datensatz für heute: Fremdsprachen
+================================
+<small>
+```{r, echo=FALSE}
+head(fremdsprachen,n=1)
+```
+</small>
+
+Erinnerung: Eine andere Perspektive
+====================================
+- Gruppe als unabhängige Variable
+- Mittelwert als eine Funkion der Gruppe + Fehler
+
+- $$\text{Welt} = (\text{model}) + \text{Fehler}$$  
+
+- $$\text{Y} = F(X) + \epsilon{} $$  
+
+- $$\text{Y} = \beta{}X + \epsilon{} $$  
+
+Erinnerung: Eine andere Perspektive
+====================================
+```{r, echo=FALSE}
+m <- mean(aphasiker[aphasiker$Aphasie == "W","Lex_Dec"]) - mean(aphasiker[aphasiker$Aphasie == "B","Lex_Dec"])
+b <- mean(aphasiker[aphasiker$Aphasie == "B","Lex_Dec"]) - m
+ggplot(subset(aphasiker, Aphasie %in% c("B","W"))) + geom_point(aes(x=Aphasie,y=Lex_Dec)) + geom_abline(slope=m, intercept=b, color="red")
+```
+
+Erinnerung: Eine andere Perspektive
+====================================
+```{r, echo=FALSE}
+ggplot(aphasiker,aes(x=Aphasie,y=Lex_Dec)) + geom_point(aes(color=Aphasie)) + geom_smooth(aes(x=as.numeric(Aphasie),y=Lex_Dec),method="lm", se=FALSE,color="red")
+```
+
+Erinnerung: Eine andere Perspektive
+====================================
+```{r, echo=FALSE}
+aphasiker$Aphasie <- factor(as.character(aphasiker$Aphasie), levels=c("C","A","B","W"))
+ggplot(aphasiker,aes(x=Aphasie,y=Lex_Dec)) + geom_point(aes(color=Aphasie)) + geom_smooth(aes(x=as.numeric(Aphasie),y=Lex_Dec),method="lm", se=FALSE,color="red")
+```
+
+Können wir das auch mit numerischen unabhängigen Variablen machen?
+=========================================================================
+type: prompt
+
+lineare Regression
+====================
+type: section
+
+Fremdsprachen: kompakt
+=========================
+<small>
+```{r}
+fs <- fremdsprachen[,c("subj","num.languages","average","duration","highest.level")]
+head(fs,n=4)
+```
+</small>
+
+Anzahl Fremdsprachen
+======================
+```{r}
+plot(average  ~ num.languages, data=fs)
+```
+
+Anzahl Fremdsprachen
+======================
+```{r}
+qplot(y=average,x=num.languages, data=fs)
+```
+
+Anzahl Fremdsprachen
+======================
+```{r}
+qplot(y=average,x=num.languages, data=fs) + geom_smooth()
+```
+
+Anzahl Fremdsprachen
+======================
+```{r}
+qplot(y=average,x=num.languages, data=fs) + geom_smooth(method="lm")
+```
+
+
+Höchstes Niveau
+======================
+```{r}
+qplot(y=average,x=highest.level, data=fs) + geom_smooth()
+```
+
+Höchstes Niveau
+======================
+```{r}
+qplot(y=average,x=highest.level, data=fs) + geom_smooth(method="lm")
+```
+
+
+Höchstes Niveau
+======================
+```{r}
+qplot(y=average,x=highest.level, data=subset(fs,highest.level > 0)) + geom_smooth(method="lm")
+```
+
+
+das GLM
+=========
+type: section
+
+
+Hausaufgabe
+=============
+
+Bibliography
+=============
+```{r, echo=FALSE,results='hide'}
+```
+<span style="font-size: 10%;">
+```{r,results='asis',echo=FALSE}
+bibliography(style="markdown",bulleted=FALSE)
+```
+</span>

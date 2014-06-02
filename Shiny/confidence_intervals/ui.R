@@ -1,4 +1,22 @@
+# Copyright 2014, Phillip Alday
+#
+# This file is part of Confidence Intervals.
+#
+# Confidence Intervals is free software: you can redistribute it and/or modify
+# it under the terms of the GNU Affero General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU Affero General Public License for more details.
+#
+# You should have received a copy of the GNU Affero General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 library(shiny)
+require(markdown)
 
 shinyUI(fluidPage(
   titlePanel("Confidence Intervals"),
@@ -83,6 +101,7 @@ shinyUI(fluidPage(
     ,mainPanel(h2("Sample distributions")
 >>>>>>> c36f07d9f256c9b799dd8239e71bbc1fb7028ae8
                ,plotOutput("sample.distributions",height=768)
+               ,includeMarkdown("confidence_intervals.md")
 
 >>>>>>> 2d35a226033d802734551a5f346bca9d24ad9652
     )
