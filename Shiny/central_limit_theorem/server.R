@@ -1,3 +1,20 @@
+# Copyright 2014, Phillip Alday
+#
+# This file is part of Central Limit Theorem.
+#
+# Central Limit Theorem is free software: you can redistribute it and/or modify
+# it under the terms of the GNU Affero General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU Affero General Public License for more details.
+#
+# You should have received a copy of the GNU Affero General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 library(shiny)
 library(ggplot2)
 library(gridExtra)
@@ -15,15 +32,20 @@ shinyServer(function(input, output) {
     n <- input$n
     random.vars.reuse <- input$reuse
     points <- input$points
-    random.distribution <-  function() rnorm(points,mean=sample(-8:8/2,1),sd=sample(1:9/3,1))
+    random.distribution <-  function() runif(points,min=-4,max=4)
     
     if(random.vars.reuse == "repeat"){
-      r <- random.distribution()
-      print(r)
+      r <- runif(points,min=-4,max=4)
+      #cartesian.product <- eval(parse(text=paste("expand.grid(",paste(rep("r",n), collapse=", "),")")))
+      #average.distribution <- apply(cartesian.product,1,sum) / n
+      #average.distribution <- sapply(1:n,function(x) mean(r))
+
       plots <- list(
         random=qplot(r,geom="density") + theme(axis.title.x = element_blank())
-        ,central=qplot(rep(r,n),geom="density") + theme(axis.title.x = element_blank())
-        )
+        ,central=qplot(average.distribution,geom="density") + 
+            theme(axis.title.x = element_blank()) + 
+            scale_x_continuous(limits=c(-6,6))
+      )
     }else{
       df.call <- "data.frame("
       for(i in 1:n){
