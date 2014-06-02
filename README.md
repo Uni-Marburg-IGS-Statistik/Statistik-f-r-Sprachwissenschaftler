@@ -102,6 +102,11 @@ Die Reihe *Use R!* von Springer ist **kostenlos** über das Uni-Netz elektronisc
 * [Git -- the simple guide](http://rogerdudler.github.io/git-guide/)
 * [Literate programming, version control, reproducible research, collaboration, and all that](http://rpubs.com/bbolker/3153)
 * [Handy statistical lexicon](http://andrewgelman.com/2009/05/24/handy_statistic/)
+
+# ShinyApps
+* [Optional Stopping](https://palday.shinyapps.io/optional_stopping/)
+* [Confidence Intervals](https://palday.shinyapps.io/confidence_intervals/)
+* [From the Binomial to the Normal Distribution](https://palday.shinyapps.io/binomial_gaussian/) (Ein Beispiel für den Zentralen Grenzwertsatz)
     
 # Kommentare zu p-Werten, NHST, und der üblichen statistischen Praxis
 * John Myles White
