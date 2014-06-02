@@ -18,14 +18,16 @@ shinyServer(function(input, output) {
     random.distribution <-  function() runif(points,min=-4,max=4)
     
     if(random.vars.reuse == "repeat"){
-      r <- random.distribution()
-      cartesian.product <- eval(parse(text=paste("expand.grid(",paste(rep("r",n), collapse=", "),")")))
-      average.distribution <- apply(cartesian.product,1,sum) / n
+      r <- runif(points,min=-4,max=4)
+      #cartesian.product <- eval(parse(text=paste("expand.grid(",paste(rep("r",n), collapse=", "),")")))
+      #average.distribution <- apply(cartesian.product,1,sum) / n
+      #average.distribution <- sapply(1:n,function(x) mean(r))
+
       plots <- list(
         random=qplot(r,geom="density") + theme(axis.title.x = element_blank())
         ,central=qplot(average.distribution,geom="density") + 
             theme(axis.title.x = element_blank()) + 
-            scale_x_continuous(limits=c(-4,4))
+            scale_x_continuous(limits=c(-6,6))
       )
     }else{
       df.call <- "data.frame("
