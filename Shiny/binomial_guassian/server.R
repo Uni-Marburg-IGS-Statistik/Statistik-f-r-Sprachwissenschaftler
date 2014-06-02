@@ -24,7 +24,7 @@ shinyServer(function(input, output) {
       sliderInput("n"
         ,"Number of dice / coins"
         ,min = 1
-        ,max = max(2, round(20 / s))
+        ,max = max(2, round(30 / s))
         ,value = 2)
     })
   

@@ -25,14 +25,16 @@ shinyUI(fluidPage(titlePanel("From the binomial distribution to the Gaussian"),
             ,c(2,4,6,8,10,12,20)
             ,selectize=FALSE)
         ,uiOutput("num.dice")
-        ,sliderInput("throws"
-            ,"Number of throws per coin / die"
-            ,min = 1
-            ,max = 10000
-            ,value = 100)
         ,radioButtons("type"
             ,"Simulate"
             ,choices=c("Exact solution"="exact","Simulate"="simulate"))
+        ,conditionalPanel("input.type == 'simulate'"
+            ,sliderInput("throws"
+               ,"Number of throws per coin / die"
+               ,min = 1
+               ,max = 10000
+               ,value = 100)
+        )
         ,actionButton("runagain",label = "Run Again")
         )
     ,mainPanel(h2("Individual Dice / Coins")
