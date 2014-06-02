@@ -65,6 +65,7 @@ shinyUI(fluidPage(
     )
     ,mainPanel(h2("Sample distributions")
                ,plotOutput("sample.distributions",height=768)
+               ,includeMarkdown("confidence_intervals.md")
 
     )
   )
