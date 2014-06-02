@@ -19,6 +19,15 @@ library(shiny)
 library(ggplot2)
 
 shinyServer(function(input, output) {
+    output$num.dice <- renderUI({
+      s <- as.numeric(input$sides)
+      sliderInput("n"
+        ,"Number of dice / coins"
+        ,min = 1
+        ,max = max(2, round(20 / s))
+        ,value = 2)
+    })
+  
     runExact <- reactive({
         n <- input$n
         s <- as.numeric(input$sides)

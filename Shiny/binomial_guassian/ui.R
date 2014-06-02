@@ -20,15 +20,11 @@ library(shiny)
 shinyUI(fluidPage(titlePanel("From the binomial distribution to the Gaussian"),
     
     sidebarLayout(sidebarPanel(h3("Simulation Parameters")
-        ,sliderInput("n"
-            ,"Number of dice / coins"
-            ,min = 1
-            ,max = 5
-            ,value = 2)
-        ,selectInput("sides"
+         ,selectInput("sides"
             ,"Number of sides pro die / coin"
             ,c(2,4,6,8,10,12,20)
             ,selectize=FALSE)
+        ,uiOutput("num.dice")
         ,sliderInput("throws"
             ,"Number of throws per coin / die"
             ,min = 1
