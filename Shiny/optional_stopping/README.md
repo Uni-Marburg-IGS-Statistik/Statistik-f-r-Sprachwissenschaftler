@@ -1,0 +1,1 @@
+Many basic statistical concepts -- especially in the frequentist framework -- are contraintuitive at first. Similarly, many statistical sins seem like a good idea at the time but ultimately lead to bias (often due to the contraintuitive subtleties.) In this series, I try to make the subtle obvious via visualization and simulation. 
