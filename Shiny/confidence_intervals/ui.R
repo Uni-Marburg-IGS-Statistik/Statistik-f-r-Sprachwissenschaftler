@@ -16,6 +16,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 library(shiny)
+require(markdown)
 
 shinyUI(fluidPage(
   titlePanel("Confidence Intervals"),
