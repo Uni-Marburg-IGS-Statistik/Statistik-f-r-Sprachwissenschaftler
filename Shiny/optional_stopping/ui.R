@@ -22,13 +22,13 @@ shinyUI(fluidPage(
   titlePanel("Optional Stopping"),
   
   sidebarLayout(
-    sidebarPanel(h2("Simulation Paramters")
+    sidebarPanel(h3("Simulation Paramters")
                  ,  sliderInput("alphaValue"
                                 ,"Significance Threshold"
                                 ,min = 0.001
                                 ,max = 0.1
                                 ,value = 0.05)
-                , h3("Advanced Settings")
+                , h5("Advanced Settings")
                 , numericInput("n"
                                 ,"Initial Observations"
                                 ,min = 2
@@ -42,7 +42,7 @@ shinyUI(fluidPage(
 
                 , actionButton("runagain",label = "Run Again")
      )
-    ,mainPanel(h1("p-Values after every additional sample of two groups")
+    ,mainPanel(h2("p-Values after every additional sample of two groups")
                ,plotOutput("pvalues")
                ,uiOutput("count")
                ,includeMarkdown("optional_stopping.md")

@@ -32,7 +32,7 @@ shinyServer(function(input, output) {
   })
   output$count <- renderUI({
         sim <- runSimulation()
-        p <- tail(sim$pvals$p,n=1)
+        p <- signif(tail(sim$pvals$p,n=1),3)
         if(p < input$alphaValue)
           paste0("On sample number ",sim$count,", you reached a p-value of ",p, "!")
         else
