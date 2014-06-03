@@ -33,6 +33,8 @@ Heute
 Datensatz für heute: Fremdsprachen
 ===============================================
 ```{r, eval=FALSE}
+aphasiker <- read.csv2("Data/aphasiker.csv",header = T)
+aphasiker <- na.omit(aphasiker)
 fremdsprachen <- read.table("Data/fremdsprachen.tab",header = T)
 fremdsprachen$subj <- as.factor(fremdsprachen)
 ```
@@ -42,6 +44,14 @@ aphasiker <- read.csv2(normalizePath("../Data/aphasiker.csv"),header = T)
 aphasiker <- na.omit(aphasiker)
 fremdsprachen <- read.table(normalizePath("../Data/fremdsprachen.tab"),header = T)
 ```
+```{r, eval=FALSE}
+kurs <- read.table("Data/body_dim_long.tab",header = T)
+```
+```{r, echo=FALSE}
+# the path in the previous block isn't correct, so run this one
+kurs <- read.table(normalizePath("../Data/body_dim_long.tab"),header = T)
+```
+
 
 Datensatz für heute: Fremdsprachen
 ================================
