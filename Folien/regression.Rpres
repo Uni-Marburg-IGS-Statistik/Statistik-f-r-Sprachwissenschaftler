@@ -33,23 +33,36 @@ Heute
 Datensatz für heute: Fremdsprachen
 ===============================================
 ```{r, eval=FALSE}
-
+aphasiker <- read.csv2("Data/aphasiker.csv",header = T)
+aphasiker <- na.omit(aphasiker)
+fremdsprachen <- read.table("Data/fremdsprachen.tab",header = T)
+fremdsprachen$subj <- as.factor(fremdsprachen)
 ```
 ```{r, echo=FALSE}
 # the path in the previous block isn't correct, so run this one
 aphasiker <- read.csv2(normalizePath("../Data/aphasiker.csv"),header = T)
 aphasiker <- na.omit(aphasiker)
+fremdsprachen <- read.table(normalizePath("../Data/fremdsprachen.tab"),header = T)
 ```
+```{r, eval=FALSE}
+kurs <- read.table("Data/body_dim_long.tab",header = T)
+```
+```{r, echo=FALSE}
+# the path in the previous block isn't correct, so run this one
+kurs <- read.table(normalizePath("../Data/body_dim_long.tab"),header = T)
+```
+
 
 Datensatz für heute: Fremdsprachen
 ================================
+<small>
 ```{r, echo=FALSE}
+head(fremdsprachen,n=1)
 ```
+</small>
 
-
-Eine andere Perspektive
-=========================
-incremental: true
+Erinnerung: Eine andere Perspektive
+====================================
 - Gruppe als unabhängige Variable
 - Mittelwert als eine Funkion der Gruppe + Fehler
 
@@ -59,45 +72,93 @@ incremental: true
 
 - $$\text{Y} = \beta{}X + \epsilon{} $$  
 
-Eine andere Perspektive
-=========================
+Erinnerung: Eine andere Perspektive
+====================================
 ```{r, echo=FALSE}
 m <- mean(aphasiker[aphasiker$Aphasie == "W","Lex_Dec"]) - mean(aphasiker[aphasiker$Aphasie == "B","Lex_Dec"])
 b <- mean(aphasiker[aphasiker$Aphasie == "B","Lex_Dec"]) - m
 ggplot(subset(aphasiker, Aphasie %in% c("B","W"))) + geom_point(aes(x=Aphasie,y=Lex_Dec)) + geom_abline(slope=m, intercept=b, color="red")
 ```
 
-Eine andere Perspektive
-=========================
+Erinnerung: Eine andere Perspektive
+====================================
 ```{r, echo=FALSE}
 ggplot(aphasiker,aes(x=Aphasie,y=Lex_Dec)) + geom_point(aes(color=Aphasie)) + geom_smooth(aes(x=as.numeric(Aphasie),y=Lex_Dec),method="lm", se=FALSE,color="red")
 ```
 
-Eine andere Perspektive
-=========================
+Erinnerung: Eine andere Perspektive
+====================================
 ```{r, echo=FALSE}
 aphasiker$Aphasie <- factor(as.character(aphasiker$Aphasie), levels=c("C","A","B","W"))
 ggplot(aphasiker,aes(x=Aphasie,y=Lex_Dec)) + geom_point(aes(color=Aphasie)) + geom_smooth(aes(x=as.numeric(Aphasie),y=Lex_Dec),method="lm", se=FALSE,color="red")
 ```
 
-Eine andere Perspektive
-=========================
-incremental:true
-- Ist die Auswirkung vom Model größer als die vom Fehler?
-- Erklärt das Model oder der Fehler mehr Varianz?
-- Erklären Intergruppen-Unterschiede mehr als Intragruppen-Unterschiede?
+Können wir das auch mit numerischen unabhängigen Variablen machen?
+=========================================================================
+type: prompt
 
-- Abhängige Variable: Reaktionszeit
-- Unabhängige Variable: Gruppe
-- zur Erinnerung: nominalskalierte unabhangige Variablen heißen auch Faktor, ihre Ausprägungen auch Faktorstufen
+lineare Regression
+====================
+type: section
+
+Fremdsprachen: kompakt
+=========================
+<small>
+```{r}
+fs <- fremdsprachen[,c("subj","num.languages","average","duration","highest.level")]
+head(fs,n=4)
+```
+</small>
+
+Anzahl Fremdsprachen
+======================
+```{r}
+plot(average  ~ num.languages, data=fs)
+```
+
+Anzahl Fremdsprachen
+======================
+```{r}
+qplot(y=average,x=num.languages, data=fs)
+```
+
+Anzahl Fremdsprachen
+======================
+```{r}
+qplot(y=average,x=num.languages, data=fs) + geom_smooth()
+```
+
+Anzahl Fremdsprachen
+======================
+```{r}
+qplot(y=average,x=num.languages, data=fs) + geom_smooth(method="lm")
+```
+
+
+Höchstes Niveau
+======================
+```{r}
+qplot(y=average,x=highest.level, data=fs) + geom_smooth()
+```
+
+Höchstes Niveau
+======================
+```{r}
+qplot(y=average,x=highest.level, data=fs) + geom_smooth(method="lm")
+```
+
+
+Höchstes Niveau
+======================
+```{r}
+qplot(y=average,x=highest.level, data=subset(fs,highest.level > 0)) + geom_smooth(method="lm")
+```
+
 
 das GLM
 =========
 type: section
 
-lineare Regression
-====================
-type: section
 
 Hausaufgabe
 =============

@@ -60,15 +60,17 @@ Woche | Datum          | Themen
 |     |                | 1. `hausaufgabe13.Rmd`
 08.   | **02.06.2014** | ANOVA III: Auswertung und Interpretation 
 |     | **03.06.2014** | lineare Regression I
+|     |                | *Hausaufgabe bis 10.06.2014 10 Uhr:*
+|     |                | 1. `hausaufgabe15.R`
 09.   | **09.06.2014** | fällt aus! (Pfingstmontag)
-|     | **10.06.2014** | Korrelationen I  
-10.   | **16.06.2014** | Korrelationen II, $\chi^2$, logLikelihood & Likelihood-Ratio 
+|     | **10.06.2014** | lineare Regression II, evtl. Korrelationen  
+10.   | **16.06.2014** | Korrelationen I
 |     | **17.06.2014** | das generalisierte lineare Model (GLM), logit-Regression
 11.   | **23.06.2014** | gemischte Modelle I
 |     | **24.06.2014** | gemischte Modelle II
-12.   | **30.06.2014** | Nicht-parametrische Tests I
-|     | **01.07.2014** | Nicht-parametrische Tests II 
-13.   | **07.07.2014** | Nicht-parametrische Tests III
+12.   | **30.06.2014** | $\chi^2$, logLikelihood & Likelihood-Ratio 
+|     | **01.07.2014** | Nicht-parametrische Tests I 
+13.   | **07.07.2014** | Nicht-parametrische Tests II
 |     | **08.07.2014** | Experimentaldesign
 14.   | **14.07.2014** | Fragestunde / Puffer
 |     | **15.07.2014** | Klausur
@@ -102,6 +104,11 @@ Die Reihe *Use R!* von Springer ist **kostenlos** über das Uni-Netz elektronisc
 * [Git -- the simple guide](http://rogerdudler.github.io/git-guide/)
 * [Literate programming, version control, reproducible research, collaboration, and all that](http://rpubs.com/bbolker/3153)
 * [Handy statistical lexicon](http://andrewgelman.com/2009/05/24/handy_statistic/)
+
+# ShinyApps
+* [Optional Stopping](https://palday.shinyapps.io/optional_stopping/)
+* [Confidence Intervals](https://palday.shinyapps.io/confidence_intervals/)
+* [From the Binomial to the Normal Distribution](https://palday.shinyapps.io/binomial_gaussian/) (Ein Beispiel für den Zentralen Grenzwertsatz)
     
 # Kommentare zu p-Werten, NHST, und der üblichen statistischen Praxis
 * John Myles White
