@@ -1,0 +1,30 @@
+---
+title: "Regression"
+author: "Phillip M Alday"
+date: "Summer 2014"
+output: html_document
+---
+
+multiple regression
+interactions
+more on R^2 (maybe formula?)
+adjusted R^2 as R^2 of the population instead of the sample
+distribution of residuals
+residuals vs influence : outliers and leverage
+hinweis on outliers
+confidence intervals
+
+
+cateogorical predictors and multiple regression
+dummy coding
+
+assumptions 7.7.2.1
+
+pearson correlation, covariance
+effect size
+standardization
+spearman
+
+AIC
+
+reference to methods of regression (7.6.4)

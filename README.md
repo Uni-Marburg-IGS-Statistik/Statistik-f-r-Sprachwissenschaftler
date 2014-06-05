@@ -1,7 +1,3 @@
-% Statistik für Sprachwissenschaftler
-% Phillip Alday
-% Sommersemester 2014
-
 Diese Veranstaltung bietet eine praktische Einführung in statistische Verfahren und deren Anwendung auf sprachliche Beispiele. Sie vermittelt Grundlagenwissen sowohl aus dem Bereich der deskriptiven Statistik als auch über die gängigsten inferenzstatistischen Verfahren, die im Bereich der Sprache angewendet werden. Alle theoretischen Grundkenntnisse werden anhand von praktischen Übungen vertieft, die mit Hilfe des (frei verfügbaren) Statistikprogramms "R" durchgeführt werden. Nachdem die Teilnehmer Grundlagenkenntnisse in R erworben haben, werden darauf aufbauend Beispielfragestellungen aus unterschiedlichen sprachrelevanten Bereichen bearbeitet. Dabei wird neben der Frage nach einem angemessenen experimentellen Design und dem geeigneten statistischen Verfahren auch die praktische Umsetzung der Auswertung in R im Mittelpunkt stehen. Nach Besuch dieser Veranstaltung sollten Teilnehmer in der Lage sein, eigene Daten statistisch zu analysieren.
 
 # Organisatorisches
@@ -19,61 +15,63 @@ Diese Veranstaltung bietet eine praktische Einführung in statistische Verfahren
 
 # Ablauf
 
-Woche | Datum          | Themen
------ | -------------- | ----------------------------------------------------------
-01.   | **14.04.2014** | Formalia, Einführung, (Textdateien &) DVCS, Warm-Up: Kombinatorik
-|     | **15.04.2014** | Warum Statistik? R, RStudio, Git
-02.   | **21.04.2014** | fällt aus! (Ostermontag) Ersatz-Lektüre: Stevens (1946)
-|     | **22.04.2014** | Warum Statistik? Ziele der Forschung, Modelle, Beschreibungsstatistik  I (Maße der zentralen Tendenz)
-|     |                | *Hausaufgabe bis 28.04.2014, 12 Uhr:* (in der Reihenfolge machen!)
-|     |                | 1. `hausaufgabe03a.Rmd`
-|     |                | 2. `hausaufgabe03b.R` 
-03.   | **28.04.2014** | Beschreibungsstatistik  II: Dispersions- und Streuungsmaße
-|     |                | *Hausaufgabe bis 29.04.2014 8 Uhr:*
-|     |                | 1. An Fragenbogen "Verteilungen" (bei ILIAS) teilnehmen
-|     |                | 2. Handout zu Logarithmen anschauen 
-|     | **29.04.2014** | Visualisierung der Daten: `ggplot2`-Basics
-|     |                | *Hausaufgabe bis 05.05.2014 12 Uhr:*
-|     |                | 1. `hausaufgabe05.R`
-04.   | **05.05.2014** | Auf dem Weg zu Interferenzstatistik: $z$-Tranformation, Wahrscheinlichkeitsverteilungen, Population vs. Stichprobe
-|     |                | *Hausaufgabe bis 06.05.2014 10 Uhr:*
-|     |                | Lesen Sie:
-|     |                | 1. [wie Statistik oft misbraucht wird](http://www.cracked.com/article_20318_the-5-most-popular-ways-statistics-are-used-to-lie-to-you.html).
-|     |                | 2. [warum es in den letzten Jahren eine Krise in der Wissenschaft gibt](http://www.economist.com/news/briefing/21588057-scientists-think-science-self-correcting-alarming-degree-it-not-trouble).
-|     | **06.05.2014** | Statistische Inteferenz, $p$-Werte, Intuition von "Messfehler" und "Wahrscheinlichkeit", Fehler-Arten
-|     |                | *Hausaufgabe bis 12.05.2014 12 Uhr:*
-|     |                | 1. `hausaufgabe07.Rmd`
-05.   | **12.05.2014** | Mehr zu Stichproben, Vergleich von Gruppen ($t$-Test), Erwähnung von Confidence-Intervalen und . [BEST](http://www.indiana.edu/~kruschke/BEST/) (etwa bayes'scher $t$-Test) 
-|     |                | *Hausaufgabe bis 13.05.2014 10 Uhr:*
-|     |                | 1. Schauen Sie sich [das Video zu BEST](https://www.youtube.com/watch?v=fhw1j1Ru2i0) BEST an.
-|     | **13.05.2014** | Vergleich von Gruppen ($t$-Test) II: Voraussetzungen und Varianten
-|     |                | *Hausaufgabe bis 19.05.2014 12 Uhr:*
-|     |                | 1. `hausaufgabe09.R`
-06.   | **19.05.2014** | Confidence und Credible-Intervale, BEST, Interferenz in der Praxis: Der Sinn von statischen Tests, neuartige Fehler, Unterschiede in frequentistischen und bayes'schen Aussagen
-|     | **20.05.2014** | Intervale II
-|     |                | *Hausaufgabe bis 26.05.2014 12 Uhr:*
-|     |                | 1. Shiny apps anschauen
-|     |                | 2. sich erholen
-07.   | **26.05.2014** | ANOVA I
-|     | **27.05.2014** | ANOVA II (evtl. auch Fixed vs. Random Effects à Clark 1973)
-|     |                | *Hausaufgabe bis 02.06.2014 12 Uhr:*
-|     |                | 1. `hausaufgabe13.Rmd`
-08.   | **02.06.2014** | ANOVA III: Auswertung und Interpretation 
-|     | **03.06.2014** | lineare Regression I
-|     |                | *Hausaufgabe bis 10.06.2014 10 Uhr:*
-|     |                | 1. `hausaufgabe15.R`
-09.   | **09.06.2014** | fällt aus! (Pfingstmontag)
-|     | **10.06.2014** | lineare Regression II, evtl. Korrelationen  
-10.   | **16.06.2014** | Korrelationen I
-|     | **17.06.2014** | das generalisierte lineare Model (GLM), logit-Regression
-11.   | **23.06.2014** | gemischte Modelle I
-|     | **24.06.2014** | gemischte Modelle II
-12.   | **30.06.2014** | $\chi^2$, logLikelihood & Likelihood-Ratio 
-|     | **01.07.2014** | Nicht-parametrische Tests I 
-13.   | **07.07.2014** | Nicht-parametrische Tests II
-|     | **08.07.2014** | Experimentaldesign
-14.   | **14.07.2014** | Fragestunde / Puffer
-|     | **15.07.2014** | Klausur
+|Woche | Datum          | Themen
+|------| -------------- | ------------------------------------------------------------------
+| 01.  | **14.04.2014** | Formalia, Einführung, (Textdateien &) DVCS, Warm-Up: Kombinatorik 
+|      | **15.04.2014** | Warum Statistik? R, RStudio, Git
+| 02.  | **21.04.2014** | fällt aus! (Ostermontag) Ersatz-Lektüre: Stevens (1946)
+|      | **22.04.2014** | Warum Statistik? Ziele der Forschung, Modelle, Beschreibungsstatistik  I (Maße der zentralen Tendenz)
+|      |                | *Hausaufgabe bis 28.04.2014, 12 Uhr:* (in der Reihenfolge machen!)
+|      |                | 1. `hausaufgabe03a.Rmd`
+|      |                | 2. `hausaufgabe03b.R` 
+| 03.  | **28.04.2014** | Beschreibungsstatistik  II: Dispersions- und Streuungsmaße
+|      |                | *Hausaufgabe bis 29.04.2014 8 Uhr:*
+|      |                | 1. An Fragenbogen "Verteilungen" (bei ILIAS) teilnehmen
+|      |                | 2. Handout zu Logarithmen anschauen 
+|      | **29.04.2014** | Visualisierung der Daten: `ggplot2`-Basics
+|      |                | *Hausaufgabe bis 05.05.2014 12 Uhr:*
+|      |                | 1. `hausaufgabe05.R`
+| 04.  | **05.05.2014** | Auf dem Weg zu Interferenzstatistik: $z$-Tranformation, Wahrscheinlichkeitsverteilungen, Population vs. Stichprobe
+|      |                | *Hausaufgabe bis 06.05.2014 10 Uhr:*
+|      |                | Lesen Sie:
+|      |                | 1. [wie Statistik oft misbraucht wird](http://www.cracked.com/article_20318_the-5-most-popular-ways-statistics-are-used-to-lie-to-you.html).
+|      |                | 2. [warum es in den letzten Jahren eine Krise in der Wissenschaft gibt](http://www.economist.com/news/briefing/21588057-scientists-think-science-self-correcting-alarming-degree-it-not-trouble).
+|      | **06.05.2014** | Statistische Inteferenz, $p$-Werte, Intuition von "Messfehler" und "Wahrscheinlichkeit", Fehler-Arten
+|      |                | *Hausaufgabe bis 12.05.2014 12 Uhr:*
+|      |                | 1. `hausaufgabe07.Rmd`
+| 05.  | **12.05.2014** | Mehr zu Stichproben, Vergleich von Gruppen ($t$-Test), Erwähnung von Confidence-Intervalen und . [BEST](http://www.indiana.edu/~kruschke/BEST/) (etwa bayes'scher $t$-Test) 
+|      |                | *Hausaufgabe bis 13.05.2014 10 Uhr:*
+|      |                | 1. Schauen Sie sich [das Video zu BEST](https://www.youtube.com/watch?v=fhw1j1Ru2i0) BEST an.
+|      | **13.05.2014** | Vergleich von Gruppen ($t$-Test) II: Voraussetzungen und Varianten
+|      |                | *Hausaufgabe bis 19.05.2014 12 Uhr:*
+|      |                | 1. `hausaufgabe09.R`
+| 06.  | **19.05.2014** | Confidence und Credible-Intervale, BEST, Interferenz in der Praxis: Der Sinn von statischen Tests, neuartige Fehler, Unterschiede in frequentistischen und bayes'schen Aussagen
+|      | **20.05.2014** | Intervale II
+|      |                | *Hausaufgabe bis 26.05.2014 12 Uhr:*
+|      |                | 1. Shiny apps anschauen
+|      |                | 2. sich erholen
+| 07.  | **26.05.2014** | ANOVA I
+|      | **27.05.2014** | ANOVA II (evtl. auch Fixed vs. Random Effects à Clark 1973)
+|      |                | *Hausaufgabe bis 02.06.2014 12 Uhr:*
+|      |                | 1. `hausaufgabe13.Rmd`
+| 08.  | **02.06.2014** | ANOVA III: Auswertung und Interpretation 
+|      | **03.06.2014** | lineare Regression I
+|      |                | *Hausaufgabe bis 10.06.2014 10 Uhr:*
+|      |                | 1. `hausaufgabe15.R`
+| 09.  | **09.06.2014** | fällt aus! (Pfingstmontag)
+|      | **10.06.2014** | lineare Regression II
+|      |                | *Hausaufgabe bis 16.06.2014 12 Uhr:*
+|      |                | 1. `hausaufgabe16.Rmd`
+| 10.  | **16.06.2014** | Korrelationen
+|      | **17.06.2014** | das generalisierte lineare Model (GLM), logit-Regression
+| 11.  | **23.06.2014** | gemischte Modelle I
+|      | **24.06.2014** | gemischte Modelle II
+| 12.  | **30.06.2014** | $\chi^2$, logLikelihood & Likelihood-Ratio 
+|      | **01.07.2014** | Nicht-parametrische Tests I 
+| 13.  | **07.07.2014** | Nicht-parametrische Tests II
+|      | **08.07.2014** | Experimentaldesign
+| 14.  | **14.07.2014** | Fragestunde / Puffer
+|      | **15.07.2014** | Klausur
 
 # Software
 - [R](http://cran.r-project.org/)
@@ -157,6 +155,7 @@ Die Reihe *Use R!* von Springer ist **kostenlos** über das Uni-Netz elektronisc
     - [Null Hypothesis](http://www.xkcd.com/892/)
     - [Frequentists vs. Bayesians](http://xkcd.com/1132/)
 * [Spurious Correlations](http://www.tylervigen.com/)
+* [How would you explain covariance to someone who understands only the mean?](http://stats.stackexchange.com/questions/18058/how-would-you-explain-covariance-to-someone-who-understands-only-the-mean) [whubers Antwort](http://stats.stackexchange.com/a/18200/26743) ist besonders schön.
 
 # Weitere Links zu spezifischen Themen
 * Warum gibt es bei manchen Formlen aus der deskriptiven Statistik $n-1$ und bei anderen $n$ als Nenner?
