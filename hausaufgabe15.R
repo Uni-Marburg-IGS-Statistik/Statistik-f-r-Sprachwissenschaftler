@@ -1,6 +1,6 @@
 # Hausaufgabe 15
-# Phillip Alday <phillip.alday@staff.uni-marburg.de>
-# 2014-06-04
+# Isabelle Franz <franzis@students.uni-marburg.de>
+# 2014-06-05
 # Dieses Werk ist lizenziert unter einer CC-BY-NC-SA Lizenz.
 
 
