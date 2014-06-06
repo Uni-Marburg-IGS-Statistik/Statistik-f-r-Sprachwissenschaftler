@@ -1,0 +1,539 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Statistik für Sprachwissenschaftler by Uni-Marburg-IGS-Statistik</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>Statistik für Sprachwissenschaftler</h1>
+        <p>Sommersemester 2014</p>
+
+        <p class="view"><a href="https://github.com/Uni-Marburg-IGS-Statistik/Statistik-f-r-Sprachwissenschaftler">View the Project on GitHub <small>Uni-Marburg-IGS-Statistik/Statistik-f-r-Sprachwissenschaftler</small></a></p>
+
+
+        <ul>
+          <li><a href="https://github.com/Uni-Marburg-IGS-Statistik/Statistik-f-r-Sprachwissenschaftler/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/Uni-Marburg-IGS-Statistik/Statistik-f-r-Sprachwissenschaftler/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/Uni-Marburg-IGS-Statistik/Statistik-f-r-Sprachwissenschaftler">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <p>Diese Veranstaltung bietet eine praktische Einführung in statistische Verfahren und deren Anwendung auf sprachliche Beispiele. Sie vermittelt Grundlagenwissen sowohl aus dem Bereich der deskriptiven Statistik als auch über die gängigsten inferenzstatistischen Verfahren, die im Bereich der Sprache angewendet werden. Alle theoretischen Grundkenntnisse werden anhand von praktischen Übungen vertieft, die mit Hilfe des (frei verfügbaren) Statistikprogramms "R" durchgeführt werden. Nachdem die Teilnehmer Grundlagenkenntnisse in R erworben haben, werden darauf aufbauend Beispielfragestellungen aus unterschiedlichen sprachrelevanten Bereichen bearbeitet. Dabei wird neben der Frage nach einem angemessenen experimentellen Design und dem geeigneten statistischen Verfahren auch die praktische Umsetzung der Auswertung in R im Mittelpunkt stehen. Nach Besuch dieser Veranstaltung sollten Teilnehmer in der Lage sein, eigene Daten statistisch zu analysieren.</p>
+
+<h1>
+<a name="organisatorisches" class="anchor" href="#organisatorisches"><span class="octicon octicon-link"></span></a>Organisatorisches</h1>
+
+<ul>
+<li>
+<strong>Termin</strong> montags 12-14 Uhr c.t. Raum HSG +1/0120 und dienstags 10-12 Uhr c.t. WR6 01C08; </li>
+<li><strong>Anzahl der ECTS-Punkte und Art der Prüfung (Klausur, "Hausarbeit") nach der jeweilgen Prüfungsordnung.</strong></li>
+<li>
+<strong>Vorausgesetzt für die Zulassung zur Prüfung sind</strong>
+
+<ul>
+<li>regelmäßige Teilnahme, inkl. Hausaufgaben zu jedem Termin -- siehe Blatt dazu</li>
+<li>max. 4 unentschuldigte Fehltermine</li>
+</ul>
+</li>
+<li>
+<strong>Anmeldung</strong>  verbindliche und obligatorische Anmeldung über ILIAS bis 18.04.2014</li>
+<li>
+<strong>Sprechstunde</strong> montags 16-17 Uhr oder nach Absprache</li>
+<li>
+<strong>Kursmaterial</strong> <a href="https://github.com/Uni-Marburg-IGS-Statistik/Statistik-f-r-Sprachwissenschaftler">https://github.com/Uni-Marburg-IGS-Statistik/Statistik-f-r-Sprachwissenschaftler</a>
+</li>
+<li>
+<strong>Email</strong> Nur Mails von Uni-Konten werden gelesen und beantwortet! </li>
+</ul><p><strong>WARNUNG</strong> Ich bin v.a. bei Formalien, die mir ein gewisses Workflow ermöglichen, <strong>sehr</strong> streng, z.B. Input-Output-Format, Respository-Layout, usw. Hausaufgaben, die den formalen Anforderungen nicht entsprechen, gelten als nicht eingereicht!</p>
+
+<h1>
+<a name="ablauf" class="anchor" href="#ablauf"><span class="octicon octicon-link"></span></a>Ablauf</h1>
+
+<table>
+<thead><tr>
+<th>Woche</th>
+<th>Datum</th>
+<th>Themen</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>01.</td>
+<td><strong>14.04.2014</strong></td>
+<td>Formalia, Einführung, (Textdateien &amp;) DVCS, Warm-Up: Kombinatorik</td>
+</tr>
+<tr>
+<td></td>
+<td><strong>15.04.2014</strong></td>
+<td>Warum Statistik? R, RStudio, Git</td>
+</tr>
+<tr>
+<td>02.</td>
+<td><strong>21.04.2014</strong></td>
+<td>fällt aus! (Ostermontag) Ersatz-Lektüre: Stevens (1946)</td>
+</tr>
+<tr>
+<td></td>
+<td><strong>22.04.2014</strong></td>
+<td>Warum Statistik? Ziele der Forschung, Modelle, Beschreibungsstatistik  I (Maße der zentralen Tendenz)</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>
+<em>Hausaufgabe bis 28.04.2014, 12 Uhr:</em> (in der Reihenfolge machen!)</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>1. <code>hausaufgabe03a.Rmd</code>
+</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>2. <code>hausaufgabe03b.R</code>
+</td>
+</tr>
+<tr>
+<td>03.</td>
+<td><strong>28.04.2014</strong></td>
+<td>Beschreibungsstatistik  II: Dispersions- und Streuungsmaße</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td><em>Hausaufgabe bis 29.04.2014 8 Uhr:</em></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>1. An Fragenbogen "Verteilungen" (bei ILIAS) teilnehmen</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>2. Handout zu Logarithmen anschauen</td>
+</tr>
+<tr>
+<td></td>
+<td><strong>29.04.2014</strong></td>
+<td>Visualisierung der Daten: <code>ggplot2</code>-Basics</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td><em>Hausaufgabe bis 05.05.2014 12 Uhr:</em></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>1. <code>hausaufgabe05.R</code>
+</td>
+</tr>
+<tr>
+<td>04.</td>
+<td><strong>05.05.2014</strong></td>
+<td>Auf dem Weg zu Interferenzstatistik: $z$-Tranformation, Wahrscheinlichkeitsverteilungen, Population vs. Stichprobe</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td><em>Hausaufgabe bis 06.05.2014 10 Uhr:</em></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>Lesen Sie:</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>1. <a href="http://www.cracked.com/article_20318_the-5-most-popular-ways-statistics-are-used-to-lie-to-you.html">wie Statistik oft misbraucht wird</a>.</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>2. <a href="http://www.economist.com/news/briefing/21588057-scientists-think-science-self-correcting-alarming-degree-it-not-trouble">warum es in den letzten Jahren eine Krise in der Wissenschaft gibt</a>.</td>
+</tr>
+<tr>
+<td></td>
+<td><strong>06.05.2014</strong></td>
+<td>Statistische Inteferenz, $p$-Werte, Intuition von "Messfehler" und "Wahrscheinlichkeit", Fehler-Arten</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td><em>Hausaufgabe bis 12.05.2014 12 Uhr:</em></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>1. <code>hausaufgabe07.Rmd</code>
+</td>
+</tr>
+<tr>
+<td>05.</td>
+<td><strong>12.05.2014</strong></td>
+<td>Mehr zu Stichproben, Vergleich von Gruppen ($t$-Test), Erwähnung von Confidence-Intervalen und . <a href="http://www.indiana.edu/%7Ekruschke/BEST/">BEST</a> (etwa bayes'scher $t$-Test)</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td><em>Hausaufgabe bis 13.05.2014 10 Uhr:</em></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>1. Schauen Sie sich <a href="https://www.youtube.com/watch?v=fhw1j1Ru2i0">das Video zu BEST</a> BEST an.</td>
+</tr>
+<tr>
+<td></td>
+<td><strong>13.05.2014</strong></td>
+<td>Vergleich von Gruppen ($t$-Test) II: Voraussetzungen und Varianten</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td><em>Hausaufgabe bis 19.05.2014 12 Uhr:</em></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>1. <code>hausaufgabe09.R</code>
+</td>
+</tr>
+<tr>
+<td>06.</td>
+<td><strong>19.05.2014</strong></td>
+<td>Confidence und Credible-Intervale, BEST, Interferenz in der Praxis: Der Sinn von statischen Tests, neuartige Fehler, Unterschiede in frequentistischen und bayes'schen Aussagen</td>
+</tr>
+<tr>
+<td></td>
+<td><strong>20.05.2014</strong></td>
+<td>Intervale II</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td><em>Hausaufgabe bis 26.05.2014 12 Uhr:</em></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>1. Shiny apps anschauen</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>2. sich erholen</td>
+</tr>
+<tr>
+<td>07.</td>
+<td><strong>26.05.2014</strong></td>
+<td>ANOVA I</td>
+</tr>
+<tr>
+<td></td>
+<td><strong>27.05.2014</strong></td>
+<td>ANOVA II (evtl. auch Fixed vs. Random Effects à Clark 1973)</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td><em>Hausaufgabe bis 02.06.2014 12 Uhr:</em></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>1. <code>hausaufgabe13.Rmd</code>
+</td>
+</tr>
+<tr>
+<td>08.</td>
+<td><strong>02.06.2014</strong></td>
+<td>ANOVA III: Auswertung und Interpretation</td>
+</tr>
+<tr>
+<td></td>
+<td><strong>03.06.2014</strong></td>
+<td>lineare Regression I</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td><em>Hausaufgabe bis 10.06.2014 10 Uhr:</em></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>1. <code>hausaufgabe15.R</code>
+</td>
+</tr>
+<tr>
+<td>09.</td>
+<td><strong>09.06.2014</strong></td>
+<td>fällt aus! (Pfingstmontag)</td>
+</tr>
+<tr>
+<td></td>
+<td><strong>10.06.2014</strong></td>
+<td>lineare Regression II, evtl. Korrelationen</td>
+</tr>
+<tr>
+<td>10.</td>
+<td><strong>16.06.2014</strong></td>
+<td>Korrelationen I</td>
+</tr>
+<tr>
+<td></td>
+<td><strong>17.06.2014</strong></td>
+<td>das generalisierte lineare Model (GLM), logit-Regression</td>
+</tr>
+<tr>
+<td>11.</td>
+<td><strong>23.06.2014</strong></td>
+<td>gemischte Modelle I</td>
+</tr>
+<tr>
+<td></td>
+<td><strong>24.06.2014</strong></td>
+<td>gemischte Modelle II</td>
+</tr>
+<tr>
+<td>12.</td>
+<td><strong>30.06.2014</strong></td>
+<td>$\chi^2$, logLikelihood &amp; Likelihood-Ratio</td>
+</tr>
+<tr>
+<td></td>
+<td><strong>01.07.2014</strong></td>
+<td>Nicht-parametrische Tests I</td>
+</tr>
+<tr>
+<td>13.</td>
+<td><strong>07.07.2014</strong></td>
+<td>Nicht-parametrische Tests II</td>
+</tr>
+<tr>
+<td></td>
+<td><strong>08.07.2014</strong></td>
+<td>Experimentaldesign</td>
+</tr>
+<tr>
+<td>14.</td>
+<td><strong>14.07.2014</strong></td>
+<td>Fragestunde / Puffer</td>
+</tr>
+<tr>
+<td></td>
+<td><strong>15.07.2014</strong></td>
+<td>Klausur</td>
+</tr>
+</tbody>
+</table><h1>
+<a name="software" class="anchor" href="#software"><span class="octicon octicon-link"></span></a>Software</h1>
+
+<ul>
+<li><a href="http://cran.r-project.org/">R</a></li>
+<li>
+<a href="http://rstudio.com/">RStudio</a> (mit <a href="http://rmarkdown.rstudio.com/">RMarkdown</a>)</li>
+<li>
+<a href="http://git-scm.com/">Git</a> (mit der <a href="https://education.github.com/">Bildungsinitiative</a> von <a href="https://github.com/">GitHub</a> )</li>
+</ul><h1>
+<a name="bibliografie" class="anchor" href="#bibliografie"><span class="octicon octicon-link"></span></a>Bibliografie</h1>
+
+<p>Baayen, R. Harald (2008): Analyzing Linguistic Data: A Practical Introduction to Statistics Using R. Cambridge University Press.</p>
+
+<p>Eid, Gollwitzer und Schmitt (2010): Statistik und Forschungsmethoden. Beltz Verlag.</p>
+
+<p>Field, A., Miles, J., &amp; Field, Z. (2012): Discovering Statistics Using R. Sage Publications.</p>
+
+<p>Luhmann, M. (2010): R für Einsteiger. Einführung in die Statistiksoftware für die Sozialwissenschaften. Beltz Verlag.</p>
+
+<p>Wickham, Hadley (2009): ggplot2. Springer.</p>
+
+<p>Die Reihe <em>Use R!</em> von Springer ist <strong>kostenlos</strong> über das Uni-Netz elektronisch verfügbar!  </p>
+
+<h1>
+<a name="linksammlung" class="anchor" href="#linksammlung"><span class="octicon octicon-link"></span></a>Linksammlung</h1>
+
+<ul>
+<li><a href="http://rmarkdown.rstudio.com/">RMarkdown</a></li>
+<li><a href="https://education.github.com/git-cheat-sheet-education.pdf">GitHub Git Cheat Sheet</a></li>
+<li><a href="https://help.github.com/articles/what-are-other-good-resources-for-learning-git-and-github">GitHub Git Resources</a></li>
+<li><a href="http://www.r-bloggers.com/">R Bloggers</a></li>
+<li><a href="http://rseek.org/">RSeek</a></li>
+<li><a href="http://stats.stackexchange.com/">CrossValidated</a></li>
+<li><a href="http://stackoverflow.com/questions/102056/how-to-search-for-r-materials">How to Search for R Materials</a></li>
+<li><a href="http://rogerdudler.github.io/git-guide/">Git -- the simple guide</a></li>
+<li><a href="http://rpubs.com/bbolker/3153">Literate programming, version control, reproducible research, collaboration, and all that</a></li>
+<li><a href="http://andrewgelman.com/2009/05/24/handy_statistic/">Handy statistical lexicon</a></li>
+</ul><h1>
+<a name="shinyapps" class="anchor" href="#shinyapps"><span class="octicon octicon-link"></span></a>ShinyApps</h1>
+
+<ul>
+<li><a href="https://palday.shinyapps.io/optional_stopping/">Optional Stopping</a></li>
+<li><a href="https://palday.shinyapps.io/confidence_intervals/">Confidence Intervals</a></li>
+<li>
+<a href="https://palday.shinyapps.io/binomial_gaussian/">From the Binomial to the Normal Distribution</a> (Ein Beispiel für den Zentralen Grenzwertsatz)</li>
+</ul><h1>
+<a name="kommentare-zu-p-werten-nhst-und-der-%C3%BCblichen-statistischen-praxis" class="anchor" href="#kommentare-zu-p-werten-nhst-und-der-%C3%BCblichen-statistischen-praxis"><span class="octicon octicon-link"></span></a>Kommentare zu p-Werten, NHST, und der üblichen statistischen Praxis</h1>
+
+<ul>
+<li>John Myles White
+
+<ol>
+<li><a href="http://www.johnmyleswhite.com/notebook/2012/05/10/criticism-1-of-nhst-good-tools-for-individual-researchers-are-not-good-tools-for-research-communities/">Good Tools for Individual Researchers are not Good Tools for Research Communities</a></li>
+<li><a href="http://www.johnmyleswhite.com/notebook/2012/05/12/criticism-2-of-nhst-nhst-conflates-rare-events-with-evidence-against-the-null-hypothesis/">NHST Conflates Rare Events with Evidence Against the Null Hypothesis</a></li>
+<li><a href="http://www.johnmyleswhite.com/notebook/2012/05/14/criticism-3-of-nhst-essential-information-is-lost-when-transforming-2d-data-into-a-1d-measure/">Essential Information is Lost When Transforming 2D Data into a 1D Measure</a></li>
+<li><a href="http://www.johnmyleswhite.com/notebook/2012/05/18/criticism-4-of-nhst-no-mechanism-for-producing-substantive-cumulative-knowledge/">No Mechanism for Producing Substantive Cumulative Knowledge
+</a></li>
+<li><a href="http://www.johnmyleswhite.com/notebook/2012/07/17/criticism-5-of-nhst-p-values-measure-effort-not-truth/">p-Values Measure Effort, Not Truth</a></li>
+<li><a href="http://www.johnmyleswhite.com/notebook/2012/12/06/a-cheap-criticism-of-p-values/">A Cheap Criticism of p-Values</a></li>
+</ol>
+</li>
+<li>Andrew Gelman
+
+<ul>
+<li><a href="http://andrewgelman.com/2012/12/05/the-p-value-is-not/">The p-value is not...</a></li>
+<li>
+<a href="http://andrewgelman.com/2014/04/25/revised-statistical-standards-evidence-comments-val-johnsons-comments-comments-vals-comments-p-values/">Revised statistical standards for evidence</a><br>
+</li>
+<li><a href="http://andrewgelman.com/2014/04/18/one-tailed-two-tailed/">One-tailed or two-tailed?</a></li>
+<li><a href="http://andrewgelman.com/2013/06/04/interrogating-p-values/">Interrogating p-values</a></li>
+<li><a href="http://www.stat.columbia.edu/%7Egelman/research/published/murtaugh2.pdf">The problem with p-values is how they're used</a></li>
+<li><a href="http://dx.doi.org/10.1198/000313006X152649">The Difference Between "Significant" and "Not Significant" is not Itself Statistically Significant</a></li>
+<li><a href="http://www.stat.columbia.edu/%7Egelman/research/unpublished/p_hacking.pdf">Researcher degrees of freedom and accidental p-hacking</a></li>
+<li><a href="http://www.stat.columbia.edu/%7Egelman/research/published/pvalues3.pdf">P-Values and Statistical Practice</a></li>
+</ul>
+</li>
+</ul><h1>
+<a name="andere-perspektive-und-interessantes-zur-statistik" class="anchor" href="#andere-perspektive-und-interessantes-zur-statistik"><span class="octicon octicon-link"></span></a>Andere Perspektive und Interessantes zur Statistik</h1>
+
+<ul>
+<li><a href="http://stats.stackexchange.com/questions/726/famous-statistician-quotes">Famous statistician quotes</a></li>
+<li><a href="http://stats.stackexchange.com/questions/4551/what-are-common-statistical-sins">Common statistical sins</a></li>
+<li><a href="http://www.johnmyleswhite.com/notebook/2013/03/22/modes-medians-and-means-an-unifying-perspective/">Modes, Medians and Means: A Unifying Perspective</a></li>
+<li><a href="http://www.stat.columbia.edu/%7Egelman/research/published/copss.pdf">How do we choose our default methods?</a></li>
+<li>
+<a href="http://andrewgelman.com/2014/05/03/graph-clearly-shows-mammography-adds-virtually-nothing-survival-anything-decreases-survival-increases-cost-provides-unnecessary-treatment/">"The graph clearly shows that mammography adds virtually nothing to survival and if anything, decreases survival (and increases cost and provides unnecessary treatment)"</a> -- ein wichtiges Beispiel von Effektgröße vs. "signifikant" mit Brustkrebs!</li>
+<li><a href="http://andrewgelman.com/2014/04/29/ken-rice-presents-unifying-approach-statistical-inference-hypothesis-testing/">Ken Rice presents a unifying approach to statistical inference and hypothesis testing</a></li>
+<li><a href="http://andrewgelman.com/2014/04/08/understanding-simpsons-paradox-using-graph/">Understanding Simpson’s paradox using a graph</a></li>
+<li><a href="http://simplystatistics.org/2014/02/13/loess-explained-in-a-gif/">loess explained in a GIF</a></li>
+<li><a href="http://norvig.com/chomsky.html">On Chomsky and the Two Cultures of Statistical Learning</a></li>
+<li><a href="http://andrewgelman.com/2014/04/27/big-data-big-deal-maybe-used-caution/">Big Data...Big Deal? Maybe, if Used with Caution.</a></li>
+<li><a href="http://andrewgelman.com/2014/04/12/schools-of-statistical-thoughts-are-sometimes-jokingly-likened-to-religions-this-analogy-is-not-perfect-unlike-religions-statistical-methods-have-no-supernatural-content-and-make-essentially-no-d/">Schools of Statistical Thought as Religion</a></li>
+<li><a href="http://www.sumsar.net/blog/2013/06/bayesian-modeling-of-anscombes-quartet/">Bayesian Modelling of Anscombe's Quartet</a></li>
+<li>
+<a href="http://videolectures.net/mlss09uk_jordan_bfway/">Bayesian or Frequentist, Which Are You?</a> vielleicht die beste holistische Perspektive!</li>
+<li><a href="http://dx.doi.org/10.6084/m9.figshare.867707">Positioning Bayesian inference as a particular application of frequentist inference and vice versa</a></li>
+<li>Software für Bayesian Modelling (wird nicht im Kurs genutzt, aber vielleicht interessant)
+
+<ul>
+<li><a href="http://mc-stan.org/">Stan</a></li>
+<li><a href="http://mcmc-jags.sourceforge.net/">JAGS</a></li>
+<li><a href="http://www.openbugs.net/w/FrontPage">BUGS</a></li>
+<li><a href="http://www.ling.uni-potsdam.de/%7Evasishth/BayesLMMs.html">Fitting linear mixed models using JAGS and Stan: A tutorial</a></li>
+</ul>
+</li>
+<li>xkcd
+
+<ul>
+<li><a href="http://xkcd.com/552/">Correlation</a></li>
+<li><a href="http://www.xkcd.com/925/">Correlation and Trends</a></li>
+<li><a href="http://www.xkcd.com/1138/">Correlation and Heatmaps</a></li>
+<li><a href="http://xkcd.com/795/">Conditional Risk</a></li>
+<li><a href="http://www.xkcd.com/892/">Null Hypothesis</a></li>
+<li><a href="http://xkcd.com/1132/">Frequentists vs. Bayesians</a></li>
+</ul>
+</li>
+<li><a href="http://www.tylervigen.com/">Spurious Correlations</a></li>
+</ul><h1>
+<a name="weitere-links-zu-spezifischen-themen" class="anchor" href="#weitere-links-zu-spezifischen-themen"><span class="octicon octicon-link"></span></a>Weitere Links zu spezifischen Themen</h1>
+
+<ul>
+<li>Warum gibt es bei manchen Formlen aus der deskriptiven Statistik $n-1$ und bei anderen $n$ als Nenner?
+
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/Bessel%27s_correction">Bessel's Correction</a></li>
+<li><a href="https://de.wikipedia.org/wiki/Bessel-Korrektur">Korrigierte Stichprobenvarianz</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Sample_mean_and_sample_covariance">Sample mean and sample covariance</a></li>
+<li><a href="http://stats.stackexchange.com/questions/100041/how-exactly-did-statisticians-agree-to-using-n-1-as-the-unbiased-estimator-for">How exactly did statisticians agree to using (n-1) as the unbiased estimator for population variance without simulation?</a></li>
+</ul>
+</li>
+<li>Konfidenz- und Credible Intervale 
+
+<ul>
+<li><a href="http://stats.stackexchange.com/questions/2356/are-there-any-examples-where-bayesian-credible-intervals-are-obviously-inferior">Are there any examples where Bayesian credible intervals are obviously inferior to frequentist confidence intervals</a></li>
+<li><a href="http://stats.stackexchange.com/questions/26450/why-does-a-95-ci-not-imply-a-95-chance-of-containing-the-mean">Why does a 95% CI not imply a 95% chance of containing the mean?</a></li>
+<li><a href="http://stats.stackexchange.com/questions/13655/what-does-a-confidence-interval-vs-a-credible-interval-actually-express">What does a confidence interval (vs. a credible interval) actually express?</a></li>
+<li><a href="http://stats.stackexchange.com/questions/60809/why-do-a-lot-fewer-than-95-of-my-confidence-intervals-intersect-the-true-para?rq=1">Why do (a lot) fewer than 95% of my confidence intervals intersect the true parameter value in this simulation?</a></li>
+<li><a href="http://stats.stackexchange.com/questions/6652/what-precisely-is-a-confidence-interval">What, precisely, is a confidence interval?</a></li>
+<li><a href="http://stats.stackexchange.com/questions/89099/from-a-bayesian-probability-perspective-why-doesnt-a-95-confidence-interval-c">From a Bayesian probability perspective, why doesn't a 95% confidence interval contain the true parameter with 95% probability?</a></li>
+<li><a href="http://stats.stackexchange.com/questions/4713/binomial-confidence-interval-estimation-why-is-it-not-symmetric?rq=1">Binomial confidence interval estimation - why is it not symmetric?</a></li>
+</ul>
+</li>
+<li>Gemischte Modelle
+
+<ul>
+<li>Tutorials
+
+<ul>
+<li><a href="http://www.bodowinter.com/tutorial/bw_LME_tutorial.pdf">von Bodo  Winter</a></li>
+<li><a href="https://hlplab.wordpress.com/2014/02/05/updated-slides-on-glm-glmm-plyr-etc-available/">T. Florian Jaeger</a></li>
+<li>
+<a href="http://dx.doi.org/10.1016/j.jml.2007.12.005">Baayen, Davidson und Bates 2008</a>(und alle anderen Artikel aus der Ausgabe des <em>Journal of Memory and Language</em>)</li>
+</ul>
+</li>
+<li>
+<a href="https://hlplab.wordpress.com/2009/05/14/random-effect-structure/">Random Effects: Should I stay or should I go?</a> (vgl. auch <a href="http://dx.doi.org/10.1016/j.jml.2012.11.001">Barr et al 2013</a>)</li>
+<li><a href="https://hlplab.wordpress.com/2013/12/13/going-full-bayesian-with-mixed-effects-regression-models/">Going full Bayesian with mixed effects regression models</a></li>
+<li><a href="https://hlplab.wordpress.com/2011/02/24/diagnosing-collinearity-in-lme4/">Diagnosing collinearity in mixed models from lme4</a></li>
+<li><a href="https://hlplab.wordpress.com/2009/05/07/multinomial-random-effects-models-in-r/">Multinomial random effects models in R</a></li>
+<li><a href="https://hlplab.wordpress.com/2009/01/19/plotting-effects-for-glmer-familybimomial-models/">Plotting effects for glmer(, family=”binomial”) models</a></li>
+<li><a href="https://hlplab.wordpress.com/2009/08/29/nagelkerke-and-coxsnell-pseudo-r2-for-mixed-logit-models/">Nagelkerke and CoxSnell Pseudo R2 for Mixed Logit Models</a></li>
+<li><a href="https://hlplab.wordpress.com/2014/03/17/old-and-new-lme4/">old and new lme4</a></li>
+<li>Nützliche Pakete
+
+<ul>
+<li><code>lme4</code></li>
+<li><code>lmerTest</code></li>
+<li><code>effects</code></li>
+<li><code>LMERConvenienceFunctions</code></li>
+<li><code>languageR</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul><h1>
+<a name="license" class="anchor" href="#license"><span class="octicon octicon-link"></span></a>License</h1>
+
+<p>This work is licensed under the Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Germany License. To view a copy of this license, visit <a href="http://creativecommons.org/licenses/by-nc-sa/3.0/de/">http://creativecommons.org/licenses/by-nc-sa/3.0/de/</a>.</p>
+
+<p>The programs presented here are mostly so simple as to be trivial, and as such, they should not be able to cause any damage. However, as Murphy once noted, there is always the potential for something to go horribly wrong, and so I hereby explicitly state that</p>
+
+<p>The code here (including but not limited to the code in the pages for the individual sessions) is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.</p>
+
+<p>Think before you type: I’m not responsible if you blindly copy and paste code and something bad happens.</p>
+
+<p>Longer programs are licensed under the GPL v2, as noted in their respective source files.</p>
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/Uni-Marburg-IGS-Statistik">Uni-Marburg-IGS-Statistik</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+    
+  </body>
+</html>
