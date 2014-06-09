@@ -38,29 +38,29 @@
 library(ggplot2)
 
 # und danach die Daten:
-body <- read.table("Data/body_dim_long.tab",header=TRUE) 
+body <- read.table("Schwarzs/body_dim_long.tab",header=TRUE) 
 
 # Wir werden auch den Datensatz women nutzen, der schon mit R geliefert wird.
 # Mehr Information zum Datensatz bekommen Sie mit ?women. Die Angaben sind in
 # US-Einheiten, weshalb wir eine Kopie mit den SI-Einheiten machen.
-#women.metric <- women
-#women.metric$height.cm <- women.metric$height * 2.54 # 2.54 cm pro inch
-#women.metric$weight.kg <- women.metric$weight / 2.2 # 2.2 lb pro kg
+women.metric <- women
+women.metric$height.cm <- women.metric$height * 2.54 # 2.54 cm pro inch
+women.metric$weight.kg <- women.metric$weight / 2.2 # 2.2 lb pro kg
 
 # Plotten wir erst mal die Daten in US-Einheiten. Die Bestimmung des
 # method-Parameters ist sehr wichtig: bei so wenigen Datenpunkten ist der
 # Default bei ggplot2 LOESS und wir wollen normale lineare Regression.
-#ggplot(women.metric,aes(x=height,y=weight)) +  geom_point() + geom_smooth(method="lm")
+ggplot(women.metric,aes(x=height,y=weight)) +  geom_point() + geom_smooth(method="lm")
 
 # Ist der Fit gut? Schauen wir uns die Regression an:
-#m <- lm(weight ~ height, data=women.metric)
-#print(summary(m))
+m <- lm(weight ~ height, data=women.metric)
+print(summary(m))
 
 # Aber Pfund (lb) und Zoll (inch) sind komische Einheiten. Wie sieht es aus mit
 # kg und cm?
-#ggplot(women.metric,aes(x=height.cm,y=weight.kg)) +  geom_point() + geom_smooth(method="lm")
-#m2 <- lm(weight.kg ~ height.cm, data=women.metric)
-#print(summary(m2))
+ggplot(women.metric,aes(x=height.cm,y=weight.kg)) +  geom_point() + geom_smooth(method="lm")
+m2 <- lm(weight.kg ~ height.cm, data=women.metric)
+print(summary(m2))
 
 # Sehen die Plots anders aus? Hat sich der R^2 Wert geändert? Die t-Werte? Die Koeffizienten? 
 
@@ -68,7 +68,10 @@ body <- read.table("Data/body_dim_long.tab",header=TRUE)
 # von weight.kg darstellen? Plotten und berechnen Sie das neue Modell, wie ich
 # es oben für die zwei bisherigen Modelle gemacht habe.
 
-# CODE_HIER
+ggplot(women.metric,aes(x=weight.kg.cm,y=height.cm)) +  geom_point() + geom_smooth(method="lm")
+m3 <- lm(height.cm ~ weight.kg, data=women.metric)
+print(summary(m3))
+
 
 # Hat sich der R^2 Wert geändert? Die t-Werte? Die Koeffizienten? Was ist die
 # Beziehung zwischen diesem Modell und m2?
@@ -76,7 +79,9 @@ body <- read.table("Data/body_dim_long.tab",header=TRUE)
 # Wie sieht es aus mit den Daten zum Kursteilnehmern? Plotten Sie und berechnen
 # Sie ein Modell für das Gewicht der Teilnehmer als Funktion von Körpergröße.
 
-# CODE_HIER
+ggplot(body,aes(x=height,y=weight)) +  geom_point() + geom_smooth(method="lm")
+m4 <- lm(weight ~ height, data=body)
+print(summary(m4))
 
 # Warum funktioniert die Regression besser beim Datensatz "women" als bei den
 # Kursteilnehmerdaten? HINT: Lesen Sie die Hilfe-Beschreibung von women! 
