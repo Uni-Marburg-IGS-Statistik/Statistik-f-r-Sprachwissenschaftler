@@ -1,0 +1,42 @@
+% Hausaufgabe 16
+% Phillip Alday <phillip.alday@staff.uni-marburg.de>
+% 2014-06-11
+
+Falls die Umlaute in dieser und anderen Dateien nicht korrekt dargestellt werden, sollten Sie File > Reopen with Encoding > UTF-8 sofort machen (und auf jeden Fall ohne davor zu speichern), damit die Enkodierung korrekt erkannt wird! 
+
+```{r, echo=FALSE}
+# Notwendige Pakete laden
+library(ggplot2)
+library(ez)
+library(xtable)
+library(reshape2)
+suppressPackageStartupMessages(library(knitcitations))
+```
+
+# Die nächsten Punkte sollten langsam automatisch sein...
+1. Kopieren Sie diese Datei in Ihren Ordner (das können Sie innerhalb RStudio machen oder mit Explorer/Finder/usw.) und öffnen Sie die Kopie. Ab diesem Punkt arbeiten Sie mit der Kopie. Die Kopie bitte `hausaufgabe16.Rmd` nennen und nicht `Kopie...`
+2. Sie sehen jetzt im Git-Tab, dass der neue Ordner als unbekannt (mit gelbem Fragezeichen) da steht. Geben Sie Git Bescheid, dass Sie die Änderungen im Ordner verfolgen möchten (auf Stage klicken). Die neue Datei steht automatisch da.
+3. Machen Sie ein Commit mit den bisherigen Änderungen (schreiben Sie eine sinnvolle Message dazu -- sinnvoll bedeutet nicht unbedingt lang) und danach einen Push.
+4. Ersetzen Sie meinen Namen oben mit Ihrem. Klicken auf Stage, um die Änderung zu merken.
+5. Ändern Sie das Datum auf heute. (Seien Sie ehrlich! Ich kann das sowieso am Commit sehen.)
+6. Sie sehen jetzt, dass es zwei Symbole in der Status-Spalte gibt, eins für den Zustand im *Staging Area* (auch als *Index* bekannt), eins für den Zustand im Vergleich zum Staging Area. Sie haben die Datei modifiziert, eine Änderung in das Staging Area aufgenommen, und danach weitere Änderungen gemacht. Nur Änderungen im Staging Area werden in den Commit aufgenommen.
+7. Stellen Sie die letzten Änderungen auch ins Staging Area und machen Sie einen Commit (immer mit sinnvoller Message!).
+8. Vergessen Sie nicht am Ende, die Lizenz ggf. zu ändern!
+
+# Diamonds are forever 
+Bisher haben Sie von mir mehr oder weniger vollständige Analysen bekommen, bei denen Sie im Prinzip nur einzelne Schritte einfügen müssten. Es wird allerdings langsam Zeit, dass Sie eine eigenständige Analyse ausführen. Sie haben das bei der Analyse vom Priming Experiment mittels ANOVA fast gemacht, aber auch da haben Sie viel von mir vorgefertigt bekommen. Für die Aufgaben heute werden Sie den Datensatz `diamonds` aus `ggplot2` bearbeiten. Schauen Sie sich die Beschreibung des Datensatzes an
+
+```{r, eval=FALSE}
+?diamonds
+```
+<div style="border: 2px solid black; padding: 5px">
+```{r, echo=FALSE, results='asis'}
+tools:::Rd2HTML(utils:::.getHelpFile(help(diamonds)),stylesheet="")
+```
+</div>
+
+
+Schauen Sie sich auch [das *ggplot* Buch](http://dx.doi.org/10.1007/978-0-387-98141-3), v.a. Abbildungen 4.7, 4.8, 4.9, 5.2, 5.3, 5.4, 5.6, 5.14, 7.16, 9.1 Kapitel 2.2-2.5
+
+# Lizenz
+Dieses Werk ist lizenziert unter einer CC-BY-NC-SA Lizenz.
