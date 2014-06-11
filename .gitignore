@@ -5,12 +5,8 @@
 .Rproj.user
 *.Rproj
 .DS_Store
-*.html
 .RData
-Folien/*-figure/
-Folien/*.md
 *.out
 *.aux
 *.synctex.gz
 *.log
-hausaufgaben.html
