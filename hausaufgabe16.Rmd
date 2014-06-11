@@ -29,14 +29,32 @@ Bisher haben Sie von mir mehr oder weniger vollständige Analysen bekommen, bei 
 ```{r, eval=FALSE}
 ?diamonds
 ```
-<div style="border: 2px solid black; padding: 5px">
+<div style="border: 2px solid black; padding: 5px; font-size: 80%;">
 ```{r, echo=FALSE, results='asis'}
 tools:::Rd2HTML(utils:::.getHelpFile(help(diamonds)),stylesheet="")
 ```
 </div>
 
+Die Aufgabe ist: eine Ausgangsfrage und die darauf folgenden Anschlussfragen statisch zu beantworten. Sie können auch einige kleinere Fragen als Gruppe behandeln. Sie haben frei Wahl von Methoden und Fragen, aber sie müssen natürlich zueinander passen!
 
-Schauen Sie sich auch [das *ggplot* Buch](http://dx.doi.org/10.1007/978-0-387-98141-3), v.a. Abbildungen 4.7, 4.8, 4.9, 5.2, 5.3, 5.4, 5.6, 5.14, 7.16, 9.1 Kapitel 2.2-2.5
+ein paar mögliche Ausgangsfragen:
+
+* Was bestimmt den Preis eines Diamenten?
+* Was bestimmt das Gewicht  eines Diamenten? Hat Farbe oder Klarheit eine Auswirkung daruf oder bloß Volumen?
+* Gibt es einen Zusammenhang zwischen den verschieden Dimensionen ("Längen")? 
+* Gibt es einen Zusammenhang zwischen Farbe und Klarheit? Zwischen Farbe und Carat? Zwischen Farbe und Tiefe?
+* ...
+
+*Vergessen Sie dabei nicht, dass wir bisher nur Methoden gelernt haben, wo die abhängige Variable zumindest intevallskaliert ist!*
+
+Sie können sich auch [das *ggplot* Buch](http://dx.doi.org/10.1007/978-0-387-98141-3) zur Inspiration anschauen, v.a. Abbildungen 4.7, 4.8, 4.9, 5.2, 5.3, 5.4, 5.6, 5.14, 7.16, 9.1  und Kapitel 2.2-2.5 könnten wirken. Den Code zur Erstellung der Figuren findet man immer im Haupttext.
+
+
+```{r}
+ggplot(diamonds,aes(x=carat,y=price,color=color)) + geom_point()
+ggplot(diamonds,aes(x=carat,y=price,color=color)) + geom_point(alpha=0.3)
+ggplot(diamonds,aes(x=carat,y=price,color=color)) + geom_point() + facet_wrap(~color)
+```
 
 # Lizenz
 Dieses Werk ist lizenziert unter einer CC-BY-NC-SA Lizenz.
