@@ -102,6 +102,7 @@ Die Reihe *Use R!* von Springer ist **kostenlos** über das Uni-Netz elektronisc
 * [Git -- the simple guide](http://rogerdudler.github.io/git-guide/)
 * [Literate programming, version control, reproducible research, collaboration, and all that](http://rpubs.com/bbolker/3153)
 * [Handy statistical lexicon](http://andrewgelman.com/2009/05/24/handy_statistic/)
+* [R for Cats](http://rforcats.net/)
 
 # ShinyApps
 * [Optional Stopping](https://palday.shinyapps.io/optional_stopping/)
