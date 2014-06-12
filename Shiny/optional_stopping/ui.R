@@ -28,6 +28,7 @@ shinyUI(fluidPage(
                                 ,"Significance Threshold"
                                 ,min = 0.001
                                 ,max = 0.1
+                                ,format = "#.###"
                                 ,value = 0.05)
                 , h5("Advanced Settings")
                 , numericInput("n"
