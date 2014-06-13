@@ -49,7 +49,41 @@ Mögliche Ausgangsfragen sind unter anderem:
 
 Sie können sich auch [das *ggplot* Buch](http://dx.doi.org/10.1007/978-0-387-98141-3) zur Inspiration anschauen, v.a. Abbildungen 4.7, 4.8, 4.9, 5.2, 5.3, 5.4, 5.6, 5.14, 7.16, 9.1  und Kapitel 2.2-2.5 könnten inspirierend wirken. Den Code zur Erstellung der Figuren findet man immer im Haupttext.
 
-**Originale Fragestellungen und Auswertungen werden mit Bonuspunkten belohnt!** 
+**Originelle Fragestellungen und Auswertungen werden mit Bonuspunkten belohnt!** 
+
+
+### Aufgabenstellung:
+Was bestimmt den Preis eines Diamanten?
+
+#### Plots
+Um einen ersten Eindruck der Daten zu erhalten, sollte man diese plotten. Die Haupthypothese könnte folgende sein: je mehr Karat ein Diamant besitzt, desto teurer ist er. Aber vielleicht beieinflussen auch Farbe, Schliff und Reinheit den Preis.
+
+```{r}
+ggplot(diamonds,aes(x=carat,y=price)) + geom_point()
+ggplot(diamonds,aes(x=carat,y=price,color=color)) + geom_point(alpha=0.5)
+ggplot(diamonds,aes(x=carat,y=price,color=cut)) + geom_point(alpha=0.5)
+ggplot(diamonds,aes(x=carat,y=price,color=clarity)) + geom_point(alpha=0.5)
+```
+Versuchen wir mal, die Beziehung von Karat und Preis durch eine lineare Regression darzustellen:
+
+```{r}
+ggplot(diamonds,aes(x=carat,y=price)) + geom_point() + geom_smooth(method="lm")
+
+```
+Vielleicht besser mit logarithmischen Skalen?
+
+```{r}
+ggplot(diamonds,aes(x=carat,y=price)) + geom_point() + geom_smooth(method="lm") + scale_x_log10() + scale_y_log10()
+
+```
+Ob Karat ein guter Prädiktor für den Preis eines Diamanten ist, können wir mit linearer Regression auch statistisch testen:
+
+```{r}
+summary(lm(price~carat, diamonds))
+
+```
+Die Abhängigkeit von Preis und Karat wird als signifikant angegeben, mit einem R^2 von 84.93%.
+
 
 Hier ein paar Grafiken (auch im Buch zu finden):
 ```{r}
