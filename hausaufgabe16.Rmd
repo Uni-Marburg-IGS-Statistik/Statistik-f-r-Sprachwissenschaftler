@@ -35,12 +35,12 @@ tools:::Rd2HTML(utils:::.getHelpFile(help(diamonds)),stylesheet="")
 ```
 </div>
 
-Die Aufgabe ist: eine Ausgangsfrage und die darauf folgenden Anschlussfragen statistisch zu beantworten. Sie können auch einige kleinere Fragen als Gruppe behandeln. Sie haben frei Wahl von Methoden und Fragen, aber sie müssen natürlich zueinander passen!
+Die Aufgabe ist: eine Ausgangsfrage und die darauf folgenden Anschlussfragen statistisch zu beantworten. Sie können auch einige kleinere Fragen als Gruppe behandeln. Sie haben freie Wahl von Methoden und Fragen, aber sie müssen natürlich zueinander passen!
 
 Mögliche Ausgangsfragen sind unter anderem:
 
-* Was bestimmt den Preis eines Diamenten?
-* Was bestimmt das Gewicht eines Diamenten? Hat Farbe oder Klarheit eine Auswirkung daruf oder bloß Volumen?
+* Was bestimmt den Preis eines Diamanten?
+* Was bestimmt das Gewicht eines Diamanten? Hat Farbe oder Klarheit eine Auswirkung daruf oder bloß Volumen?
 * Gibt es einen Zusammenhang zwischen den verschieden Dimensionen ("Längen")? 
 * Gibt es einen Zusammenhang zwischen Farbe und Klarheit? Zwischen Farbe und Carat? Zwischen Farbe und Tiefe?
 * ...
@@ -49,7 +49,7 @@ Mögliche Ausgangsfragen sind unter anderem:
 
 Sie können sich auch [das *ggplot* Buch](http://dx.doi.org/10.1007/978-0-387-98141-3) zur Inspiration anschauen, v.a. Abbildungen 4.7, 4.8, 4.9, 5.2, 5.3, 5.4, 5.6, 5.14, 7.16, 9.1  und Kapitel 2.2-2.5 könnten inspirierend wirken. Den Code zur Erstellung der Figuren findet man immer im Haupttext.
 
-**Originale Fragestellungen und Auswertungen werden mit Bonuspunkten belohnt!** 
+**Originelle Fragestellungen und Auswertungen werden mit Bonuspunkten belohnt!** 
 
 Hier ein paar Grafiken (auch im Buch zu finden):
 ```{r}
