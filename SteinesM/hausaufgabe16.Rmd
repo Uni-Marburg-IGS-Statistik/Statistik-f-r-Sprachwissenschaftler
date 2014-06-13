@@ -101,8 +101,18 @@ Ob Karat ein guter Prädiktor für den Preis eines Diamanten ist, können wir mi
 summary(lm(price ~ carat, diamonds))
 
 ```
-Die Abhängigkeit von Preis und Karat wird als signifikant angegeben, mit einem R^2 von 84.93% für die Formel price = -2256.4 + carat * 7756.4
-Ein Teil der Varianz bleibt also noch unaufgeklärt. Sprich der Preis eines Diamanten hängt nicht *allein* von Karat ab. Da die Angaben zu Farbe, Schliff und Reinheit der Diamanten nicht intervallskaliert sind, kommen wir hier mit linearer Regression nicht weiter. Wir können allerdings schnell die Hypothese testen und bestätigen, dass der Karatwert eines Diamanten selbst, der aus dessen Gewicht hervorgeht, stark vom Volumen abhängt:
+Die Abhängigkeit von Preis und Karat wird als signifikant angegeben, mit einem R^2 von 84.93% für die Formel "price = -2256.4 + carat * 7756.4"
+
+Ein Teil der Varianz bleibt also noch unaufgeklärt. Sprich der Preis eines Diamanten hängt nicht *allein* von Karat ab. 
+Allerdings erzeugt die logarithmische Transformation der Daten ein Modell mit einem noch besseren Fit. Das deutet eventuell darauf hin, dass es eher einen exponentiellen statt eines linearen Zusammenhangs gibt. 
+
+```{r}
+summary(lm(log10(price) ~ log10(carat), diamonds))
+
+```
+
+
+Da die Angaben zu Farbe, Schliff und Reinheit der Diamanten nicht numerisch skaliert sind, kommen wir hier mit linearer Regression nicht weiter. Wir können allerdings schnell die Hypothese testen und bestätigen, dass der Karatwert eines Diamanten selbst, der aus dessen Gewicht hervorgeht, stark vom Volumen abhängt:
 
 ```{r}
 summary(lm(carat ~ x + y + z, diamonds))
@@ -116,6 +126,21 @@ summary(aov(price ~ color*cut*clarity, data=diamonds))
 
 ```
 Hier werden sowohl die Haupteffekte als auch die Interaktionen als signifikant angezeigt. Alle drei Eigenschaften der Diamanten scheinen sich also irgendwie auf den Preis auszuwirken.
+
+Man könnte allerdings versuchen, durch Umwandlung der Daten mit as.numeric doch noch eine lineare Regression mit allen Variablen zu rechnen. (bei der Umwandlung der Reinheitswerte wird die Reihenfolge nicht eingehalten, daher werden sie in die Analyse nicht aufgenommen!):
+
+
+```{r}
+diamonds$cut.num <- as.numeric(diamonds$cut)
+diamonds$color.num <- as.numeric(diamonds$color)
+diamonds$clarity.num <- as.numeric(diamonds$clarity) 
+head(diamonds)
+
+summary(lm(price ~ carat * color.num * cut.num, data=diamonds))
+
+```
+Die Regression deutet im Gegensatz zur ANOVA darauf hin, dass Farbe doch keinen entscheidenden Einfluss auf den Preis hat. 
+
 
 # Lizenz
 Dieses Werk ist lizenziert unter einer CC-BY-NC-SA Lizenz.
