@@ -15,6 +15,94 @@ Diese Veranstaltung bietet eine praktische Einführung in statistische Verfahren
 
 # Ablauf
 
+<<<<<<< HEAD
+Woche | Datum          | Themen
+----- | -------------- | ----------------------------------------------------------
+01.   | **14.04.2014** | Formalia, Einführung, (Textdateien &) DVCS, Warm-Up: Kombinatorik
+|     | **15.04.2014** | Warum Statistik? R, RStudio, Git
+02.   | **21.04.2014** | fällt aus! (Ostermontag) Ersatz-Lektüre: Stevens (1946)
+|     | **22.04.2014** | Warum Statistik? Ziele der Forschung, Modelle, Beschreibungsstatistik  I (Maße der zentralen Tendenz)
+|     |                | *Hausaufgabe bis 28.04.2014, 12 Uhr:* (in der Reihenfolge machen!)
+|     |                | 1. `hausaufgabe03a.Rmd`
+|     |                | 2. `hausaufgabe03b.R` 
+03.   | **28.04.2014** | Beschreibungsstatistik  II: Dispersions- und Streuungsmaße
+|     |                | *Hausaufgabe bis 29.04.2014 8 Uhr:*
+|     |                | 1. An Fragenbogen "Verteilungen" (bei ILIAS) teilnehmen
+|     |                | 2. Handout zu Logarithmen anschauen 
+|     | **29.04.2014** | Visualisierung der Daten: `ggplot2`-Basics
+|     |                | *Hausaufgabe bis 05.05.2014 12 Uhr:*
+|     |                | 1. `hausaufgabe05.R`
+04.   | **05.05.2014** | Auf dem Weg zu Interferenzstatistik: $z$-Tranformation, Wahrscheinlichkeitsverteilungen, Population vs. Stichprobe
+|     |                | *Hausaufgabe bis 06.05.2014 10 Uhr:*
+|     |                | Lesen Sie:
+|     |                | 1. [wie Statistik oft misbraucht wird](http://www.cracked.com/article_20318_the-5-most-popular-ways-statistics-are-used-to-lie-to-you.html).
+|     |                | 2. [warum es in den letzten Jahren eine Krise in der Wissenschaft gibt](http://www.economist.com/news/briefing/21588057-scientists-think-science-self-correcting-alarming-degree-it-not-trouble).
+|     | **06.05.2014** | Statistische Inteferenz, $p$-Werte, Intuition von "Messfehler" und "Wahrscheinlichkeit", Fehler-Arten
+|     |                | *Hausaufgabe bis 12.05.2014 12 Uhr:*
+<<<<<<< HEAD
+|     |                | 1. 
+=======
+|     |                | 1. `hausaufgabe07.Rmd`
+<<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> 14eddcd829fd99180683def70ccd1c188bc78981
+05.   | **12.05.2014** |  Frequentism vs Bayes
+=======
+05.   | **12.05.2014** | Mehr zu Stichproben, Vergleich von Gruppen ($t$-Test) und Confidence-Intervale, evtl. [BEST](http://www.indiana.edu/~kruschke/BEST/) (etwa bayes'scher $t$-Test) und Credible-Intervale  
+>>>>>>> 670bfbd1cf6479612ad7facdfe5cbf5bf6e1ca41
+|     | **13.05.2014** | Interferenz in der Praxis: Der Sinn von statischen Tests, neuartige Fehler 
+06.   | **19.05.2014** | ANOVA I
+|     | **20.05.2014** | ANOVA II
+07.   | **26.05.2014** | ANOVA III
+|     | **27.05.2014** | ANOVA IV (evtl. auch Fixed vs. Random Effects à Clark 1973)
+=======
+05.   | **12.05.2014** | Mehr zu Stichproben, Vergleich von Gruppen ($t$-Test), Erwähnung von Confidence-Intervalen und . [BEST](http://www.indiana.edu/~kruschke/BEST/) (etwa bayes'scher $t$-Test) 
+|     |                | *Hausaufgabe bis 13.05.2014 10 Uhr:*
+|     |                | 1. Schauen Sie sich [das Video zu BEST](https://www.youtube.com/watch?v=fhw1j1Ru2i0) BEST an.
+|     | **13.05.2014** | Vergleich von Gruppen ($t$-Test) II: Voraussetzungen und Varianten
+|     |                | *Hausaufgabe bis 19.05.2014 12 Uhr:*
+|     |                | 1. `hausaufgabe09.R`
+06.   | **19.05.2014** | Confidence und Credible-Intervale, BEST, Interferenz in der Praxis: Der Sinn von statischen Tests, neuartige Fehler, Unterschiede in frequentistischen und bayes'schen Aussagen
+<<<<<<< HEAD
+|     | **20.05.2014** | ANOVA I
+07.   | **26.05.2014** | ANOVA II
+|     | **27.05.2014** | ANOVA III (evtl. auch Fixed vs. Random Effects à Clark 1973)
+>>>>>>> 2d35a226033d802734551a5f346bca9d24ad9652
+=======
+|     | **20.05.2014** | Intervale II
+|     |                | *Hausaufgabe bis 26.05.2014 12 Uhr:*
+|     |                | 1. Shiny apps anschauen
+|     |                | 2. sich erholen
+07.   | **26.05.2014** | ANOVA I
+|     | **27.05.2014** | ANOVA II (evtl. auch Fixed vs. Random Effects à Clark 1973)
+<<<<<<< HEAD
+>>>>>>> c36f07d9f256c9b799dd8239e71bbc1fb7028ae8
+08.   | **02.06.2014** | lineare Regression I 
+|     | **03.06.2014** | lineare Regression II
+=======
+|     |                | *Hausaufgabe bis 02.06.2014 12 Uhr:*
+|     |                | 1. `hausaufgabe13.Rmd`
+08.   | **02.06.2014** | ANOVA III: Auswertung und Interpretation 
+|     | **03.06.2014** | lineare Regression I
+<<<<<<< HEAD
+>>>>>>> 77ec6190ffbcb1ad4b90eced493c7efe9afa1712
+=======
+|     |                | *Hausaufgabe bis 10.06.2014 10 Uhr:*
+|     |                | 1. `hausaufgabe15.R`
+>>>>>>> 943b475e5b5d412589dee0355d365d7a12d12a89
+09.   | **09.06.2014** | fällt aus! (Pfingstmontag)
+|     | **10.06.2014** | lineare Regression II, evtl. Korrelationen  
+10.   | **16.06.2014** | Korrelationen I
+|     | **17.06.2014** | das generalisierte lineare Model (GLM), logit-Regression
+11.   | **23.06.2014** | gemischte Modelle I
+|     | **24.06.2014** | gemischte Modelle II
+12.   | **30.06.2014** | $\chi^2$, logLikelihood & Likelihood-Ratio 
+|     | **01.07.2014** | Nicht-parametrische Tests I 
+13.   | **07.07.2014** | Nicht-parametrische Tests II
+|     | **08.07.2014** | Experimentaldesign
+14.   | **14.07.2014** | Fragestunde / Puffer
+|     | **15.07.2014** | Klausur
+=======
 |Woche | Datum          | Themen
 |------| -------------- | ------------------------------------------------------------------
 | 01.  | **14.04.2014** | Formalia, Einführung, (Textdateien &) DVCS, Warm-Up: Kombinatorik 
@@ -72,6 +160,7 @@ Diese Veranstaltung bietet eine praktische Einführung in statistische Verfahren
 |      | **08.07.2014** | Experimentaldesign
 | 14.  | **14.07.2014** | Fragestunde / Puffer
 |      | **15.07.2014** | Klausur
+>>>>>>> dc0daed959e599346ae31770f7e14433e01164c4
 
 # Software
 - [R](http://cran.r-project.org/)

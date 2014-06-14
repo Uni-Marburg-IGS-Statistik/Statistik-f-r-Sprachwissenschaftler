@@ -57,7 +57,30 @@ shinyServer(function(input, output) {
     names(sample.means) <- c("sample","mean")
     #sorted.means <- sort(sample.means$mean)
     
+<<<<<<< HEAD
+    #bw <- diff(range(sample.means$mean)) / input$n
+    bw <- input$bw
+<<<<<<< HEAD
+    m <- ggplot(sample.means) + geom_histogram(aes(x=mean,y=..density..),binwidth=bw,color="black",alpha=0.9,position="dodge") +  geom_vline(xintercept=left,color="darkred") +  geom_vline(xintercept=right,color="darkred")
+    dist <- ggplot(samples) + geom_density(aes(x=value)) +  
+      # geom_vline(aes(xintercept=mean(value)), color="darkred") +
+=======
+    m <- ggplot(sample.means) + 
+      geom_histogram(aes(x=mean,y=..density..),binwidth=bw,color="black",alpha=0.9,position="dodge") +  
+      scale_x_continuous(limits=c(-4,4)) + 
+      geom_vline(xintercept=left,color="darkred") +  
+      geom_vline(xintercept=right,color="darkred")
+    dist <- ggplot(samples) + geom_density(aes(x=value)) +  
+      # geom_vline(aes(xintercept=mean(value)), color="darkred") +
+      scale_x_continuous(limits=c(-4,4)) + 
+>>>>>>> 2d35a226033d802734551a5f346bca9d24ad9652
+      facet_wrap(~sample) + theme(strip.background = element_blank(),strip.text.x = element_blank()) 
+    plots <- list(distributions=dist,means=m)
+  
+    plots  
+=======
     list(population=population, cis=cis, sample.means=sample.means, samples=samples)
+>>>>>>> c36f07d9f256c9b799dd8239e71bbc1fb7028ae8
   })
 
   output$sample.distributions <- renderPlot({
@@ -87,6 +110,17 @@ shinyServer(function(input, output) {
   })
 
   output$population.distribution <- renderPlot({
+<<<<<<< HEAD
+    population <- get.population()
+<<<<<<< HEAD
+    print(qplot(population,geom="density") +  geom_vline(xintercept=mean(population), color="darkred") )
+=======
+    popplot <- qplot(population,geom="density") +  
+      scale_x_continuous(limits=c(-4,4)) + 
+      geom_vline(xintercept=mean(population), color="darkred")
+    print(popplot)
+>>>>>>> 2d35a226033d802734551a5f346bca9d24ad9652
+=======
     x <- runSimulation()
     cis <- x$cis
     population <- x$population
@@ -104,5 +138,6 @@ shinyServer(function(input, output) {
       pop <- pop + geom_segment(aes(x=left,xend=right,y=0,yend=0),size=3,data=cis,alpha=0.1) 
     
     print(pop)
+>>>>>>> c36f07d9f256c9b799dd8239e71bbc1fb7028ae8
   })
 })

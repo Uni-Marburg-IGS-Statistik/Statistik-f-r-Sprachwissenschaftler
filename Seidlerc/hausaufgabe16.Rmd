@@ -1,6 +1,6 @@
 % Hausaufgabe 16
-% Phillip Alday <phillip.alday@staff.uni-marburg.de>
-% 2014-06-11
+% Carmen Seidler <seidlerc@students.uni-marburg.de>
+% 2014-06-12
 
 Falls die Umlaute in dieser und anderen Dateien nicht korrekt dargestellt werden, sollten Sie File > Reopen with Encoding > UTF-8 sofort machen (und auf jeden Fall ohne davor zu speichern), damit die Enkodierung korrekt erkannt wird! 
 
@@ -35,21 +35,12 @@ tools:::Rd2HTML(utils:::.getHelpFile(help(diamonds)),stylesheet="")
 ```
 </div>
 
-<<<<<<< HEAD
 Die Aufgabe ist: eine Ausgangsfrage und die darauf folgenden Anschlussfragen statistisch zu beantworten. Sie können auch einige kleinere Fragen als Gruppe behandeln. Sie haben frei Wahl von Methoden und Fragen, aber sie müssen natürlich zueinander passen!
 
 Mögliche Ausgangsfragen sind unter anderem:
 
 * Was bestimmt den Preis eines Diamenten?
 * Was bestimmt das Gewicht eines Diamenten? Hat Farbe oder Klarheit eine Auswirkung daruf oder bloß Volumen?
-=======
-Die Aufgabe ist: eine Ausgangsfrage und die darauf folgenden Anschlussfragen statistisch zu beantworten. Sie können auch einige kleinere Fragen als Gruppe behandeln. Sie haben freie Wahl von Methoden und Fragen, aber sie müssen natürlich zueinander passen!
-
-Mögliche Ausgangsfragen sind unter anderem:
-
-* Was bestimmt den Preis eines Diamanten?
-* Was bestimmt das Gewicht eines Diamanten? Hat Farbe oder Klarheit eine Auswirkung daruf oder bloß Volumen?
->>>>>>> 5685cb376739e1c60a38fc5e7d6ede01aec31668
 * Gibt es einen Zusammenhang zwischen den verschieden Dimensionen ("Längen")? 
 * Gibt es einen Zusammenhang zwischen Farbe und Klarheit? Zwischen Farbe und Carat? Zwischen Farbe und Tiefe?
 * ...
@@ -58,11 +49,7 @@ Mögliche Ausgangsfragen sind unter anderem:
 
 Sie können sich auch [das *ggplot* Buch](http://dx.doi.org/10.1007/978-0-387-98141-3) zur Inspiration anschauen, v.a. Abbildungen 4.7, 4.8, 4.9, 5.2, 5.3, 5.4, 5.6, 5.14, 7.16, 9.1  und Kapitel 2.2-2.5 könnten inspirierend wirken. Den Code zur Erstellung der Figuren findet man immer im Haupttext.
 
-<<<<<<< HEAD
 **Originale Fragestellungen und Auswertungen werden mit Bonuspunkten belohnt!** 
-=======
-**Originelle Fragestellungen und Auswertungen werden mit Bonuspunkten belohnt!** 
->>>>>>> 5685cb376739e1c60a38fc5e7d6ede01aec31668
 
 Hier ein paar Grafiken (auch im Buch zu finden):
 ```{r}
@@ -73,6 +60,83 @@ ggplot(diamonds,aes(x=carat,y=price,color=color)) + geom_point() + facet_wrap(~c
 
 # Noch eine Überlegung
 Haben Sie dabei explorativ oder konfirmativ gearbeitet? Was hat das für eine Auswirkung auf die Interpretation der Ergebnisse?
+
+
+#Analyse
+
+1) Was bestimmt den Preis eines Diamanten?
+- Überlegung: Je mehr Karat ein Diamat hat, umso teurer ist er. Farbe, Schliff und Reinheit haben ebeso Auswirkungen auf den Preis 
+
+--> plotten
+
+```{r}
+  ggplot(diamonds,aes(x=carat,y=price)) + geom_point()
+  ggplot(diamonds,aes(x=carat,y=price,color=color)) + geom_point(alpha=0.5)
+  ggplot(diamonds,aes(x=carat,y=price,color=cut)) + geom_point(alpha=0.5)
+  ggplot(diamonds,aes(x=carat,y=price,color=clarity)) + geom_point(alpha=0.5)
+```
+
+--> Lineare Regression um die Beziehung von Karat und Preis darzustellen
+
+```{r}
+  ggplot(diamonds,aes(x=carat,y=price)) + geom_point() + geom_smooth(method="lm")
+  
+```
+/ log. Skalen
+
+```{r}
+  ggplot(diamonds,aes(x=carat,y=price)) + geom_point() + geom_smooth(method="lm") + scale_x_log10() + scale_y_log10()
+ 
+```
+
+Mit einer linearen Regression kann statistisch nachvollzogen werden, ob Karat ein Prädikator für den Preis ist.
+
+```{r}
+  summary(lm(price ~ carat, diamonds))
+  
+```
+
+Abhängigkeit von Preis und Karakt ist signifikaten mit einem R^2 von 84.93% der Formel "price = -2256.4 + carat * 7756.4"
+
+Damit ist nicht alle Varianz erklärt, denn der Preis eines Diamanten hängt nicht nur von dessen Karat ab.
+Die log. Transformation der Daten erzeugt ein Modell mit einem noch besseren Fit, daher gibt es eher einen exponentiellen statt einem linearen Zusammenhang:
+
+```{r}
+ summary(lm(log10(price) ~ log10(carat), diamonds))
+ 
+```
+
+Problem: Farbe, Schliff und Reinheit sind nicht numerisch skaliert, sodass eine lineare Regression nicht möglich ist. Die Hypothese, dass der Karatwert (=Gewicht des Diamanten x*0,2=xGramm) vom Volumen abhängt lässt sich bestätigen:
+
+```{r}
+  summary(lm(carat ~ x + y + z, diamonds))
+  
+```
+
+2) ANOVA
+- Überprüfung ob es einen preislichen Unterschied zwischen Farbe, Schliff und Reinheitsgraden gibt (unterschiedliche Gruppengröße=verzerrtes Ergebnis)
+
+```{r}
+  summary(aov(price ~ color*cut*clarity, data=diamonds))
+  
+```
+
+-- Haupteffekte und Interaktionen sind signifikant = Auswirkung auf Preis des Diamanten
+
+ABER:
+
+- as.numeric für lineare Regression zeigt ein leicht anderes Ergebnis
+
+```{r}
+ diamonds$cut.num <- as.numeric(diamonds$cut)
+ diamonds$color.num <- as.numeric(diamonds$color)
+ diamonds$clarity.num <- as.numeric(diamonds$clarity) 
+ head(diamonds)
+ 
+ summary(lm(price ~ carat * color.num * cut.num, data=diamonds))
+ 
+```
+Aus der linearen Regression geht, im Gegensatz zur ANOVA, hervor, dass die Farbe eines Diamanten scheinbar doch keinen Einfluss auf den Preis hat. 
 
 # Lizenz
 Dieses Werk ist lizenziert unter einer CC-BY-NC-SA Lizenz.

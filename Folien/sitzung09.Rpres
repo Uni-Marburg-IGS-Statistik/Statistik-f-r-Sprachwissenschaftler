@@ -5,7 +5,10 @@ date: 2014-05-13
 autosize: false
 
 ```{r setup, include=FALSE}
+<<<<<<< HEAD
+=======
 library(knitr)
+>>>>>>> 2d35a226033d802734551a5f346bca9d24ad9652
 opts_chunk$set(cache=TRUE,prompt=TRUE)
 library(knitcitations)
 library(ggplot2)
@@ -28,11 +31,20 @@ Bisher
 - Vergleich von Gruppen ($t$-Test)
 - Confidence-Intervale
 
+<<<<<<< HEAD
+Morgen
+=======
 Heute
+>>>>>>> 2d35a226033d802734551a5f346bca9d24ad9652
 ========
 - Vergleich von Gruppen ($t$-Test) II
 - Mehr zu Confidence-Intervalen
 - evtl. [BEST](http://www.indiana.edu/~kruschke/BEST/) (etwa bayes'scher $t$-Test) und Credible-Intervale  
+<<<<<<< HEAD
+- Interferenz in der Praxis: Der Sinn von statischen Tests, neuartige Fehler 
+
+=======
+>>>>>>> 2d35a226033d802734551a5f346bca9d24ad9652
 
 t-Test für unabhängige Stichproben: Voraussetzungen
 ======================================================
