@@ -1,5 +1,5 @@
 % Hausaufgabe 13
-% Phillip Alday <phillip.alday@staff.uni-marburg.de>
+% Philipp Alday <phillip.alday@staff.uni-marburg.de>
 % 2014-05-27
 
 Falls die Umlaute in dieser und anderen Dateien nicht korrekt dargestellt werden, sollten Sie File > Reopen with Encoding > UTF-8 sofort machen (und auf jeden Fall ohne davor zu speichern), damit die Enkodierung korrekt erkannt wird! 
@@ -212,4 +212,4 @@ CODE_BLOCK_HIER
 
 
 # Lizenz
-Dieses Werk ist lizenziert unter einer CC-BY-NC-SA Lizenz.
+Dieses Werk ist lizenziert unter einer CC-BY-NC-SA Lizenz
