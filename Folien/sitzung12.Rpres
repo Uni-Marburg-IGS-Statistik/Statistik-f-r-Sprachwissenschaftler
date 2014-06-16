@@ -12,7 +12,6 @@ library(ggplot2)
 library(xtable)
 cite_options(tooltip = TRUE
              , linked = TRUE
-             , numerical = TRUE
              , bibtex_data = FALSE)
 ```
 
