@@ -12,6 +12,7 @@ packages.used <- c("knitr","knitcitations"
                    ,"zoo"
                    ,"xtable"
                    ,"ez"
+                   ,"faraway"
                    )
 
 install.packages(packages.used,dependencies = TRUE)
