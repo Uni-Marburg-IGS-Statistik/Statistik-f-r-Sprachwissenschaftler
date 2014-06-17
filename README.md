@@ -66,11 +66,11 @@ Diese Veranstaltung bietet eine praktische Einführung in statistische Verfahren
 |      | **17.06.2014** | Korrelationen I
 |      |                | *Hausaufgabe bis 23.06.2014 12 Uhr:*
 |      |                | 1. `hausaufgabe18.R`
-| 11.  | **23.06.2014** | Korrelationen II
-|      | **24.06.2014** | gemischte Modelle I
-| 12.  | **30.06.2014** | gemischte Modelle II
-|      | **01.07.2014** | $\chi^2$, logLikelihood & Likelihood-Ratio  
-| 13.  | **07.07.2014** | Nicht-parametrische Tests I
+| 11.  | **23.06.2014** | gemischte Modelle I
+|      | **24.06.2014** | gemischte Modelle II
+| 12.  | **30.06.2014** | $\chi^2$, logLikelihood & Likelihood-Ratio  
+|      | **01.07.2014** | Nicht-parametrische Tests I
+| 13.  | **07.07.2014** | Nicht-parametrische Tests II
 |      | **08.07.2014** | Experimentaldesign
 | 14.  | **14.07.2014** | Fragestunde / Puffer
 |      | **15.07.2014** | Klausur
