@@ -112,7 +112,7 @@ pyreg <- read.table("Data/pyreg.tab",header=TRUE)
 # CODE_HIER
 
 # Bevor Sie die Regression y ~ x1 + x2 berechnen, schauen Sie sich die
-# Korrelation (mit CI!) zwischen x1 und x2 an:
+# Korrelation (mit Konfidenzintervall!) zwischen x1 und x2 an:
 
 # CODE_HIER
 
