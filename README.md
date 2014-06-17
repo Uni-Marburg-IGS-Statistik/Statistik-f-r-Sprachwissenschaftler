@@ -64,6 +64,8 @@ Diese Veranstaltung bietet eine praktische Einführung in statistische Verfahren
 |      |                | 1. `hausaufgabe16.Rmd`
 | 10.  | **16.06.2014** | Wiederholung, implizite Darstellung des General Linear Modells (GLM)
 |      | **17.06.2014** | Korrelationen I
+|      |                | *Hausaufgabe bis 23.06.2014 12 Uhr:*
+|      |                | 1. `hausaufgabe18.R`
 | 11.  | **23.06.2014** | Korrelationen II
 |      | **24.06.2014** | gemischte Modelle I
 | 12.  | **30.06.2014** | gemischte Modelle II
