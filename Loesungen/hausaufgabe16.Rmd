@@ -58,8 +58,69 @@ ggplot(diamonds,aes(x=carat,y=price,color=color)) + geom_point(alpha=0.3)
 ggplot(diamonds,aes(x=carat,y=price,color=color)) + geom_point() + facet_wrap(~color)
 ```
 
+# Was bestimmt den Preis eines Diamanten?
+
+## "Subjektive" Schönheit
+Die Eigenschaften cut, color und clarity sind eher "subjektive" (obgleich es Normen gibt, an die die meisten sich halten). Sie sind auch kategorisch, vielleicht gibt uns ANOVA einen schellen eindruck.
+```{r,results='asis'}
+c3.aov <- aov(price  ~ cut*color*clarity,data=diamonds)
+print(xtable(summary(c3.aov)
+             , display=c("s","d","f","f","f","g")
+             , digits= c( 0,  0,  1,  2,  2,  0  )
+             ),type="HTML")
+```
+
+Bemerken Sie dabei, dass wir an manchen Stellen einen $p$-Wert von ` < 2e-16 `, was so viel heißt, dass wir die grenzen der numerischen Verfahren erreicht haben. Mehr dazu kann man [hier](http://stats.stackexchange.com/questions/78839/why-does-r-have-a-minimum-p-value-of-le-2-22e-16-how-should-p-be-reported-in) lesen, aber vielleicht fassen die folgenden Aussagen (auf der verlinkten Seite zu finden) das kurz und knapp genug zusammen:
+
+> This is true, and worth pointing out, but it may also be worth mentioning that in this case the $p$-value should be really thought of **only** as an index of signal strength -- such small $p$-values (sometimes even if corrected for multiple comparisons) are so tiny that the probability that the NSA broke in and tampered with your data (and then brainwashed you so you can't remember) is far, far, higher than the nominal $p$-value. 
+
+(Ben Bolker, einer der Hauptentwickler des wichtigen Pakets `lme4`!)
+
+> Indeed, while less probable than "the NSA tampered with your data", even events like "A cosmic ray flipped several important bits in your data" are far, far more likely than those probabilities. 
+
+(Glen_b, eine bekannte Persönlichkeit auf [CrossValidated](http://stats.stackexchange.com/))
+
+Aber ANOVA sagt uns nur, welche Prediktoren viel Varianz erklären, nicht was die tatsächliche Auswirkung eines Prediktors ist. Dafür brauchen wir lineare Regression -- aber wir wissen schon, dass ANOVA ein Sonderfall von Regression ist. R nutzt sogar versteckt `lm()`, um ANOVA zu berechnen! Nun müssten wir für jede Kategorische Variable entscheiden, was eine sinnvolle Vergleichstufe wäre, was nicht so leicht ist, wenn man wenig über Diamonten weißt. Vielleicht reicht es momentan zu wissen, dass alle drei Color, Cut und Clarity, sowie auch ihre Interaktionen eine signifikante Auswirkung auf den Preis eines Diamanten hat.
+
+# "Objektive" Größe
+Es gibt verschiedene Maße der Größe eines Diamanten, aber ein super "Omnibus"-Modell hat Nachteile, indem es schwierig zu interpretieren ist und fällig für $\alpha$-Fehle ist. (Wie bei ANOVA müssen wir aufpassen, denn wir führen eigentlich halb-versteckt mehrere Tests aus!) Depth kann man direkt von x, y, und z berechnen, und Table korreliert wahrscheinlich auch sehr stark mit x und y (das könnten Sie mittlerweile auch Testen, aber nicht zur Zeit dieser Hausaufgabe...), weshalb wir sie erst mal weglassen. Angenommen, dass Diamonten mehr oder weniger eine feste Dichte haben, ist auch carat (das Gewicht) eine Funktion von x,y, und z, d.h. carat korreliert sehr stark mit x,y und z, weshlab wir das weglassen sollten.
+
+```{r, results='asis'}
+size.lm <- lm(price  ~ x*y*z,data=diamonds)
+size.lm.sum <- summary(size.lm)
+print(xtable(size.lm.sum),type="HTML")
+```
+
+| Modell Fit     |                              |
+|----------------|------------------------------|
+| Maß            |                              |
+| AIC            | `r AIC(size.lm)`.            |
+| Multiple $R^2$ |`r size.lm.sum$r.squared`     |
+| Adjusted $R^2$ |`r size.lm.sum$adj.r.squared` |
+
+
+Wie kurz im Unterricht erwähnt, ist AIC wie $R^2$ und $F$ ein Maß für das Fit eines Modells mit einem wichtigen Unterschied. AIC geht auf Log Likelihood (ein anderes Maß für Fit, mehr dazu später) zurück, hat aber eine "Strafe" für Overfitting durch zu viele Parameter. Das heißt, wenn wir weitere Prediktoren einführen, um ein künstlich gutes Fit zu bekommen, (d.h. ein Modell, dass genau zu den vorhandenen Daten passt, aber sich nicht über weitere Daten hinaus generalisieren lässt), ohne unser Modell wirklich besser zu machen, wird das AIC schlechter. Bei AIC ist kleiner besser, aber es gibt keine absolut "guten" und keine absolut "schlechten" Werte, man muss es immer im Vergleich nutzen. 
+
+Wir könnten natürlich auch Modell mit *nur* carat berechnen
+```{r, results='asis'}
+carat.lm <- lm(price~ carat,data=diamonds)
+carat.lm.sum <- summary(carat.lm)
+print(xtable(carat.lm.sum),type="HTML")
+```
+
+| Modell Fit     |                               |
+|----------------|-------------------------------|
+| Maß            |                               |
+| AIC            | `r AIC(carat.lm)`.            |
+| Multiple $R^2$ |`r carat.lm.sum$r.squared`     |
+| Adjusted $R^2$ |`r carat.lm.sum$adj.r.squared` |
+
+Die Zusammenwirkung der Einzeldimensionen scheint wichtiger zu sein als bloßes Gewicht!
+
 # Noch eine Überlegung
 Haben Sie dabei explorativ oder konfirmativ gearbeitet? Was hat das für eine Auswirkung auf die Interpretation der Ergebnisse?
+
+**Die Fragen sollten Sie sich auf jeden Fall gut überlegen!** Es kommt sehr auf Ihre genaue Analyse an, aber solche Fragen sollte man nach einem Statistik-Kurs beantworten können! *cough, cough*
 
 # Lizenz
 Dieses Werk ist lizenziert unter einer CC-BY-NC-SA Lizenz.
