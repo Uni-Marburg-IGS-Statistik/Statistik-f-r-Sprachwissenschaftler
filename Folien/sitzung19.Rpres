@@ -1,0 +1,281 @@
+Statistik für Sprachwissenschaftler
+========================================================
+author: Phillip M . Alday
+date: 2014-06-23
+autosize: true
+
+```{r setup, include=FALSE}
+library(knitr)
+opts_chunk$set(cache=TRUE,prompt=TRUE)
+library(knitcitations)
+library(ggplot2)
+library(xtable)
+cite_options(tooltip = TRUE
+             , linked = TRUE
+             , bibtex_data = FALSE)
+```
+
+Aufwachen und sich errinnern!
+====================================
+type: section
+
+Bisher
+=======
+- lineare Regression
+- ANOVA mit wiederholten Messwerten
+
+Heute
+========
+- gemischte Modelle
+
+Datensätze für heute: sleepstudy
+===============================================
+```{r}
+library(lme4)
+data(sleepstudy)
+```
+
+Datensatz für heute: sleepstudy
+================================
+```{r, echo=FALSE}
+qplot(x=Days,y=Reaction,data=sleepstudy)
+```
+
+Datensatz für heute: sleepstudy
+================================
+```{r, echo=FALSE}
+qplot(x=Days,y=Reaction,color=Subject,data=sleepstudy)
+```
+
+
+Warum ist Versuchsperson jetzt ein Faktor?
+===================================
+- Fixe versus zufällige Faktoren
+- Fixer Faktor: begrenzte Anzahl an Stufen, die innerhalb der experimentellen Manipulation realisiert werden
+- Zufälliger Faktor: (potentiell) unendliche Anzahl an Stufen; z.B. potentiell unendlich viele Unterschiede in Personenmerkmalen zwischen einzelnen Probanden
+- Person / Proband ist hier ein zufälliger Faktor; Bedingung ist ein fixer Faktor
+- Die Betrachtung von Person als Faktor hilft bei der Quadratsummenzerlegung
+
+Zufällige Faktoren in der Psycho-/Neurolinguistik
+==================================================
+-  In psycho-/neurolinguistischen Studien werden sowohl Probanden als auch unterschiedliche Lexikalisierungen des Materials ("Items") typischerweise als zufällige Faktoren in Varianzanalysen mit Messwiederholung modelliert 
+- Beispiel: RT-Priming Datensatz
+  - 4 Bedingungen
+  - Wiederholungen über Probanden und Items
+- Meist werden Faktoren innerhalb Probanden *und* Items realisiert (evtl. dazu später mehr in einer Sitzung zu experimentellen Design)
+
+Zufällige Faktoren in der Psycho-/Neurolinguistik
+==================================================
+- ANOVA "by participants/subjects" ($F_1$) und ANOVA "by items" ($F_2$) 
+- Probleme: 
+  - was passiert, wenn die zwei ANOVAs unterschiedliche Ergebnisse liefern?
+  - was passiert, wenn es eine Interaktion zwischen Item und Subject gibt?
+  - was passiert, wenn die akkumulierte Variation (zwei Haupteffekte ohne Interkation) einen Schwellenwert der Wirkung erreicht?
+
+Zufällige Faktoren in der Psycho-/Neurolinguistik
+==================================================
+- In allen Fällen werden die Varianzen in der einen Dimension ignoriert, um die Varianzen in die andere Richtung modellieren zu können
+- unterschiedliche $n$ in den zwei Dimensionen -- falscher Nenner für Standardfehler, CIs, usw.
+
+Zufällige Faktoren in der Psycho-/Neurolinguistik
+==================================================
+<small>
+- Überlegungen dazu:
+  - $F_1$ und $F_2$ kombinieren `r citep("10.1016/S0022-5371(73)80014-3")`
+  - $F_1$ reicht unter Umständen aus `r citep("10.1006/jmla.1999.2650")`
+  - ANOVA vergessen, "moderne" Methoden nutzen `r citep(c("10.1016/j.jml.2007.12.005","10.1037/a0028347"))`
+- Blogging dazu (leichter zu lesen, mit vielen Links)
+  - Neuroskeptic  `r citep("http://neuroskeptic.blogspot.co.uk/2012/06/beware-stimulus-effects-in-psychology.html")`
+  - R-Bloggers  `r citep("http://www.r-bloggers.com/the-stimuli-as-a-fixed-effect-fallacy/")`
+</small>
+
+gemischte Modelle 
+==================
+type: section
+
+Linear Mixed Effects Models
+
+Wie werten wir sleepstudy aus?
+================================
+incremental: true
+* ANOVA? 
+* lineare Regression?
+
+Lineare Regression mit wiederholten Messwerten
+================================================
+```{r}
+qplot(x=Days,y=Reaction,data=sleepstudy) + geom_smooth(method="lm")
+```
+
+Lineare Regression mit wiederholten Messwerten
+================================================
+<small>
+```{r}
+summary(lm(Reaction ~ Days,data=sleepstudy))
+```
+</small>
+
+Lineare Regression mit wiederholten Messwerten
+================================================
+- kein besonders tolles Fit!
+- Struktur der Varianz komplett ignoriert
+
+Daten pro Versuchsperson
+==================================
+```{r}
+qplot(x=Days,y=Reaction,data=sleepstudy) + facet_wrap(~Subject)
+```
+
+Regression pro Versuchsperson
+==================================
+```{r}
+qplot(x=Days,y=Reaction,data=sleepstudy) + facet_wrap(~Subject) + geom_smooth(method="lm")
+```
+
+Gemischte  Modelle
+=====================
+* "Gemischt" weil sowohl fixe als auch zufällige Effekte 
+* kleine Erweiterung der Formel-Syntx `dv ~ iv | gruppe`
+* zuzätzliches `(iv|gruppe)` für zufällige Effekte 
+```{r sleep.lmer, eval=TRUE,tidy=FALSE}
+sleep.lmer <- lmer(Reaction ~ Days + (1|Subject),
+                        data=sleepstudy)
+```
+* Mehr zur Formel-Syntax [hier](http://stats.stackexchange.com/questions/18428/formula-symbols-for-mixed-model-using-lme4/61466), [hier](http://stats.stackexchange.com/questions/13166/rs-lmer-cheat-sheet/13173), und [hier](http://stackoverflow.com/questions/16313109/is-there-a-better-reference-for-r-formulas-than-formula)
+```{r formula.help, prompt=TRUE, eval=FALSE,tidy=FALSE}
+?formula
+```
+
+Modell-Zusammenfassung
+=======================
+<small>
+```{r}
+summary(sleep.lmer)
+```
+</small>
+
+Struktur fixer Effekte
+=======================
+* Package `ez`
+    * `ezMixed()` (as a convenience for exploring fixed effects)
+    * `ezPredict()` (useful for plotting regression lines)
+* Package `effects`
+* Package `lmerTest`
+* Package `languageR`
+* Package `LMERConvenienceFunctions`
+* Package `lmtest`
+
+Struktur zufälliger Effekte
+=================================
+* by-subject und by-item Analysen zusammen in einem Schritt machen
+* cf. `r citet("10.1016/S0022-5371(73)80014-3")`
+
+
+Struktur zufälliger Effekte
+=================================
+* Frühere Idee: von der einfachsten / minimalen Struktur aufbauen, bis keine Verbesserungen bei Modell-ANOVA `r citep("http://dx.doi.org/10.1016%2Fj.jml.2007.12.005")`
+* Neue Idee: die komplizierteste Struktur möglich annehmen  `r citep("http://dx.doi.org/10.1016%2Fj.jml.2012.11.001")`
+
+Struktur zufälliger Effekte
+=================================
+* Möglihe RE-Strukturen für EINEN fixen Faktor:
+    1. nur Intercepts nach RE: </br>
+        `(1 | random.factor)`
+    2. nur Anstieg nach RE: </br>
+        `(0 + fixed.factor | random.factor)`
+    3. Intercept und Anstieg nach RE: </br>
+        `(1 + fixed.factor | random.factor)`
+    4. Intercept und Anstieg, getrennt, nach RE: </br>
+        `(1 | random.factor) + (0 + fixed.factor | random.factor)`
+
+Modelle
+===========
+```{r sleep.lmer.randeff, prompt=TRUE, eval=TRUE,results="hide",tidy=FALSE}
+# REML is a "shortcut" that invalidates anova()
+sleep.lmer <- update(sleep.lmer,REML=FALSE)
+# same as (Days|Subject)
+sleep.lmer.slopes <- lmer(Reaction ~ Days + (1+Days|Subject),
+                           data=sleepstudy,REML=FALSE)
+sleep.lmer.slopes.int <- lmer(Reaction ~ Days + (1|Subject) +
+                               (0+Days|Subject),
+                               data=sleepstudy,REML=FALSE)
+```
+
+Modelle vergleichen
+======================
+``` {r sleep.lmer.anova, prompt=TRUE, eval=TRUE}
+    # can only be used for nested models!
+    anova(sleep.lmer,sleep.lmer.slopes, sleep.lmer.slopes.int)
+```
+
+Fit evaluieren
+======================
+* `anova()` Funktion für `lmer()` ähnlich wie ANOVA für `lm()`
+* $\chi^2$ Vergleiche valid nur für genestete Modelle
+* sonst AIC oder BIC nutzen
+    * keine absolut guten oder schlechten Werte
+    * "kleiner ist besser""
+    * schwierig zu sagen, was signifikant besser ist
+    * [Tipps](http://stats.stackexchange.com/questions/8557/testing-the-difference-in-aic-of-two-non-nested-models) [über AIC](http://stats.stackexchange.com/questions/25942/will-aic-and-r-square-rank-models-similarly-if-the-number-of-variables-is-equal)
+* `REML=FALSE` beim Modell-Vergleich!
+
+Beziehung to ANOVA
+=================================
+* `ezANOVA()` abhängig von `aov()`  abhängig von `lm()`
+* `anova()` zum Vergleich von `lm()`s
+* LMs verglichen mit $F$- und $t$-Tests
+* keine stetigen Predikatoren mit ANOVA
+* ANOVA funktioniert über Mittelwerte (entweder über Subjects oder Items) 
+* MEMs funktioniert mit Einzelversuch-Ebene kann mit leeren Zellen und unbalanzierten Designs umgehen!
+
+ezANOVA()
+======================
+```{r ezANOVA, prompt=TRUE, eval=TRUE,tidy=FALSE}
+# hide startup output
+suppressPackageStartupMessages(library(ez))
+sleep.ez <- ezANOVA(sleepstudy,
+                    dv=.(Reaction),
+                    wid=.(Subject),
+                    within=.(Days),
+                    detailed=TRUE,
+            # we'll take a look at the aov() in a sec
+                    return_aov=TRUE) 
+sleep.ez$ANOVA
+```
+
+aov() von ezANOVA()
+============================================
+```{r ezANOVA.aov, prompt=TRUE, eval=TRUE}
+summary(sleep.ez$aov)
+```
+
+
+Formel von aov() von ezANOVA()
+============================================
+```{r ezANOVA.aov.formula, prompt=TRUE, eval=TRUE}
+aov.formula <- formula(attr(sleep.ez$aov,"terms"))
+print(aov.formula,showEnv=FALSE)
+```
+
+
+Weitere Links
+======================
+* Jonathan Harrington (Phonetiker in München):
+    * [Mixed Models](http://www.phonetik.uni-muenchen.de/~jmh/lehre/sem/ws1213/Rspeech/mm.pdf) (in German)
+    * [Generalized Linear Mixed Models](http://www.phonetik.uni-muenchen.de/~jmh/lehre/sem/ss11/statfort/glmm.pdf) (in English)
+* [Tutorial for sociolinguists](http://www2.hawaii.edu/~kdrager/MixedEffectsModels.pdf)
+* [lmer, p-values and all that](https://stat.ethz.ch/pipermail/r-help/2006-May/094765.html)
+* [Understanding `glmer()`output](https://stat.ethz.ch/pipermail/r-sig-mixed-models/2011q1/015591.html)
+* Package `nlme` [(älterer, spezialisiertere MEM-Implementierung)](http://stats.stackexchange.com/questions/5344/how-to-choose-nlme-or-lme4-r-library-for-mixed-effects-models), siehe auch [hier](http://www.opensubscriber.com/message/r-help@stat.math.ethz.ch/5174171.html)
+* Tutorial vom `lme4` coauthor: `r citep("http://dx.doi.org/10.1016%2Fj.tree.2008.10.008")`
+
+
+Bibliography
+=============
+```{r, echo=FALSE,results='hide'}
+```
+<span style="font-size: 10%;">
+```{r,results='asis',echo=FALSE}
+bibliography(style="markdown",bulleted=FALSE)
+```
+</span>
