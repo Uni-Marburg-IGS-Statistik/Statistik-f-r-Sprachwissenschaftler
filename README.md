@@ -107,6 +107,9 @@ Die Reihe *Use R!* von Springer ist **kostenlos** über das Uni-Netz elektronisc
 * [R for Cats](http://rforcats.net/)
 * [R is a language](http://www.quantumforest.com/2012/01/r-is-a-language/)
 * [R Inferno](http://www.burns-stat.com/documents/books/the-r-inferno/)
+* [Try R](http://tryr.codeschool.com/)
+* [Quick-R](http://www.statmethods.net/)
+* [R Links](http://rwiki.sciviews.org/doku.php?id=rugs:r_user_groups) (Community Wiki)
 
 ## Statistik-Hilfe
 * [CrossValidated](http://stats.stackexchange.com/)
