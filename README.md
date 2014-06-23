@@ -94,26 +94,30 @@ Wickham, Hadley (2009): ggplot2. Springer.
 Die Reihe *Use R!* von Springer ist **kostenlos** über das Uni-Netz elektronisch verfügbar!  
 
 # Linksammlung
-* [RMarkdown](http://rmarkdown.rstudio.com/)
+
+## Git, R, Markdown
+* [Literate programming, version control, reproducible research, collaboration, and all that](http://rpubs.com/bbolker/3153)
 * [GitHub Git Cheat Sheet](https://education.github.com/git-cheat-sheet-education.pdf)
 * [GitHub Git Resources](https://help.github.com/articles/what-are-other-good-resources-for-learning-git-and-github)
+* [Git -- the simple guide](http://rogerdudler.github.io/git-guide/)
+* [RMarkdown](http://rmarkdown.rstudio.com/)
 * [R Bloggers](http://www.r-bloggers.com/)
 * [RSeek](http://rseek.org/)
-* [CrossValidated](http://stats.stackexchange.com/)
 * [How to Search for R Materials](http://stackoverflow.com/questions/102056/how-to-search-for-r-materials)
-* [Git -- the simple guide](http://rogerdudler.github.io/git-guide/)
-* [Literate programming, version control, reproducible research, collaboration, and all that](http://rpubs.com/bbolker/3153)
-* [Handy statistical lexicon](http://andrewgelman.com/2009/05/24/handy_statistic/)
 * [R for Cats](http://rforcats.net/)
 * [R is a language](http://www.quantumforest.com/2012/01/r-is-a-language/)
 * [R Inferno](http://www.burns-stat.com/documents/books/the-r-inferno/)
 
-# ShinyApps
+## Statistik-Hilfe
+* [CrossValidated](http://stats.stackexchange.com/)
+* [Handy statistical lexicon](http://andrewgelman.com/2009/05/24/handy_statistic/)
+
+## ShinyApps
 * [Optional Stopping](https://palday.shinyapps.io/optional_stopping/)
 * [Confidence Intervals](https://palday.shinyapps.io/confidence_intervals/)
 * [From the Binomial to the Normal Distribution](https://palday.shinyapps.io/binomial_gaussian/) (Ein Beispiel für den Zentralen Grenzwertsatz)
-    
-# Kommentare zu p-Werten, NHST, und der üblichen statistischen Praxis
+
+## Kommentare zu p-Werten, NHST, und der üblichen statistischen Praxis
 * [Dance of the p-Values](https://www.youtube.com/watch?v=5OL1RqHrZQ8)
 * John Myles White
     1. [Good Tools for Individual Researchers are not Good Tools for Research Communities](http://www.johnmyleswhite.com/notebook/2012/05/10/criticism-1-of-nhst-good-tools-for-individual-researchers-are-not-good-tools-for-research-communities/)
@@ -134,7 +138,7 @@ Die Reihe *Use R!* von Springer ist **kostenlos** über das Uni-Netz elektronisc
     - [P-Values and Statistical Practice](http://www.stat.columbia.edu/~gelman/research/published/pvalues3.pdf)
     - [Ken Rice presents a unifying approach to statistical inference and hypothesis testing](http://andrewgelman.com/2014/04/29/ken-rice-presents-unifying-approach-statistical-inference-hypothesis-testing/)
 
-# Andere Perspektive und Interessantes zur Statistik
+## Andere Perspektive und Interessantes zur Statistik
 * [Famous statistician quotes](http://stats.stackexchange.com/questions/726/famous-statistician-quotes)
 * [Common statistical sins](http://stats.stackexchange.com/questions/4551/what-are-common-statistical-sins)
 * [Modes, Medians and Means: A Unifying Perspective](http://www.johnmyleswhite.com/notebook/2013/03/22/modes-medians-and-means-an-unifying-perspective/)
@@ -159,7 +163,7 @@ Die Reihe *Use R!* von Springer ist **kostenlos** über das Uni-Netz elektronisc
 * [Spurious Correlations](http://www.tylervigen.com/)
 * [How would you explain covariance to someone who understands only the mean?](http://stats.stackexchange.com/questions/18058/how-would-you-explain-covariance-to-someone-who-understands-only-the-mean) Besonders schön ist [whubers Antwort](http://stats.stackexchange.com/a/18200/26743).
 
-# Weitere Links zu spezifischen Themen
+## Weitere Links zu spezifischen Themen
 * Warum gibt es bei manchen Formlen aus der deskriptiven Statistik $n-1$ und bei anderen $n$ als Nenner?
     - [Bessel's Correction](https://en.wikipedia.org/wiki/Bessel%27s_correction)
     - [Korrigierte Stichprobenvarianz](https://de.wikipedia.org/wiki/Bessel-Korrektur)
@@ -175,7 +179,6 @@ Die Reihe *Use R!* von Springer ist **kostenlos** über das Uni-Netz elektronisc
     - *The Signal and the Noise* von Nate Silver
         * Gary Marcus, ["What Nate Silver Gets Wrong"](http://www.newyorker.com/online/blogs/books/2013/01/what-nate-silver-gets-wrong.html)
         * Larry Wasserman, [Nate Silver is a Frequentist](http://normaldeviate.wordpress.com/2012/12/04/nate-silver-is-a-frequentist-review-of-the-signal-and-the-noise/)
-
 * Konfidenz- und Credible Intervale 
     - [Are there any examples where Bayesian credible intervals are obviously inferior to frequentist confidence intervals](http://stats.stackexchange.com/questions/2356/are-there-any-examples-where-bayesian-credible-intervals-are-obviously-inferior)
     - [Why does a 95% CI not imply a 95% chance of containing the mean?](http://stats.stackexchange.com/questions/26450/why-does-a-95-ci-not-imply-a-95-chance-of-containing-the-mean)
