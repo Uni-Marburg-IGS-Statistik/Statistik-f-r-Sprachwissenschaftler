@@ -6,7 +6,7 @@ Bemerken Sie, dass die Notation `paket::befehl` genutz wird, um das Paket mit de
 
 # Umgang mit Daten
 
-### scale()
+## scale()
 Standardisiert eine Variable(Ergebnis: $z$-Wert)
 ```
 scale(x)
@@ -16,17 +16,16 @@ Zentriert eine Variable
 ```
 scale(x, scale=FALSE)
 ```
+  
+#   Deskriptive Statistik 
 
-
-# Deskriptive Statistik 
-
-### table()
+## table()
 Erstellt eine Häufigkeitstabelle für eine Variable, in der die absoluten Häufigkeiten aufgelistet werden
 ```
 table(x)
 ```
 
-### prop.table()
+## prop.table()
 *proportions* table, gibt die relativen Häufigkeiten einer Häufigkeitstabelle wieder
 ```
 prop.table(tabelle)
@@ -36,44 +35,44 @@ Durch das Multiplizieren mit 100 werden die relativen Häufigkeiten in Prozent u
 100*prop.table(tabelle)
 ```
 
-### max()
+## max()
 
 Gibt den höchsten Wert in einem Objekt an
 ```
 max(x)
 ```
 
-### min()
+## min()
 Gibt den niedrigsten Wert in einem Objekt an
 ```
 min(x)
 ```
 
-### sum()
+## sum()
 Gibt die Summe aller in einem Objekt enthaltenen Werte an
 ```
 sum(x)
 ```
 
-### median()
+## median()
 Gibt den Median aller Werte in einem Objekt an
 ```
 median(x)
 ```
 
-### mean()
+## mean()
 Gibt das arithmetische Mittel aller Werte in einem Objekt an
 ```
 mean(x)
 ```
 
-### range()
+## range()
 Gibt den Wertebereich eines Objektes an
 ```
 range(x)
 ```
 
-### diff()
+## diff()
 Berechnet die Differenz mehrere Objekte
 ```
 diff(x)
@@ -84,23 +83,23 @@ Besonders nützlich mit `range(x)`
 diff(range(x))
 ```
 
-### quantile()
+## quantile()
 Gibt Minimum, Maximum sowie die drei Quartile eines Vektors an
 ```
 quantile(x)
 ```
-### sd()
+## sd()
 Gibt die Standardabweichung aller werte in einem Objekt an. Wird mit Bessels Korrektur berechnet, d.h. mit $n-1$ im Nenner, sodass man die den Populationswert aus einer Stichprobe schätzt.
 ```
 sd(x)
 ```
-### var()
+## var()
 Gibt die Varianz aller Werte in einem Objekt an. Wird mit Bessels Korrektur berechnet, d.h. mit $n-1$ im Nenner, sodass man die den Populationswert aus einer Stichprobe schätzt.
 ```
 var(x)
 ```
 
-# Wahrscheinlichkeitsverteilungen
+# Verteilungen
 
 # Interferenzstatistik
 
