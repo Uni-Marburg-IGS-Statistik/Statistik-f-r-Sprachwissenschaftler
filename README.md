@@ -85,7 +85,7 @@ Baayen, R. Harald (2008): Analyzing Linguistic Data: A Practical Introduction to
 
 Eid, Gollwitzer und Schmitt (2010): Statistik und Forschungsmethoden. Beltz Verlag.
 
-Field, A., Miles, J., & Field, Z. (2012): Discovering Statistics Using R. Sage Publications.
+[Field, A.](http://www.statisticshell.com/), Miles, J., & Field, Z. (2012): Discovering Statistics Using R. Sage Publications.
 
 Luhmann, M. (2010): R für Einsteiger. Einführung in die Statistiksoftware für die Sozialwissenschaften. Beltz Verlag.
 
@@ -106,6 +106,7 @@ Die Reihe *Use R!* von Springer ist **kostenlos** über das Uni-Netz elektronisc
 * [Handy statistical lexicon](http://andrewgelman.com/2009/05/24/handy_statistic/)
 * [R for Cats](http://rforcats.net/)
 * [R is a language](http://www.quantumforest.com/2012/01/r-is-a-language/)
+* [R Inferno](http://www.burns-stat.com/documents/books/the-r-inferno/)
 
 # ShinyApps
 * [Optional Stopping](https://palday.shinyapps.io/optional_stopping/)
