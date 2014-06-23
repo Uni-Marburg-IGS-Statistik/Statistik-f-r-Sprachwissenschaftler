@@ -142,6 +142,7 @@ Die Reihe *Use R!* von Springer ist **kostenlos** über das Uni-Netz elektronisc
 * [Understanding Simpson’s paradox using a graph](http://andrewgelman.com/2014/04/08/understanding-simpsons-paradox-using-graph/)
 * [loess explained in a GIF](http://simplystatistics.org/2014/02/13/loess-explained-in-a-gif/)
 * [Big Data...Big Deal? Maybe, if Used with Caution.](http://andrewgelman.com/2014/04/27/big-data-big-deal-maybe-used-caution/)
+* Überblick über verschiedene Verteilungen im Anhang 6.1 zu [*Probabilistic Approaches to Risk*](http://people.stern.nyu.edu/adamodar/) von [Aswath Damodaran](http://people.stern.nyu.edu/adamodar/), v.a. [Figure 6A.15](https://2.bp.blogspot.com/-SpjgitfNMb0/TteevRR_Y2I/AAAAAAAAAFQ/IZgd32z2AI8/s1600/distributions.png). Die Anwendung solcher Verteilung ist v.a. bei [GLM](http://www.statmethods.net/advstats/glm.html) sehr wichtig, wo wir eine nicht gaussche Verteilung unserer Daten bzw. Residuals bei einer Regression annehmen.
 * Software für Bayesian Modelling (wird nicht im Kurs genutzt, aber vielleicht interessant)
     - [Stan](http://mc-stan.org/)
     - [JAGS](http://mcmc-jags.sourceforge.net/)
@@ -185,12 +186,13 @@ Die Reihe *Use R!* von Springer ist **kostenlos** über das Uni-Netz elektronisc
 * Gemischte Modelle
     - [lmer, p-values and all that](https://stat.ethz.ch/pipermail/r-help/2006-May/094765.html)
     - Tutorials
+        * [Bodo Winter](http://www.bodowinter.com/tutorial/bw_LME_tutorial.pdf)
+        * [Baayen, Davidson und Bates 2008](http://dx.doi.org/10.1016/j.jml.2007.12.005) (und alle anderen Artikel aus der Ausgabe des *Journal of Memory and Language*)
+        * Ben Ogorek, [Random regression coefficients using lme4](http://www.r-bloggers.com/random-regression-coefficients-using-lme4/)
+        * [T. Florian Jaeger](https://hlplab.wordpress.com/2014/02/05/updated-slides-on-glm-glmm-plyr-etc-available/)
         * Jonathan Harrington (Professsor der Phonetik an der LMU). Die zwei Tutorials sind nicht ganz gleich!
             - [Auf Deutsch](http://www.phonetik.uni-muenchen.de/~jmh/lehre/sem/ws1213/Rspeech/mm.pdf)
             - [Auf Englisch](http://www.phonetik.uni-muenchen.de/~jmh/lehre/sem/ss11/statfort/glmm.pdf)
-        * [Bodo Winter](http://www.bodowinter.com/tutorial/bw_LME_tutorial.pdf)
-        * [T. Florian Jaeger](https://hlplab.wordpress.com/2014/02/05/updated-slides-on-glm-glmm-plyr-etc-available/)
-        * [Baayen, Davidson und Bates 2008](http://dx.doi.org/10.1016/j.jml.2007.12.005) (und alle anderen Artikel aus der Ausgabe des *Journal of Memory and Language*)
     - [Random Effects: Should I stay or should I go?](https://hlplab.wordpress.com/2009/05/14/random-effect-structure/) (vgl. auch [Barr et al 2013](        http://dx.doi.org/10.1016/j.jml.2012.11.001))
     - [Going full Bayesian with mixed effects regression models](https://hlplab.wordpress.com/2013/12/13/going-full-bayesian-with-mixed-effects-regression-models/)
     - [Diagnosing collinearity in mixed models from lme4](https://hlplab.wordpress.com/2011/02/24/diagnosing-collinearity-in-lme4/)
@@ -211,7 +213,7 @@ Die Reihe *Use R!* von Springer ist **kostenlos** über das Uni-Netz elektronisc
         * [`nlme`](http://cran.r-project.org/web/packages/nlme/): Linear and Nonlinear Mixed Effects Models
         * [`glmer2stan`](https://github.com/rmcelreath/glmer2stan): Define Stan models using glmer-style (lme4) formulas
     - Beispiele für die Anwendung von gemischten Modellen in der Literatur
-      - [http://dx.doi.org/10.3389/fpsyg.2010.00238](http://dx.doi.org/10.3389/fpsyg.2010.00238)
+      - [Kliegel et al. (2011)](http://dx.doi.org/10.3389/fpsyg.2010.00238)
       - [Roehm et al. (2012)](http://dx.doi.org/10.1080/01690965.2012.712143)
       - [Wieling et al. (2011)](http://dx.doi.org/10.1371/journal.pone.0023613)
 
