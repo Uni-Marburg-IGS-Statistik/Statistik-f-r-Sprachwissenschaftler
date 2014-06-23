@@ -13,6 +13,17 @@
   <link  href='//rstacruz.github.io/flatdoc/v/0.8.1/theme-white/style.css' rel='stylesheet'>
   <script src='//rstacruz.github.io/flatdoc/v/0.8.1/theme-white/script.js'></script>
 
+  <!-- MathJax -->
+  <!-- enable single dollar signs -->
+  <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+  });
+  </script>
+  <script type="text/javascript"
+  src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  </script>
+
   <!-- Initializer -->
   <script>
     Flatdoc.run({
@@ -20,6 +31,7 @@
     });
   </script>
 </head>
+
 <body role='flatdoc' class='no-literate large-brief'>
   <div class='header'>
     <div class='left'>
