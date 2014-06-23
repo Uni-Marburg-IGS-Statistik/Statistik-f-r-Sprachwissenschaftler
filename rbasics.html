@@ -13,14 +13,26 @@
   <link  href='http://rstacruz.github.io/flatdoc/v/0.8.1/theme-white/style.css' rel='stylesheet'>
   <script src='http://rstacruz.github.io/flatdoc/v/0.8.1/theme-white/script.js'></script>
 
+  <!-- MathJax -->
+  <!-- enable single dollar signs -->
+  <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+  });
+  </script>
+  <script type="text/javascript"
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  </script>
+  
   <!-- Initializer -->
   <script>
     Flatdoc.run({
-        fetcher: Flatdoc.github('Uni-Marburg-IGS-Statistik/Statistik-f-r-Sprachwissenschaftler','README.md')
+        fetcher: Flatdoc.file('rbasics.md')
     });
   </script>
+  
 </head>
-<body role='flatdoc' class='no-literate large-brief'>
+<body role='flatdoc' class='large-brief big-h3'>
   <div class='header'>
     <div class='left'>
     <ul>
@@ -31,16 +43,18 @@
   </div>
   <div class='content-root'>
     <div class='menubar'>
-	<div class='section' >
-	<h1 style='font-size:160%'><a href="index.html">Statistik für Sprachwissenschaftler</a></h1>
+    <div class='section' >
+	      <h1 style='font-size:160%'><a href="index.html">Statistik für Sprachwissenschaftler</a></h1>
         <h2 style='font-size:140%'>Sommersemester 2014</h2>
-	<h3 style='font-size:120%'>Phillip Alday</h3>
-        </div>
-      <div class='menu section' role='flatdoc-menu'></div>
+	      <h3 style='font-size:120%'>Phillip Alday</h3>
+    </div>
+    <div class='section' >
+      <a class='big button' onClick="$('body').toggleClass('no-literate')">Toggle Code Position</a>
+    </div>
+    <div class='menu section' role='flatdoc-menu'></div>
     </div>
     <div role='flatdoc-content' class='content'></div>
   </div>
-
 </body>
 </html>
 
