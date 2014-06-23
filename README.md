@@ -105,6 +105,7 @@ Die Reihe *Use R!* von Springer ist **kostenlos** über das Uni-Netz elektronisc
 * [Literate programming, version control, reproducible research, collaboration, and all that](http://rpubs.com/bbolker/3153)
 * [Handy statistical lexicon](http://andrewgelman.com/2009/05/24/handy_statistic/)
 * [R for Cats](http://rforcats.net/)
+* [R is a language](http://www.quantumforest.com/2012/01/r-is-a-language/)
 
 # ShinyApps
 * [Optional Stopping](https://palday.shinyapps.io/optional_stopping/)
@@ -112,6 +113,7 @@ Die Reihe *Use R!* von Springer ist **kostenlos** über das Uni-Netz elektronisc
 * [From the Binomial to the Normal Distribution](https://palday.shinyapps.io/binomial_gaussian/) (Ein Beispiel für den Zentralen Grenzwertsatz)
     
 # Kommentare zu p-Werten, NHST, und der üblichen statistischen Praxis
+* [Dance of the p-Values](https://www.youtube.com/watch?v=5OL1RqHrZQ8)
 * John Myles White
     1. [Good Tools for Individual Researchers are not Good Tools for Research Communities](http://www.johnmyleswhite.com/notebook/2012/05/10/criticism-1-of-nhst-good-tools-for-individual-researchers-are-not-good-tools-for-research-communities/)
     2. [NHST Conflates Rare Events with Evidence Against the Null Hypothesis](http://www.johnmyleswhite.com/notebook/2012/05/12/criticism-2-of-nhst-nhst-conflates-rare-events-with-evidence-against-the-null-hypothesis/)
