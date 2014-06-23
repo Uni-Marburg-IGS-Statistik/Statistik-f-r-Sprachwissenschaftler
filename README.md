@@ -183,8 +183,12 @@ Die Reihe *Use R!* von Springer ist **kostenlos** über das Uni-Netz elektronisc
     - [From a Bayesian probability perspective, why doesn't a 95% confidence interval contain the true parameter with 95% probability?](http://stats.stackexchange.com/questions/89099/from-a-bayesian-probability-perspective-why-doesnt-a-95-confidence-interval-c)
     - [Binomial confidence interval estimation - why is it not symmetric?](http://stats.stackexchange.com/questions/4713/binomial-confidence-interval-estimation-why-is-it-not-symmetric?rq=1)
 * Gemischte Modelle
+    - [lmer, p-values and all that](https://stat.ethz.ch/pipermail/r-help/2006-May/094765.html)
     - Tutorials
-        * [von Bodo  Winter](http://www.bodowinter.com/tutorial/bw_LME_tutorial.pdf)
+        * Jonathan Harrington (Professsor der Phonetik an der LMU). Die zwei Tutorials sind nicht ganz gleich!
+            - [Auf Deutsch](http://www.phonetik.uni-muenchen.de/~jmh/lehre/sem/ws1213/Rspeech/mm.pdf)
+            - [Auf Englisch](http://www.phonetik.uni-muenchen.de/~jmh/lehre/sem/ss11/statfort/glmm.pdf)
+        * [Bodo Winter](http://www.bodowinter.com/tutorial/bw_LME_tutorial.pdf)
         * [T. Florian Jaeger](https://hlplab.wordpress.com/2014/02/05/updated-slides-on-glm-glmm-plyr-etc-available/)
         * [Baayen, Davidson und Bates 2008](http://dx.doi.org/10.1016/j.jml.2007.12.005) (und alle anderen Artikel aus der Ausgabe des *Journal of Memory and Language*)
     - [Random Effects: Should I stay or should I go?](https://hlplab.wordpress.com/2009/05/14/random-effect-structure/) (vgl. auch [Barr et al 2013](        http://dx.doi.org/10.1016/j.jml.2012.11.001))
@@ -194,12 +198,23 @@ Die Reihe *Use R!* von Springer ist **kostenlos** über das Uni-Netz elektronisc
     - [Plotting effects for glmer(, family=”binomial”) models](https://hlplab.wordpress.com/2009/01/19/plotting-effects-for-glmer-familybimomial-models/)
     - [Nagelkerke and CoxSnell Pseudo R2 for Mixed Logit Models](https://hlplab.wordpress.com/2009/08/29/nagelkerke-and-coxsnell-pseudo-r2-for-mixed-logit-models/)
     - [old and new lme4](https://hlplab.wordpress.com/2014/03/17/old-and-new-lme4/)
+    - [Test equivalence of non-nested models](http://stats.stackexchange.com/questions/8513/test-equivalence-of-non-nested-models)
+    - [Entwurf des `lme4`Buches](http://lme4.r-forge.r-project.org/book/) von Doug Bates
     - Nützliche Pakete
-        * `lme4`
-        * `lmerTest`
-        * `effects`
-        * `LMERConvenienceFunctions`
-        * `languageR`
+        * [`lme4`](http://cran.r-project.org/web/packages/lme4): Linear mixed-effects models using Eigen and S4
+        * [`lmerTest`](http://cran.r-project.org/web/packages/lmerTest/): Tests for random and fixed effects for linear mixed effect models (lmer objects of lme4 package)
+        * [`effects`](http://cran.r-project.org/web/packages/effects/): Effect Displays for Linear, Generalized Linear, Multinomial-Logit, Proportional-Odds Logit Models and Mixed-Effects Models
+        * [`LMERConvenienceFunctions`](http://cran.r-project.org/web/packages/LMERConvenienceFunctions/): A suite of functions to back-fit fixed effects and forward-fit random effects, as well as other miscellaneous functions
+        * [`languageR`](http://cran.r-project.org/web/packages/languageR/): Data sets and functions with "Analyzing Linguistic Data: A practical introduction to statistics"
+        * [`multcomp`](http://cran.r-project.org/web/packages/multcomp/) Simultaneous Inference in General Parametric Models
+        * [`blme`](http://cran.r-project.org/web/packages/blme/): Bayesian Linear Mixed-Effects Models
+        * [`nlme`](http://cran.r-project.org/web/packages/nlme/): Linear and Nonlinear Mixed Effects Models
+        * [`glmer2stan`](https://github.com/rmcelreath/glmer2stan): Define Stan models using glmer-style (lme4) formulas
+    - Beispiele für die Anwendung von gemischten Modellen in der Literatur
+      - [http://dx.doi.org/10.3389/fpsyg.2010.00238](http://dx.doi.org/10.3389/fpsyg.2010.00238)
+      - [Roehm et al. (2012)](http://dx.doi.org/10.1080/01690965.2012.712143)
+      - [Wieling et al. (2011)](http://dx.doi.org/10.1371/journal.pone.0023613)
+
 
 # License
 This work is licensed under the Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Germany License. To view a copy of this license, visit http://creativecommons.org/licenses/by-nc-sa/3.0/de/.
