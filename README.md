@@ -129,22 +129,17 @@ Die Reihe *Use R!* von Springer ist **kostenlos** über das Uni-Netz elektronisc
     - [The Difference Between "Significant" and "Not Significant" is not Itself Statistically Significant](http://dx.doi.org/10.1198/000313006X152649 )
     - [Researcher degrees of freedom and accidental p-hacking](http://www.stat.columbia.edu/~gelman/research/unpublished/p_hacking.pdf)
     - [P-Values and Statistical Practice](http://www.stat.columbia.edu/~gelman/research/published/pvalues3.pdf)
-    
+    - [Ken Rice presents a unifying approach to statistical inference and hypothesis testing](http://andrewgelman.com/2014/04/29/ken-rice-presents-unifying-approach-statistical-inference-hypothesis-testing/)
+
 # Andere Perspektive und Interessantes zur Statistik
 * [Famous statistician quotes](http://stats.stackexchange.com/questions/726/famous-statistician-quotes)
 * [Common statistical sins](http://stats.stackexchange.com/questions/4551/what-are-common-statistical-sins)
 * [Modes, Medians and Means: A Unifying Perspective](http://www.johnmyleswhite.com/notebook/2013/03/22/modes-medians-and-means-an-unifying-perspective/)
 * [How do we choose our default methods?](http://www.stat.columbia.edu/~gelman/research/published/copss.pdf)
 * ["The graph clearly shows that mammography adds virtually nothing to survival and if anything, decreases survival (and increases cost and provides unnecessary treatment)"](http://andrewgelman.com/2014/05/03/graph-clearly-shows-mammography-adds-virtually-nothing-survival-anything-decreases-survival-increases-cost-provides-unnecessary-treatment/) -- ein wichtiges Beispiel von Effektgröße vs. "signifikant" mit Brustkrebs!
-* [Ken Rice presents a unifying approach to statistical inference and hypothesis testing](http://andrewgelman.com/2014/04/29/ken-rice-presents-unifying-approach-statistical-inference-hypothesis-testing/)
 * [Understanding Simpson’s paradox using a graph](http://andrewgelman.com/2014/04/08/understanding-simpsons-paradox-using-graph/)
 * [loess explained in a GIF](http://simplystatistics.org/2014/02/13/loess-explained-in-a-gif/)
-* [On Chomsky and the Two Cultures of Statistical Learning](http://norvig.com/chomsky.html)
 * [Big Data...Big Deal? Maybe, if Used with Caution.](http://andrewgelman.com/2014/04/27/big-data-big-deal-maybe-used-caution/)
-* [Schools of Statistical Thought as Religion](http://andrewgelman.com/2014/04/12/schools-of-statistical-thoughts-are-sometimes-jokingly-likened-to-religions-this-analogy-is-not-perfect-unlike-religions-statistical-methods-have-no-supernatural-content-and-make-essentially-no-d/)
-* [Bayesian Modelling of Anscombe's Quartet](http://www.sumsar.net/blog/2013/06/bayesian-modeling-of-anscombes-quartet/)
-* [Bayesian or Frequentist, Which Are You?](http://videolectures.net/mlss09uk_jordan_bfway/) vielleicht die beste holistische Perspektive!
-* [Positioning Bayesian inference as a particular application of frequentist inference and vice versa](http://dx.doi.org/10.6084/m9.figshare.867707)
 * Software für Bayesian Modelling (wird nicht im Kurs genutzt, aber vielleicht interessant)
     - [Stan](http://mc-stan.org/)
     - [JAGS](http://mcmc-jags.sourceforge.net/)
@@ -158,7 +153,7 @@ Die Reihe *Use R!* von Springer ist **kostenlos** über das Uni-Netz elektronisc
     - [Null Hypothesis](http://www.xkcd.com/892/)
     - [Frequentists vs. Bayesians](http://xkcd.com/1132/)
 * [Spurious Correlations](http://www.tylervigen.com/)
-* [How would you explain covariance to someone who understands only the mean?](http://stats.stackexchange.com/questions/18058/how-would-you-explain-covariance-to-someone-who-understands-only-the-mean) [whubers Antwort](http://stats.stackexchange.com/a/18200/26743) ist besonders schön.
+* [How would you explain covariance to someone who understands only the mean?](http://stats.stackexchange.com/questions/18058/how-would-you-explain-covariance-to-someone-who-understands-only-the-mean) Besonders schön ist [whubers Antwort](http://stats.stackexchange.com/a/18200/26743).
 
 # Weitere Links zu spezifischen Themen
 * Warum gibt es bei manchen Formlen aus der deskriptiven Statistik $n-1$ und bei anderen $n$ als Nenner?
@@ -166,6 +161,17 @@ Die Reihe *Use R!* von Springer ist **kostenlos** über das Uni-Netz elektronisc
     - [Korrigierte Stichprobenvarianz](https://de.wikipedia.org/wiki/Bessel-Korrektur)
     - [Sample mean and sample covariance](https://en.wikipedia.org/wiki/Sample_mean_and_sample_covariance)
     - [How exactly did statisticians agree to using (n-1) as the unbiased estimator for population variance without simulation?](http://stats.stackexchange.com/questions/100041/how-exactly-did-statisticians-agree-to-using-n-1-as-the-unbiased-estimator-for)
+* Schools of Statistical Thought
+    - [Schools of Statistical Thought as Religion](http://andrewgelman.com/2014/04/12/schools-of-statistical-thoughts-are-sometimes-jokingly-likened-to-religions-this-analogy-is-not-perfect-unlike-religions-statistical-methods-have-no-supernatural-content-and-make-essentially-no-d/)
+    - [Bayesian Modelling of Anscombe's Quartet](http://www.sumsar.net/blog/2013/06/bayesian-modeling-of-anscombes-quartet/)
+    - [Bayesian or Frequentist, Which Are You?](http://videolectures.net/mlss09uk_jordan_bfway/) vielleicht die beste holistische Perspektive!
+    - [Positioning Bayesian inference as a particular application of frequentist inference and vice versa](http://dx.doi.org/10.6084/m9.figshare.867707)
+    - [What is Bayesian / Frequentist Interference?](http://normaldeviate.wordpress.com/2012/11/17/what-is-bayesianfrequentist-inference/) -- auch eine sehr gute, ausgewogene Perspektive
+    - [On Chomsky and the Two Cultures of Statistical Learning](http://norvig.com/chomsky.html)
+    - *The Signal and the Noise* von Nate Silver
+        * Gary Marcus, ["What Nate Silver Gets Wrong"](http://www.newyorker.com/online/blogs/books/2013/01/what-nate-silver-gets-wrong.html)
+        * Larry Wasserman, [Nate Silver is a Frequentist](http://normaldeviate.wordpress.com/2012/12/04/nate-silver-is-a-frequentist-review-of-the-signal-and-the-noise/)
+
 * Konfidenz- und Credible Intervale 
     - [Are there any examples where Bayesian credible intervals are obviously inferior to frequentist confidence intervals](http://stats.stackexchange.com/questions/2356/are-there-any-examples-where-bayesian-credible-intervals-are-obviously-inferior)
     - [Why does a 95% CI not imply a 95% chance of containing the mean?](http://stats.stackexchange.com/questions/26450/why-does-a-95-ci-not-imply-a-95-chance-of-containing-the-mean)
@@ -178,7 +184,7 @@ Die Reihe *Use R!* von Springer ist **kostenlos** über das Uni-Netz elektronisc
     - Tutorials
         * [von Bodo  Winter](http://www.bodowinter.com/tutorial/bw_LME_tutorial.pdf)
         * [T. Florian Jaeger](https://hlplab.wordpress.com/2014/02/05/updated-slides-on-glm-glmm-plyr-etc-available/)
-        * [Baayen, Davidson und Bates 2008](http://dx.doi.org/10.1016/j.jml.2007.12.005)(und alle anderen Artikel aus der Ausgabe des *Journal of Memory and Language*)
+        * [Baayen, Davidson und Bates 2008](http://dx.doi.org/10.1016/j.jml.2007.12.005) (und alle anderen Artikel aus der Ausgabe des *Journal of Memory and Language*)
     - [Random Effects: Should I stay or should I go?](https://hlplab.wordpress.com/2009/05/14/random-effect-structure/) (vgl. auch [Barr et al 2013](        http://dx.doi.org/10.1016/j.jml.2012.11.001))
     - [Going full Bayesian with mixed effects regression models](https://hlplab.wordpress.com/2013/12/13/going-full-bayesian-with-mixed-effects-regression-models/)
     - [Diagnosing collinearity in mixed models from lme4](https://hlplab.wordpress.com/2011/02/24/diagnosing-collinearity-in-lme4/)
