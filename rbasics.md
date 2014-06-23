@@ -107,3 +107,7 @@ var(x)
 # Grafiken
 ## base
 ## ggplot2
+
+# Attributions
+Image adapted from <a href='//blog.revolutionanalytics.com/2010/11/acm-data-mining-camp-1.html'>Revolution Analytics Blog</a>.
+
