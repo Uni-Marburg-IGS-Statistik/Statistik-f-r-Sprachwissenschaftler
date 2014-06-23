@@ -17,7 +17,7 @@ Zentriert eine Variable
 scale(x, scale=FALSE)
 ```
   
-#   Deskriptive Statistik 
+# Deskriptive Statistik 
 
 ## table()
 Erstellt eine Häufigkeitstabelle für eine Variable, in der die absoluten Häufigkeiten aufgelistet werden
@@ -99,13 +99,92 @@ Gibt die Varianz aller Werte in einem Objekt an. Wird mit Bessels Korrektur bere
 var(x)
 ```
 
+## cor()
+
+## cov()
+
 # Verteilungen
+
+## Binomial
+`dbinom()`, `pbinom()`, `qbinom()`, `rbinom()`
+
+## Normal
+`dnorm()`, `pnorm()`, `qnorm()`, `rnorm()`
+
+## $\chi^2$
+`dchisq()`, `pchisq()`, `qchisq()`, `rchisq()`
+
+## F
+`df()`, `pf()`, `qf()`, `rf()`
+
+## Poisson
+`dpois()`, `ppois()`, `qpois()`, `rpois()`
+
+
+## t
+`dt()`, `pt()`, `qt()`, `rt()`
+
+## Uniform 
+`dunif()`, `punif()`, `qunif()`, `runif()`
 
 # Interferenzstatistik
 
+## t.test()
+
+## var.test()
+
+## car::leveneTest()
+
+## shapiro.test()
+
+## aov()
+
+## ez::ezANOVA()
+
+## ez::ezSummary()
+
+## lm()
+
+## confint()
+
+## anova()
+
+## cor.test()
+
+## lme4::lmer()
+
+## chisq.test()
+
 # Grafiken
 ## base
+
+### qqnorm()
+
 ## ggplot2
+
+### qplot()
+
+### ggplot()
+
+### aes()
+
+### geom_point()
+
+### geom_smooth()
+
+### geom_bar()
+
+### geom_error()
+
+### geom_line()
+
+### geom_jitter()
+
+### geom_histogram()
+
+### geom_density()
+
+### geom_boxplot()
 
 # Attributions
 Image adapted from <a href='//blog.revolutionanalytics.com/2010/11/acm-data-mining-camp-1.html'>Revolution Analytics Blog</a>.
