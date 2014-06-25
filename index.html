@@ -30,15 +30,16 @@
         fetcher: Flatdoc.github('Uni-Marburg-IGS-Statistik/Statistik-f-r-Sprachwissenschaftler','README.md')
     });
   </script>
+  <script>
+    $(function(){
+      $("#linkbar").load("linkbar.html");
+    });
+   </script>
 </head>
 
 <body role='flatdoc' class='no-literate large-brief'>
   <div class='header'>
-    <div class='left'>
-    <ul>
-      <li><a href=hausaufgaben.html>Hinweise zu den Hausaufgaben</a></li>
-      <li><a href=rbasics.html>R Grundlagen</a></li>
-    </ul>  
+    <div class='left' id="linkbar">
     </div>
   </div>
   <div class='content-root'>

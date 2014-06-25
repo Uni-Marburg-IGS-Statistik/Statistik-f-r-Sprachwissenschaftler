@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset='utf-8'>
-  <title>Statistik für Sprachwissenschaftler</title>
+  <title>Statistik für Sprachwissenschaftler: R Befehle</title>
 
   <!-- Flatdoc -->
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
@@ -23,21 +23,26 @@
   <script type="text/javascript"
   src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
   </script>
-  
+
   <!-- Initializer -->
   <script>
     Flatdoc.run({
-        fetcher: Flatdoc.file('rbasics.md')
+        fetcher: Flatdoc.github('Uni-Marburg-IGS-Statistik/littler','funktionen.md')
     });
   </script>
-  
+
   <style type="text/css">
   .content h2 {
     text-transform: none;
   }
   </style>
-  
+  <script>
+    $(function(){
+      $("#linkbar").load("linkbar.html");
+    });
+   </script>
 </head>
+
 <body role='flatdoc' class='large-brief big-h3'>
   <div class='title-area title-card' style='background-image: url(img/iheartr.png); max-height: 335px; max-width: 1180px;'>
   </div>
@@ -46,8 +51,8 @@
     <div class='left'>
     <ul>
       <li><a href=hausaufgaben.html>Hinweise zu den Hausaufgaben</a></li>
-      <li><a href=rbasics.html>R Grundlagen</a></li>
-    </ul>  
+      <li><a href=rbefehle.html>R Befehle</a></li>
+    </ul>
     </div>
   </div>
   <div class='content-root'>
