@@ -1,0 +1,505 @@
+Statistik für Sprachwissenschaftler
+========================================================
+author: Phillip M . Alday
+date: 2014-06-30
+autosize: false
+
+```{r setup, include=FALSE}
+library(knitr)
+opts_chunk$set(cache=TRUE,prompt=TRUE)
+library(knitcitations)
+library(ggplot2)
+library(xtable)
+library(reshape2)
+cite_options(tooltip = TRUE
+             , linked = TRUE
+             , bibtex_data = FALSE)
+```
+
+Aufwachen und sich errinnern!
+====================================
+type: section
+
+Bisher
+=======
+- das lineare Modell in vielen Formen
+- kategorische und metrische unabhängige Variablen
+- metrische abhängige Variablen
+
+Heute
+========
+- nominale Daten
+
+Datensätze für heute: Titanic
+===============================================
+```{r}
+Titanic
+```
+
+Datensätze für heute: Titanic
+===============================================
+```{r}
+titanic <- data.frame(Titanic)
+head(titanic)
+```
+
+Datensätze für heute: Titanic
+===============================================
+```{r, echo=FALSE}
+ggplot(titanic) + geom_bar(aes(x=Class,fill=Survived,y=Freq), stat="identity")
+```
+
+Datensätze für heute: Titanic
+===============================================
+```{r, echo=FALSE}
+ggplot(titanic) + geom_bar(aes(x=Sex,fill=Survived,y=Freq), stat="identity")
+```
+
+Datensätze für heute: Titanic
+===============================================
+```{r, echo=FALSE}
+ggplot(titanic) + geom_bar(aes(x=Class,fill=Survived,y=Freq), stat="identity") + facet_wrap(~Sex)
+```
+
+Datensätze für heute: Titanic
+===============================================
+```{r, echo=FALSE}
+ggplot(titanic) + geom_bar(aes(x=Class,fill=Survived,y=Freq), stat="identity") + facet_wrap(~Sex)
+```
+
+Datensätze für heute: Titanic
+===============================================
+```{r}
+passengers <- subset(titanic,Class!="Crew")
+classless <- aggregate(Freq ~ Sex + Survived ,data=passengers,FUN=sum)
+classless
+```
+
+Datensätze für heute: Titanic
+===============================================
+```{r}
+xtabs(Freq ~ Sex + Survived,passengers)
+```
+
+Datensätze für heute: Titanic
+===============================================
+
+|            | Alive | Dead | Total |
+|------------|-------|------|-------|
+| Female     | 324   | 123  |  447  |
+| Male       | 175   | 694  |  869  |
+| **Total**  | 499   | 817  | 1316  |
+
+Datensätze für heute: Titanic
+===============================================
+```{r,echo=FALSE}
+ggplot(titanic) + geom_bar(aes(x=Sex,fill=Survived,y=Freq), stat="identity",position="fill")
+```
+
+Datensatz für heute: Kurs
+================================
+```{r, eval=FALSE}
+kurs <- read.table("Data/body_dim_long.tab",header = T)
+```
+```{r, echo=FALSE}
+# the path in the previous block isn't correct, so run this one
+kurs <- read.table(normalizePath("../Data/body_dim_long.tab"),header = T)
+```
+
+Datensatz für heute: Kurs
+================================
+```{r,echo=FALSE}
+ggplot(kurs) + geom_bar(aes(x=major))
+```
+
+Datensatz für heute: Kurs
+================================
+```{r,echo=FALSE}
+kurs.stacked <- ggplot(kurs) + geom_bar(aes(x="x",fill=major),position="fill") + theme(axis.title = element_blank(), axis.ticks = element_blank(),axis.text=element_blank())
+kurs.stacked
+```
+
+Datensatz für heute: Kurs
+================================
+```{r,echo=FALSE}
+kurs.stacked + coord_polar(theta="y")
+```
+
+
+Datensatz für heute: Kurs
+================================
+```
+kurs2 <- subset(kurs,...)
+```
+
+```{r, echo=FALSE}
+kurs2 <- subset(kurs,major %in% c("M.A..Klinische.Linguistik","M.A..Speech.Science"))
+kurs2.stacked <- ggplot(kurs2) + geom_bar(aes(x="x",fill=major),position="fill") + theme(axis.title = element_blank(), axis.ticks = element_blank(),axis.text=element_blank())
+kurs2.stacked
+```
+***
+```{r,echo=FALSE}
+kurs2.stacked + coord_polar(theta="y")
+```
+
+Die Rolle von Varianz: bisherige Modell-Überlegungen
+=============================================================
+incremental: true
+$$ \text{Prüfgröße} = \frac{\text{Beo} - \text{Theo}}{s_\text{Beo}} $$ 
+
+$$ \frac{\text{Erklärte Varianz}}{\text{Gesamtvarianz}} $$
+
+Devianz (Residual/unerklärte Varianz) $$ = \sum \left( \text{Beo} - \text{Model} \right)^2 $$
+
+Rolle der Freiheitsgrade --  Gewichtung: $$ \frac{RSS}{Df} $$
+
+Chi-Quadrat-Test
+===========================
+type: section
+
+Häufigkeiten vergleichen
+=========================
+```{r}
+xtabs(~kurs2$major)
+```
+
+Exkurs: subset()
+=========================
+* per Default behält `subset()` die urpsrüngliche Kodierung aller Variablen, inkl. Faktorstufen  
+```{r}
+levels(kurs2$major) 
+```
+
+Exkurs: subset()
+=========================
+* Wir können `subset()` dazu zwingen, die Faktoren neu zu kodieren bzw. unbenutzte Stufen "fallen zu lassen" mit `drop=TRUE`
+
+```
+d2 <- subset(d, ..., drop=TRUE)
+```
+
+* Wir können die Rekodierung einer bestehenden Variable mit `factor()` zwingen:
+```{r}
+kurs2$major <- factor(kurs2$major)
+levels(kurs2$major)
+```
+
+Exkurs: factor() vs. as.factor()
+==========================
+* beide können genutzt werden, um eine Variable in den Datentype `factor` umzuwandeln
+* `as.factor()` macht bei bestehenden Faktoren keine Umkodierung, behält also auch unbesetzte Faktorstufen
+* `factor()` zwingt eine neue Kodierung, d.h. unbesetzte Stufen werden fallen gelassen; weiterhin haben die Stufen evtl. eine andere Dummy-Kodierung
+
+Häufigkeiten vergleichen
+=========================
+<small>
+```{r}
+crosstable <- xtabs(~kurs2$major)
+crosstable
+chisq.test(crosstable)
+```
+</small>
+
+Chi-Quadrat: Sinn des Tests
+==============================
+* Erwartung unter H_0: Gleichverteilung, also `r sum(crosstable)/2` pro Gruppe (Modell)
+* Prüfgröße: Summe der quadrierten Abweichung  (Devianz vom Modell)
+    $$ \chi^2 = \sum_\text{Zellen} \frac{(\text{Beo} - \text{Modell})^2}{\text{Modell}} $$
+
+```{r}
+chiquadrat <- (11-14)^2/14 + (17-14)^2/14 
+chiquadrat
+```
+
+Chi-Quadrat: Sinn des Tests
+==============================
+* der Prüfwert folgt *in etwa* der $\chi^2$-Verteilung
+* Freihatsgrade (mehr dazu gleich!) 
+
+* Wie beim $F$-Test:
+    - gibt es keine negativen Werte
+    - interessiert uns bei $\chi^2$ in der Regel die rechte Seite 
+    
+Chi-Quadrat: Sinn des Tests
+==============================
+```{r}
+pchisq(chiquadrat,df=1)
+1 - pchisq(chiquadrat,df=1)
+pchisq(chiquadrat,df=1,lower.tail=FALSE)
+```
+
+Chi-Quadrat-Verteilung
+=======================
+```{r, echo=FALSE}
+pts <- seq(1,30,by=0.2)
+chisq.pts <- data.frame(x=pts,"1"=dchisq(pts,df=1),"2"=dchisq(pts,df=2),"3"=dchisq(pts,df=3),"4"=dchisq(pts,df=4),"6"=dchisq(pts,df=6),"8"=dchisq(pts,df=8))
+chisq.pts <- melt(chisq.pts,id.vars="x",variable.name = "df",value.name="y")
+levels(chisq.pts$df) <- c("1","2","3","4","6","8")
+qplot(x=x,y=y,color=df,data=chisq.pts,geom="line") + ylab("Dichte")
+```
+
+Erweiterung: Vier-Felder-Test
+===============================
+|            | Alive | Dead | Total |
+|------------|-------|------|-------|
+| Female     | 324   | 123  |  447  |
+| Male       | 175   | 694  |  869  |
+| **Total**  | 499   | 817  | 1316  |
+
+Modell / Erwartung pro Feld:
+
+$$ \frac{ \text{Spaltensumme} \times \text{Zeilensumme} }{ \text{Gesamtsumme} } $$
+
+Erweiterung: Vier-Felder-Test
+===============================
+|            | Alive | Dead | Total |
+|------------|-------|------|-------|
+| Female     | 324   | 123  |  447  |
+| Male       | 175   | 694  |  869  |
+| **Total**  | 499   | 817  | 1316  |
+
+Modell / Erwartung pro Feld:
+
+|            | Alive                | Dead                | Total |
+|------------|----------------------|---------------------|-------|
+| Female     | `r 499*447 / 1316`   | `r 447*817 / 1316`  |  447  |
+| Male       | `r 499*869 / 1316`   | `r 817*869 / 1316`  |  869  |
+| **Total**  | 499                  | 817                 | 1316  |
+
+Erweiterung: Vier-Felder-Test
+===============================
+```{r}
+chiquadrat <- (324-169.4932)^2 / 169.4932 + (123 - 277.5068)^2 / 277.5068 + (175 - 329.5068)^2 / 329.5068 + (694 - 539.4932)^2 / 539.4932  
+chiquadrat
+qchisq(0.95,df=1)
+pchisq(343.6,df=1,lower.tail=F)
+```
+
+Erweiterung: Vier-Felder-Test
+===============================
+```{r}
+sexsurvival <- xtabs(Freq ~ Sex + Survived, Titanic)
+sexsurvival
+```
+
+Erweiterung: Vier-Felder-Test
+===============================
+```{r}
+chisq.test(sexsurvival,correct=F)
+```
+
+Yates' Continuity Correction
+=============================
+```{r}
+chisq.test(sexsurvival)
+```
+
+Yates-Korrektur
+=================
+* Die Test-Statistik nähert die $\chi^2$ an, ist nicht exakt!
+* Je größer die Stichprobe, desto besser die Annäherung.
+* Vier-Felder-Tests sind auch oft antikonservativ (fällig für $\alpha$-Fehler)
+* Dazu *Yates' Continuity Correction*: 
+    $$ \chi^2_\text{Yates} = \sum_\text{Zellen} \frac{( |\text{Beo} - \text{Modell}| - 0.5)^2}{\text{Modell}} $$
+* Macht den Test konservativer, kann allerdings auch überkorrigieren; daher unterschiedliche Meinungen zur Verwendung
+    
+Chi-Quadrat: Allgemeine Formel
+===============================
+* der Test besteht aus zwei Formeln, die sich auch auf beliebige Tabellen ausdehnen lassen
+* Freiheitgrade:
+  * $(r-1)(c-1)$ 
+  * (Anzahl Zeilen - 1) $\times$ (Anzahl Spalten - 1)
+  * (Stufen der einer Variable  - 1)  $\times$ (Stufen der anderen Variable  - 1)    
+  
+Chi-Quadrat: Motivation des Modellwertes
+=========================================
+* Wahrscheinlichkeit eines Mermals: 
+  - Anzahl Vorkommen des Merkals durch Gesamtanzahl Vorkommen}
+  - d.h. Spalten- oder Zeilensumme durch Gesamtsumme
+* Für zwei unabhängige Ereignisse (hier =Stufen zwei unabhängiger Faktoren) gilt: 
+    - $P(A \cap B) = P(A)P(B)$
+    - d.h. Berechnung pro Zeile mal Berechnung pro Spalte
+
+Zur Erinnerung: Titanic
+======================================
+|            | Alive | Dead | Total |
+|------------|-------|------|-------|
+| Female     | 324   | 123  |  447  |
+| Male       | 175   | 694  |  869  |
+| **Total**  | 499   | 817  | 1316  |
+
+Chi-Quadrat: Motivation des Modellwertes
+=========================================
+* Wahrscheinlich pro Zelle ist so mit Spaltensumme / Gesamtsumme $\times$ Zeilensumme / Gesamtsumme: $$ \frac{\text{Zeile}}{\text{Gesamt}} \cdot{} \frac{\text{Spalte}}{\text{Gesamt}} $$
+* Um Häufigkeit statt Wahrscheinlichkeit zu bekommen, müssen wir durch die Gesamtsumme durchmultiplizieren.
+$$ \text{Gesamt} \cdot{} \frac{\text{Zeile}}{\text{Gesamt}} \cdot{} \frac{\text{Spalte}}{\text{Gesamt}} = \frac{\text{Zeile}\times\text{Spalte}}{\text{Gesamt}} $$
+
+Chi-Quadrat: Voraussetzungen
+=============================
+* Unabhängigkeit der Beobachtungen
+* Die erwarteten Häufigkeiten pro Zelle sollten größer als 5 sein
+  * Yates-Korrektur mögliche Lösung
+  * Besser aber computetionell aufwendiger: Fishers Exact-Test
+
+Exakter Test nach Fisher
+==================== 
+<small> berechnet den **exakten** Wert, ist allerdings computionell unpraktisch für größere Tabellen (>4 Felder).
+```{r}
+ fisher.test(sexsurvival)
+```
+</small>
+(mehr zu *odds ratio* morgen!)
+
+Kurs: Studiengang und Geschlecht
+==================================
+```{r}
+xtabs(~sex + major, kurs2)
+```
+
+Kurs: Studiengang und Geschlecht
+===============================
+```{r}
+levels(kurs2$major)
+levels(kurs2$major) <- c("Klin.Ling.","Speech Science")
+levels(kurs2$major)
+```
+
+Kurs: Studiengang und Geschlecht
+==================================
+```{r}
+xtabs(~sex + major, kurs2)
+```
+
+Kurs: Studiengang und Geschlecht
+==================================
+```{r}
+chisq.test(xtabs(~sex + major, kurs2),correct=F)
+```
+*R generiert in der Konsole eine Warnung!*
+
+Kurs: Studiengang und Geschlecht
+==================================
+```{r}
+chisq.test(xtabs(~sex + major, kurs2),correct=T)
+```
+*R generiert in der Konsole eine Warnung!*
+
+Kurs: Studiengang und Geschlecht
+==================================
+type: alert
+```{r}
+fisher.test(xtabs(~sex + major, kurs2))
+```
+
+Beispieldatensatz: verbs aus languageR
+============================================
+* 903 Beobachtungen (Koprusdaten) zur Dativ-Alternation (John gave Mary the book; John gave the book to Mary) mit 5 Variablen
+* `RealizationOfRec`: Rezipient (NP vs. PP)
+* `Verb`: Einzelverb
+* `AnimacyOfRec`: Rezipient (belebt vs. unbelebt)
+* `AnimacyOfTheme`: Thema (belebt vs. unbelebt)
+* `LengthOfTheme`: Länge (in Buchstaben) des Thema-Arguments
+
+Beispieldatensatz: verbs aus languageR
+============================================
+<small>
+```{r}
+library(languageR)
+head(verbs,n=3)
+```
+</small>
+
+Beispieldatensatz: verbs aus languageR
+============================================
+Tabelle erstellen
+```{r}
+verbs.xt <- xtabs(~RealizationOfRec + AnimacyOfRec,verbs)
+verbs.xt
+```
+
+Beispieldatensatz: verbs aus languageR
+============================================
+Text berechnen
+```{r}
+chisq.test(verbs.xt, correct=F)
+```
+Berichten:
+$\chi^2(1) = 14.27, p = 0.0001588$
+
+Beispieldatensatz: verbs aus languageR
+============================================
+Erwartungswerte von R ausgeben lassen
+```{r}
+chisq.test(verbs.xt, correct=F)$expected
+```
+
+Alternativ zu (Pearson'schem) Chi-Quadrat:  Likelihood-Ratio-Test
+=======================================================================
+* <small>Likelihood: 
+  * nicht gleich Wahrscheinlichkeit!
+  * $\mathcal{L}(H | D) = P(D | H)$ 
+  * (leicht unkonventionelle Formulierung: eigentlich wird "Parameter" $\theta$ statt "Hypothese" in den meisten Definitionen genutzt)
+* Likelihood-Ratio-Test: Vergleiche das Modell mit dem höchsten Likelihood mit dem Null-Modell
+$$ L_{\chi^2} = 2\sum_\text{Zellen} \text{Beo} \ln \frac{\text{Beo}}{\text{Modell}} $$
+* Nach Wilks-Satz folgt logLikelihood einer $\chi^2$-Verteilung!
+</small>
+
+Alternativ zu (Pearson'schem) Chi-Quadrat:  Likelihood-Ratio-Test
+=======================================================================
+```{r}
+theo <-  chisq.test(verbs.xt, correct=F)$expected
+beo <- verbs.xt
+loglike <- 2 * sum( beo * log(beo/theo))
+loglike
+pchisq(loglike,df=1, lower.tail=F)
+```
+
+Anmerkung: Andere Verteilungsformen (= keine Gleichverteilung)
+================================================================
+* Man kann mit dem Chi-Quadrat-Test auch Vorhersagen auf andere Verteilungsformen überprüfen
+* z.B. Bei dem Vergleich zwischen Belebten und Unbelebten Rezipienten könnten wir die Hypothese testen, dass Belebt:Unbelebt  in einem Verhältnis von 90:10 vorkommen
+* Die erwarteten Wahrscheinlichkeiten gibt man R mit dem Parameter `p` vor:
+
+Anmerkung: Andere Verteilungsformen (= keine Gleichverteilung)
+================================================================
+```{r}
+chisq.test(xtabs(~AnimacyOfRec,verbs), correct=F)
+```
+
+Anmerkung: Andere Verteilungsformen (= keine Gleichverteilung)
+================================================================
+```{r}
+chisq.test(xtabs(~AnimacyOfRec,verbs), correct=F,p=c(0.9,0.1))
+```
+
+Was ist bei Messwiederholung?
+=================================
+* mehrfache Messwiederholung schwierig
+* Sonderfall für zwei Messungen: **McNemar-Test**
+    - "test for significance of change"
+    - etwa $\chi^2$ für abhängige Stichproben
+
+Was ist bei Messwiederholung?
+=================================
+* Beispiel:  Vorher-/Nachher-Befragung bei einer Kampagne gegen Rauchen
+237 Personen wurden vor und nach der Kampagne befragt, ob sie rauchen
+* Spalten: Nachher, Zeilen: Vorher
+
+|         | ja   |nein   |
+|---------|------|-------|
+| ja      | a=80 | b=25  |
+| nein    | c=12 | d=120 |
+
+* McNemar-Test berücksichtigt nur die "Wechsler"; unter der $H_0$ sollten beide Gruppen gleich groß sein: $$m_b = m_c = \frac{b+c}{2}$$
+
+Was ist bei Messwiederholung?
+=================================
+* Die Logik bei der Bildung der Prüfgröße bleibt gleich. Es werden allerdings, wie gesagt, nur die "Wechsler" in Betracht gezogen und der erwartete Wert wird anders berechnet.
+* $$\chi^2 = \frac{(b-m_b)^2}{m_b} + \frac{(c-m_c)^2}{m_c} $$
+
+Was ist bei Messwiederholung?
+=================================
+```{r}
+raucher <- as.table(rbind(c(80,25),c(12,120)))
+mcnemar.test(raucher,correct=F)
+```

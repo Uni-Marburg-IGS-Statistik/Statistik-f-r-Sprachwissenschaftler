@@ -14,6 +14,8 @@ packages.used <- c("knitr","knitcitations"
                    ,"ez"
                    ,"faraway"
                    ,"lme4"
+                   ,"gmodels"
+                   ,"effects"
                    )
 
 install.packages(packages.used,dependencies = TRUE)
