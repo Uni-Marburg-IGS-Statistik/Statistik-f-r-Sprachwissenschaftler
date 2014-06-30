@@ -1,7 +1,7 @@
 Statistik für Sprachwissenschaftler
 ========================================================
 author: Phillip M . Alday
-date: 2014-06-23
+date: 2014-06-23/24
 autosize: true
 
 ```{r setup, include=FALSE}
