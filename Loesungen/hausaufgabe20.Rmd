@@ -48,6 +48,9 @@ Die Items in dieser Studie sind "Szenarien", also Situationen wo man mehr oder w
 Allerdings merken wir, dass `scenario` falsch kodiert ist, was wir korrigieren müssen:
 
 CODE_BLOCK_HIER
+```{r}
+stimmen$scenario <- as.factor(stimmen$scenario)
+```
 
 ## Auswirkung der experimentellen Manipulation
 Um einen groben Eindruck zu bekommen, können wir schnell einen Boxplot machen:
@@ -74,11 +77,15 @@ Wir können auf ähnliche Art und Weise ein Plot für die Versuchspersonen und S
 
 Erstellen Sie einen Boxplot für `frequency` nach `subject`, wie oben für `frequency` nach `attitude` gemacht wurde (hier ohne Aufteilung nach Geschlecht). Dieser gibt uns einen Blick in die Varianz innerhalb und zwischen Versuchspersonen. 
 
-CODE_BLOCK_HIER
+```{r, fig.width=7, fig.height=4, fig.align='center'}
+ggplot(stimmen) + geom_boxplot(aes(x=subject,y=frequency)) 
+```
 
 Machen Sie das gleiche für `scenario`. 
 
-CODE_BLOCK_HIER
+```{r, fig.width=7, fig.height=4, fig.align='center'}
+ggplot(stimmen) + geom_boxplot(aes(x=scenario,y=frequency)) 
+```
 
 Gibt es mehr Varianz zwischen Szenarien oder zwischen Versuchspersonen? 
 
@@ -111,8 +118,8 @@ Haben sich die Koeffizienten oder Standardfehler geändert?
 Jetzt berechen wir das Modell mit der Interaktion zwischen `gender` und `attitude`. 
 
 ```{r}
-#model.attitude.int <- CODE_HIER
-#summary(model.attitude.int)
+model.attitude.int <- lmer(frequency ~ gender * attitude + (1|subject) + (1|scenario), data=stimmen, REML=FALSE)
+summary(model.attitude.int)
 ```
 
 Haben sich die Koeffizienten oder Standardfehler geändert?
@@ -120,7 +127,7 @@ Haben sich die Koeffizienten oder Standardfehler geändert?
 Ist die Interaktion signifikant? Wir können uns den Koeffizienten anschauen, aber uns interessiert ob *das Model besser geworden ist*. Das testen wir mit `anova()`
 
 ```{r}
-#anova(model.attitude,model.attitude.int)
+anova(model.attitude,model.attitude.int)
 ```
 
 Hat die Interkation das Modell verbessert? Wenn ein komplexeres Modell nicht signifikant besser als ein einfacheres Modell ist, bleiben wir bei dem einfacheren Modell! 
@@ -139,6 +146,9 @@ Haben sich die Koeffizienten oder Standardfehler (im Vergleich zu `model.attitud
 Hat dieses Modell ein signifikante besseres Fit als `model.attitude`? 
 
 CODE_BLOCK_HIER
+```{r}
+anova(model.attitude,model.attitude.re.slope)
+```
 
 Könnten wir hier ein Intercepts-Only-Modell begründen? 
 
@@ -166,6 +176,8 @@ plot(effects.attitude)
 ```
 
 Was ist der Unterschied zwischen den Konfidenzintervallen von `confint()` und von `allEffects()`? (D.h., woher kommt der Unterschied?) 
+
+`allEffects()` schätzt die CIs für alle Stufen der Parameter, `confint()` schätzt sie nur für die Koeffizienten (d.h. -- zumindest hier -- für die Differenzen!.)
 
 # Intercepts und Slopes
 
