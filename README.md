@@ -68,10 +68,10 @@ Diese Veranstaltung bietet eine praktische Einführung in statistische Verfahren
 |      |                | 1. `hausaufgabe18.R`
 | 11.  | **23.06.2014** | gemischte Modelle I
 |      | **24.06.2014** | gemischte Modelle II
-| 12.  | **30.06.2014** | $\chi^2$, logLikelihood & Likelihood-Ratio  
-|      | **01.07.2014** | Nicht-parametrische Tests I
-| 13.  | **07.07.2014** | Nicht-parametrische Tests II
-|      | **08.07.2014** | Experimentaldesign
+| 12.  | **30.06.2014** | $\chi^2$-Test  
+|      | **01.07.2014** | Mosaic Plots, Odds Ratio, logLikelihood & Likelihood-Ratio, Mann-Whitney U-Test, Wilcoxon Test
+| 13.  | **07.07.2014** | Experimentaldesign I
+|      | **08.07.2014** | Experimentaldesign II, Effektgröße und Power
 | 14.  | **14.07.2014** | Fragestunde / Puffer
 |      | **15.07.2014** | Klausur
 
