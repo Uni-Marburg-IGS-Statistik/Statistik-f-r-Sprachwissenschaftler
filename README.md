@@ -77,7 +77,7 @@ Diese Veranstaltung bietet eine praktische Einführung in statistische Verfahren
 | 14.  | **14.07.2014** | Fragestunde / Puffer
 |      | **15.07.2014** | Klausur
 
-[^jenseits]: (Ordinaldaten: Mann-Whitney U-Test, Wilcoxon Test, andere nicht parametrische Verfahren, Resampling-Methoden, Link-Funktionen in GLM, GAM, andere Regressionsverfahren -- LASSO, Theil–Sen, usw., Bayes'sche Varianten aller Verfahren) 
+[^jenseits]: Mann-Whitney U-Test & Wilcoxon Test für Ordinaldaten, andere nicht parametrische Verfahren, Resampling-Methoden, Robust-Methoden, Link-Funktionen in GLM, GAM, andere Regressionsverfahren, MANOVA, Bayes'sche Varianten aller Verfahren, Bayes' Factors 
 
 # Software
 - [R](http://cran.r-project.org/)
