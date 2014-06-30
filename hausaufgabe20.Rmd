@@ -1,0 +1,194 @@
+% Hausaufgabe 20
+% Phillip Alday <phillip.alday@staff.uni-marburg.de>
+% 2014-06-24
+
+Falls die Umlaute in dieser und anderen Dateien nicht korrekt dargestellt werden, sollten Sie File > Reopen with Encoding > UTF-8 sofort machen (und auf jeden Fall ohne davor zu speichern), damit die Enkodierung korrekt erkannt wird! 
+
+```{r, echo=FALSE}
+# Notwendige Pakete laden
+library(ggplot2)
+library(xtable)
+library(lme4)
+suppressPackageStartupMessages(library(knitcitations))
+```
+
+# Die nächsten Punkte sollten beinahe automatisch sein...
+1. Kopieren Sie diese Datei in Ihren Ordner (das können Sie innerhalb RStudio machen oder mit Explorer/Finder/usw.) und öffnen Sie die Kopie. Ab diesem Punkt arbeiten Sie mit der Kopie. Die Kopie bitte `hausaufgabe20.Rmd` nennen und nicht `Kopie...`
+2. Sie sehen jetzt im Git-Tab, dass die neue Datei als unbekannt (mit gelbem Fragezeichen) da steht. Geben Sie Git Bescheid, dass Sie die Änderungen in der Datei verfolgen möchten (auf Stage klicken).
+3. Machen Sie ein Commit mit den bisherigen Änderungen (schreiben Sie eine sinnvolle Message dazu -- sinnvoll bedeutet nicht unbedingt lang) und danach einen Push.
+4. Ersetzen Sie meinen Namen oben mit Ihrem. Klicken auf Stage, um die Änderung zu merken.
+5. Ändern Sie das Datum auf heute. (Seien Sie ehrlich! Ich kann das sowieso am Commit sehen.)
+6. Sie sehen jetzt, dass es zwei Symbole in der Status-Spalte gibt, eins für den Zustand im *Staging Area* (auch als *Index* bekannt), eins für den Zustand im Vergleich zum Staging Area. Sie haben die Datei modifiziert, eine Änderung in das Staging Area aufgenommen, und danach weitere Änderungen gemacht. Nur Änderungen im Staging Area werden in den Commit aufgenommen.
+7. Stellen Sie die letzten Änderungen auch ins Staging Area und machen Sie einen Commit (immer mit sinnvoller Message!).
+8. Vergessen Sie nicht am Ende, die Lizenz ggf. zu ändern!
+
+*Für diese Hausaufgabe werden Sie auch während der Bearbeitung Internetzugang brauchen, weil die Quellenangaben und Daten dynamisch aus dem Netz runtergeladen werden!*
+
+Ich schlage weiterhin vor, dass Sie die R-Code-Blöcke erst in der Konsole testen und zum Laufen bringen, bevor Sie sie in die Rmd-Datei einfügen. Die Behebung von Fehlern ist einfach leichter in der Konsole *und* bei den Rmd-Dateien wird evtl. alles jedes mal neu berechnet, was bei den Modellen hier evtl. ein paar Minuten dauern könnte. Sparen Sie sich Zeit und testen Sie das Knitten der Rmd-Datei erst, wenn Sie kurz eine Kaffeepause brauchen
+
+Im folgenden steht RE für engl. *random effect* und FE für engl. *fixed effect*.
+
+# Höflichkeit und Stimmhöhe
+`r citet("10.1016/j.wocn.2012.08.006")` untersuchten die phonetischen Eigenschaften der formellen und informellen Register im Koreanischen. Unter anderem wurde auch die Grundfrequenz ($F_0$) der Stimme bei jedem Trial festgestellt. Die Daten zur Grundfrequenz bei sechs Probanden und sieben Items hat Bodo Winter im Netz verfügbar gemacht. 
+
+Wir können Daten direkt von seiner Webseite in R laden: 
+
+```{r}
+stimmen <- read.csv("http://www.bodowinter.com/tutorial/politeness_data.csv")
+```
+
+Wie immer schauen wir uns erstmal die Zusammenfassung der Daten an.
+
+```{r}
+summary(stimmen)
+```
+
+Die Items in dieser Studie sind "Szenarien", also Situationen wo man mehr oder weniger höflich ist: obwohl es einen fixen Faktor für Höflichkeit gibt, ist man evtl. nicht in jeder Situation gleich (un)höflich. Somit haben wir einen zufälligen Faktor, weil wir nicht alle möglichen Szenarien austesten können, obgleich wir erkennen, dass das Szenario einen Teil der Varianz erklären kann. `attitude` ist auch ein Faktor mit zwei Stufen `inf` für *informal* und `pol` für *polite*.  Geschlecht spielt eine bekannte Rolle bei Stimmhöhe und wurde demzufolge auch als `gender` mit aufgenommen. Die Messung der Stimmhöhe in Hertz ist eine metrische Variable, die als `frequency` im data frame zu finden ist. 
+
+Allerdings merken wir, dass `scenario` falsch kodiert ist, was wir korrigieren müssen:
+
+CODE_BLOCK_HIER
+
+## Auswirkung der experimentellen Manipulation
+Um einen groben Eindruck zu bekommen, können wir schnell einen Boxplot machen:
+
+```{r, fig.width=7, fig.height=4, fig.align='center'}
+ggplot(stimmen) +
+  geom_boxplot(aes(x=attitude,y=frequency)) + 
+  # in Subplots nach Geschlecht aufteilen
+  facet_wrap(~gender)
+```
+
+Wir merken dabei, dass:
+1. Männer haben eindeutig tiefere Stimmen, was uns schon davor bekannt war.
+2. Der höfliche Register scheint allgemein tiefer zu sein.
+3. Dieser Unterschied scheint kleiner bei Männern als bei Frauen zu sein.
+
+Über den bekannten Haupteffekt `gender` hinaus gibt es also zwei weitere fixe Effekte, die wir uns anschauen möchten:
+1. Haupteffekt für `attitude`
+2. Interaktion für `gender` $\times$ `attitude` 
+
+## Item- und Subject-Varianz
+
+Wir können auf ähnliche Art und Weise ein Plot für die Versuchspersonen und Szenarien erstellen.
+
+Erstellen Sie einen Boxplot für `frequency` nach `subject`, wie oben für `frequency` nach `attitude` gemacht wurde (hier ohne Aufteilung nach Geschlecht). Dieser gibt uns einen Blick in die Varianz innerhalb und zwischen Versuchspersonen. 
+
+CODE_BLOCK_HIER
+
+Machen Sie das gleiche für `scenario`. 
+
+CODE_BLOCK_HIER
+
+Gibt es mehr Varianz zwischen Szenarien oder zwischen Versuchspersonen? 
+
+Die Varianz zwischen Versuchspersonen bzw. Szenarien beschreiben wir durch zufällige Effekte. Es gibt offentsichlich einen Unterschied zwischen den verschiedenen Basisfrequenzen der Einzelversuchenpersonen und es scheint auch zwischen den verschiedenen Szenarien einen Unterschied zu geben, d.h. wir haben auf jeden Fall Intercepts in unserer RE-Struktur. Ob wir auch weitere Struktur in der RE-Struktur aufnehmen, schauen wir uns erst später an.
+
+# Fixe Effekte
+
+Wie oben erwähnt, haben wir drei mögliche Effekte, die wir uns anschauen wollen:
+1. Haupteffekt für `gender`
+2. Haupteffekt für `attitude`
+3. Interaktion für `gender` $\times$ `attitude` 
+
+Um die Berechnung im folgenden zu beschleunigen, bleiben wir momentan bei einer Intercepts-Only-RE-Struktur. Weil der Effekt von Geschlecht schon aus der Literatur und dem Alltag bekannt ist, nehmen wir das Model nur mit `gender` als Ausgangspunkt. Wir haben auch vor, Modellvergleiche zu machen, daher setzten wir `REML=FALSE` von Anfang an.
+
+```{r}
+model.gender <- lmer(frequency ~ gender + (1|subject) + (1|scenario), data=stimmen, REML=FALSE)
+summary(model.gender)
+```
+
+Wie bei normaler Regression werden auch hier kategorische Variablen als Stufen angegeben. Hier gibt es für `genderM` (also für Männer) eine Auswirkung von etwa $-108$ Hz, d.h. die Stimme von Männern sind etwa $108$ Hz tiefer als die von Frauen.
+
+Wir schauen als nächstes den Haupteffekt von `attitude` an:
+```{r}
+model.attitude <- lmer(frequency ~ gender + attitude + (1|subject) + (1|scenario), data=stimmen, REML=FALSE)
+summary(model.attitude)
+```
+
+Haben sich die Koeffizienten oder Standardfehler geändert?
+
+Jetzt berechen wir das Modell mit der Interaktion zwischen `gender` und `attitude`. 
+
+```{r}
+#model.attitude.int <- CODE_HIER
+#summary(model.attitude.int)
+```
+
+Haben sich die Koeffizienten oder Standardfehler geändert?
+
+Ist die Interaktion signifikant? Wir können uns den Koeffizienten anschauen, aber uns interessiert ob *das Model besser geworden ist*. Das testen wir mit `anova()`
+
+```{r}
+#anova(model.attitude,model.attitude.int)
+```
+
+Hat die Interkation das Modell verbessert? Wenn ein komplexeres Modell nicht signifikant besser als ein einfacheres Modell ist, bleiben wir bei dem einfacheren Modell! 
+
+# Zufällige Effekte
+
+Wir haben bisher Modelle angeschaut, die nur Intercepts in der RE-Struktur haben. Wie `r citet("10.3389/fpsyg.2013.00328")` betont hat, sollten wir möglichst maximale RE-Strukturen nehmen, sonst haben wir anti-konservative Schätzungen, also erhöhten $\alpha$-Fehler. Hier könnten wir uns vorstellen, dass sich die Probanden nicht nur in ihrer Basistonlage (Intercept) unterscheiden, sondern auch in der Änderung der Tonlage nach Höflichkeit (Slope/Anstieg). Ähnlich können wir uns auch vorstellen, dass manche Szenarien einen größeren Unterschied in der Tonlage zwischen der informellen und der formellen Varianten als bei anderen hervorrufen. Es lohnt sich also, auch Antieg in die RE-Struktur aufzunehmen.
+
+```{r}
+model.attitude.re.slope <- lmer(frequency ~ gender + attitude + (1+attitude|subject) + (1+attitude|scenario), data=stimmen, REML=FALSE)
+summary(model.attitude.re.slope)
+```
+
+Haben sich die Koeffizienten oder Standardfehler (im Vergleich zu `model.attitude` geändert)? 
+
+Hat dieses Modell ein signifikante besseres Fit als `model.attitude`? 
+
+CODE_BLOCK_HIER
+
+Könnten wir hier ein Intercepts-Only-Modell begründen? 
+
+Wir könnten -- sollten -- uns hier auch das Modell mit `gender` in der RE-Struktur anschauen, aber solche Berechnungen werden sehr schnell für eine Hausaufgabe zu aufwendig. Sie können sich an dieser Stelle schon vorstellen, wie kompliziert die RE-Struktur werden kann. Wir müssten für jeden zufälligen Effekt die maximale berechenbare Struktur finden und die einzelnen Berechnungen können schon ziemlich lange dauern. Das ist ein deutlicher Nachteil dieser Methode.   
+
+(Übrigens: Auch bei den RE-Struktur müssen wir berücksichtigen, ob die Interkation zu einer signifikanten Verbesserung führt. In der Regel nehmen wir allerdings keine RE-Struktur an, die komplexer als unsere FE-Struktur ist. Das heißt, wir schauen nicht, ob die Interaktion in der RE-Struktur was bringt, wenn wir die Interkation nicht in die fixen Effekte aufgenommen haben. )
+
+# CIs und Effects
+Auch für gemischte Modelle können wir Konfidenzintervalle berechnen. Der Befehl lautet -- wie bei `lm()` -- `confint()`. Allerdings ist die Berechnung deutlich aufwendiger, weshalb wir hier nur beispielweise sie für das einfachste Modell berechnen:
+
+```{r}
+confint(model.gender)
+```
+
+`.sigma` ist die Schätzung der Residual-Varianz, die `.sigXX` sind die anderen zufälligen Effekte.  
+
+Das Paket `effects` bietet auch die Möglichkeit an, Konfidenzintervalle und schnelle Grafiken für gemischte Modelle zu berechnen bzw. zu generieren.
+
+```{r}
+library(effects)
+
+effects.attitude <- allEffects(model.attitude)
+summary(effects.attitude)
+plot(effects.attitude)
+```
+
+Was ist der Unterschied zwischen den Konfidenzintervallen von `confint()` und von `allEffects()`? (D.h., woher kommt der Unterschied?) 
+
+# Intercepts und Slopes
+
+Ich habe am Anfang meiner Erklärung für gemischte Modelle erwähnt, dass wir sie eigentlich als Regression mit Korrektur für die verschiedenen Gruppierungen (Subjects, Items, usw.) betrachten können. Das können wir eigentlich auch direkt am Model sehen, indem wir den Befehl `coef()` nutzen.
+
+Wir schauen uns zuerst ein Intercept-Only-Modell an: 
+```{r}
+coef(model.attitude)
+```
+
+Wir sehen, dass das Intercept für jedes `subject` und `scenario` ist, aber die Koeffizienten für die Anstige (`genderM` und `attitudepol`) überall gleich sind und zwar die gleichen, die es als fixe Effekte gibt!  Bei dem Modell mit Anstieg in der RE-Struktur gibt es einen Anstieg für jedes `subject` und `scenario`.
+
+```{r}
+coef(model.attitude.re.slope)
+```
+
+Diese Sichtweise -- Regression + Korrektur pro RE-Gruppierung -- war also nicht so verstellt!
+
+# Bibliographie
+```{r, echo=FALSE, results='asis'}
+bibliography()
+```
+
+# Lizenz
+Dieses Werk ist lizenziert unter einer CC-BY-NC-SA Lizenz.
+
