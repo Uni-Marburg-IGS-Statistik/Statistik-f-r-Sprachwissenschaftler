@@ -423,12 +423,35 @@ Text berechnen
 ```{r}
 chisq.test(verbs.xt, correct=F)
 ```
+Berichten:
+$\chi^2(1) = 14.27, p = 0.0001588$
 
 Beispieldatensatz: verbs aus languageR
 ============================================
 Erwartungswerte von R ausgeben lassen
 ```{r}
 chisq.test(verbs.xt, correct=F)$expected
+```
+
+Alternativ zu (Pearson'schem) Chi-Quadrat:  Likelihood-Ratio-Test
+=======================================================================
+* <small>Likelihood: 
+  * nicht gleich Wahrscheinlichkeit!
+  * $\mathcal{L}(H | D) = P(D | H)$ 
+  * (leicht unkonventionelle Formulierung: eigentlich wird "Parameter" $\theta$ statt "Hypothese" in den meisten Definitionen genutzt)
+* Likelihood-Ratio-Test: Vergleiche das Modell mit dem höchsten Likelihood mit dem Null-Modell
+$$ L_{\chi^2} = 2\sum_\text{Zellen} \text{Beo} \ln \frac{\text{Beo}}{\text{Modell}} $$
+* Nach Wilks-Satz folgt logLikelihood einer $\chi^2$-Verteilung!
+</small>
+
+Alternativ zu (Pearson'schem) Chi-Quadrat:  Likelihood-Ratio-Test
+=======================================================================
+```{r}
+theo <-  chisq.test(verbs.xt, correct=F)$expected
+beo <- verbs.xt
+loglike <- 2 * sum( beo * log(beo/theo))
+loglike
+pchisq(loglike,df=1, lower.tail=F)
 ```
 
 Anmerkung: Andere Verteilungsformen (= keine Gleichverteilung)

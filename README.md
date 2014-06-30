@@ -70,8 +70,8 @@ Diese Veranstaltung bietet eine praktische Einführung in statistische Verfahren
 |      | **24.06.2014** | gemischte Modelle II
 |      |                | *Hausaufgabe bis 30.06.2014 12 Uhr:*
 |      |                | 1. `hausaufgabe20.Rmd`
-| 12.  | **30.06.2014** | $\chi^2$-Test  
-|      | **01.07.2014** | Mosaic Plots, Odds Ratio, logLikelihood & Likelihood-Ratio, Mann-Whitney U-Test, Wilcoxon Test
+| 12.  | **30.06.2014** | $\chi^2$-Test, logLikelihood & Likelihood-Ratio, McNemar-Test
+|      | **01.07.2014** | Mosaic Plots, Odds Ratio, Mann-Whitney U-Test, Wilcoxon Test
 | 13.  | **07.07.2014** | Experimentaldesign I
 |      | **08.07.2014** | Experimentaldesign II, Effektgröße und Power
 | 14.  | **14.07.2014** | Fragestunde / Puffer
