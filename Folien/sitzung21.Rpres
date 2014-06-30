@@ -1,7 +1,7 @@
 Statistik für Sprachwissenschaftler
 ========================================================
 author: Phillip M . Alday
-date: 2014-06-30
+date: 2014-06-30 / 07-01
 autosize: false
 
 ```{r setup, include=FALSE}
@@ -342,13 +342,13 @@ Chi-Quadrat: Voraussetzungen
   * Besser aber computetionell aufwendiger: Fishers Exact-Test
 
 Exakter Test nach Fisher
-==================== 
+==========================
 <small> berechnet den **exakten** Wert, ist allerdings computionell unpraktisch für größere Tabellen (>4 Felder).
 ```{r}
  fisher.test(sexsurvival)
 ```
 </small>
-(mehr zu *odds ratio* morgen!)
+(mehr zu *odds ratio* später!)
 
 Kurs: Studiengang und Geschlecht
 ==================================
@@ -503,3 +503,158 @@ Was ist bei Messwiederholung?
 raucher <- as.table(rbind(c(80,25),c(12,120)))
 mcnemar.test(raucher,correct=F)
 ```
+
+Wie kann ich mir Häufigkeitstabellen visuell vorstellen? 
+==========================================================
+```{r}
+mosaicplot(xtabs(~ sex + major,kurs2))
+```
+
+Wie kann ich mir Häufigkeitstabellen visuell vorstellen? 
+==========================================================
+```{r}
+mosaicplot(xtabs(~ sex + major,kurs))
+```
+
+Wie kann ich mir Häufigkeitstabellen visuell vorstellen? 
+==========================================================
+* Mosaic Plots
+  - in base graphics drin `mosaicplot()`
+  - Erweiterung in Paket `vcd`: `mosaic`
+  - kein eigenes `geom` in `ggplot2`: siehe oben für Umwege!
+* Möglichst quadratisch darstellen, um Probleme mit Perspektive und Wahrnehmung zu vermeieden!
+
+Wie kann ich mir Häufigkeitstabellen visuell vorstellen? 
+==========================================================
+```{r}
+mosaicplot(xtabs(Freq ~ Sex + Survived,passengers))
+```
+
+Wie kann ich mir Häufigkeitstabellen visuell vorstellen? 
+==========================================================
+```{r}
+mosaicplot(xtabs(Freq ~ Sex + Survived,passengers),shade=TRUE)
+```
+
+Chi-Quadrat Zerlegen: Standardisierte Residuals
+====================================================
+* $$\text{Residual} = \text{Beo} - \text{Modell} $$
+* $$\text{Std. Residual} = \frac{(\text{Beo} - \text{Model})}{\sqrt{\text{Model}}} $$ 
+* Std. Residuals sind eigentlich direkt als $z$-Werte interpretierbar!
+```{r}
+chisq.test(xtabs(Freq ~ Sex + Survived,passengers),correct=F)$residuals
+```
+
+Chi-Quadrat Zerlegen: Standardisierte Residuals
+====================================================
+<small>
+```{r}
+titanic.chisq <- chisq.test(xtabs(Freq ~ Sex + Survived,passengers),correct=F)
+(titanic.chisq$observed - titanic.chisq$expected) / sqrt(titanic.chisq$expected)
+```
+</small>
+
+Chi-Quadrat Zerlegen: Standardisierte Residuals
+====================================================
+```{r}
+titanic.chisq$residuals
+```
+
+Chi-Quadrat Zerlegen: Standardisierte Residuals
+====================================================
+- **Obacht:** `?chisq.test` nennt die Std. Residuals "Pearson Residuals" und nutzt "Standardized Residuals" für einen anderen Begriff (verbunden mit Cramér's $V$, a.ka. Cramér's $\phi$, etwa Korrelationstest für nominale Daten) 
+- `?chisq.test` bietet übrigens auch andere Verfahren zur Berechnung der $\chi^2$-Statistik, inkl. Monte Carlo Verfahren
+
+Effektgröße bei Chi-Quadrat: Odds Ratio
+=============================================
+<small>
+```{r}
+titanic.chisq$observed
+```
+***
+* Wahrscheinlichkeit, dass ein Mann stirbt: `r 694 / (694 + 175)`
+* Wahrscheinlichkeit, dass eine Frau stirbt: `r 123 / (123 + 324)`
+* Es war **`r 0.7986 / 0.2752`x** wahrscheinlicher, dass ein Mann stirbt als eine Frau.
+* Wahrscheinlichkeit, dass ein Mann lebt: `r 175 / (694 + 175)`
+* Wahrscheinlichkeit, dass eine Frau lebt: `r 324 / (123 + 324)`
+* Es war **`r 0.7248 / 0.2014`x** wahrscheinlicher, dass eine Frau überlebt als ein Mann.
+</small>
+
+Effektgröße bei Chi-Quadrat: Odds Ratio
+=============================================
+type: prompt
+incremental: true
+
+Huh?
+
+Wie kann es sein, dass Männer nur etwa 3 mal so oft gestorben sind, aber Frauen 3.6 mal so oft überlebt haben?
+
+Effektgröße bei Chi-Quadrat: Odds Ratio
+=============================================
+* <small> Wahrscheinlichkeit und Odds, trotz Synonymie im Alltag, nicht gleich in der Statistik
+* (Wahrscheinlichkeit, Likelihood und Odds haben alle genau statistiche Definitionen, die unterschiedlichen Teilen des Alltaggebrauchs abdecken!)
+* Odds, dass eine Frau überlebt: $$\frac{\text{Anzahl überlebt}}{\text{Anzahl gestorben}} = \frac{324}{123} \approx 2.6$$
+  "Eine Frau überlebte 2.6 mal öfter als starb."
+* Odds, dass ein Mann überlebt: $$\frac{\text{Anzahl überlebt}}{\text{Anzahl gestorben}} = \frac{175}{694} \approx 0.25 $$
+  "Ein Mann starb 4 mal öfter als überlebte."
+</small>
+
+Effektgröße bei Chi-Quadrat: Odds Ratio
+=============================================
+- Überleben: Frauen zu Männer
+  * das Verhältnis der Odds (Odds-Ratio): $$\frac{324}{123} / \frac{175}{694} \approx \frac{2.6}{0.25} \approx 10$$
+  * "Frauen hatten etwa 10 mal bessere Chancen als Männer."
+- Sterben: Männer zu Frauen
+  * das Verhältnis der Odds (Odds-Ratio): $$\frac{694}{175} / \frac{123}{324} \approx \frac{4}{0.38} \approx 10$$
+  * "Männer hatten etwa 10 mal schlechtere Chancen als Frauen."
+
+Effektgröße bei Chi-Quadrat: Odds Ratio
+============================================
+- Vorteil des Odds-Ratio: Symmetrie
+- Odds-Ratio auch ein Maß der Effektgröße
+- Odds-Ratio + CI über den Fisher-Test berechnen
+- Null-Effekt bei Odds-Ratio (wie bei allen verhältnisbasierten Tests): Odds == 1
+
+Effektgröße bei Chi-Quadrat: Odds Ratio
+============================================
+```{r}
+fisher.test(xtabs(Freq ~ Sex + Survived,passengers))
+```
+
+Symmetrie des Odds-Ratio:
+============================
+* <small> Odds, dass ein Überlebender Frau ist: $$\frac{\text{Anzahl Frauen}}{\text{Anzahl Männer}} = \frac{324}{175} \approx  1.85$$
+  "Es gab bei den Überlebenden 1.85 mal so viele Frauen als Männer."
+* Odds, dass ein Gestorbener Frau ist: $$\frac{\text{Anzahl Frauen}}{\text{Anzahl Männer}} = \frac{123}{694} \approx 0.177 $$
+  "Es gab bei den Gestorben 5.6 mal so viele Männer als Frauen."
+* Odds-Ratio: $$ 1.85 / 0.177 \approx 10 $$
+"Ein Überlebender ist 10 mal so oft eine Frau als ein Gestorbener ist."
+* Vielleicht sollten wir "eine Überlebende" und "ein Gestorbener" sagen!
+</small>
+
+Effektgröße bei Chi-Quadrat: Odds Ratio
+============================================
+- Vorteil des Odds-Ratio: Symmetrie
+- Odds-Ratio auch ein Maß der Effektgröße
+- Odds-Ratio + CI über den Fisher-Test berechnen
+- Null-Effekt bei Odds-Ratio (wie bei allen verhältnisbasierten Tests): Odds == 1
+- Odds-Ratio beschreibt irgendwie die Interaktion der zwei Faktoren beim Vier-Felder-Test
+- Schwierig bis unintretierbar bei größeren Tabellen 
+- Fishers Test sowieso computionell zu aufwendig bei größeren Tabellen!
+
+Effektgröße bei Chi-Quadrat: Odds Ratio
+============================================
+```{r}
+fisher.test(xtabs(~ sex + major,kurs2))
+```
+
+Hausaufgabe
+=============
+* Kapitel 18 bis auf 18.7 (loglinear analysis) aus *Discovering Statistics Using R* lesen
+    - Gute Erklärung und andere Funktion (`CrossTable()` aus dem Paket `gmodels`) zur Berechnung der $\chi^2$-Statistiken
+* Tests selber üben -- mit den Daten in *DSUR* oder weiterhin mit dem Titanic-Datensatz (Age, Class, Sex), z.B.
+```{r, eval=FALSE}
+xtabs(Freq~ Age + Class, Titanic)
+xtabs(Freq~ Age + Class + Sex, Titanic)
+```
+usw.
