@@ -72,6 +72,9 @@ Diese Veranstaltung bietet eine praktische Einführung in statistische Verfahren
 |      |                | 1. `hausaufgabe20.Rmd`
 | 12.  | **30.06.2014** | $\chi^2$-Test, logLikelihood & Likelihood-Ratio, McNemar-Test
 |      | **01.07.2014** | $\chi^2$-Test, logLikelihood & Likelihood-Ratio, McNemar-Test, Mosaic Plots, Odds Ratio
+|      |                | *Hausaufgabe (wird nicht kontrolliert!)*
+|      |                | 1. Kapitel 18 bis auf 18.7 (loglinear analysis) aus *Discovering Statistics Using R* lesen
+|      |                | 2. Tests selber üben -- mit den Daten in *DSUR* oder weiterhin mit dem Titanic-Datensatz
 | 13.  | **07.07.2014** | Verweis auf nicht behandelte Methoden,^[jenseits] Experimentaldesign I
 |      | **08.07.2014** | Experimentaldesign II, Effektgröße und Power
 | 14.  | **14.07.2014** | Fragestunde / Puffer
