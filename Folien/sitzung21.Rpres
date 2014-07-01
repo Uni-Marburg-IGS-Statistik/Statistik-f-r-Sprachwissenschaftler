@@ -278,7 +278,7 @@ pchisq(343.6,df=1,lower.tail=F)
 Erweiterung: Vier-Felder-Test
 ===============================
 ```{r}
-sexsurvival <- xtabs(Freq ~ Sex + Survived, Titanic)
+sexsurvival <- xtabs(Freq ~ Sex + Survived, passengers)
 sexsurvival
 ```
 
