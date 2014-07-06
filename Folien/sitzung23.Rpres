@@ -1,0 +1,476 @@
+Statistik für Sprachwissenschaftler
+========================================================
+author: Phillip M . Alday
+date: 2014-06-30 / 07-01
+autosize: false
+
+```{r setup, include=FALSE}
+library(knitr)
+opts_chunk$set(cache=TRUE,prompt=TRUE)
+library(knitcitations)
+library(ggplot2)
+library(xtable)
+library(reshape2)
+cite_options(tooltip = TRUE
+             , linked = TRUE
+             , bibtex_data = FALSE)
+```
+
+Aufwachen und sich errinnern!
+====================================
+type: section
+
+Bisher
+=======
+- $p$-Werte und Konfidenzintervalle
+- $z$- und $t$-Tests
+- BEST
+- ANOVA
+  - ein- und mehrfaktoriell
+  - ohne und mit Messwiederholung ("between" und "within")
+- lineare Regression und Korrelation
+- lineare gemischte Modelle
+- $\chi^2$-Test 
+
+Heute und morgen
+==================
+- was man bei der Vorbereitung einer Studie berücksichtigen sollte
+- was man bei der Auswertung einer Studie berücksichtigen sollte
+
+Nicht abgedeckt, aber ggf. wichtig...
+==========================================
+- Nicht-parametrische Tests
+  - Wilcoxon und Mann-Whitney Tests (entspricht etwa $t$-Test)
+  - usw.
+- Robuste Verfahren
+  - Verfahren mit Trimmend Means, M-Estimators, usw.
+  - s. v.a. Literatur von R. Wilcox
+- Resampling-Methoden
+  - Jackknife
+  - Bootstrap
+
+Nicht abgedeckt, aber ggf. wichtig...
+==========================================
+- Generalisiertes lineares Modell (logit-, Poisson-, usw.-Regression)
+- Andere Regressionsmethoden (Bayes'sche Verfahren, LASSO, usw.)
+- Generalisiertes additives Modell
+- viel mehr ... 
+
+Was sollte man bei der Vorbereitung einer Studie berücksichtigen?
+===================================================================
+type:section
+
+Ronald Fisher (1938)
+==========================
+> To call in the statistician after the experiment is done may be no more than asking him to perform a post-mortem examination: he may be able to say what the experiment died of.
+
+John Tukey (1986)
+======================
+> The combination of some data and an aching desire for an answer does not ensure that a reasonable answer can be extracted from a given body of data.
+
+Basale Designaspekte
+=========================
+* Was wollen wir wissen (Hypothese)?
+* Welche Art von Daten benötigen wir (Skalenfrage)?
+* Welche Methoden stehen uns zur Verfügung (Logistik)?
+* Welche Art von Daten bekommen wir mit der experimentellen Methode unserer Wahl (Skalenfrage)?
+* Wie gewährleisten wir Interpretierbarkeit der Daten (Aufbau des Experiments)?
+
+
+Allgemeines
+===============
+* Man sollte in der Regel immer mehrere Stimuli pro Bedingung präsentieren, um z.B. lexikalische Effekte auszuschliessen (die genaue Anzahl ist abhängig von der gewählten Methode)
+* Die kritischen Bedingungen sollten sich immer nur minimal unterscheiden, z.B. *... dass der Butler den Gärtner einlud* vs.  *... dass den Butler der Gärtner einlud*
+* Filler (Ablenker) haben Vor- und Nachteile
+
+Filler
+==========
+* Bei vielen Verhaltensstudien wichtig (z.B. Fragebögen, Blickbewegungsmessungen etc.) um Strategien zu vermeiden
+* Verhältnis von kritischen Sätzen zu Fillersätzen mindestens 1:2
+* Allerdings: Die Art der Filler kann auch die Ergebnisse beeinflussen (z.B. Akzeptabilitätsurteile)
+* Bei nicht ausbalancierten Designs (-> Vorhersagbarkeit) sollten Filler zur Ausbalancierung hinzugefügt werden
+
+Ein Designbeispiel
+====================
+* **Fragestellung:** Wie werden objektsinitiale Strukturen verarbeitet und inwiefern hängt dies von der Art der Objektsvoranstellung ab?
+* Zwei Faktoren:
+  - **Wortstellung** (SO vs. OS)
+  - **Umstellungsart** (Vorfeld vs. Mittelfeld)
+* Insgesamt ein 2x2 Design (2 Stufen x 2 Stufen)
+
+Ein Designbeispiel
+====================
+Worstellung | Position | Beispielsatz
+------------|----------|--------------
+SO          | VF       | Der Butler hat den Gärtner eingeladen.
+OS          | VF       | Den Butler hat der Gärtner eingeladen.
+SO          | MF       | Gestern hat der Butler den Gärtner eingeladen.
+OS          | MF       | Gestern hat den Butler der Gärtner eingeladen.
+
+Materialkonstruktion
+=======================
+- **01A** Der Butler hat den Gärtner eingeladen.
+- **01B** Den Butler hat der Gärtner eingeladen.
+- **01C** Gestern hat der Butler den Gärtner eingeladen.
+- **01D** Gestern hat den Butler der Gärtner eingeladen.
+- **02A** Der Lehrer hat den Politiker gegrüßt.
+- **02B** Den Lehrer hat der Politiker gegrüßt.
+- ...
+
+Wie viel Material?
+=====================
+* Jede VP sieht nur eine Bedingung aus einem Satzblock (alle Bedingungen bzw. "Formen" eines Items)
+  - Typisch für Akzeptabilitätsstudien, Lesezeiten und Blickbewegungsstudien
+  - In weiteren Methoden (Speed-accuracy Tradeoff, neurokognitive Messungen) sind oftmals mehr Sätze pro Bedingung erforderlich (damit werden oft auch lexikalische Wiederholungen pro Proband notwendig)
+* Bei 6 Sätzen pro Bedingung und 4 Bedingungen => 24 Lexikalisierungen
+
+Listenaufteilung ("Latin square")
+===================================
+Bedingung | Liste 1          |  Liste 2         | Liste 3          | Liste 4
+----------|------------------|------------------|------------------|------------------
+A         | Satzblock 01--06 | Satzblock 07--12 | Satzblock 13--18 | Satzblock 19--24 
+B         | 07--12           | 13--18           | 19--24           | 01--06
+C         | 13--18           | 19--24           | 01--06           | 07--12           
+D         | 19--24           | 01--06           | 07--12           | 13--18
+
+Über alle VPs hinweg kommen also alle Sätze in allen Bedingungen vor.
+============
+type: prompt
+
+Wie viele Probanden?
+=====================
+* Abhängig von der Methode
+* Allgemein: mehrere Probanden sind wichtig, um Einzelergebnisse auszuschließen (ähnlich wie das Argument für mehrere Sätze pro Bedingung)
+
+Mögliche Ergebnisse: Haupteffekt Wortstellung
+================================================
+left: 50%
+
+<br/>
+SO-Sätze sind unabhängig von der Satzstruktur "besser" als OS-Sätze
+
+***
+<br/>
+```{r, echo=FALSE}
+wortstellung <- data.frame(Wortstellung=factor(c("SO","OS","SO","OS"),levels=c("SO","OS"))
+                ,Position=factor(c("VF","VF","MF","MF"), levels=c("VF","MF"))
+                ,Maß=c(96,82,94,78))
+effectdemo <- ggplot(wortstellung) + 
+  geom_bar(aes(x=Position,y=Maß,fill=Wortstellung)
+           ,stat="identity"
+           ,position="dodge") + 
+  theme(axis.title.y=element_blank()
+        ,axis.text.y=element_blank())
+effectdemo
+```
+
+
+Mögliche Ergebnisse: Haupteffekt Position
+================================================
+left: 50%
+
+<br/>
+Es gibt einen generellen Unterschied zwischen den beiden Umstellungsmöglicheiten
+
+***
+
+<br/>
+```{r,echo=FALSE}
+position <- data.frame(Wortstellung=factor(c("SO","OS","SO","OS"),levels=c("SO","OS"))
+                ,Position=factor(c("VF","VF","MF","MF"), levels=c("VF","MF"))
+                ,Maß=c(96,92,78,74))
+effectdemo %+% position
+```
+
+Mögliche Ergebnisse: Interaktion
+================================================
+left: 50%
+
+<br/>
+Der Unterschied zwischen SO und OS Sätzen hängt von der Satzstruktur ab
+
+***
+
+<br/>
+```{r,echo=FALSE}
+interaktion <- data.frame(Wortstellung=factor(c("SO","OS","SO","OS"),levels=c("SO","OS"))
+                ,Position=factor(c("VF","VF","MF","MF"), levels=c("VF","MF"))
+                ,Maß=c(96,92,90,70))
+effectdemo %+% interaktion
+```
+
+Mögliche Ergebnisse: überkreutzte Interaktion
+================================================
+left: 50%
+
+<br/>
+Der Unterschied zwischen SO und OS Sätzen kehrt je nach der Satzstruktur um
+
+NB: definitiv nicht der Realität entsprechend!
+***
+
+<br/>
+```{r,echo=FALSE}
+interaktion <- data.frame(Wortstellung=factor(c("SO","OS","SO","OS"),levels=c("SO","OS"))
+                ,Position=factor(c("VF","VF","MF","MF"), levels=c("VF","MF"))
+                ,Maß=c(78,92,90,70))
+effectdemo %+% interaktion
+```
+
+Komplexere Gesichtspunkte I
+============================
+* Bei einem direkten Vergleich kritischer Wörter:
+    - ähnliche Länge
+    - ähnliche Vorkommenshäufigkeit
+    - ggf. ähnlicher Grad der Erwartung an der entsprechenden Position
+* Bei Studien auf der Wortebene ggf. noch weitere Aspekte: "age of acquisition", Konkretheit / Bildhaftigkeit , Bigrammfrequenz ... 
+
+Beispiel: Staub (2007)
+======================
+* When the dog ~~arrived~~ the vet and his new assistant took off the muzzle. (**unakkusativ**)
+* When the dog ~~struggled~~ the vet and his new assistant took off the muzzle. (**unergativ**)
+* When the dog ~~scratched~~ the vet and his new assistant took off the muzzle. (**optional transitiv**)
+
+gleiche Länge + gleiche Vorkommenshäufigkeit
+
+Komplexere Gesichtspunkte II
+================================
+Bei Studien auf der Satzebene:
+* Vorkommenshäufigkeit der Struktur?
+* Plausibilität des Gesamtsatzes?
+* Vorhersagbarkeit, lexikalische Assoziation
+
+Allgemeine Frage
+==================
+* Auf welche Einflussfaktoren kann ein Unterschied in einem experimentellen Maß zurückgeführt werden?
+* Verhaltensstudien (z.B.  Fragebögen mit Akzeptabilitätsurteilen) sind daher oftmals eine Voraussetzung für die Verwendung feinkörnigerer Messmethoden (wie EEG oder fMRT)
+* Was genau kontrolliert werden muss, hängt auch von der Methode ab.
+
+Beispiel 1
+============
+* Subjekt- vs. Objektrelativsätze:
+  - The senator who **the journalist** ~~attacked~~ admitted the error.
+  - The senator who ~~attacked~~ **the journalist** admitted the error.
+* Bei Lesezeit- und Blickbewegungsstudien werden oftmals Regionen mit unterschiedlichen Wortkategorien verglichen.
+* Beim EEG ist dies nicht möglich, da Nomen und Verben per se unterschiedliche Potenzialverschiebungen auslösen.
+
+Beispiel 2
+===========
+* Rolle der lexikalisch-semantischen Assoziation
+* Wang et al. (2009):
+    - Wie wird das erste Argument in einem chinesischen Satz interpretiert?
+    - Gibt es hier eine "Subjekt-erst-Präferenz" wie in vielen europäischen Sprachen (z.B. Deutsch, Niederländisch, Italienisch ...)
+    - vgl. *Welche Studentin besuchten ...*.
+
+Argumentinterpretation im Chinesischen
+=========================================
+left: 60%
+<br/>
+* Satzinitiale Position als Topik- statt Subjektsposition 
+* Chinesisch als Topi-prominente Sprache (Li & Thompson, 1976)
+* Argumentposition spielt nur eine sehr eingeschränkte Rolle in der endgültigen Interpretation (z.B. Li et al., 1993)
+* Belebtheit erscheint wichtiger
+
+***
+<br/>
+![Li et al (1993)](lietal1993fig1.png)
+Li et al (1993)
+
+
+Eine Subjektspräferenz im Chinesischen? Wang et al. (2009)
+==========================================================
+
+1. 小说 阅读了  
+  - xiaoshuo yuedu-le
+  - Roman lesen-PERF
+2. 演员 阅读了
+  - yanyuan yuedu-le
+  - Schauspieler lesen-PERF
+3. 小说 教育了
+  - xiaoshuo jiaoyu-le
+  - Roman bilden-PERF
+  
+***
+
+Eine Subjektspräferenz im Chinesischen? Wang et al. (2009)
+==========================================================
+
+1. 小说 <font color="blue">阅读了</font>
+  - xiaoshuo yuedu-le
+  - Roman lesen-PERF
+2. 演员 <font color="red">阅读了</font>
+  - yanyuan yuedu-le
+  - Schauspieler lesen-PERF
+3. 小说 <font color="green">教育了</font>
+  - xiaoshuo jiaoyu-le
+  - Roman bilden-PERF
+  
+***
+
+![](wangetal2009-01.png)
+N400 für beide S-initalen Satztypen!
+
+Keine Subjektspräferenz im Chinesischen? Wang et al. (2009)
+=================================================================
+Ein konfundierender Faktor: lexikalische Relatiertheit zwischen NP1 und dem Verb
+* die semantische Nähe zwischen "Roman" und "lesen" ist größer als zwischen "Roman" und "bilden" oder "Schauspieler" und "lesen"
+* durch eine Fragebogenstudie bestätigt (4-Punkt-Skala; 1 = hoch relatiert; 4 = gar nicht relatiert)
+  * Roman -- lesen: 1.26
+  * Schauspieler -- lesen: 2.82
+  * Roman -- bilden: 2.72
+  
+Wenn die semantische Nähe kontrolliert wird ...
+==========================================================
+
+1. 小说 <font color="blue">理解了</font>
+  - xiaoshuo lijie-le
+  - Roman verstehen-PERF
+2. 演员 <font color="red">理解了</font>
+  - yanyuan lijie-le
+  - Schauspieler lesen-PERF
+3. 小说 <font color="green">教育了</font>
+  - xiaoshuo jiaoyu-le
+  - Roman bilden-PERF
+  
+***
+
+![](wangetal2009-02.png)
+N400 für die O-initale Wortstellung!
+
+Standards beachten
+=====================
+Bei Verwendung einer neuen Methode sollte man in der Literatur nachschauen, was herkömmlicherweise kontrolliert wird bzw. wie viele Probanden / Stimuli pro Bedingung typischerweise verwendet werden.
+
+
+Was sollte man bei der Auswertung  einer Studie berücksichtigen?
+===================================================================
+type:section
+
+George Box (& Draper, 1987)
+=============================================
+> All models are wrong, but some are useful.
+
+John Tukey (??? attributed)
+======================
+> An approximate answer to the right problem is worth a good deal more than an exact answer to an approximate problem.
+
+Analyse nach Probanden
+=========================
+* "analysis by participants/subjects", $F_1$, (setzt voraus, dass jeder Proband jede Bedingung vorgesetzt bekommen hat)
+* zunächst: Mittelung über jede Bedingung pro Proband
+* Analyse über die Mittelwerte der einzelnen Bedingungen ($t$-Test, Varianzanalyse)
+* hier ist die Streuung (Standardabweichung / Varianz) über die Probanden hinweg entscheidend
+* signifikantes Ergebnis = Generalisierung über Probanden
+
+Analyse nach Items
+======================
+* "analysis by items", $F_2$, (setzt voraus, dass jedes Item in jeder Bedingung präsentiert worden ist)
+* zunächst: Mittelung über jede Bedingung pro Item
+* Analyse über die Mittelwerte der einzelnen Bedingungen (t-Test, Varianzanalyse)
+* hier ist die Streuung (Standardabweichung / Varianz) über die Items hinweg entscheidend
+* signifikantes Ergebnis = Generalisierung über unterschiedliches lexikalisches Material
+
+Fragestellung
+===============
+* Was möchte ich herausfinden?
+* Beispiel: Unterscheiden sich zwei Bedingungen 
+  * allgemein? 
+      * weiter zum nächsten Schritt 
+  * in einer bestimmten Dimension (z.B. in einer bestimmten Hirnregion)? 
+      * Methode oftmals durch Fragesetllung bereits festgelegt
+      
+Probanden
+=========
+* Welche Probandenpopulation soll bzw. kann untersucht werden?
+* Lässt sich die Fragestellung mit gesunden Probanden (z.B. Studenten) untersuchen?
+  - statistisches Verfahren ist abhängig von der Methode (Skalenniveau der Daten)
+* Ist die Gruppe klein (z.B. Patienten mit einer bestimmten Läsion / Diagnose oder Sprecher einer seltenen Sprache)?
+  - statistisches Verfahren ist bereits durch die Gruppengröße eingeschränkt
+  
+Keine Probandenbeschränkung
+==============================
+* Die Fragestellung ist entscheidend
+* Lässt die Fragestellung mehrere Alternativen zu, entscheidet der Experimentator
+
+Was entscheidet der Experimentator?
+======================================
+* Beispiel: Wortstellung im deutschen Mittelfeld
+* 3 Einflussfaktoren:
+    * S-vor-O vs. O-vor-S
+    * S belebt vs. S unbelebt
+    * Verbtyp: Aktivverb vs. Objektexperiencer (nur Dativverben)
+    * (müssen O-Belebtheit konstant halten!)
+
+Beispiele
+============
+Alle wissen ...
+
+Wortstellung | Belebtheit | Verbtyp | Beispiel
+-------------|------------|---------|----------------------------------------
+S            | B          | A       | dass der Polizist dem Winzer hilft.
+S            | B          | E       | dass der Polizist dem Winzer auffällt.
+S            | U          | A       | dass der Vertrag dem Winzer hilft.
+S            | U          | E       | dass der Vertrag dem Winzer auffällt.
+
+Beispiele
+============
+Alle wissen ...
+
+Wortstellung | Belebtheit | Verbtyp | Beispiel
+-------------|------------|---------|----------------------------------------
+O            | B          | A       | dass dem Winzer der Polizist hilft.
+O            | B          | E       | dass dem Winzer der Polizist auffällt.
+O            | U          | A       | dass dem Winzer der Vertrag hilft.
+O            | U          | E       | dass dem Winzer der Vertrag auffällt.
+
+Was wollen wir wissen?
+=========================
+Beeinflussen die Faktoren 
+* die Satzakzeptabilität?
+* das Leseverhalten?
+* die Verarbeitung der ersten NP?
+* das Satzverständnis bei Aphasikern / Kindern?
+* ...
+
+Akzeptabilitätsmessungen
+==========================
+* Zeitinsensitiv
+  * Fragebogen: $\chi^2$-, $t$-Test, Wilcoxon-Test
+  * Single-Item-Studie: $\chi^2$-Test
+  * Magnitude estimateion: $t$-Test
+* Unter Zeitdruck
+  * Speeded Acceptability judgements: Akzept: siehe oben; RT: $t$-,$F$-Test
+  
+Leseverhalten
+=================
+* Lesezeiten -- RT pro Region: $t$-,$F$-Test
+* Blickbewegungsdaten:
+  - Fixationszeiten: $t$-,$F$-Test
+  - Wahrscheinlichkeiten: Überspringen / Regressionen: t-Test / (F-Test) [Umwandlung in Prozente]
+      - **Obacht!** Das übliche Verfahren ist eigentlich problematisch!
+      
+Der "Rest"
+=============
+* Verarbeitung der ersten NP
+    - zeitsensitive Methoden
+    - Blickbewegungen
+    - Lesezeiten
+    - EEG etc. ...
+* Satzverständnis bei Aphasikern / Kindern
+    - ähnliche Methoden wie bei anderen Probandengruppen (wenn passend); Problem der kleinen Gruppen beachten
+    
+Zusammenfassung
+==================
+* Zählungen (z.B. Korpushäufigkeiten, Produktionshäufigkeiten, etc.)
+    - $\chi^2$-Test
+* Reaktionszeiten (z.B. bei Beurteilungen, Lesezeiten, Fixationsdauer etc.)
+    - $t$-Test, $F$-Test
+* Beurteilungen
+    - 2er-Skala: $t$-Test / $F$-Test (Umwandlung in Prozente); ansonsten $\chi^2$-Test, Wilcoxon Test
+    
+Allgemein
+===========
+* Standards in der jeweiligen Community beachten!
+* Manchmal ändern sich die akzeptierten statistischen Verfahren für bestimmte Datentypen oder es gibt interessante Neuentwicklungen
+* Beispiel: Linear mixed effects models in der Psycholinguistik (Baayen et al., 2008, Journal of Memory and Language)
+* Unterschiede auch je nach Journal!
