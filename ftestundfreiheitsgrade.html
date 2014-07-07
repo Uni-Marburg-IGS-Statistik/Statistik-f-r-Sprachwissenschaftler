@@ -1,0 +1,57 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset='utf-8'>
+  <title>Statistik für Sprachwissenschaftler: Metapher für die Freiheitsgrade beim F-Test</title>
+
+  <!-- Flatdoc -->
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script src='//rstacruz.github.io/flatdoc/v/0.8.1/legacy.js'></script>
+  <script src='//rstacruz.github.io/flatdoc/v/0.8.1/flatdoc.js'></script>
+
+  <!-- Flatdoc theme -->
+  <link  href='//rstacruz.github.io/flatdoc/v/0.8.1/theme-white/style.css' rel='stylesheet'>
+  <script src='//rstacruz.github.io/flatdoc/v/0.8.1/theme-white/script.js'></script>
+
+  <!-- MathJax -->
+  <!-- enable single dollar signs -->
+  <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+  });
+  </script>
+  <script type="text/javascript"
+  src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  </script>
+
+  <!-- Initializer -->
+  <script>
+    Flatdoc.run({
+        fetcher: Flatdoc.github('Uni-Marburg-IGS-Statistik/Statistik-f-r-Sprachwissenschaftler','ftestundfreiheitsgrade.md')
+    });
+  </script>
+  <script>
+    $(function(){
+      $("#linkbar").load("linkbar.html");
+    });
+   </script>
+</head>
+<body role='flatdoc' class='no-literate large-brief'>
+  <div class='header'>
+    <div class='left' id="linkbar">
+    </div>
+  </div>
+  <div class='content-root'>
+    <div class='menubar'>
+	<div class='section' >
+	<h1 style='font-size:160%'><a href="index.html">Statistik für Sprachwissenschaftler</a></h1>
+        <h2 style='font-size:140%'>Sommersemester 2014</h2>
+	<h3 style='font-size:120%'>Phillip Alday</h3>
+        </div>
+      <div class='menu section' role='flatdoc-menu'></div>
+    </div>
+    <div role='flatdoc-content' class='content'></div>
+  </div>
+</body>
+</html>
+
