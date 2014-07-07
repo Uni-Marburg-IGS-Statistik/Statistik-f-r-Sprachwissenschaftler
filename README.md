@@ -90,15 +90,21 @@ Diese Veranstaltung bietet eine praktische Einführung in statistische Verfahren
 # Bibliografie
 Baayen, R. Harald (2008): Analyzing Linguistic Data: A Practical Introduction to Statistics Using R. Cambridge University Press.
 
+Bortz, Jürgen und Schuster (2010) [Statistik für Human- und Sozialwissenschaftler](http://link.springer.com/book/10.1007/978-3-642-12770-0). Springer Verlag.
+
 Eid, Gollwitzer und Schmitt (2010): Statistik und Forschungsmethoden. Beltz Verlag.
 
 [Field, A.](http://www.statisticshell.com/), Miles, J., & Field, Z. (2012): Discovering Statistics Using R. Sage Publications.
 
 Luhmann, M. (2010): R für Einsteiger. Einführung in die Statistiksoftware für die Sozialwissenschaften. Beltz Verlag.
 
-Wickham, Hadley (2009): ggplot2. Springer.
+Wickham, Hadley (2009): [ggplot2](http://link.springer.com/book/10.1007%2F978-0-387-98141-3). Springer.
 
-Die Reihe *Use R!* von Springer ist **kostenlos** über das Uni-Netz elektronisch verfügbar!  
+Wilcox, Rand R. (2010): [Fundamentals of Modern Statistical Methods](http://link.springer.com/book/10.1007/978-1-4419-5525-8). Springer Verlag.
+
+Wilcox, Rand R. (2012): [Introduction to Robust Estimation and Hypothesis Testing](http://www.sciencedirect.com/science/book/9780123869838). Academic Press.
+
+Die Reihe *Use R!* von Springer sowie auch Bortz und Schuster und die zwei Bücher von Wilcox sind **kostenlos** über das Uni-Netz elektronisch verfügbar! 
 
 # Linksammlung
 
