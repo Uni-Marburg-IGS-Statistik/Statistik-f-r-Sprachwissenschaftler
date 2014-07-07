@@ -1,8 +1,9 @@
 Statistik für Sprachwissenschaftler
 ========================================================
 author: Phillip M . Alday
-date: 2014-06-30 / 07-01
+date: 2014-07-01/08 
 autosize: false
+css: custom.css
 
 ```{r setup, include=FALSE}
 library(knitr)
@@ -40,7 +41,7 @@ Heute und morgen
 Nicht abgedeckt, aber ggf. wichtig...
 ==========================================
 - Nicht-parametrische Tests
-  - Wilcoxon und Mann-Whitney Tests (entspricht etwa $t$-Test)
+  - Wilcoxon und Mann-Whitney Tests (entspricht etwa $t$-Test für ordinalskalierte Daten)
   - usw.
 - Robuste Verfahren
   - Verfahren mit Trimmend Means, M-Estimators, usw.
@@ -51,9 +52,12 @@ Nicht abgedeckt, aber ggf. wichtig...
 
 Nicht abgedeckt, aber ggf. wichtig...
 ==========================================
-- Generalisiertes lineares Modell (logit-, Poisson-, usw.-Regression)
+- Generalisiertes lineares Modell (Link-Funktionen: logit-, Poisson-, usw.-Regression)
 - Andere Regressionsmethoden (Bayes'sche Verfahren, LASSO, usw.)
 - Generalisiertes additives Modell
+- MANOVA
+- Bayes'sche Varianten vieler Verfahren
+- Bayes' Factors
 - viel mehr ... 
 
 Was sollte man bei der Vorbereitung einer Studie berücksichtigen?
@@ -277,7 +281,7 @@ left: 60%
 Li et al (1993)
 
 
-Eine Subjektspräferenz im Chinesischen? Wang et al. (2009)
+Eine Subjektspräferenz im Chinesischen? 
 ==========================================================
 
 1. 小说 阅读了  
@@ -290,9 +294,11 @@ Eine Subjektspräferenz im Chinesischen? Wang et al. (2009)
   - xiaoshuo jiaoyu-le
   - Roman bilden-PERF
   
+
+<small>Wang et al. (2009)</small>
 ***
 
-Eine Subjektspräferenz im Chinesischen? Wang et al. (2009)
+Eine Subjektspräferenz im Chinesischen?
 ==========================================================
 
 1. 小说 <font color="blue">阅读了</font>
@@ -305,12 +311,13 @@ Eine Subjektspräferenz im Chinesischen? Wang et al. (2009)
   - xiaoshuo jiaoyu-le
   - Roman bilden-PERF
   
+<small>Wang et al. (2009)</small>
 ***
 
 ![](wangetal2009-01.png)
 N400 für beide S-initalen Satztypen!
 
-Keine Subjektspräferenz im Chinesischen? Wang et al. (2009)
+Keine Subjektspräferenz im Chinesischen?
 =================================================================
 Ein konfundierender Faktor: lexikalische Relatiertheit zwischen NP1 und dem Verb
 * die semantische Nähe zwischen "Roman" und "lesen" ist größer als zwischen "Roman" und "bilden" oder "Schauspieler" und "lesen"
@@ -319,7 +326,9 @@ Ein konfundierender Faktor: lexikalische Relatiertheit zwischen NP1 und dem Verb
   * Schauspieler -- lesen: 2.82
   * Roman -- bilden: 2.72
   
-Wenn die semantische Nähe kontrolliert wird ...
+<small>Wang et al. (2009)</small>
+
+Wenn die sem. Nähe kontrolliert wird ...
 ==========================================================
 
 1. 小说 <font color="blue">理解了</font>
