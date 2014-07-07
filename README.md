@@ -149,6 +149,7 @@ Die Reihe *Use R!* von Springer ist **kostenlos** über das Uni-Netz elektronisc
     - [Ken Rice presents a unifying approach to statistical inference and hypothesis testing](http://andrewgelman.com/2014/04/29/ken-rice-presents-unifying-approach-statistical-inference-hypothesis-testing/)
 
 ## Andere Perspektive und Interessantes zur Statistik
+* [Verstehen Ärzte Testergebnisse?](http://www.bbc.com/news/magazine-28166019)
 * [Famous statistician quotes](http://stats.stackexchange.com/questions/726/famous-statistician-quotes)
 * [Common statistical sins](http://stats.stackexchange.com/questions/4551/what-are-common-statistical-sins)
 * [Modes, Medians and Means: A Unifying Perspective](http://www.johnmyleswhite.com/notebook/2013/03/22/modes-medians-and-means-an-unifying-perspective/)
