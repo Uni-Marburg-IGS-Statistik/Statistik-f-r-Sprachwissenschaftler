@@ -1,5 +1,5 @@
 # Prüfung
-Stand: 2014-07-07
+Stand: 2014-07-13
 
 ## Formalia
 * Zulassung nur mit Erreichen 80% der möglichen Hausaufgabenpunkte
