@@ -26,6 +26,9 @@ Skripte, die perfekt funktionieren, aber schlecht lesbar oder schlecht dokumenti
 Es gelten die Regelungen zum Einreichen und zu Coding-Stil aus dem Blatt zu Hausaufgaben!
 
 # Klausur
+## Datensatz 
+Der Datensatz wird aus dem Paket `faraway` genommen -- am Besten installiert man das Paket im Voraus!Der 
+
 ## Form und Formalia
 * Zweiteilig
     1. "Theorie" -- ohne Rechner
@@ -74,7 +77,7 @@ Analyse und Bearbeitung eines größeren echten aber trotzdem einigermaßen sch�
 * Freischalttermin: Dienstag, 15.07.2014 um 10 Uhr (zum Beginn der Klausur)
   - Daten über GitHub herunterladen
   - Beim Erscheinen zum Klausurtermin Ausdruck des Aufgabeblatts auch verfügbar, sonst in der Repository 
-* Abgabetermin: 31.07.2014
+* Abgabetermin: 31.08.2014
 
 ## Formalia
 * Abgabge über Private-Repository unter der Uni-Marburg-IGS-Statistik-Organisation (wird von mir eingerichtet) 
